@@ -298,13 +298,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4477b4a93fa3499da057d010bd7a2bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biomeSettings: []
-  biomeWidth: 100
-  biomeHeight: 50
-  baseMapManagerPrefab: {fileID: 0}
-  objectManagerPrefab: {fileID: 0}
-  tileManagerPrefab: {fileID: 0}
-  roadManagerPrefab: {fileID: 0}
+  biomeConfigs:
+  - {fileID: 11400000, guid: ecdf43c9a25a046e080f7483208e959c, type: 2}
+  - {fileID: 11400000, guid: aefb251c538f14c9c847dcd7a8ab91f3, type: 2}
+  biomeSize: {x: 50, y: 50}
 --- !u!1 &694064867
 GameObject:
   m_ObjectHideFlags: 0

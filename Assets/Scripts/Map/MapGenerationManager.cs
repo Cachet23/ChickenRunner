@@ -34,14 +34,15 @@ public class MapGenerationManager : MonoBehaviour
         for (int i = 0; i < biomeConfigs.Count; i++)
         {
             var cfg = biomeConfigs[i];
-            // Überschreibe die Größe im SO, falls nötig
             cfg.biomeSize = biomeSize;
             Vector2Int origin = new Vector2Int(0, i * biomeSize.y);
+            var bounds = new BoundsInt(new Vector3Int(origin.x, origin.y, 0), new Vector3Int(biomeSize.x, biomeSize.y, 1));
 
             // BaseMapManager erzeugen
             var goB = new GameObject($"BMM_{i}"); goB.transform.parent = transform;
             var b = goB.AddComponent<BaseMapManager>();
             b.origin = origin; b.biomeSize = biomeSize;
+            b.biomeBounds = bounds;
             b.baseLayer = baseLayer;
             b.grassLayer = grassLayer;
             b.waterLayer = waterLayer;
@@ -86,6 +87,7 @@ public class MapGenerationManager : MonoBehaviour
             var goT = new GameObject($"TM_{i}"); goT.transform.parent = transform;
             var t = goT.AddComponent<TileManager>();
             t.origin = origin; t.biomeSize = biomeSize; t.baseMapManager = b;
+            t.biomeBounds = bounds;
             t.darkEarthTiles = cfg.darkEarthTiles;
             t.mediumEarthTiles = cfg.mediumEarthTiles;
             t.lightEarthTiles = cfg.lightEarthTiles;
@@ -105,6 +107,24 @@ public class MapGenerationManager : MonoBehaviour
         yield return null;
         foreach(var o in allOM) o.PlaceHouses(); yield return new WaitForSeconds(0.5f);
         foreach(var b in allBMM) b.DetectRegions(); yield return new WaitForSeconds(0.5f);
+        // --- Region Count Check ---
+        if (allBMM.Count > 1) {
+            var first = allBMM[0];
+            bool allEqual = true;
+            foreach (var b in allBMM) {
+                if (b.EarthRegions.Count != first.EarthRegions.Count ||
+                    b.GrassRegions.Count != first.GrassRegions.Count ||
+                    b.LakeRegions.Count != first.LakeRegions.Count) {
+                    allEqual = false;
+                    break;
+                }
+            }
+            if (allEqual) {
+                Debug.LogWarning("[RegionCheck] All BaseMapManager instances found the same number of regions! This likely means bounds are not set correctly.");
+            } else {
+                Debug.Log("[RegionCheck] Region counts differ between BaseMapManagers as expected.");
+            }
+        }
         foreach(var t in allTM) t.EnhanceTerrain(); yield return new WaitForSeconds(0.3f);
         foreach (var x in allOM) x.PlaceRemainingObjects(); yield return new WaitForSeconds(0.3f);
 

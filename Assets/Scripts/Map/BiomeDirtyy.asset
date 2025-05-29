@@ -12,17 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 082029f1e986846c6a6872ddd983af3d, type: 3}
   m_Name: BiomeDirtyy
   m_EditorClassIdentifier: 
-  mapWidth: 100
-  mapHeight: 100
-  noiseScale: 50
-  useRandomSeed: 1
-  seed: 0
-  grassThreshold: 0.039
-  waterThreshold: 0.019
-  minRegionSize: 4
+  biomeSize: {x: 50, y: 50}
   earthTile: {fileID: 11400000, guid: 14e78bdfa03a74993aec8575f7021878, type: 2}
   grassTile: {fileID: 11400000, guid: e79b9f881982047d09aee03e9ec059f5, type: 2}
   waterTile: {fileID: 11400000, guid: bc8d9a700458e5043af201bcc68584e9, type: 2}
+  roadTile: {fileID: 11400000, guid: 5eda2f0150dd1364caec3d50deaff2ea, type: 2}
+  noiseScale: 2.5
+  useRandomSeed: 1
+  seed: 0
+  grassThreshold: 0.4
+  waterThreshold: 0.3
+  minRegionSize: 4
   darkEarthTiles:
   - {fileID: 11400000, guid: 5e76936474c7b4da890843f7c3fa5bae, type: 2}
   - {fileID: 11400000, guid: 7e3f608f7362f4793b57aef1cd4ce301, type: 2}
@@ -55,7 +55,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7f4fe2131ac864ee5989c317d140bd86, type: 2}
   waterTileVariants:
   - {fileID: 11400000, guid: bc8d9a700458e5043af201bcc68584e9, type: 2}
-  roadTile: {fileID: 11400000, guid: 5eda2f0150dd1364caec3d50deaff2ea, type: 2}
   treePrefabs:
   - {fileID: 8082689388017433024, guid: bd00ad35c541eaa44874dde41f3bea90, type: 3}
   - {fileID: 8082689388017433024, guid: 181d619f05119f249bd1b8f9199cc4dc, type: 3}
@@ -63,7 +62,7 @@ MonoBehaviour:
   lowGrassPrefab: {fileID: 7855908118402871436, guid: 142ebffa6672cc54a933010c945059ef, type: 3}
   housePrefabs:
   - {fileID: 919132149155446097, guid: 92744fe4ba2484eefa4f921a692c8ba2, type: 3}
-  treeDensity: 0.019
+  treeDensity: 0.194
   minTreeDistance: 4
   minTreeRoadDistance: 5
   highGrassRadius: 5
@@ -77,12 +76,9 @@ MonoBehaviour:
   roadGrassRadius: 2
   roadGrassChance: 0.052
   roadHighGrassRatio: 0.071
-  housesPerRegion: 2
   minHouseDistance: 9
   sortingLayerName: Props
   treeSortingOrder: 3
   houseSortingOrder: 2
   highGrassSortingOrder: 1
   lowGrassSortingOrder: 0
-  maxEarthSteps: 25
-  earthPenalty: 5

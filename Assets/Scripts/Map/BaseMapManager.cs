@@ -10,6 +10,7 @@ public class BaseMapManager : MonoBehaviour
 {
     [HideInInspector] public Vector2Int origin;
     [HideInInspector] public Vector2Int biomeSize;
+    public BoundsInt biomeBounds; // Begrenzung für dieses Biom
 
     [Header("Required References")]
     public ObjectManager objectManager;   // Reference to ObjectManager
@@ -120,8 +121,8 @@ public class BaseMapManager : MonoBehaviour
 
     public void DetectRegions()
     {
-        Debug.Log("BaseMapManager: Starting region detection...");
-        var bounds = baseLayer.cellBounds;
+        Debug.Log($"BaseMapManager: Starting region detection in bounds {biomeBounds}...");
+        var bounds = biomeBounds;
         var visited = new HashSet<Vector3Int>();
 
         // Find Earth Regions (tiles with earth but no grass)
