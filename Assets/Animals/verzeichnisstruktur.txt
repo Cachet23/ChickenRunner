@@ -1,0 +1,142 @@
+.
+├── Animations
+│   ├── Animation_Controllers
+│   │   ├── Chicken.controller
+│   │   ├── Chicken.controller.meta
+│   │   ├── Deer.controller
+│   │   ├── Deer.controller.meta
+│   │   ├── Dog.controller
+│   │   ├── Dog.controller.meta
+│   │   ├── Horse.controller
+│   │   ├── Horse.controller.meta
+│   │   ├── Kitty.controller
+│   │   ├── Kitty.controller.meta
+│   │   ├── Pinguin.controller
+│   │   ├── Pinguin.controller.meta
+│   │   ├── Tiger.controller
+│   │   └── Tiger.controller.meta
+│   ├── Animation_Controllers.meta
+│   ├── Other_Animations
+│   │   ├── Chicken_001_idle.anim
+│   │   ├── Chicken_001_idle.anim.meta
+│   │   ├── Chicken_002_run.anim
+│   │   ├── Chicken_002_run.anim.meta
+│   │   ├── Chicken_003_walk.anim
+│   │   ├── Chicken_003_walk.anim.meta
+│   │   ├── Deer_001_idle.anim
+│   │   ├── Deer_001_idle.anim.meta
+│   │   ├── Deer_001_run.anim
+│   │   ├── Deer_001_run.anim.meta
+│   │   ├── Deer_001_walk.anim
+│   │   ├── Deer_001_walk.anim.meta
+│   │   ├── Dog_001_idle.anim
+│   │   ├── Dog_001_idle.anim.meta
+│   │   ├── Dog_001_run.anim
+│   │   ├── Dog_001_run.anim.meta
+│   │   ├── Dog_001_walk.anim
+│   │   ├── Dog_001_walk.anim.meta
+│   │   ├── Horse_001_eat.anim
+│   │   ├── Horse_001_eat.anim.meta
+│   │   ├── Horse_001_idle.anim
+│   │   ├── Horse_001_idle.anim.meta
+│   │   ├── Horse_001_run.anim
+│   │   ├── Horse_001_run.anim.meta
+│   │   ├── Horse_001_walk.anim
+│   │   ├── Horse_001_walk.anim.meta
+│   │   ├── Kitty_001_idle.anim
+│   │   ├── Kitty_001_idle.anim.meta
+│   │   ├── Kitty_001_run.anim
+│   │   ├── Kitty_001_run.anim.meta
+│   │   ├── Kitty_001_walk.anim
+│   │   ├── Kitty_001_walk.anim.meta
+│   │   ├── Pinguin_001_idle.anim
+│   │   ├── Pinguin_001_idle.anim.meta
+│   │   ├── Pinguin_001_run.anim
+│   │   ├── Pinguin_001_run.anim.meta
+│   │   ├── Pinguin_001_walk.anim
+│   │   ├── Pinguin_001_walk.anim.meta
+│   │   ├── Tiger_001_idle_rare.anim
+│   │   ├── Tiger_001_idle_rare.anim.meta
+│   │   ├── Tiger_001_idle.anim
+│   │   ├── Tiger_001_idle.anim.meta
+│   │   ├── Tiger_001_run.anim
+│   │   ├── Tiger_001_run.anim.meta
+│   │   ├── Tiger_001_walk.anim
+│   │   └── Tiger_001_walk.anim.meta
+│   └── Other_Animations.meta
+├── Animations.meta
+├── Materials
+│   ├── Floor.mat
+│   ├── Floor.mat.meta
+│   ├── Material.mat
+│   └── Material.mat.meta
+├── Materials.meta
+├── Meshes
+│   ├── Chicken_001.fbx
+│   ├── Chicken_001.fbx.meta
+│   ├── Deer_001.fbx
+│   ├── Deer_001.fbx.meta
+│   ├── Dog_001.fbx
+│   ├── Dog_001.fbx.meta
+│   ├── Horse_001.fbx
+│   ├── Horse_001.fbx.meta
+│   ├── Kitty_001.fbx
+│   ├── Kitty_001.fbx.meta
+│   ├── Pinguin_001.fbx
+│   ├── Pinguin_001.fbx.meta
+│   ├── Tiger_001.fbx
+│   └── Tiger_001.fbx.meta
+├── Meshes.meta
+├── Prefabs
+│   ├── Chicken_001.prefab
+│   ├── Chicken_001.prefab.meta
+│   ├── Deer_001.prefab
+│   ├── Deer_001.prefab.meta
+│   ├── Dog_001.prefab
+│   ├── Dog_001.prefab.meta
+│   ├── Horse_001.prefab
+│   ├── Horse_001.prefab.meta
+│   ├── Kitty_001.prefab
+│   ├── Kitty_001.prefab.meta
+│   ├── Pinguin_001.prefab
+│   ├── Pinguin_001.prefab.meta
+│   ├── Tiger_001.prefab
+│   └── Tiger_001.prefab.meta
+├── Prefabs.meta
+├── Render_Pipeline_Convert
+│   ├── Documentation.txt
+│   ├── Documentation.txt.meta
+│   ├── URP_to_BuiltIn_source.unitypackage
+│   ├── URP_to_BuiltIn_source.unitypackage.meta
+│   ├── URP_to_HDRP_source.unitypackage
+│   └── URP_to_HDRP_source.unitypackage.meta
+├── Render_Pipeline_Convert.meta
+├── Scenes
+│   ├── Demonstration.unity
+│   └── Demonstration.unity.meta
+├── Scenes.meta
+├── Scripts
+│   ├── CreatureMover.cs
+│   ├── CreatureMover.cs.meta
+│   ├── MovePlayerInput.cs
+│   ├── MovePlayerInput.cs.meta
+│   ├── PlayerCamera.cs
+│   ├── PlayerCamera.cs.meta
+│   ├── ThirdPersonCamera.cs
+│   └── ThirdPersonCamera.cs.meta
+├── Scripts.meta
+├── Skyboxes
+│   ├── Skybox_5.mat
+│   ├── Skybox_5.mat.meta
+│   ├── Skybox_Textures
+│   │   ├── Skybox_5.png
+│   │   └── Skybox_5.png.meta
+│   └── Skybox_Textures.meta
+├── Skyboxes.meta
+├── Textures
+│   ├── Texture.png
+│   └── Texture.png.meta
+├── Textures.meta
+└── verzeichnisstruktur.txt
+
+13 directories, 127 files

@@ -17,12 +17,12 @@ MonoBehaviour:
   grassTile: {fileID: 11400000, guid: e79b9f881982047d09aee03e9ec059f5, type: 2}
   waterTile: {fileID: 11400000, guid: f92e7510fea8e44728c8ed07a81852f4, type: 2}
   roadTile: {fileID: 11400000, guid: 5eda2f0150dd1364caec3d50deaff2ea, type: 2}
-  noiseScale: 10
+  noiseScale: 7
   useRandomSeed: 1
   seed: 0
   grassThreshold: 0.4
-  waterThreshold: 0.3
-  minRegionSize: 4
+  waterThreshold: 0.12
+  minRegionSize: 15
   darkEarthTiles:
   - {fileID: 11400000, guid: 5e76936474c7b4da890843f7c3fa5bae, type: 2}
   - {fileID: 11400000, guid: 7e3f608f7362f4793b57aef1cd4ce301, type: 2}
@@ -64,19 +64,19 @@ MonoBehaviour:
   - {fileID: 919132149155446097, guid: 92744fe4ba2484eefa4f921a692c8ba2, type: 3}
   treeDensity: 0.019
   minTreeDistance: 4
-  minTreeRoadDistance: 5
-  highGrassRadius: 5
-  lowGrassRadius: 8
-  highGrassDensity: 0.123
+  minTreeRoadDistance: 2
+  highGrassRadius: 2
+  lowGrassRadius: 5
+  highGrassDensity: 0.1
   lowGrassDensity: 0.077
-  lakeTreeChance: 0.019
+  lakeTreeChance: 0.17
   lakeEffectRadius: 8
   lakeHighGrassChance: 0.206
   lakeLowGrassChance: 0.065
   roadGrassRadius: 2
   roadGrassChance: 0.052
   roadHighGrassRatio: 0.071
-  minHouseDistance: 9
+  minHouseDistance: 3
   sortingLayerName: Props
   treeSortingOrder: 3
   houseSortingOrder: 2

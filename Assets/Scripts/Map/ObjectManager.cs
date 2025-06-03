@@ -59,6 +59,10 @@ public class ObjectManager : MonoBehaviour
     public int highGrassSortingOrder = 1;
     public int lowGrassSortingOrder = 0;
 
+    [Header("Biome Wall")]
+    public GameObject wallPrefab;
+    private GameObject biomeWallInstance;
+
     private Transform objectContainer;
     private List<Vector3> placedObjects = new List<Vector3>();
     private Dictionary<GameObject, Vector3Int> houseDirections = new Dictionary<GameObject, Vector3Int>();
@@ -140,24 +144,34 @@ public class ObjectManager : MonoBehaviour
     private void PlaceHouse(Vector3 position)
     {
         var prefab = housePrefabs[Random.Range(0, housePrefabs.Length)];
-        // Erst -90° um Y, dann 90° um Z, dann random um X
         float randomX = Random.Range(0, 360);
         var rotation = Quaternion.Euler(randomX, -90f, 90f);
         var house = Instantiate(prefab, position, rotation, objectContainer);
-        
-        // Add sorting group
+
+        // Setze Layer auf "Wall" für Häuser
+        house.layer = LayerMask.NameToLayer("Wall");
+        foreach (Transform child in house.transform)
+            child.gameObject.layer = LayerMask.NameToLayer("Wall");
+
+        // Collider sicherstellen (kein Trigger)
+        var collider = house.GetComponent<Collider>();
+        if (collider == null) collider = house.AddComponent<BoxCollider>();
+        collider.isTrigger = false;
+        foreach (Transform child in house.transform)
+        {
+            var childCollider = child.GetComponent<Collider>();
+            if (childCollider != null) childCollider.isTrigger = false;
+        }
+
         var sg = house.AddComponent<SortingGroup>();
         sg.sortingLayerName = sortingLayerName;
         sg.sortingOrder = houseSortingOrder;
-        
-        // Store house direction based on rotation
+
         Vector3Int direction;
-        // Die Richtung bleibt wie gehabt, da sie von der ursprünglichen Logik abhängt
         if (Mathf.Approximately(rotation.eulerAngles.y, 0f)) direction = Vector3Int.down;
         else if (Mathf.Approximately(rotation.eulerAngles.y, 90f)) direction = Vector3Int.left;
         else if (Mathf.Approximately(rotation.eulerAngles.y, 180f)) direction = Vector3Int.up;
         else direction = Vector3Int.right;
-        
         houseDirections[house] = direction;
         placedObjects.Add(position);
     }
@@ -297,42 +311,66 @@ public class ObjectManager : MonoBehaviour
     private void PlaceTree(Vector3 worldPos)
     {
         if (!IsInBiomeBounds(worldPos)) return;
-
         var prefab = treePrefabs[Random.Range(0, treePrefabs.Length)];
-        // Erst -90° um Y, dann 90° um Z, dann random um X
         float randomX = Random.Range(0, 360);
         var rotation = Quaternion.Euler(randomX, -90f, 90f);
         var tree = Instantiate(prefab, worldPos, rotation, objectContainer);
 
+        // Setze Layer auf "Wall" für Bäume
+        tree.layer = LayerMask.NameToLayer("Wall");
+        foreach (Transform child in tree.transform)
+            child.gameObject.layer = LayerMask.NameToLayer("Wall");
+
+        // Collider sicherstellen (kein Trigger)
+        var collider = tree.GetComponent<Collider>();
+        if (collider == null) collider = tree.AddComponent<BoxCollider>();
+        collider.isTrigger = false;
+        foreach (Transform child in tree.transform)
+        {
+            var childCollider = child.GetComponent<Collider>();
+            if (childCollider != null) childCollider.isTrigger = false;
+        }
+
         var sg = tree.AddComponent<SortingGroup>();
         sg.sortingLayerName = sortingLayerName;
         sg.sortingOrder = treeSortingOrder;
-
         float scale = Random.Range(0.9f, 1.1f);
         tree.transform.localScale *= scale;
-
         placedObjects.Add(worldPos);
     }
 
     private void PlaceGrass(Vector3 worldPos, bool isHighGrass)
     {
         if (!IsInBiomeBounds(worldPos)) return;
-
         if (placedObjects.Any(p => Vector2.Distance(p, worldPos) < minTreeDistance * 0.5f))
             return;
         var prefab = isHighGrass ? highGrassPrefab : lowGrassPrefab;
-        // Erst -90° um Y, dann 90° um Z, dann random um X
         float randomX = Random.Range(0, 360);
         var rotation = Quaternion.Euler(randomX, -90f, 90f);
         var grass = Instantiate(prefab, worldPos, rotation, objectContainer);
 
+        // Setze Layer auf "IgnorePlayer" für Gras
+        grass.layer = LayerMask.NameToLayer("IgnorePlayer");
+        foreach (Transform child in grass.transform)
+            child.gameObject.layer = LayerMask.NameToLayer("IgnorePlayer");
+
+        // Entferne ALLE Collider-Komponenten rekursiv (auch MeshCollider, BoxCollider, etc.)
+        foreach (var col in grass.GetComponents<Collider>())
+            Destroy(col);
+        foreach (var col in grass.GetComponentsInChildren<Collider>())
+            Destroy(col);
+
+        // Auch 2D-Collider entfernen, falls vorhanden
+        foreach (var col in grass.GetComponents<Collider2D>())
+            Destroy(col);
+        foreach (var col in grass.GetComponentsInChildren<Collider2D>())
+            Destroy(col);
+
         var sg = grass.AddComponent<SortingGroup>();
         sg.sortingLayerName = sortingLayerName;
         sg.sortingOrder = isHighGrass ? highGrassSortingOrder : lowGrassSortingOrder;
-
         float scale = Random.Range(0.8f, 1.2f);
         grass.transform.localScale *= scale;
-
         placedObjects.Add(worldPos);
     }
 private bool IsValidPosition(Vector3 worldPos, bool isTree = false)
@@ -378,5 +416,30 @@ private bool IsValidPosition(Vector3 worldPos, bool isTree = false)
     }
 
     return true;
+}
+
+public void CreateBiomeWall()
+{
+    if (wallPrefab == null) { Debug.LogError($"[ObjectManager] wallPrefab nicht gesetzt für {name}"); return; }
+    // Position: obere Grenze des Bioms
+    float centerX = origin.x + (biomeSize.x / 2f) - 0.5f;
+    float centerY = origin.y + biomeSize.y + 0.5f;
+    Vector3 wallPosition = new Vector3(centerX, centerY, 0f);
+    biomeWallInstance = Instantiate(wallPrefab, wallPosition, Quaternion.identity, objectContainer);
+    biomeWallInstance.name = $"BiomeWall_{origin.y / biomeSize.y}";
+    var box = biomeWallInstance.GetComponent<BoxCollider>();
+    if (box == null) box = biomeWallInstance.AddComponent<BoxCollider>();
+    box.isTrigger = false;
+    float width = biomeSize.x, height = 1f, depth = 1f;
+    biomeWallInstance.transform.localScale = new Vector3(width, height, depth);
+}
+
+public void RemoveBiomeWall()
+{
+    if (biomeWallInstance != null)
+    {
+        Destroy(biomeWallInstance);
+        biomeWallInstance = null;
+    }
 }
 }

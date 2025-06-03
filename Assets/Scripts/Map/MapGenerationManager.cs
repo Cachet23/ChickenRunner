@@ -11,6 +11,9 @@ public class MapGenerationManager : MonoBehaviour
     [Header("Globale Biomeinstellungen")]
     public Vector2Int biomeSize = new Vector2Int(100, 50); // Feste Größe für alle Biome
 
+    [Header("Biome Wall Prefab")]
+    public GameObject wallPrefab;
+
     private List<BaseMapManager> allBMM = new List<BaseMapManager>();
     private List<ObjectManager> allOM  = new List<ObjectManager>();
     private List<TileManager> allTM    = new List<TileManager>();
@@ -81,7 +84,9 @@ public class MapGenerationManager : MonoBehaviour
             o.houseSortingOrder = cfg.houseSortingOrder;
             o.highGrassSortingOrder = cfg.highGrassSortingOrder;
             o.lowGrassSortingOrder = cfg.lowGrassSortingOrder;
+            o.wallPrefab = wallPrefab; // Wall Prefab setzen
             allOM.Add(o);
+            o.CreateBiomeWall(); // Wand für dieses Biom erzeugen
 
             // TileManager erzeugen
             var goT = new GameObject($"TM_{i}"); goT.transform.parent = transform;
@@ -126,10 +131,15 @@ public class MapGenerationManager : MonoBehaviour
             }
         }
         foreach(var t in allTM) t.EnhanceTerrain(); yield return new WaitForSeconds(0.3f);
-        foreach (var x in allOM) x.PlaceRemainingObjects(); yield return new WaitForSeconds(0.3f);
 
-        // Logging: Anzahl Häuser pro Biome
+        // RoadManager erzeugen und alle HouseFronts übergeben
         int totalHouses = 0;
+        var goR = new GameObject("RoadManager"); goR.transform.parent = transform;
+        roadManager = goR.AddComponent<RoadManager>();
+        roadManager.baseMapManager = allBMM[0];
+        roadManager.globalOrigin = new Vector2Int(0, 0);
+        roadManager.globalSize = new Vector2Int(biomeSize.x, biomeSize.y * biomeConfigs.Count);
+        var allHouseFronts = new List<RoadManager.HouseFront>();
         for (int i = 0; i < allOM.Count; i++)
         {
             var houseFronts = allOM[i].GetHouseFrontPositions();
@@ -137,23 +147,17 @@ public class MapGenerationManager : MonoBehaviour
             foreach (var hf in houseFronts)
                 Debug.Log($"Biome #{i} House at {hf.position} dir {hf.direction}");
             totalHouses += houseFronts.Count;
+            allHouseFronts.AddRange(houseFronts);
         }
-
-        // RoadManager erzeugen und alle HouseFronts übergeben
-        var goR = new GameObject("RoadManager"); goR.transform.parent = transform;
-        roadManager = goR.AddComponent<RoadManager>();
-        roadManager.baseMapManager = allBMM[0];
-        // Setze globalen Bereich für das Pathfinding
-        roadManager.globalOrigin = new Vector2Int(0, 0);
-        roadManager.globalSize = new Vector2Int(biomeSize.x, biomeSize.y * biomeConfigs.Count);
-        var allHouseFronts = new List<RoadManager.HouseFront>();
-        foreach (var om in allOM)
-            allHouseFronts.AddRange(om.GetHouseFrontPositions());
         Debug.Log($"Total houses for road connection: {allHouseFronts.Count}");
         foreach (var hf in allHouseFronts)
             Debug.Log($"RoadManager House at {hf.position} dir {hf.direction}");
         roadManager.SetHouseFronts(allHouseFronts);
         roadManager.enabled = true;
+        yield return new WaitForSeconds(0.5f); // Warten bis Straßen platziert
+
+        // Jetzt erst die restlichen Objekte platzieren
+        foreach (var x in allOM) x.PlaceRemainingObjects(); yield return new WaitForSeconds(0.3f);
 
         Debug.Log("All biomes generated.");
     }

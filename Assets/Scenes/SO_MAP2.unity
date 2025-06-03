@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 269148744}
   m_Layer: 0
   m_Name: Dice
-  m_TagString: Untagged
+  m_TagString: Dice
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -223,7 +223,7 @@ Transform:
   m_GameObject: {fileID: 269148736}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 22, y: 25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -241,7 +241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 900577713e913467786ad3b26b53cb6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 10
 --- !u!210 &269148744
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -299,9 +299,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   biomeConfigs:
-  - {fileID: 11400000, guid: ecdf43c9a25a046e080f7483208e959c, type: 2}
   - {fileID: 11400000, guid: aefb251c538f14c9c847dcd7a8ab91f3, type: 2}
+  - {fileID: 11400000, guid: ecdf43c9a25a046e080f7483208e959c, type: 2}
+  - {fileID: 11400000, guid: 38f011019e2f64c188cbb8a6321333dc, type: 2}
   biomeSize: {x: 50, y: 50}
+  wallPrefab: {fileID: 8968207056011337159, guid: ddf7733eee3514b12a491aaf11277a19, type: 3}
 --- !u!1 &694064867
 GameObject:
   m_ObjectHideFlags: 0
@@ -999,6 +1001,51 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &1434561162
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1434561164}
+  - component: {fileID: 1434561163}
+  m_Layer: 0
+  m_Name: AccessController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1434561163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1434561162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e860b639d246c41ad9f6c6f3cf90f27d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  diceTransform: {fileID: 0}
+--- !u!4 &1434561164
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1434561162}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 25.98243, y: 38.23799, z: 33.677406}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1839389007
 GameObject:
   m_ObjectHideFlags: 0
@@ -1192,3 +1239,4 @@ SceneRoots:
   - {fileID: 1839389009}
   - {fileID: 688541433}
   - {fileID: 269148741}
+  - {fileID: 1434561164}

@@ -39,10 +39,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: daa9b2a93b38b463dbfdd2a28a2cc301, type: 2}
   - {fileID: 11400000, guid: 33f701229fedd4267bc33e673fec4c4c, type: 2}
   lightGrassTiles:
-  - {fileID: 11400000, guid: d36c8f0ece44a447ebbea7869653de22, type: 2}
-  - {fileID: 11400000, guid: 0319ee565f5e44f51b4fe1ad2c39a3e2, type: 2}
-  - {fileID: 11400000, guid: d4585a6d162ee409996d27cd1aeb4e73, type: 2}
-  - {fileID: 11400000, guid: 366718e4b131a4e2d8529bf324d4c512, type: 2}
+  - {fileID: 11400000, guid: 15c3f490e22e3401db1477dbf3c5d113, type: 2}
+  - {fileID: 11400000, guid: 510d4ccafd65c46639cdb9d601de9d37, type: 2}
+  - {fileID: 11400000, guid: c882cc2308935493cba3e1bc7d7d3f8e, type: 2}
+  - {fileID: 11400000, guid: c505192cc41874aa1934bd97b6aa9a5b, type: 2}
   mediumGrassTiles:
   - {fileID: 11400000, guid: cb621a5a54161481a9da5f3b3fb8a3b6, type: 2}
   - {fileID: 11400000, guid: 0415a8bb3186e488c923c8468b43a12e, type: 2}

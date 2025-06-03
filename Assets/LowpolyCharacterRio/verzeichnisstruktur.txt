@@ -1,0 +1,28 @@
+.
+├── Materials
+│   ├── Rio.mat
+│   └── Rio.mat.meta
+├── Materials.meta
+├── Models
+│   ├── Rio.fbx
+│   └── Rio.fbx.meta
+├── Models.meta
+├── Prefabs
+│   ├── Rio.prefab
+│   └── Rio.prefab.meta
+├── Prefabs.meta
+├── Scenes
+│   ├── DemoScene.unity
+│   └── DemoScene.unity.meta
+├── Scenes.meta
+├── Textures
+│   ├── Rio_AlbedoTransparency.png
+│   ├── Rio_AlbedoTransparency.png.meta
+│   ├── Rio_MetallicSmoothness.png
+│   ├── Rio_MetallicSmoothness.png.meta
+│   ├── Riol_Normal.png
+│   └── Riol_Normal.png.meta
+├── Textures.meta
+└── verzeichnisstruktur.txt
+
+6 directories, 20 files
