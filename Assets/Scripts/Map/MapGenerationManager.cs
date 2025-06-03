@@ -14,6 +14,9 @@ public class MapGenerationManager : MonoBehaviour
     [Header("Biome Wall Prefab")]
     public GameObject wallPrefab;
 
+    [Header("Fog of War Prefab")]
+    public GameObject fogPrefab;
+
     private List<BaseMapManager> allBMM = new List<BaseMapManager>();
     private List<ObjectManager> allOM  = new List<ObjectManager>();
     private List<TileManager> allTM    = new List<TileManager>();
@@ -70,6 +73,8 @@ public class MapGenerationManager : MonoBehaviour
             o.highGrassPrefab = cfg.highGrassPrefab;
             o.lowGrassPrefab = cfg.lowGrassPrefab;
             o.housePrefabs = cfg.housePrefabs;
+            o.wallPrefab = wallPrefab;
+            o.fogPrefab = fogPrefab;
             o.minHouseDistance = cfg.minHouseDistance;
             o.highGrassRadius = cfg.highGrassRadius;
             o.lowGrassRadius = cfg.lowGrassRadius;
@@ -84,7 +89,6 @@ public class MapGenerationManager : MonoBehaviour
             o.houseSortingOrder = cfg.houseSortingOrder;
             o.highGrassSortingOrder = cfg.highGrassSortingOrder;
             o.lowGrassSortingOrder = cfg.lowGrassSortingOrder;
-            o.wallPrefab = wallPrefab; // Wall Prefab setzen
             allOM.Add(o);
             o.CreateBiomeWall(); // Wand für dieses Biom erzeugen
 

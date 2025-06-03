@@ -63,6 +63,10 @@ public class ObjectManager : MonoBehaviour
     public GameObject wallPrefab;
     private GameObject biomeWallInstance;
 
+    [Header("Fog of War")]
+    public GameObject fogPrefab;
+    private GameObject fogInstance;
+
     private Transform objectContainer;
     private List<Vector3> placedObjects = new List<Vector3>();
     private Dictionary<GameObject, Vector3Int> houseDirections = new Dictionary<GameObject, Vector3Int>();
@@ -71,6 +75,50 @@ public class ObjectManager : MonoBehaviour
     {
         objectContainer = new GameObject("ObjectContainer").transform;
         objectContainer.parent = transform;
+    }
+
+    private void Start()
+    {
+        CreateFogOfWar();
+        if (origin.y == 0)
+            StartCoroutine(RemoveFirstBiomeFog());
+    }
+
+    private void CreateFogOfWar()
+    {
+        if (fogPrefab == null)
+        {
+            Debug.LogWarning($"[ObjectManager] Kein FogPrefab gesetzt für {name}!");
+            return;
+        }
+        Vector3 position = new Vector3(origin.x + biomeSize.x / 2f, origin.y + biomeSize.y / 2f, -3f); // Z=5
+        fogInstance = Instantiate(fogPrefab, position, Quaternion.identity, objectContainer);
+        fogInstance.transform.localScale = new Vector3(biomeSize.x, biomeSize.y, 1);
+        fogInstance.name = $"Fog_{origin.y / biomeSize.y}";
+        fogInstance.SetActive(true);
+        // Sorting Layer setzen
+        var renderer = fogInstance.GetComponent<Renderer>();
+        if (renderer != null)
+        {
+            renderer.sortingLayerName = sortingLayerName;
+            renderer.sortingOrder = 99; // Sehr hoch, damit immer oben
+        }
+        Debug.Log($"[ObjectManager] Fog erzeugt für {name} an {position} mit Größe {biomeSize} und SortingLayer {sortingLayerName}");
+    }
+
+    private System.Collections.IEnumerator RemoveFirstBiomeFog()
+    {
+        yield return new WaitForSeconds(3f);
+        RemoveFogOfWar();
+    }
+
+    public void RemoveFogOfWar()
+    {
+        if (fogInstance != null)
+        {
+            Destroy(fogInstance);
+            fogInstance = null;
+        }
     }
 
     // Public methods for MapGenerationManager to call
@@ -438,6 +486,11 @@ public void RemoveBiomeWall()
 {
     if (biomeWallInstance != null)
     {
+        // Fog vom nächsten Biom entfernen
+        var nextBiomeOM = FindObjectsOfType<ObjectManager>()
+            .FirstOrDefault(om => om.origin.y == origin.y + biomeSize.y);
+        if (nextBiomeOM != null)
+            nextBiomeOM.RemoveFogOfWar();
         Destroy(biomeWallInstance);
         biomeWallInstance = null;
     }
