@@ -66,11 +66,19 @@ public class BaseMapManager : MonoBehaviour
     public void InitializeRandomization()
     {
         if (useRandomSeed)
+        {
             seed = Random.Range(0, 99999);
-        
-        Random.InitState(seed);
-        xOffset = Random.Range(0f, 99999f);
-        yOffset = Random.Range(0f, 99999f);
+            Random.InitState(seed);
+            xOffset = Random.Range(0f, 99999f);
+            yOffset = Random.Range(0f, 99999f);
+        }
+        else
+        {
+            // Seed und Offsets deterministisch aus seed berechnen
+            Random.InitState(seed);
+            xOffset = seed * 0.12345f % 99999f;
+            yOffset = seed * 0.54321f % 99999f;
+        }
     }
 
     public void GenerateBaseMap()
@@ -100,8 +108,8 @@ public class BaseMapManager : MonoBehaviour
         for (int x = 0; x < biomeSize.x; x++)
         for (int y = 0; y < biomeSize.y; y++)
         {
-            float nx = (x + origin.x) / (float)biomeSize.x * noiseScale;
-            float ny = (y + origin.y) / (float)biomeSize.y * noiseScale;
+            float nx = ((x + origin.x) / (float)biomeSize.x) * noiseScale + xOffset;
+            float ny = ((y + origin.y) / (float)biomeSize.y) * noiseScale + yOffset;
             if (Mathf.PerlinNoise(nx, ny) > grassThreshold)
                 grassLayer.SetTile(new Vector3Int(origin.x + x, origin.y + y, 0), grassTile);
         }
@@ -112,8 +120,8 @@ public class BaseMapManager : MonoBehaviour
         for (int x = 0; x < biomeSize.x; x++)
         for (int y = 0; y < biomeSize.y; y++)
         {
-            float nx = (x + origin.x + 1000f) / biomeSize.x * noiseScale;
-            float ny = (y + origin.y + 1000f) / biomeSize.y * noiseScale;
+            float nx = ((x + origin.x + 1000f) / biomeSize.x) * noiseScale + xOffset;
+            float ny = ((y + origin.y + 1000f) / biomeSize.y) * noiseScale + yOffset;
             if (Mathf.PerlinNoise(nx, ny) < waterThreshold)
                 waterLayer.SetTile(new Vector3Int(origin.x + x, origin.y + y, 0), waterTile);
         }
