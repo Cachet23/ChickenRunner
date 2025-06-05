@@ -91,7 +91,7 @@ public class ObjectManager : MonoBehaviour
             Debug.LogWarning($"[ObjectManager] Kein FogPrefab gesetzt für {name}!");
             return;
         }
-        Vector3 position = new Vector3(origin.x + biomeSize.x / 2f, origin.y + biomeSize.y / 2f, -3f); // Z=5
+        Vector3 position = new Vector3(origin.x + biomeSize.x / 2f, origin.y + biomeSize.y / 2f, -6f); // Z=5
         fogInstance = Instantiate(fogPrefab, position, Quaternion.identity, objectContainer);
         fogInstance.transform.localScale = new Vector3(biomeSize.x, biomeSize.y, 1);
         fogInstance.name = $"Fog_{origin.y / biomeSize.y}";

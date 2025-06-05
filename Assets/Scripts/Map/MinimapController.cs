@@ -16,7 +16,7 @@ public class MinimapController : MonoBehaviour
             // Set camera size and position to fit the whole map
             minimapCamera.orthographic = true;
             minimapCamera.orthographicSize = mapSize.y / 2f + border;
-            minimapCamera.transform.position = new Vector3(mapSize.x / 2f, mapSize.y / 2f, -50f);
+            minimapCamera.transform.position = new Vector3(mapSize.x / 2f, mapSize.y / 2f, -20f);
             minimapCamera.cullingMask = LayerMask.GetMask("Default", "Props");
         }
     }
