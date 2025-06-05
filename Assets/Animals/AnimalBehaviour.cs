@@ -9,12 +9,40 @@ public class AnimalBehaviour : MonoBehaviour
     private Vector3 moveDir;
     private Rigidbody rb;
     private CreatureMover mover;
+    private Bounds planeBounds;
+    private Transform planeTransform;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         mover = GetComponent<CreatureMover>();
         PickNewDirection();
+
+        // Suche die Plane in der Szene (Name: "Plane" oder Tag: "Ground")
+        var planeObj = GameObject.Find("Plane");
+        if (planeObj == null)
+            planeObj = GameObject.FindGameObjectWithTag("Ground");
+        if (planeObj != null)
+        {
+            planeTransform = planeObj.transform;
+            var mesh = planeObj.GetComponent<MeshFilter>()?.sharedMesh;
+            if (mesh != null)
+            {
+                // Bounds im lokalen Raum, auf globale Position/Rotation/Scale anwenden
+                planeBounds = mesh.bounds;
+            }
+            else
+            {
+                // Fallback: nutze Collider-Bounds
+                var collider = planeObj.GetComponent<Collider>();
+                if (collider != null)
+                    planeBounds = collider.bounds;
+            }
+        }
+        else
+        {
+            Debug.LogWarning("AnimalBehaviour: Keine Plane gefunden!");
+        }
     }
 
     void Update()
@@ -44,6 +72,20 @@ public class AnimalBehaviour : MonoBehaviour
         else
         {
             transform.position += new Vector3(moveDir.x, moveDir.y, 0) * moveSpeed * Time.fixedDeltaTime;
+        }
+
+        // Bewegung auf Plane beschränken
+        if (planeTransform != null)
+        {
+            // Transformiere aktuelle Position in lokale Koordinaten der Plane
+            Vector3 localPos = planeTransform.InverseTransformPoint(transform.position);
+            // Clamp innerhalb der Plane-Bounds
+            localPos.x = Mathf.Clamp(localPos.x, planeBounds.min.x, planeBounds.max.x);
+            localPos.y = Mathf.Clamp(localPos.y, planeBounds.min.y, planeBounds.max.y);
+            // Z bleibt (Höhe)
+            // Transformiere zurück in Weltkoordinaten
+            Vector3 clampedWorld = planeTransform.TransformPoint(localPos);
+            transform.position = clampedWorld;
         }
     }
 

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Tilemaps;
 
@@ -19,26 +20,30 @@ public class AnimalManager : MonoBehaviour
 
     void Start()
     {
+        StartCoroutine(InitializeWithDelay());
+    }
+
+    private IEnumerator InitializeWithDelay()
+    {
+        // Warte ein paar Frames bis MapGenerationManager initialisiert ist
+        yield return new WaitForSeconds(0.5f);
+        
         // Hole den ersten BaseMapManager aus MapGenerationManager
         if (mapGenerationManager != null && mapGenerationManager.GetAllBaseMapManagers().Count > 0)
         {
             baseMapManager = mapGenerationManager.GetAllBaseMapManagers()[0];
             Debug.Log($"AnimalManager: BaseMapManager gefunden: {baseMapManager.name}");
+            SpawnChickens();
         }
         else
         {
             Debug.LogWarning("AnimalManager: Kein BaseMapManager gefunden!");
         }
-        // SpawnChickens() NICHT mehr hier aufrufen!
         Debug.Log($"AnimalManager: Tiere nach Start: {animals.Count}");
     }
 
     public void SpawnChickens()
     {
-        // Dynamisch BaseMapManager holen
-        if (mapGenerationManager != null && mapGenerationManager.GetAllBaseMapManagers().Count > 0)
-            baseMapManager = mapGenerationManager.GetAllBaseMapManagers()[0];
-
         if (chickenPrefab == null)
         {
             Debug.LogWarning("AnimalManager: chickenPrefab ist nicht gesetzt!");
