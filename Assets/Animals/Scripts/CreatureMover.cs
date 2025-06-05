@@ -66,7 +66,10 @@ namespace Controller
 
         private void Update()
         {
-            m_Movement.Move(Time.deltaTime, in m_Axis, in m_Target, m_IsRun, m_IsMoving, out var animAxis, out var isAir);
+            // Logging für Input
+            Debug.Log($"CreatureMover.Update: m_Axis={m_Axis}, m_Target={m_Target}, m_IsRun={m_IsRun}, m_IsMoving={m_IsMoving}");
+            // ACHTUNG: Wir bewegen auf X/Y-Ebene, Z ist up!
+            m_Movement.MoveXYPlane(Time.deltaTime, in m_Axis, in m_Target, m_IsRun, m_IsMoving, out var animAxis, out var isAir);
             m_Animation.Animate(in animAxis, m_IsRun ? 1f : 0f, Time.deltaTime);
         }
 
@@ -77,6 +80,7 @@ namespace Controller
 
         public void SetInput(in Vector2 axis, in Vector3 target, in bool isRun, in bool isJump)
         {
+            Debug.Log($"CreatureMover.SetInput: axis={axis}, target={target}, isRun={isRun}, isJump={isJump}");
             m_Axis = axis;
             m_Target = target;
             m_IsRun = isRun;
@@ -167,87 +171,68 @@ namespace Controller
                 m_Normal = normal;
             }
 
-            public void Move(float deltaTime, in Vector2 axis, in Vector3 target, bool isRun, bool isMoving, out Vector2 animAxis, out bool isAir)
+            // NEU: Bewegung auf X/Y-Ebene, Z ist up
+            public void MoveXYPlane(float deltaTime, in Vector2 axis, in Vector3 target, bool isRun, bool isMoving, out Vector2 animAxis, out bool isAir)
             {
+                Debug.Log($"MoveXYPlane: axis={axis}, target={target}, isRun={isRun}, isMoving={isMoving}");
+                // Zielrichtung auf X/Y-Ebene
                 var cameraLook = Vector3.Normalize(target - m_Transform.position);
                 var targetForward = m_LastForward;
 
-                ConvertMovement(in axis, in cameraLook, out var movement);
+                ConvertMovementXY(in axis, in cameraLook, out var movement);
                 if (movement.sqrMagnitude > 0.5f) {
                     m_LastForward = Vector3.Normalize(movement);
                 }
 
-                CaculateGravity(deltaTime, out isAir);
-                Displace(deltaTime, in movement, isRun);
-                Turn(in targetForward, isMoving);
-                UpdateRotation(deltaTime);
+                CaculateGravityXY(deltaTime, out isAir);
+                DisplaceXY(deltaTime, in movement, isRun);
+                TurnXY(in targetForward, isMoving);
+                UpdateRotationXY(deltaTime);
 
-                GenAnimationAxis(in movement, out animAxis);
+                GenAnimationAxisXY(in movement, out animAxis);
             }
 
-            private void ConvertMovement(in Vector2 axis, in Vector3 targetForward, out Vector3 movement)
+            private void ConvertMovementXY(in Vector2 axis, in Vector3 targetForward, out Vector3 movement)
             {
-                Vector3 forward;
-                Vector3 right;
-
-                if (m_Space == Space.Self)
-                {
-                    forward = new Vector3(targetForward.x, 0f, targetForward.z).normalized;
-                    right = Vector3.Cross(Vector3.up, forward).normalized;
-                }
-                else
-                {
-                    forward = Vector3.forward;
-                    right = Vector3.right;
-                }
-
+                // forward = Y+, right = X+, up = Z+
+                Vector3 forward = new Vector3(0, 1, 0); // Y+
+                Vector3 right = new Vector3(1, 0, 0);   // X+
                 movement = axis.x * right + axis.y * forward;
-                movement = Vector3.ProjectOnPlane(movement, m_Normal);
+                movement = Vector3.ProjectOnPlane(movement, m_Normal); // m_Normal sollte (0,0,1) sein
             }
 
-            private void Displace(float deltaTime, in Vector3 movement, bool isRun)
+            private void DisplaceXY(float deltaTime, in Vector3 movement, bool isRun)
             {
                 Vector3 displacement = (isRun ? m_RunSpeed : m_WalkSpeed) * movement;
                 displacement += m_GravityAcelleration;
                 displacement *= deltaTime;
-
                 m_Controller.Move(displacement);
             }
 
-            private void CaculateGravity(float deltaTime, out bool isAir)
+            private void CaculateGravityXY(float deltaTime, out bool isAir)
             {
                 m_jumpTimer = Mathf.Max(m_jumpTimer - deltaTime, 0f);
-
                 if (m_Controller.isGrounded)
                 {
                     m_GravityAcelleration = Physics.gravity;
                     isAir = false;
-
                     return;
                 }
-
                 isAir = true;
-
                 m_GravityAcelleration += Physics.gravity * deltaTime;
                 return;
             }
 
-            private void GenAnimationAxis(in Vector3 movement, out Vector2 animAxis)
+            private void GenAnimationAxisXY(in Vector3 movement, out Vector2 animAxis)
             {
-                if(m_Space == Space.Self)
-                {
-                    animAxis = new Vector2(Vector3.Dot(movement, m_Transform.right), Vector3.Dot(movement, m_Transform.forward));
-                }
-                else
-                {
-                    animAxis = new Vector2(Vector3.Dot(movement, Vector3.right), Vector3.Dot(movement, Vector3.forward));
-                }
+                // Animation: X = rechts, Y = vorwärts (Y+)
+                animAxis = new Vector2(movement.x, movement.y);
             }
 
-            private void Turn(in Vector3 targetForward, bool isMoving)
+            private void TurnXY(in Vector3 targetForward, bool isMoving)
             {
-                var angle = Vector3.SignedAngle(m_Transform.forward, Vector3.ProjectOnPlane(targetForward, Vector3.up), Vector3.up);
-
+                // Rotation um Z-Achse (da Z jetzt up ist)
+                var angle = Vector3.SignedAngle(m_Transform.up, Vector3.ProjectOnPlane(targetForward, Vector3.forward), Vector3.forward);
                 if (!m_IsRotating)
                 {
                     if (!isMoving && Mathf.Abs(angle) < m_Luft)
@@ -255,20 +240,17 @@ namespace Controller
                         m_IsRotating = false;
                         return;
                     }
-
                     m_IsRotating = true;
                 }
-
                 m_TargetAngle = angle;
             }
 
-            private void UpdateRotation(float deltaTime)
+            private void UpdateRotationXY(float deltaTime)
             {
                 if(!m_IsRotating)
                 {
                     return;
                 }
-
                 var rotDelta = m_RotateSpeed * deltaTime;
                 if (rotDelta + Mathf.PI * 2f + Mathf.Epsilon >= Mathf.Abs(m_TargetAngle))
                 {
@@ -279,8 +261,7 @@ namespace Controller
                 {
                     rotDelta *= Mathf.Sign(m_TargetAngle);
                 }
-
-                m_Transform.Rotate(Vector3.up, rotDelta);
+                m_Transform.Rotate(Vector3.up, rotDelta); // jetzt um Y drehen, nicht Z
             }
         }
 
