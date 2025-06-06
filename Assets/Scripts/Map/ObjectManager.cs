@@ -71,6 +71,11 @@ public class ObjectManager : MonoBehaviour
     private List<Vector3> placedObjects = new List<Vector3>();
     private Dictionary<GameObject, Vector3Int> houseDirections = new Dictionary<GameObject, Vector3Int>();
 
+    [Header("Flower Settings")]
+    public FlowerConfig[] flowerPrefabs;
+    [Range(0f, 1f)]
+    public float flowerSpawnChance = 0.3f;
+
     private void Awake()
     {
         objectContainer = new GameObject("ObjectContainer").transform;
@@ -427,15 +432,9 @@ public class ObjectManager : MonoBehaviour
         if (!IsInBiomeBounds(worldPos)) return;
         if (placedObjects.Any(p => Vector2.Distance(new Vector2(p.x, p.z), new Vector2(worldPos.x, worldPos.z)) < minTreeDistance * 0.5f))
             return;
-        var prefab = isHighGrass ? highGrassPrefab : lowGrassPrefab;
-        
-        // Only rotate around Y axis for variation
-        float randomY = Random.Range(0, 360);
-        var rotation = Quaternion.Euler(0, randomY, 0);
-        
-        // Adjust Y position to 0 for ground level
-        Vector3 adjustedPos = new Vector3(worldPos.x, 0, worldPos.z);
-        var grass = Instantiate(prefab, adjustedPos, rotation, objectContainer);
+            
+        var grass = CreateGrass(new Vector3(worldPos.x, 0, worldPos.z), isHighGrass);
+        if (grass == null) return;
 
         // Setze Layer auf "IgnorePlayer" für Gras
         grass.layer = LayerMask.NameToLayer("IgnorePlayer");
@@ -542,5 +541,71 @@ public void RemoveBiomeWall()
         Destroy(biomeWallInstance);
         biomeWallInstance = null;
     }
+}    private void ReplaceGrassWithFlowers(GameObject grassObject, bool isHighGrass)
+    {
+        if (flowerPrefabs == null || flowerPrefabs.Length == 0 || Random.value > flowerSpawnChance)
+        {
+            return;
+        }
+
+        // Debug-Log für die Flower-Spawn-Logik
+        Debug.Log($"[ObjectManager] Versuche Blumen zu spawnen. {flowerPrefabs.Length} Blumen-Prefabs verfügbar. SpawnChance: {flowerSpawnChance}");
+
+        // Sort flowers by rarity (Epic is most rare)
+        var sortedFlowers = flowerPrefabs
+            .OrderByDescending(f => f.rarity)
+            .ToArray();
+
+        foreach (var flower in sortedFlowers)
+        {
+            if (Random.value <= flower.replacementChance)
+            {
+                // Create flower at grass position
+                Vector3 position = grassObject.transform.position;
+                var flowerInstance = Instantiate(flower.flowerPrefab, position, Quaternion.Euler(0, Random.Range(0, 360), 0), objectContainer);
+                
+                Debug.Log($"[ObjectManager] Blume gespawnt: {flower.flowerPrefab.name} an Position {position}. Rarity: {flower.rarity}");
+                
+                // Set sorting layer and order (using same as grass)
+                var spriteRenderer = flowerInstance.GetComponent<SpriteRenderer>();
+                if (spriteRenderer != null)
+                {
+                    spriteRenderer.sortingLayerName = sortingLayerName;
+                    spriteRenderer.sortingOrder = isHighGrass ? highGrassSortingOrder : lowGrassSortingOrder;
+                }
+
+                // Set layer to IgnorePlayer like grass
+                flowerInstance.layer = LayerMask.NameToLayer("IgnorePlayer");
+                foreach (Transform child in flowerInstance.transform)
+                    child.gameObject.layer = LayerMask.NameToLayer("IgnorePlayer");
+
+                // Random scale variation
+                float scale = Random.Range(0.8f, 1.2f);
+                flowerInstance.transform.localScale *= scale;
+
+                // Destroy the grass
+                Destroy(grassObject);
+                return; // Only replace with one flower
+            }
+        }
+    }
+
+private GameObject CreateGrass(Vector3 position, bool highGrass)
+{
+    GameObject grassPrefab = highGrass ? highGrassPrefab : lowGrassPrefab;
+    if (grassPrefab == null) return null;
+
+    var grass = Instantiate(grassPrefab, position, Quaternion.Euler(0, Random.Range(0, 360), 0), objectContainer);
+    var spriteRenderer = grass.GetComponent<SpriteRenderer>();
+    if (spriteRenderer != null)
+    {
+        spriteRenderer.sortingLayerName = sortingLayerName;
+        spriteRenderer.sortingOrder = highGrass ? highGrassSortingOrder : lowGrassSortingOrder;
+    }
+
+    // Try to replace with flower
+    ReplaceGrassWithFlowers(grass, highGrass);
+
+    return grass;
 }
 }

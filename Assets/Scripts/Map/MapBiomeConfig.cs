@@ -65,4 +65,9 @@ public class MapBiomeConfig : ScriptableObject
 
     [Header("Creature Settings")]
     public List<CreatureConfig> creatures = new List<CreatureConfig>();
+
+    [Header("Flower Settings")]
+    public FlowerConfig[] flowerPrefabs;
+    [Range(0f, 1f)]
+    public float flowerSpawnChance = 0.3f; // Overall chance to replace grass with any flower
 }

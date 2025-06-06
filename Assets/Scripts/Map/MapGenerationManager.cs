@@ -76,6 +76,8 @@ public class MapGenerationManager : MonoBehaviour
             o.highGrassPrefab = cfg.highGrassPrefab;
             o.lowGrassPrefab = cfg.lowGrassPrefab;
             o.housePrefabs = cfg.housePrefabs;
+            o.flowerPrefabs = cfg.flowerPrefabs;
+            o.flowerSpawnChance = cfg.flowerSpawnChance;
             o.wallPrefab = wallPrefab;
             o.fogPrefab = fogPrefab;
             o.minHouseDistance = cfg.minHouseDistance;
