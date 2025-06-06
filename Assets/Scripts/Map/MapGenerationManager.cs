@@ -165,4 +165,10 @@ public class MapGenerationManager : MonoBehaviour
 
         Debug.Log("All biomes generated.");
     }
+
+    // --- Am Ende der Klasse hinzufügen ---
+    public List<BaseMapManager> GetAllBaseMapManagers()
+    {
+        return allBMM;
+    }
 }

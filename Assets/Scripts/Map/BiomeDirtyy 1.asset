@@ -19,7 +19,7 @@ MonoBehaviour:
   roadTile: {fileID: 11400000, guid: 5eda2f0150dd1364caec3d50deaff2ea, type: 2}
   noiseScale: 2.5
   useRandomSeed: 1
-  seed: 14
+  seed: 0
   grassThreshold: 0.54
   waterThreshold: 0.41
   minRegionSize: 40

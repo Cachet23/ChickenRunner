@@ -1,6 +1,3283 @@
 {
     "objects": [
         {
+            "name": "toe.R",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "foot.R",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 0.1688607931137085,
+                    "y": 0.03490782901644707,
+                    "z": -0.7200160026550293
+                },
+                "localPosition": {
+                    "x": -3.3005917998707449e-8,
+                    "y": 0.24364595115184785,
+                    "z": 6.859636414446868e-8
+                },
+                "rotation": {
+                    "x": 270.019775390625,
+                    "y": 179.99993896484376,
+                    "z": 0.0
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 0.9999999403953552,
+                    "z": 0.9999995827674866
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "foot.R",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "shin.R",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 0.16886036098003388,
+                    "y": 0.2633981704711914,
+                    "z": -0.8046061396598816
+                },
+                "localPosition": {
+                    "x": -4.6566128730773929e-9,
+                    "y": 0.358574241399765,
+                    "z": -9.138602763414383e-9
+                },
+                "rotation": {
+                    "x": 339.6847839355469,
+                    "y": -0.00036224318319000304,
+                    "z": 180.00022888183595
+                },
+                "localScale": {
+                    "x": 0.9999996423721314,
+                    "y": 1.0000003576278687,
+                    "z": 1.0000001192092896
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "shin.R",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "thigh.R",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 0.1830275058746338,
+                    "y": 0.53047114610672,
+                    "z": -0.5657617449760437
+                },
+                "localPosition": {
+                    "x": 3.0442606657743457e-8,
+                    "y": 0.5854100584983826,
+                    "z": -1.2165401130914688e-8
+                },
+                "rotation": {
+                    "x": 41.79963302612305,
+                    "y": 359.77740478515627,
+                    "z": 177.58731079101563
+                },
+                "localScale": {
+                    "x": 1.000000238418579,
+                    "y": 0.999999463558197,
+                    "z": 0.9999998807907105
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "thigh.R",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "spine.007",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 0.1833454817533493,
+                    "y": 1.115755558013916,
+                    "z": -0.553638756275177
+                },
+                "localPosition": {
+                    "x": -0.18334531784057618,
+                    "y": -0.009634499438107014,
+                    "z": 0.018598070368170739
+                },
+                "rotation": {
+                    "x": 1.1864514350891114,
+                    "y": 359.76116943359377,
+                    "z": 179.9639434814453
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 0.9999998807907105,
+                    "z": 0.9999998807907105
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "toe.L",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "foot.L",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": -0.16885173320770265,
+                    "y": 0.03490681201219559,
+                    "z": -0.5052367448806763
+                },
+                "localPosition": {
+                    "x": -3.670457715543307e-9,
+                    "y": 0.2436460256576538,
+                    "z": 3.767939915633178e-8
+                },
+                "rotation": {
+                    "x": 270.0,
+                    "y": 179.9998779296875,
+                    "z": 0.0
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 0.9999998211860657,
+                    "z": 0.9999995231628418
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "foot.L",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "shin.L",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": -0.1688520610332489,
+                    "y": 0.26339688897132876,
+                    "z": -0.5898268818855286
+                },
+                "localPosition": {
+                    "x": 1.5832483768463136e-8,
+                    "y": 0.3585752248764038,
+                    "z": 6.157788448035717e-7
+                },
+                "rotation": {
+                    "x": 339.684814453125,
+                    "y": -0.00034853004035539925,
+                    "z": 180.0001983642578
+                },
+                "localScale": {
+                    "x": 0.9999995827674866,
+                    "y": 1.0000003576278687,
+                    "z": 1.000000238418579
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "shin.L",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "thigh.L",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": -0.18829448521137238,
+                    "y": 0.5557512044906616,
+                    "z": -0.38312140107154848
+                },
+                "localPosition": {
+                    "x": -1.6065314412117006e-8,
+                    "y": 0.5854101181030273,
+                    "z": 3.073364496231079e-8
+                },
+                "rotation": {
+                    "x": 35.27572250366211,
+                    "y": 359.6775817871094,
+                    "z": 182.92201232910157
+                },
+                "localScale": {
+                    "x": 1.000000238418579,
+                    "y": 0.9999995827674866,
+                    "z": 1.0
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "thigh.L",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "spine.007",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": -0.18334510922431947,
+                    "y": 1.115754246711731,
+                    "z": -0.5536405444145203
+                },
+                "localPosition": {
+                    "x": 0.1833452731370926,
+                    "y": -0.009634467773139477,
+                    "z": 0.018598297610878946
+                },
+                "rotation": {
+                    "x": 343.0604248046875,
+                    "y": 359.3446350097656,
+                    "z": 179.70651245117188
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 0.9999997019767761,
+                    "z": 0.9999999403953552
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "jaw",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "spine.012",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": -0.0000035137722989020405,
+                    "y": 0.6811603903770447,
+                    "z": 1.2248966693878174
+                },
+                "localPosition": {
+                    "x": 3.099398782069329e-8,
+                    "y": 0.48402974009513857,
+                    "z": -0.11670011281967163
+                },
+                "rotation": {
+                    "x": 296.7042236328125,
+                    "y": -0.0011289628455415369,
+                    "z": 180.0011749267578
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 0.9999993443489075,
+                    "z": 1.0000001192092896
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "spine.012",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "spine.011",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": -0.000006631566520809429,
+                    "y": 1.061545491218567,
+                    "z": 0.9036317467689514
+                },
+                "localPosition": {
+                    "x": -1.5916157281026244e-12,
+                    "y": 0.19703052937984467,
+                    "z": -4.466685155080086e-8
+                },
+                "rotation": {
+                    "x": 306.2609558105469,
+                    "y": -0.0008060436230152845,
+                    "z": 180.00091552734376
+                },
+                "localScale": {
+                    "x": 1.0000001192092896,
+                    "y": 1.0000003576278687,
+                    "z": 0.9999997019767761
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "spine.011",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "spine.010",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": -0.000005841319762112107,
+                    "y": 1.097715139389038,
+                    "z": 0.7099495530128479
+                },
+                "localPosition": {
+                    "x": 6.821210263296962e-13,
+                    "y": 0.2305375039577484,
+                    "z": 1.564934279940644e-7
+                },
+                "rotation": {
+                    "x": 280.57794189453127,
+                    "y": -0.00175820745062083,
+                    "z": 180.00149536132813
+                },
+                "localScale": {
+                    "x": 0.9999998807907105,
+                    "y": 1.000000238418579,
+                    "z": 1.000000238418579
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "spine.010",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "spine.009",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": -0.000004847283889830578,
+                    "y": 1.126883864402771,
+                    "z": 0.4812648892402649
+                },
+                "localPosition": {
+                    "x": -1.1368683772161603e-13,
+                    "y": 0.3585304915904999,
+                    "z": -1.4899720213179536e-7
+                },
+                "rotation": {
+                    "x": 277.2688293457031,
+                    "y": -0.002462391508743167,
+                    "z": 180.002197265625
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 0.9999992251396179,
+                    "z": 0.9999992251396179
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "front_toe.R",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "front_foot.R",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 0.235510915517807,
+                    "y": 0.042459771037101749,
+                    "z": 0.49749279022216799
+                },
+                "localPosition": {
+                    "x": 1.748493616560154e-8,
+                    "y": 0.17621979117393495,
+                    "z": -6.148138709249906e-8
+                },
+                "rotation": {
+                    "x": 272.32135009765627,
+                    "y": 359.99334716796877,
+                    "z": 180.00637817382813
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 0.9999995231628418,
+                    "z": 0.9999994039535523
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "front_foot.R",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "front_shin.R",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 0.2355106770992279,
+                    "y": 0.2058061808347702,
+                    "z": 0.43137621879577639
+                },
+                "localPosition": {
+                    "x": -3.14321368932724e-8,
+                    "y": 0.237885981798172,
+                    "z": 1.234002411365509e-8
+                },
+                "rotation": {
+                    "x": 337.9637145996094,
+                    "y": -0.00042474843212403357,
+                    "z": 180.000244140625
+                },
+                "localScale": {
+                    "x": 0.9999998807907105,
+                    "y": 1.0000007152557374,
+                    "z": 1.0000005960464478
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "front_shin.R",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "front_thigh.R",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 0.23126937448978425,
+                    "y": 0.43231138586997988,
+                    "z": 0.35880184173583987
+                },
+                "localPosition": {
+                    "x": -2.1420419216156007e-8,
+                    "y": 0.3276214599609375,
+                    "z": 4.842877388000488e-8
+                },
+                "rotation": {
+                    "x": 342.23150634765627,
+                    "y": 0.15313705801963807,
+                    "z": 180.974853515625
+                },
+                "localScale": {
+                    "x": 0.9999999403953552,
+                    "y": 0.9999996423721314,
+                    "z": 0.9999995231628418
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "front_thigh.R",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "shoulder.R",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 0.1833416372537613,
+                    "y": 0.6847994923591614,
+                    "z": 0.5619977712631226
+                },
+                "localPosition": {
+                    "x": 0.03837406635284424,
+                    "y": 0.43638700246810915,
+                    "z": 0.00003427934643696062
+                },
+                "rotation": {
+                    "x": 38.09965133666992,
+                    "y": 5.236589431762695,
+                    "z": 191.67062377929688
+                },
+                "localScale": {
+                    "x": 1.0000001192092896,
+                    "y": 1.0000003576278687,
+                    "z": 1.0000001192092896
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "shoulder.R",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "spine.009",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 0.22171466052532197,
+                    "y": 1.1101728677749634,
+                    "z": 0.464574933052063
+                },
+                "localPosition": {
+                    "x": -0.22171935439109803,
+                    "y": 0.3392370045185089,
+                    "z": -0.013625230640172959
+                },
+                "rotation": {
+                    "x": 347.10455322265627,
+                    "y": -0.00033409520983695984,
+                    "z": 180.00021362304688
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 0.999999463558197,
+                    "z": 0.9999994039535523
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "front_toe.L",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "front_foot.L",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": -0.2084244340658188,
+                    "y": 0.042458005249500278,
+                    "z": 0.3628010153770447
+                },
+                "localPosition": {
+                    "x": -1.6802630398160546e-9,
+                    "y": 0.17621983587741853,
+                    "z": -4.026446731586475e-9
+                },
+                "rotation": {
+                    "x": 272.32159423828127,
+                    "y": -0.00463404506444931,
+                    "z": 180.00436401367188
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 0.9999992847442627,
+                    "z": 0.9999993443489075
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "front_foot.L",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "front_shin.L",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": -0.20842474699020387,
+                    "y": 0.20580428838729859,
+                    "z": 0.29668450355529787
+                },
+                "localPosition": {
+                    "x": -1.5133991837501527e-8,
+                    "y": 0.23788592219352723,
+                    "z": -1.3969838619232178e-9
+                },
+                "rotation": {
+                    "x": 337.9637451171875,
+                    "y": -0.00031151322764344513,
+                    "z": 180.00021362304688
+                },
+                "localScale": {
+                    "x": 0.9999999403953552,
+                    "y": 1.0000009536743165,
+                    "z": 1.0000008344650269
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "front_shin.L",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "front_thigh.L",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": -0.20919600129127503,
+                    "y": 0.4380933940410614,
+                    "z": 0.3479763865470886
+                },
+                "localPosition": {
+                    "x": 4.284083843231201e-8,
+                    "y": 0.3276214003562927,
+                    "z": -3.253808245062828e-8
+                },
+                "rotation": {
+                    "x": 12.450934410095215,
+                    "y": 0.22250086069107057,
+                    "z": 180.2337188720703
+                },
+                "localScale": {
+                    "x": 0.9999998807907105,
+                    "y": 0.9999992847442627,
+                    "z": 0.9999992251396179
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "front_thigh.L",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "shoulder.L",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": -0.1833488941192627,
+                    "y": 0.6847984194755554,
+                    "z": 0.5619956254959106
+                },
+                "localPosition": {
+                    "x": -0.03837405890226364,
+                    "y": 0.43638676404953005,
+                    "z": 0.00003429989374126308
+                },
+                "rotation": {
+                    "x": 40.95576477050781,
+                    "y": 0.2342025190591812,
+                    "z": 175.62855529785157
+                },
+                "localScale": {
+                    "x": 1.0000001192092896,
+                    "y": 1.0000003576278687,
+                    "z": 1.000000238418579
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "shoulder.L",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "spine.009",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": -0.2217240333557129,
+                    "y": 1.1101714372634888,
+                    "z": 0.4645726680755615
+                },
+                "localPosition": {
+                    "x": 0.22171933948993684,
+                    "y": 0.33923694491386416,
+                    "z": -0.013624962419271469
+                },
+                "rotation": {
+                    "x": 347.10455322265627,
+                    "y": -0.0003115110448561609,
+                    "z": 180.00021362304688
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 0.9999995231628418,
+                    "z": 0.999999463558197
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "spine.009",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "spine.008",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": -0.000002928608410002198,
+                    "y": 1.0658209323883057,
+                    "z": 0.12797245383262635
+                },
+                "localPosition": {
+                    "x": 2.461320036672987e-11,
+                    "y": 0.3499087989330292,
+                    "z": 0.00029992673080414534
+                },
+                "rotation": {
+                    "x": 279.80615234375,
+                    "y": 180.00100708007813,
+                    "z": -0.0012969039380550385
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0000007152557374,
+                    "z": 1.0000005960464478
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "spine.008",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "spine.007",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": -0.0000012289826827327489,
+                    "y": 1.0616278648376465,
+                    "z": -0.22191122174263
+                },
+                "localPosition": {
+                    "x": 2.2737367544323206e-13,
+                    "y": 0.32596591114997866,
+                    "z": 2.794514486481603e-8
+                },
+                "rotation": {
+                    "x": 270.6376647949219,
+                    "y": 180.01913452148438,
+                    "z": 359.9805908203125
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 0.9999995827674866,
+                    "z": 0.9999995827674866
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "spine",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "spine.001",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 0.00000771661325416062,
+                    "y": 0.13062214851379395,
+                    "z": -1.3281528949737549
+                },
+                "localPosition": {
+                    "x": 1.1368683772161603e-13,
+                    "y": 0.1283765733242035,
+                    "z": -1.4895839228756813e-8
+                },
+                "rotation": {
+                    "x": 84.10940551757813,
+                    "y": 0.0001820175239117816,
+                    "z": 180.00050354003907
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 0.9999998211860657,
+                    "z": 0.9999995231628418
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "spine.001",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "spine.002",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 0.000006927583854121622,
+                    "y": 0.177292600274086,
+                    "z": -1.2085599899291993
+                },
+                "localPosition": {
+                    "x": 3.410605131648481e-13,
+                    "y": 0.1382341831922531,
+                    "z": -1.1921741815967835e-7
+                },
+                "rotation": {
+                    "x": 68.68211364746094,
+                    "y": 0.00010428116365801543,
+                    "z": 180.0004425048828
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.000000238418579,
+                    "z": 0.9999998211860657
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "spine.002",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "spine.003",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 0.000006066496098355856,
+                    "y": 0.2725774943828583,
+                    "z": -1.1084129810333253
+                },
+                "localPosition": {
+                    "x": -2.2737367544323206e-13,
+                    "y": 0.18786275386810304,
+                    "z": -9.687645530220834e-8
+                },
+                "rotation": {
+                    "x": 46.42503356933594,
+                    "y": -0.00010620411921991035,
+                    "z": 180.00027465820313
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 0.9999994039535523
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "spine.003",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "spine.004",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 0.000005037541541241808,
+                    "y": 0.44175776839256289,
+                    "z": -1.0267395973205567
+                },
+                "localPosition": {
+                    "x": 4.547473508864641e-13,
+                    "y": 0.22252097725868226,
+                    "z": -4.4722394676455227e-8
+                },
+                "rotation": {
+                    "x": 25.76932144165039,
+                    "y": -0.00020919299277011305,
+                    "z": 180.00022888183595
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0000005960464478,
+                    "z": 1.0000005960464478
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "spine.004",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "spine.005",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 0.000003918502443411853,
+                    "y": 0.6541079878807068,
+                    "z": -0.960234522819519
+                },
+                "localPosition": {
+                    "x": 3.410605131648481e-13,
+                    "y": 0.24534256756305695,
+                    "z": 2.978654478624776e-8
+                },
+                "rotation": {
+                    "x": 17.3898868560791,
+                    "y": -0.0002374282048549503,
+                    "z": 180.00021362304688
+                },
+                "localScale": {
+                    "x": 1.0000001192092896,
+                    "y": 1.0000001192092896,
+                    "z": 1.0
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "spine.005",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "spine.006",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 0.0000027458791009848939,
+                    "y": 0.8934105038642883,
+                    "z": -0.9061301946640015
+                },
+                "localPosition": {
+                    "x": -2.2737367544323206e-13,
+                    "y": 0.3070019781589508,
+                    "z": -1.7881716019019223e-7
+                },
+                "rotation": {
+                    "x": 12.739891052246094,
+                    "y": -0.0002500140981283039,
+                    "z": 180.00021362304688
+                },
+                "localScale": {
+                    "x": 0.9999998807907105,
+                    "y": 0.9999997019767761,
+                    "z": 0.9999995827674866
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "spine.006",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "spine.007",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 8.551537575840484e-7,
+                    "y": 1.1169382333755494,
+                    "z": -0.6956889033317566
+                },
+                "localPosition": {
+                    "x": -1.4991314856160898e-9,
+                    "y": -0.1510063260793686,
+                    "z": 0.004691995680332184
+                },
+                "rotation": {
+                    "x": 43.27272415161133,
+                    "y": -0.00010257965186610818,
+                    "z": 180.00027465820313
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 0.9999999403953552,
+                    "z": 1.0000001192092896
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "spine.007",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "Root",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 2.083194772239949e-7,
+                    "y": 1.0962388515472413,
+                    "z": -0.5460343956947327
+                },
+                "localPosition": {
+                    "x": 3.2934572402609777e-8,
+                    "y": 1.0962389707565308,
+                    "z": 0.5460342764854431
+                },
+                "rotation": {
+                    "x": 276.0950927734375,
+                    "y": -0.0023583685979247095,
+                    "z": 180.00209045410157
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0000001192092896,
+                    "z": 1.0000001192092896
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Root",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "Tiger_001_rig",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "localPosition": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "rotation": {
+                    "x": 0.000007513437140005408,
+                    "y": 180.0,
+                    "z": 0.000005008957487007137
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Tiger_001_rig",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "Tiger_001",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "localPosition": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Tiger_001",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "Tiger_001",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": -8.04377187080263e-9,
+                    "y": 7.58378360110612e-10,
+                    "z": -3.1208950979078055e-9
+                },
+                "localPosition": {
+                    "x": -8.04377187080263e-9,
+                    "y": 7.58378360110612e-10,
+                    "z": -3.1208950979078055e-9
+                },
+                "rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform",
+                "SkinnedMeshRenderer"
+            ]
+        },
+        {
+            "name": "Tiger_001",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "None",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "localPosition": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform",
+                "CharacterController",
+                "Animator",
+                "CreatureMover",
+                "MovePlayerInput"
+            ]
+        },
+        {
+            "name": "toe.R_end",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "toe.R",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.210775375366211,
+                    "y": 10.095460891723633,
+                    "z": -0.01156710833311081
+                },
+                "localPosition": {
+                    "x": 8.658389560878277e-9,
+                    "y": 0.0745219737291336,
+                    "z": 1.862645149230957e-9
+                },
+                "rotation": {
+                    "x": 351.6896667480469,
+                    "y": 175.1361083984375,
+                    "z": 17.046756744384767
+                },
+                "localScale": {
+                    "x": 0.9999999403953552,
+                    "y": 0.9999999403953552,
+                    "z": 0.9999999403953552
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "toe.R",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "foot.R",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.158538818359375,
+                    "y": 10.024961471557618,
+                    "z": -0.04184972494840622
+                },
+                "localPosition": {
+                    "x": -2.852175384759903e-9,
+                    "y": 0.04787154123187065,
+                    "z": -6.984919309616089e-10
+                },
+                "rotation": {
+                    "x": 351.6896667480469,
+                    "y": 175.1361083984375,
+                    "z": 17.046749114990236
+                },
+                "localScale": {
+                    "x": 0.9999998211860657,
+                    "y": 0.9999992847442627,
+                    "z": 1.000000238418579
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "foot.R",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "shin.R",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.159921646118164,
+                    "y": 9.978796005249024,
+                    "z": -0.0734824612736702
+                },
+                "localPosition": {
+                    "x": 2.9685907065868379e-9,
+                    "y": 0.049726348370313647,
+                    "z": -2.0954757928848268e-9
+                },
+                "rotation": {
+                    "x": 344.72528076171877,
+                    "y": 182.96278381347657,
+                    "z": 358.55615234375
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 0.999999463558197,
+                    "z": 0.9999994039535523
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "shin.R",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "thigh.R",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.156427383422852,
+                    "y": 9.95517349243164,
+                    "z": -0.18282024562358857
+                },
+                "localPosition": {
+                    "x": 2.561137080192566e-9,
+                    "y": 0.0857931599020958,
+                    "z": -2.3283064365386964e-9
+                },
+                "rotation": {
+                    "x": 298.40240478515627,
+                    "y": 185.15943908691407,
+                    "z": 357.07080078125
+                },
+                "localScale": {
+                    "x": 0.9999997019767761,
+                    "y": 1.0000003576278687,
+                    "z": 1.0000003576278687
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "thigh.R",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "spine.002",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.162521362304688,
+                    "y": 9.944276809692383,
+                    "z": -0.39547890424728396
+                },
+                "localPosition": {
+                    "x": -0.07045130431652069,
+                    "y": 0.08126606792211533,
+                    "z": -0.08534067869186402
+                },
+                "rotation": {
+                    "x": 277.9752502441406,
+                    "y": 202.30117797851563,
+                    "z": 336.2633361816406
+                },
+                "localScale": {
+                    "x": 1.000000238418579,
+                    "y": 1.000000238418579,
+                    "z": 0.9999998807907105
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "toe.L_end",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "toe.L",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 9.786170959472657,
+                    "y": 9.926980972290039,
+                    "z": -0.016608472913503648
+                },
+                "localPosition": {
+                    "x": 4.627509042620659e-9,
+                    "y": 0.0745219886302948,
+                    "z": -1.3242242857813836e-9
+                },
+                "rotation": {
+                    "x": 351.8833312988281,
+                    "y": 180.12905883789063,
+                    "z": 342.7181091308594
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 0.9999998807907105,
+                    "z": 0.9999999403953552
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "toe.L",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "foot.L",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 9.841461181640625,
+                    "y": 9.856535911560059,
+                    "z": -0.0418497696518898
+                },
+                "localPosition": {
+                    "x": 0.0,
+                    "y": 0.04787154495716095,
+                    "z": 3.259629011154175e-9
+                },
+                "rotation": {
+                    "x": 351.8833312988281,
+                    "y": 180.12905883789063,
+                    "z": 342.7181091308594
+                },
+                "localScale": {
+                    "x": 0.9999997615814209,
+                    "y": 1.0000003576278687,
+                    "z": 1.000000238418579
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "foot.L",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "shin.L",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 9.833405494689942,
+                    "y": 9.84410572052002,
+                    "z": -0.15714271366596223
+                },
+                "localPosition": {
+                    "x": 0.00257303100079298,
+                    "y": 0.04845867678523064,
+                    "z": 0.010855893604457379
+                },
+                "rotation": {
+                    "x": 285.5288391113281,
+                    "y": 198.61082458496095,
+                    "z": 345.8978271484375
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 0.9999998807907105,
+                    "z": 0.9999992251396179
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "shin.L",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "thigh.L",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 9.81992244720459,
+                    "y": 9.876689910888672,
+                    "z": -0.2500765323638916
+                },
+                "localPosition": {
+                    "x": 3.958120942115784e-9,
+                    "y": 0.08579341322183609,
+                    "z": -2.0954757928848268e-9
+                },
+                "rotation": {
+                    "x": 323.7904357910156,
+                    "y": 1.6202988624572755,
+                    "z": 188.1702880859375
+                },
+                "localScale": {
+                    "x": 0.9999995827674866,
+                    "y": 0.9999998807907105,
+                    "z": 0.999999463558197
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "thigh.L",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "spine.002",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 9.816779136657715,
+                    "y": 9.89445972442627,
+                    "z": -0.4598858952522278
+                },
+                "localPosition": {
+                    "x": 0.07047509402036667,
+                    "y": 0.04160480201244354,
+                    "z": -0.05638735368847847
+                },
+                "rotation": {
+                    "x": 282.2858581542969,
+                    "y": 347.2973937988281,
+                    "z": 193.26145935058595
+                },
+                "localScale": {
+                    "x": 1.0000001192092896,
+                    "y": 1.0000003576278687,
+                    "z": 0.9999998211860657
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "scull_end",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "scull",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 9.95630168914795,
+                    "y": 10.210366249084473,
+                    "z": -0.9281244277954102
+                },
+                "localPosition": {
+                    "x": -3.725290298461914e-9,
+                    "y": 0.061519376933574679,
+                    "z": -3.434251993894577e-9
+                },
+                "rotation": {
+                    "x": 336.591552734375,
+                    "y": 181.69895935058595,
+                    "z": 352.0956726074219
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 0.9999999403953552,
+                    "z": 0.9999999403953552
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "scull",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "spine.007",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 9.975647926330567,
+                    "y": 10.154446601867676,
+                    "z": -0.9892458915710449
+                },
+                "localPosition": {
+                    "x": -2.7939677238464357e-9,
+                    "y": 0.04886326938867569,
+                    "z": -3.341119736433029e-8
+                },
+                "rotation": {
+                    "x": 336.0225830078125,
+                    "y": 176.54380798339845,
+                    "z": 354.16839599609377
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0000003576278687,
+                    "z": 1.000000238418579
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "spine.007",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "spine.006",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 9.97551441192627,
+                    "y": 10.125328063964844,
+                    "z": -0.891147255897522
+                },
+                "localPosition": {
+                    "x": 0.0,
+                    "y": 0.04433497041463852,
+                    "z": 2.491287887096405e-8
+                },
+                "rotation": {
+                    "x": 52.78714370727539,
+                    "y": 167.65769958496095,
+                    "z": 350.17816162109377
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 0.9999992251396179,
+                    "z": 0.9999992251396179
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "spine.006",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "spine.005",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 9.973459243774414,
+                    "y": 10.10453987121582,
+                    "z": -0.7932713031768799
+                },
+                "localPosition": {
+                    "x": -2.7939677238464357e-9,
+                    "y": 0.05673154816031456,
+                    "z": -1.5366822481155397e-8
+                },
+                "rotation": {
+                    "x": 61.45404052734375,
+                    "y": 166.18841552734376,
+                    "z": 348.8836669921875
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0000001192092896,
+                    "z": 1.000000238418579
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "spine.005",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "spine.004",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 9.971048355102539,
+                    "y": 10.076926231384278,
+                    "z": -0.669400155544281
+                },
+                "localPosition": {
+                    "x": -4.656612873077393e-10,
+                    "y": 0.07203511148691178,
+                    "z": -3.277091309428215e-8
+                },
+                "rotation": {
+                    "x": 60.47515106201172,
+                    "y": 168.57005310058595,
+                    "z": 351.0010070800781
+                },
+                "localScale": {
+                    "x": 0.9999999403953552,
+                    "y": 1.0,
+                    "z": 1.0000001192092896
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Wing.002.R_end",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "Wing.002.R",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.223039627075196,
+                    "y": 9.865446090698243,
+                    "z": -0.536656379699707
+                },
+                "localPosition": {
+                    "x": 3.725290298461914e-9,
+                    "y": 0.07307472079992295,
+                    "z": -2.0954757928848268e-9
+                },
+                "rotation": {
+                    "x": 358.6888122558594,
+                    "y": 345.5702209472656,
+                    "z": 167.64385986328126
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0000001192092896
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Wing.002.R",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "Wing.001.R",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.261917114257813,
+                    "y": 9.936809539794922,
+                    "z": -0.5308695435523987
+                },
+                "localPosition": {
+                    "x": 9.709037840366364e-8,
+                    "y": 0.07368391752243042,
+                    "z": 2.8812792152166368e-9
+                },
+                "rotation": {
+                    "x": 358.6888122558594,
+                    "y": 345.5702209472656,
+                    "z": 167.64385986328126
+                },
+                "localScale": {
+                    "x": 0.9999999403953552,
+                    "y": 1.000000238418579,
+                    "z": 0.999999463558197
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Wing.001.R",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "Wing.R",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.254704475402832,
+                    "y": 10.010431289672852,
+                    "z": -0.5331374406814575
+                },
+                "localPosition": {
+                    "x": 2.0023435354232789e-8,
+                    "y": 0.10171861201524735,
+                    "z": 5.2619725465774539e-8
+                },
+                "rotation": {
+                    "x": 359.5677185058594,
+                    "y": 353.1280822753906,
+                    "z": 182.31214904785157
+                },
+                "localScale": {
+                    "x": 0.9999995231628418,
+                    "y": 0.9999991655349731,
+                    "z": 0.9999997615814209
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Wing.R",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "shoulder.R",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.134244918823243,
+                    "y": 10.089556694030762,
+                    "z": -0.63814377784729
+                },
+                "localPosition": {
+                    "x": -0.02474064752459526,
+                    "y": 0.04725779592990875,
+                    "z": 0.024347463622689248
+                },
+                "rotation": {
+                    "x": 344.12347412109377,
+                    "y": 339.5345764160156,
+                    "z": 216.02786254882813
+                },
+                "localScale": {
+                    "x": 1.0000004768371583,
+                    "y": 1.0000005960464478,
+                    "z": 1.0000001192092896
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "shoulder.R",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "spine.004",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.080669403076172,
+                    "y": 10.035017013549805,
+                    "z": -0.6433961391448975
+                },
+                "localPosition": {
+                    "x": -0.041757576167583469,
+                    "y": 0.02683684043586254,
+                    "z": -0.0008187873754650354
+                },
+                "rotation": {
+                    "x": 331.7874755859375,
+                    "y": 178.74000549316407,
+                    "z": 356.10247802734377
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0000003576278687,
+                    "z": 1.000000238418579
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Wing.002.L_end",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "Wing.002.L",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 9.75942325592041,
+                    "y": 9.859345436096192,
+                    "z": -0.5542612075805664
+                },
+                "localPosition": {
+                    "x": -3.725290298461914e-9,
+                    "y": 0.07307468354701996,
+                    "z": -6.984919309616089e-9
+                },
+                "rotation": {
+                    "x": 356.02532958984377,
+                    "y": 3.7220406532287599,
+                    "z": 201.7904510498047
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Wing.002.L",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "Wing.001.L",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 9.690987586975098,
+                    "y": 9.927035331726075,
+                    "z": -0.5615922212600708
+                },
+                "localPosition": {
+                    "x": 4.784669727087021e-8,
+                    "y": 0.07368393987417221,
+                    "z": 2.60770320892334e-8
+                },
+                "rotation": {
+                    "x": 356.0253601074219,
+                    "y": 3.722050905227661,
+                    "z": 201.79046630859376
+                },
+                "localScale": {
+                    "x": 0.999998927116394,
+                    "y": 1.000000238418579,
+                    "z": 0.999999463558197
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Wing.001.L",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "Wing.L",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 9.686965942382813,
+                    "y": 10.000659942626954,
+                    "z": -0.5678043961524963
+                },
+                "localPosition": {
+                    "x": -9.633367881178856e-8,
+                    "y": 0.10171864181756973,
+                    "z": 7.29633029550314e-8
+                },
+                "rotation": {
+                    "x": 358.1491394042969,
+                    "y": 356.4068908691406,
+                    "z": 181.36953735351563
+                },
+                "localScale": {
+                    "x": 1.0000003576278687,
+                    "y": 1.0000001192092896,
+                    "z": 1.0000007152557374
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Wing.L",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "shoulder.L",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 9.812085151672364,
+                    "y": 10.082037925720215,
+                    "z": -0.6551100611686707
+                },
+                "localPosition": {
+                    "x": 0.021004974842071534,
+                    "y": 0.047551412135362628,
+                    "z": 0.024274876341223718
+                },
+                "rotation": {
+                    "x": 341.9055480957031,
+                    "y": 9.07667064666748,
+                    "z": 147.31488037109376
+                },
+                "localScale": {
+                    "x": 0.9999996423721314,
+                    "y": 1.0,
+                    "z": 0.9999991059303284
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "shoulder.L",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "spine.004",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 9.872562408447266,
+                    "y": 10.030014991760254,
+                    "z": -0.65468430519104
+                },
+                "localPosition": {
+                    "x": 0.041757579892873767,
+                    "y": 0.026836849749088289,
+                    "z": -0.0008187296334654093
+                },
+                "rotation": {
+                    "x": 331.7874450683594,
+                    "y": 178.73989868164063,
+                    "z": 356.1025390625
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.000000238418579,
+                    "z": 1.0000003576278687
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "spine.004",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "spine.003",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 9.98012638092041,
+                    "y": 10.005939483642579,
+                    "z": -0.6401652693748474
+                },
+                "localPosition": {
+                    "x": 1.1641532182693482e-9,
+                    "y": 0.0787092074751854,
+                    "z": 1.2747477740049363e-8
+                },
+                "rotation": {
+                    "x": 9.153663635253907,
+                    "y": 176.34124755859376,
+                    "z": 356.52178955078127
+                },
+                "localScale": {
+                    "x": 0.9999999403953552,
+                    "y": 0.9999995827674866,
+                    "z": 0.999999463558197
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "spine.003",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "spine.002",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 9.990020751953125,
+                    "y": 9.928374290466309,
+                    "z": -0.608241856098175
+                },
+                "localPosition": {
+                    "x": -1.1641532182693482e-9,
+                    "y": 0.07803936302661896,
+                    "z": -7.861672202125192e-9
+                },
+                "rotation": {
+                    "x": 9.21835708618164,
+                    "y": 177.5479736328125,
+                    "z": 356.72222900390627
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0000003576278687,
+                    "z": 1.000000238418579
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "spine_end",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "spine",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.01893138885498,
+                    "y": 9.73688793182373,
+                    "z": -0.8977060317993164
+                },
+                "localPosition": {
+                    "x": -1.3969838619232178e-9,
+                    "y": 0.06502928584814072,
+                    "z": -1.1772499419748783e-8
+                },
+                "rotation": {
+                    "x": 320.1622009277344,
+                    "y": 181.97459411621095,
+                    "z": 175.9212646484375
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 0.9999998807907105,
+                    "z": 0.9999998807907105
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "spine",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "spine.001",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.010953903198243,
+                    "y": 9.786694526672364,
+                    "z": -0.7934861183166504
+                },
+                "localPosition": {
+                    "x": -2.0954757928848268e-9,
+                    "y": 0.0907551646232605,
+                    "z": -2.1289451979100705e-8
+                },
+                "rotation": {
+                    "x": 320.1622009277344,
+                    "y": 181.97459411621095,
+                    "z": 175.9212646484375
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 0.9999997019767761,
+                    "z": 0.9999998807907105
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "spine.001",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "spine.002",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.00195026397705,
+                    "y": 9.837124824523926,
+                    "z": -0.6050661206245422
+                },
+                "localPosition": {
+                    "x": -1.6298145055770875e-9,
+                    "y": -0.012952988967299462,
+                    "z": 0.008439142256975174
+                },
+                "rotation": {
+                    "x": 303.9416809082031,
+                    "y": 184.0207061767578,
+                    "z": 174.3865203857422
+                },
+                "localScale": {
+                    "x": 0.9999999403953552,
+                    "y": 0.9999998211860657,
+                    "z": 0.9999998807907105
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "spine.002",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "Root",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.0,
+                    "y": 9.850878715515137,
+                    "z": -0.5875266194343567
+                },
+                "localPosition": {
+                    "x": 9.873517115011055e-9,
+                    "y": 0.23501063883304597,
+                    "z": 0.14912143349647523
+                },
+                "rotation": {
+                    "x": 6.06167459487915,
+                    "y": 179.1985321044922,
+                    "z": 356.98309326171877
+                },
+                "localScale": {
+                    "x": 0.9999999403953552,
+                    "y": 0.9999996423721314,
+                    "z": 0.9999997019767761
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Root",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "Chicken_001_rig",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.0,
+                    "y": 10.0,
+                    "z": 0.0
+                },
+                "localPosition": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "rotation": {
+                    "x": 90.0,
+                    "y": 179.99996948242188,
+                    "z": 0.0
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Chicken_001_rig",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "Chicken_ro",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.0,
+                    "y": 10.0,
+                    "z": 0.0
+                },
+                "localPosition": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "rotation": {
+                    "x": 270.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Chicken_001",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "Chicken_ro",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.0,
+                    "y": 10.0,
+                    "z": 2.417182454195199e-9
+                },
+                "localPosition": {
+                    "x": -2.1598878241491094e-9,
+                    "y": -9.668729150646982e-10,
+                    "z": 1.146775008287193e-9
+                },
+                "rotation": {
+                    "x": 270.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform",
+                "SkinnedMeshRenderer"
+            ]
+        },
+        {
+            "name": "Chicken_ro",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "None",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.0,
+                    "y": 10.0,
+                    "z": 0.0
+                },
+                "localPosition": {
+                    "x": 10.0,
+                    "y": 10.0,
+                    "z": 0.0
+                },
+                "rotation": {
+                    "x": 270.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "localScale": {
+                    "x": 2.5,
+                    "y": 2.5,
+                    "z": 1.0
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform",
+                "CharacterController",
+                "Animator",
+                "CreatureMover",
+                "SortingGroup",
+                "AnimalBehaviour"
+            ]
+        },
+        {
             "name": "MinimapController",
             "tag": "Untagged",
             "layer": "Default",
@@ -52,7 +3329,7 @@
             "tag": "Dice",
             "layer": "Default",
             "parent": "None",
-            "prefabType": "Scene Object",
+            "prefabType": "Prefab Instance",
             "isActive": true,
             "transform": {
                 "position": {
@@ -252,13 +3529,13 @@
             "isActive": true,
             "transform": {
                 "position": {
-                    "x": 613.0,
-                    "y": 608.0,
+                    "x": 561.0,
+                    "y": 558.0,
                     "z": 0.0
                 },
                 "localPosition": {
-                    "x": 301.5,
-                    "y": 299.0,
+                    "x": 275.5,
+                    "y": 274.0,
                     "z": 0.0
                 },
                 "rotation": {
@@ -288,7 +3565,8 @@
             "components": [
                 "RectTransform",
                 "CanvasRenderer",
-                "RawImage"
+                "RawImage",
+                "Outline"
             ]
         },
         {
@@ -349,13 +3627,13 @@
             "isActive": true,
             "transform": {
                 "position": {
-                    "x": 311.5,
-                    "y": 309.0,
+                    "x": 285.5,
+                    "y": 284.0,
                     "z": 0.0
                 },
                 "localPosition": {
-                    "x": 311.5,
-                    "y": 309.0,
+                    "x": 285.5,
+                    "y": 284.0,
                     "z": 0.0
                 },
                 "rotation": {
@@ -437,6 +3715,55 @@
                 "AudioListener",
                 "UniversalAdditionalCameraData",
                 "CameraFollow"
+            ]
+        },
+        {
+            "name": "Plane",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "None",
+            "prefabType": "Scene Object",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 25.0,
+                    "y": 75.0,
+                    "z": -0.009999999776482582
+                },
+                "localPosition": {
+                    "x": 25.0,
+                    "y": 75.0,
+                    "z": -0.009999999776482582
+                },
+                "rotation": {
+                    "x": 270.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "localScale": {
+                    "x": 5.0,
+                    "y": 100.0,
+                    "z": 15.0
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer",
+                "MeshCollider"
             ]
         },
         {
@@ -534,6 +3861,53 @@
                 "Tilemap",
                 "TilemapRenderer",
                 "SortingGroup"
+            ]
+        },
+        {
+            "name": "AnimalManager",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "None",
+            "prefabType": "Scene Object",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 0.2499825656414032,
+                    "y": 5.096865177154541,
+                    "z": -0.3506113886833191
+                },
+                "localPosition": {
+                    "x": 0.2499825656414032,
+                    "y": 5.096865177154541,
+                    "z": -0.3506113886833191
+                },
+                "rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform",
+                "AnimalManager"
             ]
         },
         {
@@ -676,7 +4050,8 @@
             },
             "components": [
                 "Transform",
-                "Grid"
+                "Grid",
+                "Tilemap"
             ]
         },
         {
@@ -725,20 +4100,46 @@
                 "Transform",
                 "Tilemap",
                 "TilemapRenderer",
-                "SortingGroup"
+                "SortingGroup",
+                "TilemapCollider2D"
             ]
         }
     ],
     "prefabs": [
         {
-            "name": "Chicken_001",
-            "path": "Assets/Animals/Prefabs/Chicken_001.prefab",
+            "name": "Dice",
+            "path": "Assets/Animals/Meshes/Dice.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer",
+                "BoxCollider",
+                "DiceController",
+                "SortingGroup"
+            ]
+        },
+        {
+            "name": "Chicken_brown",
+            "path": "Assets/Animals/Prefabs/Chicken_brown.prefab",
             "components": [
                 "Transform",
                 "CharacterController",
                 "Animator",
                 "CreatureMover",
-                "MovePlayerInput"
+                "SortingGroup",
+                "AnimalBehaviour"
+            ]
+        },
+        {
+            "name": "Chicken_grey",
+            "path": "Assets/Animals/Prefabs/Chicken_grey.prefab",
+            "components": [
+                "Transform",
+                "CharacterController",
+                "Animator",
+                "CreatureMover",
+                "SortingGroup",
+                "AnimalBehaviour"
             ]
         },
         {
@@ -750,6 +4151,18 @@
                 "Animator",
                 "CreatureMover",
                 "MovePlayerInput"
+            ]
+        },
+        {
+            "name": "Dice",
+            "path": "Assets/Animals/Prefabs/Dice.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer",
+                "BoxCollider",
+                "DiceController",
+                "SortingGroup"
             ]
         },
         {
@@ -1547,7 +4960,11 @@
             ".DS_Store",
             "DefaultVolumeProfile.asset",
             "InputSystem_Actions.inputactions",
+            "MyTryFassst.shader",
+            "New Material.mat",
+            "NewWireframe.shadergraph",
             "SceneExport.json",
+            "SimpleWireframe.shader",
             "UniversalRenderPipelineGlobalSettings.asset",
             "particles 1.prefab"
         ],
@@ -1556,6 +4973,8 @@
                 "name": "Animals",
                 "path": "Assets/Animals",
                 "files": [
+                    "AnimalBehaviour.cs",
+                    "AnimalManager.cs",
                     "verzeichnisstruktur.txt"
                 ],
                 "subfolders": [
@@ -1569,6 +4988,7 @@
                         "name": "Materials",
                         "path": "Assets/Animals/Materials",
                         "files": [
+                            "Chicken_Lit.mat",
                             "Floor.mat",
                             "Material.mat"
                         ],
@@ -1580,6 +5000,7 @@
                         "files": [
                             "Chicken_001.fbx",
                             "Deer_001.fbx",
+                            "Dice.prefab",
                             "Dog_001.fbx",
                             "Horse_001.fbx",
                             "Kitty_001.fbx",
@@ -1592,11 +5013,14 @@
                         "name": "Prefabs",
                         "path": "Assets/Animals/Prefabs",
                         "files": [
-                            "Chicken_001.prefab",
+                            "Chicken_brown.prefab",
+                            "Chicken_grey.prefab",
                             "Deer_001.prefab",
+                            "Dice.prefab",
                             "Dog_001.prefab",
                             "Pinguin_001.prefab",
-                            "Tiger_001.prefab"
+                            "Tiger_001.prefab",
+                            "verzeichnisstruktur.txt"
                         ],
                         "subfolders": []
                     },
@@ -1614,7 +5038,8 @@
                         "name": "Scenes",
                         "path": "Assets/Animals/Scenes",
                         "files": [
-                            "Demonstration.unity"
+                            "Demonstration.unity",
+                            "NewShaderVariants.shadervariants"
                         ],
                         "subfolders": []
                     },
@@ -1626,6 +5051,14 @@
                             "MovePlayerInput.cs",
                             "PlayerCamera.cs",
                             "ThirdPersonCamera.cs"
+                        ],
+                        "subfolders": []
+                    },
+                    {
+                        "name": "Shaders",
+                        "path": "Assets/Animals/Shaders",
+                        "files": [
+                            "ColorMapShader.shader"
                         ],
                         "subfolders": []
                     },
@@ -1642,6 +5075,54 @@
                         "path": "Assets/Animals/Textures",
                         "files": [
                             "Texture.png"
+                        ],
+                        "subfolders": []
+                    }
+                ]
+            },
+            {
+                "name": "CrossPlatformWireframe",
+                "path": "Assets/CrossPlatformWireframe",
+                "files": [
+                    ".DS_Store",
+                    "Demo-Glow.unity",
+                    "Demo.unity",
+                    "Glow Profile.asset"
+                ],
+                "subfolders": [
+                    {
+                        "name": "Animations",
+                        "path": "Assets/CrossPlatformWireframe/Animations",
+                        "files": [
+                            "RotateY.anim"
+                        ],
+                        "subfolders": []
+                    },
+                    {
+                        "name": "Materials",
+                        "path": "Assets/CrossPlatformWireframe/Materials",
+                        "files": [
+                            "CrossPlatformWireframe-Glow.mat",
+                            "CrossPlatformWireframe.mat",
+                            "Ground.mat"
+                        ],
+                        "subfolders": []
+                    },
+                    {
+                        "name": "Scripts",
+                        "path": "Assets/CrossPlatformWireframe/Scripts",
+                        "files": [
+                            "MeshWireframeComputor.cs"
+                        ],
+                        "subfolders": []
+                    },
+                    {
+                        "name": "Shaders",
+                        "path": "Assets/CrossPlatformWireframe/Shaders",
+                        "files": [
+                            "CrossPlatformWireframe-Glow.shadergraph",
+                            "CrossPlatformWireframe.shadergraph",
+                            "Wireframe.shadersubgraph"
                         ],
                         "subfolders": []
                     }
@@ -1963,6 +5444,19 @@
                             "preview.png",
                             "sample.png"
                         ],
+                        "subfolders": []
+                    }
+                ]
+            },
+            {
+                "name": "UCLAGameLab",
+                "path": "Assets/UCLAGameLab",
+                "files": [],
+                "subfolders": [
+                    {
+                        "name": "Wireframe",
+                        "path": "Assets/UCLAGameLab/Wireframe",
+                        "files": [],
                         "subfolders": []
                     }
                 ]

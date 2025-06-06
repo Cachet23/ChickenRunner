@@ -856,7 +856,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7ab977a21c92388468ee65ad1c0e5a78, type: 2}
+  - {fileID: 2100000, guid: f6730b960ba6c914e9141395fc93249f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1155,10 +1155,9 @@ GameObject:
   - component: {fileID: 8881504610387854123}
   - component: {fileID: 8881504610387854120}
   - component: {fileID: 8881504610387854121}
-  - component: {fileID: -4190870798832621855}
-  - component: {fileID: -5427269321834487422}
+  - component: {fileID: 8881504610387854134}
   m_Layer: 0
-  m_Name: Chicken_ro
+  m_Name: Chicken_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1172,15 +1171,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8073443194988779917}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 10, y: 10, z: 0}
-  m_LocalScale: {x: 2.5, y: 2.5, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2382459246418940066}
   - {fileID: 5260241464314499896}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!143 &8881504610387854123
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1242,7 +1241,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_WalkSpeed: 1
   m_RunSpeed: 4
-  m_RotateSpeed: 162
+  m_RotateSpeed: 245
   m_Space: 1
   m_JumpHeight: 5
   m_VerticalID: Vert
@@ -1252,19 +1251,7 @@ MonoBehaviour:
     body: 0.3
     head: 0.7
     eyes: 1
---- !u!210 &-4190870798832621855
-SortingGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8073443194988779917}
-  m_Enabled: 1
-  m_SortingLayerID: -1392183151
-  m_SortingLayer: 7
-  m_SortingOrder: 0
-  m_SortAtRoot: 0
---- !u!114 &-5427269321834487422
+--- !u!114 &8881504610387854134
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1273,11 +1260,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 8073443194988779917}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce284e6a99671424fb319870ac9eb3ac, type: 3}
+  m_Script: {fileID: 11500000, guid: b2c67ce836140b4479603ebcf944cddd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.2
-  changeDirTime: 10
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_JumpButton: Jump
+  m_RunKey: 304
+  m_Camera: {fileID: 0}
+  m_MouseX: Mouse X
+  m_MouseY: Mouse Y
+  m_MouseScroll: Mouse ScrollWheel
 --- !u!1 &8122850409471221505
 GameObject:
   m_ObjectHideFlags: 0
