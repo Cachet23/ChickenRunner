@@ -183,25 +183,30 @@ namespace Controller
                 UpdateRotation(deltaTime);
 
                 GenAnimationAxis(in movement, out animAxis);
-            }
-
-            private void ConvertMovement(in Vector2 axis, in Vector3 targetForward, out Vector3 movement)
+            }            private void ConvertMovement(in Vector2 axis, in Vector3 targetForward, out Vector3 movement)
             {
-                Vector3 forward;
-                Vector3 right;
-
-                if (m_Space == Space.Self)
-                {
-                    forward = new Vector3(targetForward.x, 0f, targetForward.z).normalized;
-                    right = Vector3.Cross(Vector3.up, forward).normalized;
-                }
-                else
-                {
-                    forward = Vector3.forward;
-                    right = Vector3.right;
-                }
+                // Always use world space directions for movement
+                Vector3 forward = Vector3.forward;  // (0, 0, 1) - Moving along positive Z
+                Vector3 right = Vector3.right;      // (1, 0, 0) - Moving along positive X
 
                 movement = axis.x * right + axis.y * forward;
+
+                // Calculate target rotation based on movement direction                if (movement.sqrMagnitude > 0.01f)
+                {
+                    float targetRotation = 0;
+                    
+                    // Calculate rotation based on movement direction
+                    if (axis.x != 0 || axis.y != 0)
+                    {
+                        // Convert input to angle (atan2 gives us angle in radians)
+                        targetRotation = Mathf.Atan2(axis.x, axis.y) * Mathf.Rad2Deg;
+                    }
+
+                    // Set target rotation smoothly
+                    m_TargetAngle = targetRotation;
+                    m_IsRotating = true;
+                }
+
                 movement = Vector3.ProjectOnPlane(movement, m_Normal);
             }
 
@@ -242,24 +247,10 @@ namespace Controller
                 {
                     animAxis = new Vector2(Vector3.Dot(movement, Vector3.right), Vector3.Dot(movement, Vector3.forward));
                 }
-            }
-
-            private void Turn(in Vector3 targetForward, bool isMoving)
+            }            private void Turn(in Vector3 targetForward, bool isMoving)
             {
-                var angle = Vector3.SignedAngle(m_Transform.forward, Vector3.ProjectOnPlane(targetForward, Vector3.up), Vector3.up);
-
-                if (!m_IsRotating)
-                {
-                    if (!isMoving && Mathf.Abs(angle) < m_Luft)
-                    {
-                        m_IsRotating = false;
-                        return;
-                    }
-
-                    m_IsRotating = true;
-                }
-
-                m_TargetAngle = angle;
+                // Disable gradual turning since we're using direct rotations
+                m_IsRotating = false;
             }
 
             private void UpdateRotation(float deltaTime)

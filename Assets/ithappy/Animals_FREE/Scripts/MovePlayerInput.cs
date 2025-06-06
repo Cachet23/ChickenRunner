@@ -44,11 +44,29 @@ namespace Controller
         {
             GatherInput();
             SetInput();
-        }
-
-        public void GatherInput()
+        }        public void GatherInput()
         {
-            m_Axis = new Vector2(Input.GetAxis(m_HorizontalAxis), Input.GetAxis(m_VerticalAxis));
+            // Get raw input
+            float horizontal = Input.GetAxis(m_HorizontalAxis);
+            float vertical = Input.GetAxis(m_VerticalAxis);
+            
+            // Convert to Vector2 and ensure we only move in cardinal directions
+            if (Mathf.Abs(horizontal) > Mathf.Abs(vertical))
+            {
+                // Horizontal movement dominates - move only left/right
+                m_Axis = new Vector2(horizontal, 0);
+            }
+            else if (Mathf.Abs(vertical) > Mathf.Abs(horizontal))
+            {
+                // Vertical movement dominates - move only up/down
+                m_Axis = new Vector2(0, vertical);
+            }
+            else
+            {
+                // No movement or equal input - stop
+                m_Axis = Vector2.zero;
+            }
+            
             m_IsRun = Input.GetKey(m_RunKey);
             m_IsJump = Input.GetButton(m_JumpButton);
 
