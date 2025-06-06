@@ -189,22 +189,17 @@ namespace Controller
                 Vector3 forward = Vector3.forward;  // (0, 0, 1) - Moving along positive Z
                 Vector3 right = Vector3.right;      // (1, 0, 0) - Moving along positive X
 
-                movement = axis.x * right + axis.y * forward;
-
-                // Calculate target rotation based on movement direction                if (movement.sqrMagnitude > 0.01f)
+                movement = axis.x * right + axis.y * forward;                // Calculate target rotation based on movement direction
+                if (movement.sqrMagnitude > 0.01f)
                 {
-                    float targetRotation = 0;
+                    // Convert input to angle (atan2 gives us angle in radians, convert to degrees)
+                    float targetRotation = Mathf.Atan2(axis.x, axis.y) * Mathf.Rad2Deg;
                     
-                    // Calculate rotation based on movement direction
-                    if (axis.x != 0 || axis.y != 0)
-                    {
-                        // Convert input to angle (atan2 gives us angle in radians)
-                        targetRotation = Mathf.Atan2(axis.x, axis.y) * Mathf.Rad2Deg;
-                    }
+                    // Normalize to 0-360 range
+                    while (targetRotation < 0) targetRotation += 360f;
+                    while (targetRotation > 360) targetRotation -= 360f;
 
-                    // Set target rotation smoothly
                     m_TargetAngle = targetRotation;
-                    m_IsRotating = true;
                 }
 
                 movement = Vector3.ProjectOnPlane(movement, m_Normal);
@@ -249,29 +244,48 @@ namespace Controller
                 }
             }            private void Turn(in Vector3 targetForward, bool isMoving)
             {
-                // Disable gradual turning since we're using direct rotations
-                m_IsRotating = false;
-            }
+                if (!isMoving)
+                {
+                    m_IsRotating = false;
+                    return;
+                }
 
-            private void UpdateRotation(float deltaTime)
+                // Calculate the current rotation and normalize it to 0-360 range
+                float currentRotation = m_Transform.rotation.eulerAngles.y;
+                while (currentRotation > 360f) currentRotation -= 360f;
+                while (currentRotation < 0f) currentRotation += 360f;
+
+                // Calculate shortest path to target angle
+                float angleDiff = Mathf.DeltaAngle(currentRotation, m_TargetAngle);
+                
+                if (Mathf.Abs(angleDiff) > 0.1f)
+                {
+                    m_TargetAngle = currentRotation + angleDiff;
+                    m_IsRotating = true;
+                }
+            }            private void UpdateRotation(float deltaTime)
             {
-                if(!m_IsRotating)
+                if (!m_IsRotating)
                 {
                     return;
                 }
 
-                var rotDelta = m_RotateSpeed * deltaTime;
-                if (rotDelta + Mathf.PI * 2f + Mathf.Epsilon >= Mathf.Abs(m_TargetAngle))
+                float currentRotation = m_Transform.rotation.eulerAngles.y;
+                float angleDiff = Mathf.DeltaAngle(currentRotation, m_TargetAngle);
+
+                // Calculate rotation step
+                float rotationStep = m_RotateSpeed * deltaTime;
+                float rotation = Mathf.MoveTowards(0, angleDiff, rotationStep);
+
+                // Apply rotation
+                if (Mathf.Abs(rotation) > 0.01f)
                 {
-                    rotDelta = m_TargetAngle;
-                    m_IsRotating = false;
+                    m_Transform.Rotate(Vector3.up, rotation);
                 }
                 else
                 {
-                    rotDelta *= Mathf.Sign(m_TargetAngle);
+                    m_IsRotating = false;
                 }
-
-                m_Transform.Rotate(Vector3.up, rotDelta);
             }
         }
 
