@@ -166,14 +166,22 @@ public class ObjectManager : MonoBehaviour
 
     private bool IsInBiomeBounds(Vector3 worldPos)
     {
-        var cell = baseMapManager.baseLayer.WorldToCell(worldPos);
-        return cell.x >= origin.x && cell.x < origin.x + biomeSize.x &&
-               cell.y >= origin.y && cell.y < origin.y + biomeSize.y;
+        // Convert 3D position to 2D grid coordinates
+        var tileX = Mathf.RoundToInt(worldPos.x - 0.5f);
+        var tileY = Mathf.RoundToInt(worldPos.z - 0.5f);
+        
+        return tileX >= origin.x && tileX < origin.x + biomeSize.x &&
+               tileY >= origin.y && tileY < origin.y + biomeSize.y;
     }
 
     private bool IsValidHousePosition(Vector3 worldPos)
     {
-        var cellPos = baseMapManager.baseLayer.WorldToCell(worldPos);
+        // Convert 3D position to 2D grid coordinates
+        var cellPos = new Vector3Int(
+            Mathf.RoundToInt(worldPos.x - 0.5f),
+            Mathf.RoundToInt(worldPos.z - 0.5f),
+            0
+        );
         
         // Position must have grass and no water
         if (baseMapManager.grassLayer.GetTile(cellPos) == null || 
@@ -192,11 +200,16 @@ public class ObjectManager : MonoBehaviour
     private void PlaceHouse(Vector3 position)
     {
         var prefab = housePrefabs[Random.Range(0, housePrefabs.Length)];
-        float randomX = Random.Range(0, 360);
-        var rotation = Quaternion.Euler(randomX, -90f, 90f);
-        var house = Instantiate(prefab, position, rotation, objectContainer);
+        
+        // Only rotate around Y axis for different house orientations
+        float randomY = Random.Range(0, 4) * 90; // 0, 90, 180, or 270 degrees
+        var rotation = Quaternion.Euler(0, randomY, 0);
+        
+        // Adjust Y position to 0 for ground level
+        Vector3 adjustedPos = new Vector3(position.x, 0, position.z);
+        var house = Instantiate(prefab, adjustedPos, rotation, objectContainer);
 
-        // Setze Layer auf "Wall" für Häuser
+        // Set layer for houses
         house.layer = LayerMask.NameToLayer("Wall");
         foreach (Transform child in house.transform)
             child.gameObject.layer = LayerMask.NameToLayer("Wall");
@@ -215,13 +228,14 @@ public class ObjectManager : MonoBehaviour
         sg.sortingLayerName = sortingLayerName;
         sg.sortingOrder = houseSortingOrder;
 
+        // Convert rotation to grid direction
         Vector3Int direction;
-        if (Mathf.Approximately(rotation.eulerAngles.y, 0f)) direction = Vector3Int.down;
-        else if (Mathf.Approximately(rotation.eulerAngles.y, 90f)) direction = Vector3Int.left;
-        else if (Mathf.Approximately(rotation.eulerAngles.y, 180f)) direction = Vector3Int.up;
-        else direction = Vector3Int.right;
+        if (Mathf.Approximately(rotation.eulerAngles.y, 0f)) direction = Vector3Int.back;  // facing -Z
+        else if (Mathf.Approximately(rotation.eulerAngles.y, 90f)) direction = Vector3Int.left;  // facing -X
+        else if (Mathf.Approximately(rotation.eulerAngles.y, 180f)) direction = Vector3Int.forward; // facing +Z
+        else direction = Vector3Int.right; // facing +X
         houseDirections[house] = direction;
-        placedObjects.Add(position);
+        placedObjects.Add(new Vector3(position.x, 0, position.z));
     }
 
     public List<RoadManager.HouseFront> GetHouseFrontPositions()
@@ -234,9 +248,13 @@ public class ObjectManager : MonoBehaviour
             var dir = houseEntry.Value;
             var worldPos = house.transform.position;
             
-            // Get tile position in front of house
-            var samplePos = worldPos + (Vector3)dir * 0.5f;
-            var tilePos = baseMapManager.grassLayer.WorldToCell(samplePos);
+            // Convert 3D position to tilemap position
+            var samplePos = worldPos + new Vector3(dir.x * 0.5f, 0, dir.z * 0.5f);
+            var tilePos = new Vector3Int(
+                Mathf.RoundToInt(samplePos.x - 0.5f), 
+                Mathf.RoundToInt(samplePos.z - 0.5f), 
+                0
+            );
             
             fronts.Add(new RoadManager.HouseFront(tilePos, dir));
         }
@@ -250,7 +268,8 @@ public class ObjectManager : MonoBehaviour
         {
             foreach (var tile in region.Tiles)
             {
-                var worldPos = baseMapManager.baseLayer.CellToWorld(tile) + new Vector3(0.5f, 0.5f, 0f);
+                var cellPos = baseMapManager.baseLayer.CellToWorld(tile);
+                var worldPos = new Vector3(cellPos.x + 0.5f, 0f, cellPos.y + 0.5f);
                 
                 if (Random.value < treeDensity && 
                     !placedObjects.Any(p => Vector2.Distance(p, worldPos) < minTreeDistance) &&
@@ -271,7 +290,8 @@ public class ObjectManager : MonoBehaviour
         {
             foreach (var tile in region.Tiles)
             {
-                var worldPos = baseMapManager.waterLayer.CellToWorld(tile) + new Vector3(0.5f, 0.5f, 0f);
+                var cellPos = baseMapManager.waterLayer.CellToWorld(tile);
+            var worldPos = new Vector3(cellPos.x + 0.5f, 0f, cellPos.y + 0.5f);
                 
                 for (float angle = 0; angle < 360; angle += 45)
                 {
@@ -302,7 +322,8 @@ public class ObjectManager : MonoBehaviour
         {
             if (baseMapManager.roadLayer.GetTile(pos) == null) continue;
 
-            var worldPos = baseMapManager.roadLayer.CellToWorld(pos) + new Vector3(0.5f, 0.5f, 0f);
+            var cellPos = baseMapManager.roadLayer.CellToWorld(pos);
+            var worldPos = new Vector3(cellPos.x + 0.5f, 0f, cellPos.y + 0.5f);
             
             for (float angle = 0; angle < 360; angle += 30)
             {
@@ -360,11 +381,16 @@ public class ObjectManager : MonoBehaviour
     {
         if (!IsInBiomeBounds(worldPos)) return;
         var prefab = treePrefabs[Random.Range(0, treePrefabs.Length)];
-        float randomX = Random.Range(0, 360);
-        var rotation = Quaternion.Euler(randomX, -90f, 90f);
-        var tree = Instantiate(prefab, worldPos, rotation, objectContainer);
+        
+        // Only rotate around Y axis, keep X and Z at 0
+        float randomY = Random.Range(0, 360);
+        var rotation = Quaternion.Euler(0, randomY, 0);
+        
+        // Adjust Y position to 0 for ground level
+        Vector3 adjustedPos = new Vector3(worldPos.x, 0, worldPos.z);
+        var tree = Instantiate(prefab, adjustedPos, rotation, objectContainer);
 
-        // Setze Layer auf "Wall" für Bäume
+        // Set layer for trees
         tree.layer = LayerMask.NameToLayer("Wall");
         foreach (Transform child in tree.transform)
             child.gameObject.layer = LayerMask.NameToLayer("Wall");
@@ -390,12 +416,17 @@ public class ObjectManager : MonoBehaviour
     private void PlaceGrass(Vector3 worldPos, bool isHighGrass)
     {
         if (!IsInBiomeBounds(worldPos)) return;
-        if (placedObjects.Any(p => Vector2.Distance(p, worldPos) < minTreeDistance * 0.5f))
+        if (placedObjects.Any(p => Vector2.Distance(new Vector2(p.x, p.z), new Vector2(worldPos.x, worldPos.z)) < minTreeDistance * 0.5f))
             return;
         var prefab = isHighGrass ? highGrassPrefab : lowGrassPrefab;
-        float randomX = Random.Range(0, 360);
-        var rotation = Quaternion.Euler(randomX, -90f, 90f);
-        var grass = Instantiate(prefab, worldPos, rotation, objectContainer);
+        
+        // Only rotate around Y axis for variation
+        float randomY = Random.Range(0, 360);
+        var rotation = Quaternion.Euler(0, randomY, 0);
+        
+        // Adjust Y position to 0 for ground level
+        Vector3 adjustedPos = new Vector3(worldPos.x, 0, worldPos.z);
+        var grass = Instantiate(prefab, adjustedPos, rotation, objectContainer);
 
         // Setze Layer auf "IgnorePlayer" für Gras
         grass.layer = LayerMask.NameToLayer("IgnorePlayer");
