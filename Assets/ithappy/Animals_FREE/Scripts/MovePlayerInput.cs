@@ -50,21 +50,13 @@ namespace Controller
             float horizontal = Input.GetAxis(m_HorizontalAxis);
             float vertical = Input.GetAxis(m_VerticalAxis);
             
-            // Convert to Vector2 and ensure we only move in cardinal directions
-            if (Mathf.Abs(horizontal) > Mathf.Abs(vertical))
+            // Allow diagonal movement by combining both inputs
+            m_Axis = new Vector2(horizontal, vertical);
+            
+            // Normalize the input vector if its magnitude is greater than 1
+            if (m_Axis.magnitude > 1f)
             {
-                // Horizontal movement dominates - move only left/right
-                m_Axis = new Vector2(horizontal, 0);
-            }
-            else if (Mathf.Abs(vertical) > Mathf.Abs(horizontal))
-            {
-                // Vertical movement dominates - move only up/down
-                m_Axis = new Vector2(0, vertical);
-            }
-            else
-            {
-                // No movement or equal input - stop
-                m_Axis = Vector2.zero;
+                m_Axis.Normalize();
             }
             
             m_IsRun = Input.GetKey(m_RunKey);
