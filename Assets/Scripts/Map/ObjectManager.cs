@@ -91,8 +91,14 @@ public class ObjectManager : MonoBehaviour
             Debug.LogWarning($"[ObjectManager] Kein FogPrefab gesetzt für {name}!");
             return;
         }
-        Vector3 position = new Vector3(origin.x + biomeSize.x / 2f, origin.y + biomeSize.y / 2f, -6f); // Z=5
-        fogInstance = Instantiate(fogPrefab, position, Quaternion.identity, objectContainer);
+        // X bleibt gleich, alter Y-Wert wird zu Z, fester Y-Wert ist jetzt +6
+        Vector3 position = new Vector3(
+            origin.x + biomeSize.x / 2f,  // X bleibt in X
+            6f,                           // Neuer Y-Wert ist +6
+            origin.y + biomeSize.y / 2f   // Alter Y-Wert wird zu Z
+        );
+        // Rotation um +90 Grad in X-Achse
+        fogInstance = Instantiate(fogPrefab, position, Quaternion.Euler(90, 0, 0), objectContainer);
         fogInstance.transform.localScale = new Vector3(biomeSize.x, biomeSize.y, 1);
         fogInstance.name = $"Fog_{origin.y / biomeSize.y}";
         fogInstance.SetActive(true);
@@ -166,12 +172,15 @@ public class ObjectManager : MonoBehaviour
 
     private bool IsInBiomeBounds(Vector3 worldPos)
     {
-        // Convert 3D position to 2D grid coordinates
-        var tileX = Mathf.RoundToInt(worldPos.x - 0.5f);
-        var tileY = Mathf.RoundToInt(worldPos.z - 0.5f);
+        // Convert 3D world position to 2D grid position
+        var cellPos = new Vector3Int(
+            Mathf.RoundToInt(worldPos.x - 0.5f),
+            Mathf.RoundToInt(worldPos.z - 0.5f),
+            0
+        );
         
-        return tileX >= origin.x && tileX < origin.x + biomeSize.x &&
-               tileY >= origin.y && tileY < origin.y + biomeSize.y;
+        return cellPos.x >= origin.x && cellPos.x < origin.x + biomeSize.x &&
+               cellPos.y >= origin.y && cellPos.y < origin.y + biomeSize.y;
     }
 
     private bool IsValidHousePosition(Vector3 worldPos)
@@ -269,10 +278,10 @@ public class ObjectManager : MonoBehaviour
             foreach (var tile in region.Tiles)
             {
                 var cellPos = baseMapManager.baseLayer.CellToWorld(tile);
-                var worldPos = new Vector3(cellPos.x + 0.5f, 0f, cellPos.y + 0.5f);
+                var worldPos = new Vector3(cellPos.x + 0.5f, 0f, tile.y + 0.5f);
                 
                 if (Random.value < treeDensity && 
-                    !placedObjects.Any(p => Vector2.Distance(p, worldPos) < minTreeDistance) &&
+                    !placedObjects.Any(p => Vector3.Distance(new Vector3(p.x, 0, p.z), worldPos) < minTreeDistance) &&
                     IsValidPosition(worldPos, true))
                 {
                     PlaceTree(worldPos);
@@ -291,14 +300,14 @@ public class ObjectManager : MonoBehaviour
             foreach (var tile in region.Tiles)
             {
                 var cellPos = baseMapManager.waterLayer.CellToWorld(tile);
-            var worldPos = new Vector3(cellPos.x + 0.5f, 0f, cellPos.y + 0.5f);
+            var worldPos = new Vector3(cellPos.x + 0.5f, 0f, tile.y + 0.5f);
                 
                 for (float angle = 0; angle < 360; angle += 45)
                 {
                     float rad = angle * Mathf.Deg2Rad;
                     for (float dist = 1; dist <= lakeEffectRadius; dist += 1f)
                     {
-                        Vector3 checkPos = worldPos + new Vector3(Mathf.Cos(rad), Mathf.Sin(rad), 0) * dist;
+                        Vector3 checkPos = worldPos + new Vector3(Mathf.Cos(rad), 0, Mathf.Sin(rad)) * dist;
                                  if (!IsValidPosition(checkPos, true)) continue;
 
                 float distFactor = 1 - (dist / lakeEffectRadius);
@@ -454,7 +463,12 @@ public class ObjectManager : MonoBehaviour
     }
 private bool IsValidPosition(Vector3 worldPos, bool isTree = false)
 {
-    var cellPos = baseMapManager.baseLayer.WorldToCell(worldPos);
+    // Convert 3D world position to 2D grid position
+    var cellPos = new Vector3Int(
+        Mathf.RoundToInt(worldPos.x - 0.5f),
+        Mathf.RoundToInt(worldPos.z - 0.5f),
+        0
+    );
 
     // Check if position is within map bounds
     if (!baseMapManager.baseLayer.cellBounds.Contains(cellPos))
@@ -500,16 +514,19 @@ private bool IsValidPosition(Vector3 worldPos, bool isTree = false)
 public void CreateBiomeWall()
 {
     if (wallPrefab == null) { Debug.LogError($"[ObjectManager] wallPrefab nicht gesetzt für {name}"); return; }
-    // Position: obere Grenze des Bioms
+    // Position: Grenze des Bioms, jetzt in X-Z Ebene bei Y=0
     float centerX = origin.x + (biomeSize.x / 2f) - 0.5f;
-    float centerY = origin.y + biomeSize.y + 0.5f;
-    Vector3 wallPosition = new Vector3(centerX, centerY, 0f);
-    biomeWallInstance = Instantiate(wallPrefab, wallPosition, Quaternion.identity, objectContainer);
+    float centerZ = origin.y + biomeSize.y + 0.5f;  // Alter Y-Wert wird zu Z-Koordinate
+    Vector3 wallPosition = new Vector3(centerX, 0f, centerZ);  // Y ist jetzt 0
+    biomeWallInstance = Instantiate(wallPrefab, wallPosition, Quaternion.Euler(0, 90, 0), objectContainer);
     biomeWallInstance.name = $"BiomeWall_{origin.y / biomeSize.y}";
     var box = biomeWallInstance.GetComponent<BoxCollider>();
     if (box == null) box = biomeWallInstance.AddComponent<BoxCollider>();
     box.isTrigger = false;
-    float width = biomeSize.x, height = 1f, depth = 1f;
+    // Angepasste Dimensionen für die neue Orientierung
+    float width = 1f;           // X-Ausdehnung (Dicke der Wand)
+    float height = 3f;          // Y-Ausdehnung (Höhe der Wand)
+    float depth = biomeSize.x;  // Z-Ausdehnung (Breite der Wand, entspricht der Biome-Breite)
     biomeWallInstance.transform.localScale = new Vector3(width, height, depth);
 }
 
