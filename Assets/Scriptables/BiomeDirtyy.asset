@@ -82,3 +82,6 @@ MonoBehaviour:
   houseSortingOrder: 2
   highGrassSortingOrder: 1
   lowGrassSortingOrder: 0
+  creatures:
+  - creaturePrefab: {fileID: 2629182449500102118, guid: 5fa79f7c6280c426091ad7f8526133df, type: 3}
+    spawnCount: 2

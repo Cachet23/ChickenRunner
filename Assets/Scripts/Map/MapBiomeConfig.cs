@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "MapBiomeConfig", menuName = "Map/MapBiomeConfig", order = 1)]
 public class MapBiomeConfig : ScriptableObject
@@ -61,4 +62,7 @@ public class MapBiomeConfig : ScriptableObject
     public int houseSortingOrder = 2;
     public int highGrassSortingOrder = 1;
     public int lowGrassSortingOrder = 0;
+
+    [Header("Creature Settings")]
+    public List<CreatureConfig> creatures = new List<CreatureConfig>();
 }

@@ -126,11 +126,7 @@ namespace Controller
 
             private float m_WalkSpeed;
             private float m_RunSpeed;
-            private float m_RotateSpeed;
-
-            private Space m_Space;
-
-            private readonly float m_Luft = 75f;
+            private float m_RotateSpeed;            private Space m_Space;
 
             private float m_TargetAngle;
             private bool m_IsRotating = false;

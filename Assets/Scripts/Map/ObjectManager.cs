@@ -535,7 +535,7 @@ public void RemoveBiomeWall()
     if (biomeWallInstance != null)
     {
         // Fog vom nächsten Biom entfernen
-        var nextBiomeOM = FindObjectsOfType<ObjectManager>()
+        var nextBiomeOM = FindObjectsByType<ObjectManager>(FindObjectsSortMode.None)
             .FirstOrDefault(om => om.origin.y == origin.y + biomeSize.y);
         if (nextBiomeOM != null)
             nextBiomeOM.RemoveFogOfWar();

@@ -51,7 +51,7 @@ public class BiomeAccessController : MonoBehaviour
     private void TryRemoveNextBiomeWall()
     {
         // Hole alle ObjectManager in Szenen-Reihenfolge
-        var allOM = FindObjectsOfType<ObjectManager>()
+        var allOM = FindObjectsByType<ObjectManager>(FindObjectsSortMode.None)
             .OrderBy(om => om.origin.y)
             .ToList();
         foreach (var om in allOM)

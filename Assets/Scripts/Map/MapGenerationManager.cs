@@ -2,14 +2,17 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Tilemaps;
+using System;
 
 public class MapGenerationManager : MonoBehaviour
 {
+    public event Action OnMapGenerationComplete;
+
     [Header("Biome ScriptableObjects")]
     public List<MapBiomeConfig> biomeConfigs;
 
     [Header("Globale Biomeinstellungen")]
-    public Vector2Int biomeSize = new Vector2Int(100, 50); // Feste Größe für alle Biome
+    public Vector2Int biomeSize = new Vector2Int(50, 50); // Feste Größe für alle Biome
 
     [Header("Biome Wall Prefab")]
     public GameObject wallPrefab;
@@ -164,6 +167,9 @@ public class MapGenerationManager : MonoBehaviour
         foreach (var x in allOM) x.PlaceRemainingObjects(); yield return new WaitForSeconds(0.3f);
 
         Debug.Log("All biomes generated.");
+
+        // Fire the event when generation is complete
+        OnMapGenerationComplete?.Invoke();
     }
 
     // --- Am Ende der Klasse hinzufügen ---
