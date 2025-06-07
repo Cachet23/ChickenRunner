@@ -190,7 +190,7 @@ public class TileManager : MonoBehaviour
             {
                 // Convert tile position to world position and add centering offset
                 Vector3 worldPos = baseMapManager.waterLayer.CellToWorld(pos);
-                worldPos += new Vector3(0.5f, -0.2f, 0.5f); // center in x, -0.2 in y, +0.7 in z
+                worldPos += new Vector3(0.5f, -0.04f, 0.5f); // center in x, -0.2 in y, +0.7 in z
                 
                 // Instantiate water object at exact position
                 GameObject waterObj = Instantiate(waterPrefab, worldPos, Quaternion.identity, waterContainer);
