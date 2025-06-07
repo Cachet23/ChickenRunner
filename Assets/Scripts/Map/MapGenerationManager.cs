@@ -111,6 +111,8 @@ public class MapGenerationManager : MonoBehaviour
             t.waterTileVariants = cfg.waterTileVariants;
             t.roadTile = cfg.roadTile;
             allTM.Add(t);
+
+            t.waterPrefab = cfg.waterPrefab;
         }
         StartCoroutine(GenerateAll());
     }

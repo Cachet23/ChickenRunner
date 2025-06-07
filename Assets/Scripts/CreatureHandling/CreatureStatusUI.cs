@@ -157,12 +157,12 @@ public class CreatureStatusUI : MonoBehaviour
     private void UpdateStaminaBar(float percent)
     {
         targetStaminaFill = percent;
-        Debug.Log($"Stamina updated to: {percent:F2}, current value: {staminaSlider.value:F2}");
+        // Debug.Log($"Stamina updated to: {percent:F2}, current value: {staminaSlider.value:F2}");
     }
 
     private void UpdateManaBar(float percent)
     {
         targetManaFill = percent;
-        Debug.Log($"Mana updated to: {percent:F2}, current value: {manaSlider.value:F2}");
+        // Debug.Log($"Mana updated to: {percent:F2}, current value: {manaSlider.value:F2}");
     }
 }

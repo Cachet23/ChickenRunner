@@ -12,6 +12,8 @@ public class TileManager : MonoBehaviour
 
     [Header("Required References")]
     public BaseMapManager baseMapManager;
+    public GameObject waterPrefab;     // Das 3D Water Object Prefab
+    private Transform waterContainer;   // Container für die Water Objects
 
     [Header("Earth Tiles")]
     public Tile[] darkEarthTiles;      // Darker earth/dirt variants for region centers
@@ -28,6 +30,13 @@ public class TileManager : MonoBehaviour
 
     [Header("Road Settings")]
     public RuleTile roadTile;          // Road tile with automatic connections
+
+    private void Awake()
+    {
+        // Create water container as child of this object
+        waterContainer = new GameObject("WaterContainer").transform;
+        waterContainer.parent = transform;
+    }
 
     // All initialization is now controlled by MapGenerationManager
     public void EnhanceTerrain()
@@ -171,12 +180,25 @@ public class TileManager : MonoBehaviour
         int tileCount = 0;
         foreach (var pos in region.Tiles)
         {
+            // Setze Tile Variante
             var tileIndex = Mathf.Abs((pos.x * 48271 + pos.y * 16807) % waterTileVariants.Length);
             baseMapManager.waterLayer.SetTile(pos, waterTileVariants[tileIndex]);
             tileCount++;
+
+            // 3D Water Object erstellen wenn vorhanden
+            if (waterPrefab != null)
+            {
+                // Convert tile position to world position and add centering offset
+                Vector3 worldPos = baseMapManager.waterLayer.CellToWorld(pos);
+                worldPos += new Vector3(0.5f, -0.2f, 0.5f); // center in x, -0.2 in y, +0.7 in z
+                
+                // Instantiate water object at exact position
+                GameObject waterObj = Instantiate(waterPrefab, worldPos, Quaternion.identity, waterContainer);
+                waterObj.name = $"Water_{pos.x}_{pos.y}";
+            }
         }
 
-        Debug.Log($"TileManager: Enhanced water region {region.Name} with {tileCount} variant tiles");
+        Debug.Log($"TileManager: Enhanced water region {region.Name} with {tileCount} variant tiles and 3D objects");
     }
 
     private void EnhanceHouseRegion(Map.HouseRegion region)

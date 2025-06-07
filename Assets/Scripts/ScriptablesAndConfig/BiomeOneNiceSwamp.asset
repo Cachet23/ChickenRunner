@@ -24,35 +24,28 @@ MonoBehaviour:
   waterThreshold: 0.3
   minRegionSize: 4
   darkEarthTiles:
+  - {fileID: 11400000, guid: 5e76936474c7b4da890843f7c3fa5bae, type: 2}
+  - {fileID: 11400000, guid: 7e3f608f7362f4793b57aef1cd4ce301, type: 2}
+  mediumEarthTiles:
   - {fileID: 11400000, guid: 44c812c9fe47d4d57bcff2a5f8d4d5f8, type: 2}
   - {fileID: 11400000, guid: 7d4a1ab21c8454dc4a35fc045478e267, type: 2}
-  - {fileID: 11400000, guid: 5e5698181b51544849b2c9c632e0ff9a, type: 2}
-  - {fileID: 11400000, guid: 52b85399a4c2e48aa850bf49e132950f, type: 2}
-  mediumEarthTiles:
-  - {fileID: 11400000, guid: ee6c343d0cfde45be9bfac43bb2415d6, type: 2}
-  - {fileID: 11400000, guid: 96fd62846450c485dbebfc7e7ec4a520, type: 2}
   - {fileID: 11400000, guid: 1d9a3e037ca764ca88a93ecf5b25c4cc, type: 2}
-  - {fileID: 11400000, guid: 010b2b1e023df408fb82020b131fd32e, type: 2}
   lightEarthTiles:
-  - {fileID: 11400000, guid: 7b99d32b8ab7d4b0a9d8eb3b56a31168, type: 2}
-  - {fileID: 11400000, guid: 2f93f662f17184f148eb2ec2bef6ada2, type: 2}
-  - {fileID: 11400000, guid: daa9b2a93b38b463dbfdd2a28a2cc301, type: 2}
-  - {fileID: 11400000, guid: 33f701229fedd4267bc33e673fec4c4c, type: 2}
+  - {fileID: 11400000, guid: 44c812c9fe47d4d57bcff2a5f8d4d5f8, type: 2}
+  - {fileID: 11400000, guid: 52b85399a4c2e48aa850bf49e132950f, type: 2}
   lightGrassTiles:
-  - {fileID: 11400000, guid: 366718e4b131a4e2d8529bf324d4c512, type: 2}
-  - {fileID: 11400000, guid: d4585a6d162ee409996d27cd1aeb4e73, type: 2}
-  - {fileID: 11400000, guid: 0319ee565f5e44f51b4fe1ad2c39a3e2, type: 2}
-  - {fileID: 11400000, guid: d36c8f0ece44a447ebbea7869653de22, type: 2}
+  - {fileID: 11400000, guid: 97f8afc019dd94214b19ba67e4f51143, type: 2}
+  - {fileID: 11400000, guid: dbce43f6232ee47ceb0a4ef200dcef99, type: 2}
+  - {fileID: 11400000, guid: aa3226a66ad8843e3bb0da9610f761cb, type: 2}
+  - {fileID: 11400000, guid: 39a79b4e3eeb34670ba7cc577eab838b, type: 2}
   mediumGrassTiles:
-  - {fileID: 11400000, guid: cb621a5a54161481a9da5f3b3fb8a3b6, type: 2}
-  - {fileID: 11400000, guid: 0415a8bb3186e488c923c8468b43a12e, type: 2}
-  - {fileID: 11400000, guid: 804190d1c37b54007ac7e9ac0651fe20, type: 2}
-  - {fileID: 11400000, guid: 76910416caeb14e3aa1bd41902964ccb, type: 2}
+  - {fileID: 11400000, guid: c505192cc41874aa1934bd97b6aa9a5b, type: 2}
+  - {fileID: 11400000, guid: c882cc2308935493cba3e1bc7d7d3f8e, type: 2}
   darkGrassTiles:
-  - {fileID: 11400000, guid: cf549ee55ce1a411fa8196fc3abe2e89, type: 2}
-  - {fileID: 11400000, guid: 5501b47258f9d499887164ee7cd5bf5c, type: 2}
-  - {fileID: 11400000, guid: 12406dc1d6d72472c80764328b1f6cd9, type: 2}
   - {fileID: 11400000, guid: 7f4fe2131ac864ee5989c317d140bd86, type: 2}
+  - {fileID: 11400000, guid: 12406dc1d6d72472c80764328b1f6cd9, type: 2}
+  - {fileID: 11400000, guid: 5501b47258f9d499887164ee7cd5bf5c, type: 2}
+  - {fileID: 11400000, guid: cf549ee55ce1a411fa8196fc3abe2e89, type: 2}
   waterTileVariants:
   - {fileID: 11400000, guid: bc8d9a700458e5043af201bcc68584e9, type: 2}
   treePrefabs:
