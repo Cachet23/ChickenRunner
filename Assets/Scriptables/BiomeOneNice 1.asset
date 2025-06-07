@@ -86,5 +86,7 @@ MonoBehaviour:
   creatures:
   - creaturePrefab: {fileID: 2629182449500102118, guid: cf22d88c8f6094cb880c58995910c70a, type: 3}
     spawnCount: 4
+  - creaturePrefab: {fileID: 2629182449500102118, guid: 5fa79f7c6280c426091ad7f8526133df, type: 3}
+    spawnCount: 1
   flowerPrefabs: []
   flowerSpawnChance: 0.3

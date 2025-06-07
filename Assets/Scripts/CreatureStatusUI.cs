@@ -22,7 +22,7 @@ public class CreatureStatusUI : MonoBehaviour
     private float targetStaminaFill;
     private float targetManaFill;
 
-    private Slider CreateStatBar(string name, Color fillColor, Vector2 position)
+    private Slider CreateStatBar(string name, Color fillColor, Vector2 anchorMinMax)
     {
         // Create the main container
         GameObject sliderObj = new GameObject(name);
@@ -30,11 +30,18 @@ public class CreatureStatusUI : MonoBehaviour
 
         // Setup RectTransform
         RectTransform sliderRect = sliderObj.AddComponent<RectTransform>();
-        sliderRect.anchorMin = new Vector2(0, 1);
-        sliderRect.anchorMax = new Vector2(0, 1);
-        sliderRect.pivot = new Vector2(0, 1);
-        sliderRect.sizeDelta = barSize;
-        sliderRect.anchoredPosition = position;
+        
+        // Calculate the center position and width for this third
+        float thirdWidth = (anchorMinMax.y - anchorMinMax.x); // Width of the third
+        float centerOfThird = anchorMinMax.x + (thirdWidth / 2f); // Center point of the third
+        float halfBarWidth = (barSize.x / Screen.width) / 2f; // Half of our desired bar width in normalized coordinates
+        
+        // Set anchors to the center 50% of the third
+        sliderRect.anchorMin = new Vector2(centerOfThird - halfBarWidth, 0); // Bottom of screen
+        sliderRect.anchorMax = new Vector2(centerOfThird + halfBarWidth, 0);
+        sliderRect.pivot = new Vector2(0.5f, 0); // Center horizontally, bottom vertically
+        sliderRect.sizeDelta = new Vector2(0, barSize.y); // Only set height, width is controlled by anchors
+        sliderRect.anchoredPosition = new Vector2(0, 20); // Small margin from bottom
 
         // Add Slider component
         Slider slider = sliderObj.AddComponent<Slider>();
@@ -81,13 +88,10 @@ public class CreatureStatusUI : MonoBehaviour
 
     private void Start()
     {
-        // Create the sliders
-        float currentY = 0;
-        healthSlider = CreateStatBar("HealthBar", healthColor, new Vector2(10, currentY));
-        currentY -= (barSize.y + barSpacing);
-        staminaSlider = CreateStatBar("StaminaBar", staminaColor, new Vector2(10, currentY));
-        currentY -= (barSize.y + barSpacing);
-        manaSlider = CreateStatBar("ManaBar", manaColor, new Vector2(10, currentY));
+        // Create the sliders - divide screen into thirds
+        staminaSlider = CreateStatBar("StaminaBar", staminaColor, new Vector2(0f, 0.33f));      // Left third
+        healthSlider = CreateStatBar("HealthBar", healthColor, new Vector2(0.33f, 0.66f));      // Middle third
+        manaSlider = CreateStatBar("ManaBar", manaColor, new Vector2(0.66f, 1f));              // Right third
 
         // Find player creature by tag and get its stats
         GameObject player = GameObject.FindWithTag("Dice");

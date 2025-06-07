@@ -455,7 +455,7 @@ GameObject:
   - component: {fileID: 9003410764456430701}
   - component: {fileID: 4203687711656398374}
   - component: {fileID: 6603396127301369233}
-  - component: {fileID: 5119900242595942870}
+  - component: {fileID: 2988679698843291867}
   m_Layer: 0
   m_Name: Dog_blue_hell
   m_TagString: Untagged
@@ -563,7 +563,7 @@ SortingGroup:
   m_SortingLayer: 7
   m_SortingOrder: 0
   m_SortAtRoot: 0
---- !u!114 &5119900242595942870
+--- !u!114 &2988679698843291867
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -572,14 +572,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 2629182449500102118}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eabe097f0f9d14cf3b0327877a2f391d, type: 3}
+  m_Script: {fileID: 11500000, guid: d0526656f9aac4363a0157df67603ffe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minWaitTime: 2
-  maxWaitTime: 5
-  moveRadius: 10
-  turnSpeed: 2
-  acceleration: 0.5
+  settings:
+    useBasicBehavior: 1
+    isBasicDefault: 1
+    useAggressiveBehavior: 1
+    aggressiveActivationDistance: 10
+    alignmentTime: 3
+    chaseSpeed: 1.5
+  checkInterval: 0.5
 --- !u!1 &2735724662372591797
 GameObject:
   m_ObjectHideFlags: 0
