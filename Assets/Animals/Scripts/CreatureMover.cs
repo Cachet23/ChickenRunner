@@ -32,6 +32,7 @@ namespace Controller
         private Transform m_Transform;
         private CharacterController m_Controller;
         private Animator m_Animator;
+        private CreatureStats m_Stats;
 
         private MovementHandler m_Movement;
         private AnimationHandler m_Animation;
@@ -59,6 +60,12 @@ namespace Controller
             m_Transform = transform;
             m_Controller = GetComponent<CharacterController>();
             m_Animator = GetComponent<Animator>();
+            m_Stats = GetComponent<CreatureStats>();
+
+            if (m_Stats == null)
+            {
+                m_Stats = gameObject.AddComponent<CreatureStats>();
+            }
 
             m_Movement = new MovementHandler(m_Controller, m_Transform, m_WalkSpeed, m_RunSpeed, m_RotateSpeed, m_JumpHeight, m_Space);
             m_Animation = new AnimationHandler(m_Animator, m_VerticalID, m_StateID);
@@ -66,6 +73,19 @@ namespace Controller
 
         private void Update()
         {
+            if (m_IsRun)
+            {
+                // Prüfe ob genug Stamina da ist
+                if (m_Stats.HasEnoughStamina(0.1f)) // Kleine Menge zum Prüfen
+                {
+                    m_Stats.DrainStaminaForSprint();
+                }
+                else
+                {
+                    m_IsRun = false;
+                }
+            }
+
             m_Movement.Move(Time.deltaTime, in m_Axis, in m_Target, m_IsRun, m_IsMoving, out var animAxis, out var isAir);
             m_Animation.Animate(in animAxis, m_IsRun ? 1f : 0f, Time.deltaTime);
         }

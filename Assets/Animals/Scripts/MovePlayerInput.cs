@@ -26,6 +26,7 @@ namespace Controller
         private string m_MouseScroll = "Mouse ScrollWheel";
 
         private CreatureMover m_Mover;
+        private CreatureStats m_Stats;
 
         private Vector2 m_Axis;
         private bool m_IsRun;
@@ -38,13 +39,25 @@ namespace Controller
         private void Awake()
         {
             m_Mover = GetComponent<CreatureMover>();
+            
+            // Only get CreatureStats if this is the player
+            if (CompareTag("Dice"))
+            {
+                m_Stats = GetComponent<CreatureStats>();
+                if (m_Stats == null)
+                {
+                    m_Stats = gameObject.AddComponent<CreatureStats>();
+                }
+            }
         }
 
         private void Update()
         {
             GatherInput();
             SetInput();
-        }        public void GatherInput()
+        }
+
+        public void GatherInput()
         {
             // Get raw input
             float horizontal = Input.GetAxis(m_HorizontalAxis);
@@ -59,7 +72,28 @@ namespace Controller
                 m_Axis.Normalize();
             }
             
-            m_IsRun = Input.GetKey(m_RunKey);
+            // Handle running for the player
+            if (m_Stats != null)  // We are the player
+            {
+                bool wantsToRun = Input.GetKey(m_RunKey);
+                bool hasStamina = m_Stats.HasEnoughStamina(0.1f);
+                bool isMoving = m_Axis.magnitude > 0;
+                
+                m_IsRun = wantsToRun && hasStamina && isMoving;
+                
+                // Only drain stamina if we're actually running and moving
+                if (m_IsRun)
+                {
+                    m_Stats.DrainStaminaForSprint();
+                    Debug.Log("Draining stamina for sprint");
+                }
+            }
+            else  // We are not the player
+            {
+                bool wantsToRun = Input.GetKey(m_RunKey);
+                m_IsRun = wantsToRun && m_Axis.magnitude > 0;
+            }
+            
             m_IsJump = Input.GetButton(m_JumpButton);
 
             m_Target = (m_Camera == null) ? Vector3.zero : m_Camera.Target;
