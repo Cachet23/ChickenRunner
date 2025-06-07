@@ -21,8 +21,8 @@ MonoBehaviour:
   useRandomSeed: 1
   seed: 0
   grassThreshold: 0.4
-  waterThreshold: 0.522
-  minRegionSize: 130
+  waterThreshold: 0.445
+  minRegionSize: 200
   darkEarthTiles:
   - {fileID: 11400000, guid: 44c812c9fe47d4d57bcff2a5f8d4d5f8, type: 2}
   - {fileID: 11400000, guid: 7d4a1ab21c8454dc4a35fc045478e267, type: 2}
@@ -86,3 +86,5 @@ MonoBehaviour:
   creatures:
   - creaturePrefab: {fileID: 2629182449500102118, guid: cf22d88c8f6094cb880c58995910c70a, type: 3}
     spawnCount: 4
+  flowerPrefabs: []
+  flowerSpawnChance: 0.3

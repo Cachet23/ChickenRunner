@@ -602,6 +602,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chicken_brown
       objectReference: {fileID: 0}
+    - target: {fileID: 8073443194988779917, guid: a2f90ef432a214630981663eaf30d0a0, type: 3}
+      propertyPath: m_TagString
+      value: Dice
+      objectReference: {fileID: 0}
     - target: {fileID: 8881504610387854135, guid: a2f90ef432a214630981663eaf30d0a0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10.84

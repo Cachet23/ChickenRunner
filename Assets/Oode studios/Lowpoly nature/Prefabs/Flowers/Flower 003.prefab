@@ -145,4 +145,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionRadius: 2
-  interactionUIPrefab: {fileID: 0}
+  interactionUIPrefab: {fileID: 6442454213096952268, guid: ad567a1a20d804dbdac3fa14c96e2d15, type: 3}

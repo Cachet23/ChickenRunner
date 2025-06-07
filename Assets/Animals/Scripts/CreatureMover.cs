@@ -42,8 +42,6 @@ namespace Controller
 
         private bool m_IsMoving;
 
-        private float m_SpeedMultiplier = 1f;
-
         public Vector2 Axis => m_Axis;
         public Vector3 Target => m_Target;
         public bool IsRun => m_IsRun;
@@ -95,11 +93,6 @@ namespace Controller
             }
         }
 
-        public void SetSpeedMultiplier(float multiplier)
-        {
-            m_SpeedMultiplier = multiplier;
-        }
-
         private void OnControllerColliderHit(ControllerColliderHit hit)
         {
             if(hit.normal.y > m_Controller.stepOffset)
@@ -126,15 +119,14 @@ namespace Controller
         }
 
         #region Handlers
-    private class MovementHandler
-    {
-        private readonly CharacterController m_Controller;
-        private readonly Transform m_Transform;
+        private class MovementHandler
+        {
+            private readonly CharacterController m_Controller;
+            private readonly Transform m_Transform;
 
-        private float m_WalkSpeed;
-        private float m_RunSpeed;
-        private float m_RotateSpeed;
-        private float m_SpeedMultiplier = 1f;private Space m_Space;
+            private float m_WalkSpeed;
+            private float m_RunSpeed;
+            private float m_RotateSpeed;            private Space m_Space;
 
             private float m_TargetAngle;
             private bool m_IsRotating = false;
@@ -209,15 +201,9 @@ namespace Controller
                 movement = Vector3.ProjectOnPlane(movement, m_Normal);
             }
 
-            public void SetSpeedMultiplier(float multiplier)
-            {
-                m_SpeedMultiplier = multiplier;
-            }
-
             private void Displace(float deltaTime, in Vector3 movement, bool isRun)
             {
-                float currentSpeed = (isRun ? m_RunSpeed : m_WalkSpeed) * m_SpeedMultiplier;
-                Vector3 displacement = currentSpeed * movement;
+                Vector3 displacement = (isRun ? m_RunSpeed : m_WalkSpeed) * movement;
                 displacement += m_GravityAcelleration;
                 displacement *= deltaTime;
 

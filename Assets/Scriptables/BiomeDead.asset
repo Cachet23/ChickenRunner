@@ -88,3 +88,14 @@ MonoBehaviour:
   creatures:
   - creaturePrefab: {fileID: 2629182449500102118, guid: 5fa79f7c6280c426091ad7f8526133df, type: 3}
     spawnCount: 12
+  flowerPrefabs:
+  - flowerPrefab: {fileID: 7833339051835576946, guid: 058372e3e721de24c9d6fea4cd9bfcd8, type: 3}
+    rarity: 0
+    replacementChance: 0.523
+  - flowerPrefab: {fileID: 2405172879166089963, guid: b62683e69cbf30848b1fc1ed05c2f2ab, type: 3}
+    rarity: 1
+    replacementChance: 0.176
+  - flowerPrefab: {fileID: 5739805106531696801, guid: dfb330a840eef6b4ba7181829a5e97e9, type: 3}
+    rarity: 2
+    replacementChance: 0.08
+  flowerSpawnChance: 0.198
