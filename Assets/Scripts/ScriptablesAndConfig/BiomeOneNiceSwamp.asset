@@ -90,3 +90,4 @@ MonoBehaviour:
     rarity: 2
     replacementChance: 0.045
   flowerSpawnChance: 0.082
+  waterPrefab: {fileID: 2535361562235551622, guid: 27f1c609b2fec43b386c555f12d55405, type: 3}
