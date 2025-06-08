@@ -1,0 +1,2569 @@
+{
+    "objects": [
+        {
+            "name": "[Debug Updater]",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "None",
+            "prefabType": "Scene Object",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "localPosition": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform",
+                "DebugUpdater"
+            ]
+        },
+        {
+            "name": "MinimapController",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "None",
+            "prefabType": "Scene Object",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 669.0,
+                    "y": 451.0,
+                    "z": 0.0
+                },
+                "localPosition": {
+                    "x": 669.0,
+                    "y": 451.0,
+                    "z": 0.0
+                },
+                "rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform",
+                "MinimapController"
+            ]
+        },
+        {
+            "name": "MinimapCamera",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "None",
+            "prefabType": "Scene Object",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 24.04888916015625,
+                    "y": 20.084999084472658,
+                    "z": 29.706104278564454
+                },
+                "localPosition": {
+                    "x": 24.04888916015625,
+                    "y": 20.084999084472658,
+                    "z": 29.706104278564454
+                },
+                "rotation": {
+                    "x": 90.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform",
+                "Camera",
+                "UniversalAdditionalCameraData",
+                "MinimapCameraFollow"
+            ]
+        },
+        {
+            "name": "LevelManager",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "None",
+            "prefabType": "Scene Object",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 54.95658493041992,
+                    "y": 12.57237434387207,
+                    "z": -0.04659999907016754
+                },
+                "localPosition": {
+                    "x": 54.95658493041992,
+                    "y": 12.57237434387207,
+                    "z": -0.04659999907016754
+                },
+                "rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform",
+                "LevelManager"
+            ]
+        },
+        {
+            "name": "WaterLayer",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "Grid",
+            "prefabType": "Scene Object",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "localPosition": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "rotation": {
+                    "x": 90.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform",
+                "Tilemap",
+                "TilemapRenderer",
+                "SortingGroup"
+            ]
+        },
+        {
+            "name": "MinimapImage",
+            "tag": "Untagged",
+            "layer": "UI",
+            "parent": "Canvas",
+            "prefabType": "Scene Object",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 766.0,
+                    "y": 569.0,
+                    "z": 0.0
+                },
+                "localPosition": {
+                    "x": 433.0,
+                    "y": 279.5,
+                    "z": 0.0
+                },
+                "rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "RectTransform",
+                "CanvasRenderer",
+                "RawImage",
+                "Outline"
+            ]
+        },
+        {
+            "name": "RoadLayer",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "Grid",
+            "prefabType": "Scene Object",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "localPosition": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "rotation": {
+                    "x": 90.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform",
+                "Tilemap",
+                "TilemapRenderer",
+                "SortingGroup"
+            ]
+        },
+        {
+            "name": "Canvas",
+            "tag": "Untagged",
+            "layer": "UI",
+            "parent": "None",
+            "prefabType": "Scene Object",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 333.0,
+                    "y": 289.5,
+                    "z": 0.0
+                },
+                "localPosition": {
+                    "x": 333.0,
+                    "y": 289.5,
+                    "z": 0.0
+                },
+                "rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "RectTransform",
+                "Canvas",
+                "CanvasScaler",
+                "GraphicRaycaster"
+            ]
+        },
+        {
+            "name": "Main Camera",
+            "tag": "MainCamera",
+            "layer": "Default",
+            "parent": "None",
+            "prefabType": "Scene Object",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 24.04888916015625,
+                    "y": 2.3849997520446779,
+                    "z": 27.46610450744629
+                },
+                "localPosition": {
+                    "x": 24.04888916015625,
+                    "y": 2.3849997520446779,
+                    "z": 27.46610450744629
+                },
+                "rotation": {
+                    "x": 32.80000305175781,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform",
+                "Camera",
+                "AudioListener",
+                "UniversalAdditionalCameraData",
+                "CameraFollow"
+            ]
+        },
+        {
+            "name": "Plane",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "None",
+            "prefabType": "Scene Object",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 25.0,
+                    "y": 0.0,
+                    "z": -0.009999999776482582
+                },
+                "localPosition": {
+                    "x": 25.0,
+                    "y": 0.0,
+                    "z": -0.009999999776482582
+                },
+                "rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "localScale": {
+                    "x": 5.0,
+                    "y": 1.0,
+                    "z": 1500.0
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer",
+                "MeshCollider"
+            ]
+        },
+        {
+            "name": "EventSystem",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "None",
+            "prefabType": "Scene Object",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "localPosition": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform",
+                "EventSystem",
+                "InputSystemUIInputModule"
+            ]
+        },
+        {
+            "name": "PropsLayer",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "Grid",
+            "prefabType": "Scene Object",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "localPosition": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "rotation": {
+                    "x": 90.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform",
+                "Tilemap",
+                "TilemapRenderer",
+                "SortingGroup"
+            ]
+        },
+        {
+            "name": "EarthLayer",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "Grid",
+            "prefabType": "Scene Object",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "localPosition": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "rotation": {
+                    "x": 90.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform",
+                "Tilemap",
+                "TilemapRenderer",
+                "SortingGroup"
+            ]
+        },
+        {
+            "name": "AccessController",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "None",
+            "prefabType": "Scene Object",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 25.98242950439453,
+                    "y": 38.23799133300781,
+                    "z": 33.677406311035159
+                },
+                "localPosition": {
+                    "x": 25.98242950439453,
+                    "y": 38.23799133300781,
+                    "z": 33.677406311035159
+                },
+                "rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform",
+                "BiomeAccessController"
+            ]
+        },
+        {
+            "name": "Grid",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "None",
+            "prefabType": "Scene Object",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "localPosition": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "rotation": {
+                    "x": 90.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform",
+                "Grid",
+                "Tilemap"
+            ]
+        },
+        {
+            "name": "BaseLayer",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "Grid",
+            "prefabType": "Scene Object",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "localPosition": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "rotation": {
+                    "x": 90.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform",
+                "Tilemap",
+                "TilemapRenderer",
+                "SortingGroup",
+                "TilemapCollider2D"
+            ]
+        }
+    ],
+    "prefabs": [
+        {
+            "name": "Chicken_001",
+            "path": "Assets/Animals/Prefabs/Chicken_001.prefab",
+            "components": [
+                "Transform",
+                "CharacterController",
+                "Animator",
+                "CreatureMover",
+                "MovePlayerInput"
+            ]
+        },
+        {
+            "name": "Chicken_brown",
+            "path": "Assets/Animals/Prefabs/Chicken_brown.prefab",
+            "components": [
+                "Transform",
+                "CharacterController",
+                "Animator",
+                "CreatureMover",
+                "MovePlayerInput",
+                "SortingGroup"
+            ]
+        },
+        {
+            "name": "Chicken_grey_bright",
+            "path": "Assets/Animals/Prefabs/Chicken_grey_bright.prefab",
+            "components": [
+                "Transform",
+                "CharacterController",
+                "Animator",
+                "CreatureMover",
+                "MovePlayerInput",
+                "SortingGroup"
+            ]
+        },
+        {
+            "name": "Chicken_grey_dark",
+            "path": "Assets/Animals/Prefabs/Chicken_grey_dark.prefab",
+            "components": [
+                "Transform",
+                "CharacterController",
+                "Animator",
+                "CreatureMover",
+                "MovePlayerInput",
+                "SortingGroup"
+            ]
+        },
+        {
+            "name": "Chicken_special",
+            "path": "Assets/Animals/Prefabs/Chicken_special.prefab",
+            "components": [
+                "Transform",
+                "CharacterController",
+                "Animator",
+                "CreatureMover",
+                "MovePlayerInput",
+                "SortingGroup"
+            ]
+        },
+        {
+            "name": "Deer_001",
+            "path": "Assets/Animals/Prefabs/Deer_001.prefab",
+            "components": [
+                "Transform",
+                "CharacterController",
+                "Animator",
+                "CreatureMover",
+                "MovePlayerInput"
+            ]
+        },
+        {
+            "name": "Dog_001",
+            "path": "Assets/Animals/Prefabs/Dog_001.prefab",
+            "components": [
+                "Transform",
+                "CharacterController",
+                "Animator",
+                "CreatureMover",
+                "SortingGroup",
+                "BasicCreatureBehavior"
+            ]
+        },
+        {
+            "name": "Dog_blue_hell",
+            "path": "Assets/Animals/Prefabs/Dog_blue_hell.prefab",
+            "components": [
+                "Transform",
+                "CharacterController",
+                "Animator",
+                "CreatureMover",
+                "SortingGroup",
+                "BasicCreatureBehavior"
+            ]
+        },
+        {
+            "name": "Dog_forest",
+            "path": "Assets/Animals/Prefabs/Dog_forest.prefab",
+            "components": [
+                "Transform",
+                "CharacterController",
+                "Animator",
+                "CreatureMover",
+                "SortingGroup",
+                "BasicCreatureBehavior"
+            ]
+        },
+        {
+            "name": "Horse_001",
+            "path": "Assets/Animals/Prefabs/Horse_001.prefab",
+            "components": [
+                "Transform",
+                "CharacterController",
+                "Animator",
+                "CreatureMover",
+                "MovePlayerInput"
+            ]
+        },
+        {
+            "name": "Kitty_001",
+            "path": "Assets/Animals/Prefabs/Kitty_001.prefab",
+            "components": [
+                "Transform",
+                "CharacterController",
+                "Animator",
+                "CreatureMover",
+                "MovePlayerInput"
+            ]
+        },
+        {
+            "name": "Pinguin_001",
+            "path": "Assets/Animals/Prefabs/Pinguin_001.prefab",
+            "components": [
+                "Transform",
+                "CharacterController",
+                "Animator",
+                "CreatureMover",
+                "MovePlayerInput"
+            ]
+        },
+        {
+            "name": "Tiger_001",
+            "path": "Assets/Animals/Prefabs/Tiger_001.prefab",
+            "components": [
+                "Transform",
+                "CharacterController",
+                "Animator",
+                "CreatureMover",
+                "SortingGroup"
+            ]
+        },
+        {
+            "name": "Rio",
+            "path": "Assets/LowpolyCharacterRio/Prefabs/Rio.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "background",
+            "path": "Assets/mapassets/2DPixelFantasyTilemapFree/TilePalettes/background.prefab",
+            "components": [
+                "Transform",
+                "Grid"
+            ]
+        },
+        {
+            "name": "NewGrassAndDirt",
+            "path": "Assets/mapassets/Handpainted_Grass_and_Ground_Textures/NewGrassAndDirt.prefab",
+            "components": [
+                "Transform",
+                "Grid"
+            ]
+        },
+        {
+            "name": "MinimalPalette",
+            "path": "Assets/mapassets/Palettes/MinimalPalette.prefab",
+            "components": [
+                "Transform",
+                "Grid"
+            ]
+        },
+        {
+            "name": "low grass",
+            "path": "Assets/mapassets/Stylize Tree &Grasses samples/HDRP/prefab/low grass.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "tall grass",
+            "path": "Assets/mapassets/Stylize Tree &Grasses samples/HDRP/prefab/tall grass.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "tree 1",
+            "path": "Assets/mapassets/Stylize Tree &Grasses samples/HDRP/prefab/tree 1.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "tree",
+            "path": "Assets/mapassets/Stylize Tree &Grasses samples/HDRP/prefab/tree.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "low grass",
+            "path": "Assets/mapassets/Stylize Tree &Grasses samples/Prefab/low grass.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "tall grass",
+            "path": "Assets/mapassets/Stylize Tree &Grasses samples/Prefab/tall grass.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "tree 1",
+            "path": "Assets/mapassets/Stylize Tree &Grasses samples/Prefab/tree 1.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "tree",
+            "path": "Assets/mapassets/Stylize Tree &Grasses samples/Prefab/tree.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "low grass",
+            "path": "Assets/mapassets/Stylize Tree &Grasses samples/URP/prefab/low grass.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Oak 1",
+            "path": "Assets/mapassets/Stylize Tree &Grasses samples/URP/prefab/Oak 1.prefab",
+            "components": [
+                "Transform",
+                "LODGroup"
+            ]
+        },
+        {
+            "name": "Oak",
+            "path": "Assets/mapassets/Stylize Tree &Grasses samples/URP/prefab/Oak.prefab",
+            "components": [
+                "Transform",
+                "LODGroup"
+            ]
+        },
+        {
+            "name": "tall grass",
+            "path": "Assets/mapassets/Stylize Tree &Grasses samples/URP/prefab/tall grass.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "tree 1",
+            "path": "Assets/mapassets/Stylize Tree &Grasses samples/URP/prefab/tree 1.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "tree",
+            "path": "Assets/mapassets/Stylize Tree &Grasses samples/URP/prefab/tree.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Bridge",
+            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Bridges/Bridge.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Broken bridge",
+            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Bridges/Broken bridge.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Camp fire",
+            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Camp fire/Camp fire.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Cliff 001",
+            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Cliffs/Cliff 001.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Cliff 002",
+            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Cliffs/Cliff 002.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Dead tree 001",
+            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Dead trees/Dead tree 001.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Dead tree 002",
+            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Dead trees/Dead tree 002.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Dead tree 003",
+            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Dead trees/Dead tree 003.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Dead tree 004",
+            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Dead trees/Dead tree 004.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Broken fence",
+            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Fences/Broken fence.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Fence",
+            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Fences/Fence.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Fire_PSys",
+            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Fire PS/Fire_PSys.prefab",
+            "components": [
+                "Transform",
+                "ParticleSystem",
+                "ParticleSystemRenderer"
+            ]
+        },
+        {
+            "name": "Flower 001",
+            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Flowers/Flower 001.prefab",
+            "components": [
+                "Transform",
+                "SortingGroup",
+                "FlowerInteraction"
+            ]
+        },
+        {
+            "name": "Flower 002",
+            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Flowers/Flower 002.prefab",
+            "components": [
+                "Transform",
+                "SortingGroup",
+                "FlowerInteraction"
+            ]
+        },
+        {
+            "name": "Flower 003",
+            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Flowers/Flower 003.prefab",
+            "components": [
+                "Transform",
+                "SortingGroup",
+                "FlowerInteraction"
+            ]
+        },
+        {
+            "name": "Grass 001",
+            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Grass/Grass 001.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Grass 002",
+            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Grass/Grass 002.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Grass 003",
+            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Grass/Grass 003.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Grass 004",
+            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Grass/Grass 004.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Mashroom 001",
+            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Mashrooms/Mashroom 001.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Mashroom 002",
+            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Mashrooms/Mashroom 002.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Mashroom 003",
+            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Mashrooms/Mashroom 003.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Mashroom 004",
+            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Mashrooms/Mashroom 004.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Pine tree 001",
+            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Pine trees/Pine tree 001.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Pine tree 002",
+            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Pine trees/Pine tree 002.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Pine tree 003",
+            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Pine trees/Pine tree 003.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Pine tree 004",
+            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Pine trees/Pine tree 004.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Pine tree 005",
+            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Pine trees/Pine tree 005.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Rock 001",
+            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Rocks/Rock 001.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Rock 002",
+            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Rocks/Rock 002.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Rock 003",
+            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Rocks/Rock 003.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Rock 004",
+            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Rocks/Rock 004.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Rock 005",
+            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Rocks/Rock 005.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Rock 006",
+            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Rocks/Rock 006.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Rock 007",
+            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Rocks/Rock 007.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Rock 008",
+            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Rocks/Rock 008.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Rock 009",
+            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Rocks/Rock 009.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Rock 010",
+            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Rocks/Rock 010.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Plane",
+            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Terrain/Plane.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer",
+                "MeshCollider"
+            ]
+        },
+        {
+            "name": "terrain",
+            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Terrain/terrain.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Tree 001",
+            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Trees/Tree 001.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Tree 002",
+            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Trees/Tree 002.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Tree 003",
+            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Trees/Tree 003.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Trunk 001",
+            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Trunks/Trunk 001.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Trunk 002",
+            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Trunks/Trunk 002.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Water",
+            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Water/Water.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer",
+                "MeshCollider"
+            ]
+        },
+        {
+            "name": "particles 1",
+            "path": "Assets/particles 1.prefab",
+            "components": [
+                "Transform",
+                "ParticleSystem",
+                "ParticleSystemRenderer"
+            ]
+        },
+        {
+            "name": "CampFire",
+            "path": "Assets/PolygonPilots/Campfire/Prefabs/CampFire.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "BaseMapManagerObject",
+            "path": "Assets/Prefabs/BaseMapManagerObject.prefab",
+            "components": [
+                "Transform",
+                "BaseMapManager"
+            ]
+        },
+        {
+            "name": "ChunkPrefab",
+            "path": "Assets/Prefabs/ChunkPrefab.prefab",
+            "components": [
+                "Transform",
+                "Grid"
+            ]
+        },
+        {
+            "name": "Cube",
+            "path": "Assets/Prefabs/Cube.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer",
+                "BoxCollider",
+                "WallCollisionDebug"
+            ]
+        },
+        {
+            "name": "FlowerInteractionUI",
+            "path": "Assets/Prefabs/FlowerInteractionUI.prefab",
+            "components": [
+                "RectTransform",
+                "Canvas",
+                "CanvasScaler",
+                "GraphicRaycaster"
+            ]
+        },
+        {
+            "name": "ObjectManagerObject",
+            "path": "Assets/Prefabs/ObjectManagerObject.prefab",
+            "components": [
+                "Transform",
+                "ObjectManager"
+            ]
+        },
+        {
+            "name": "Quad",
+            "path": "Assets/Prefabs/Quad.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer",
+                "MeshCollider"
+            ]
+        },
+        {
+            "name": "RoadManagerObject",
+            "path": "Assets/Prefabs/RoadManagerObject.prefab",
+            "components": [
+                "Transform",
+                "RoadManager"
+            ]
+        },
+        {
+            "name": "TileManagerObject",
+            "path": "Assets/Prefabs/TileManagerObject.prefab",
+            "components": [
+                "Transform",
+                "TileManager"
+            ]
+        },
+        {
+            "name": "Box_100x100x100_Prefab",
+            "path": "Assets/StarterAssets/Environment/Prefabs/Box_100x100x100_Prefab.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer",
+                "BoxCollider"
+            ]
+        },
+        {
+            "name": "Box_350x250x200_Prefab",
+            "path": "Assets/StarterAssets/Environment/Prefabs/Box_350x250x200_Prefab.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer",
+                "BoxCollider"
+            ]
+        },
+        {
+            "name": "Box_350x250x300_Prefab",
+            "path": "Assets/StarterAssets/Environment/Prefabs/Box_350x250x300_Prefab.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer",
+                "BoxCollider"
+            ]
+        },
+        {
+            "name": "Environment_Prefab",
+            "path": "Assets/StarterAssets/Environment/Prefabs/Environment_Prefab.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Ramp_Prefab",
+            "path": "Assets/StarterAssets/Environment/Prefabs/Ramp_Prefab.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer",
+                "MeshCollider"
+            ]
+        },
+        {
+            "name": "Stairs_200x100x200_Prefab",
+            "path": "Assets/StarterAssets/Environment/Prefabs/Stairs_200x100x200_Prefab.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer",
+                "MeshCollider"
+            ]
+        },
+        {
+            "name": "Stairs_650_400_300_Prefab",
+            "path": "Assets/StarterAssets/Environment/Prefabs/Stairs_650_400_300_Prefab.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer",
+                "MeshCollider"
+            ]
+        },
+        {
+            "name": "Structure_Prefab",
+            "path": "Assets/StarterAssets/Environment/Prefabs/Structure_Prefab.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer",
+                "MeshCollider"
+            ]
+        },
+        {
+            "name": "Tunnel_Prefab",
+            "path": "Assets/StarterAssets/Environment/Prefabs/Tunnel_Prefab.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer",
+                "BoxCollider",
+                "BoxCollider",
+                "BoxCollider"
+            ]
+        },
+        {
+            "name": "Wall_Prefab",
+            "path": "Assets/StarterAssets/Environment/Prefabs/Wall_Prefab.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer",
+                "BoxCollider",
+                "BoxCollider"
+            ]
+        },
+        {
+            "name": "UI_Canvas_StarterAssetsInputs_Joysticks",
+            "path": "Assets/StarterAssets/Mobile/Prefabs/CanvasInputs/UI_Canvas_StarterAssetsInputs_Joysticks.prefab",
+            "components": [
+                "RectTransform",
+                "Canvas",
+                "CanvasScaler",
+                "GraphicRaycaster",
+                "UICanvasControllerInput",
+                "MobileDisableAutoSwitchControls"
+            ]
+        },
+        {
+            "name": "UI_Canvas_StarterAssetsInputs_TouchZones",
+            "path": "Assets/StarterAssets/Mobile/Prefabs/CanvasInputs/UI_Canvas_StarterAssetsInputs_TouchZones.prefab",
+            "components": [
+                "RectTransform",
+                "Canvas",
+                "CanvasScaler",
+                "GraphicRaycaster",
+                "UICanvasControllerInput",
+                "MobileDisableAutoSwitchControls"
+            ]
+        },
+        {
+            "name": "UI_EventSystem",
+            "path": "Assets/StarterAssets/Mobile/Prefabs/EventSystem/UI_EventSystem.prefab",
+            "components": [
+                "Transform",
+                "EventSystem",
+                "InputSystemUIInputModule"
+            ]
+        },
+        {
+            "name": "UI_Virtual_Button",
+            "path": "Assets/StarterAssets/Mobile/Prefabs/VirtualInputs/UI_Virtual_Button.prefab",
+            "components": [
+                "RectTransform",
+                "CanvasRenderer",
+                "Image",
+                "Button",
+                "UIVirtualButton"
+            ]
+        },
+        {
+            "name": "UI_Virtual_Joystick",
+            "path": "Assets/StarterAssets/Mobile/Prefabs/VirtualInputs/UI_Virtual_Joystick.prefab",
+            "components": [
+                "RectTransform",
+                "CanvasRenderer",
+                "Image",
+                "UIVirtualJoystick"
+            ]
+        },
+        {
+            "name": "UI_Virtual_TouchZone",
+            "path": "Assets/StarterAssets/Mobile/Prefabs/VirtualInputs/UI_Virtual_TouchZone.prefab",
+            "components": [
+                "RectTransform",
+                "CanvasRenderer",
+                "Image",
+                "UIVirtualTouchZone"
+            ]
+        },
+        {
+            "name": "MainCamera",
+            "path": "Assets/StarterAssets/ThirdPersonController/Prefabs/MainCamera.prefab",
+            "components": [
+                "Transform",
+                "Camera",
+                "AudioListener",
+                "CinemachineBrain"
+            ]
+        },
+        {
+            "name": "NestedParentArmature_Unpack",
+            "path": "Assets/StarterAssets/ThirdPersonController/Prefabs/NestedParentArmature_Unpack.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "NestedParentCapsule_Unpack",
+            "path": "Assets/StarterAssets/ThirdPersonController/Prefabs/NestedParentCapsule_Unpack.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "PlayerArmature",
+            "path": "Assets/StarterAssets/ThirdPersonController/Prefabs/PlayerArmature.prefab",
+            "components": [
+                "Transform",
+                "Animator",
+                "CharacterController",
+                "ThirdPersonController",
+                "BasicRigidBodyPush",
+                "StarterAssetsInputs",
+                "PlayerInput"
+            ]
+        },
+        {
+            "name": "PlayerCapsule 1",
+            "path": "Assets/StarterAssets/ThirdPersonController/Prefabs/PlayerCapsule 1.prefab",
+            "components": [
+                "Transform",
+                "CharacterController",
+                "ThirdPersonController",
+                "BasicRigidBodyPush",
+                "PlayerInput",
+                "StarterAssetsInputs"
+            ]
+        },
+        {
+            "name": "PlayerCapsule",
+            "path": "Assets/StarterAssets/ThirdPersonController/Prefabs/PlayerCapsule.prefab",
+            "components": [
+                "Transform",
+                "CharacterController",
+                "ThirdPersonController",
+                "BasicRigidBodyPush",
+                "PlayerInput",
+                "StarterAssetsInputs"
+            ]
+        },
+        {
+            "name": "PlayerFollowCamera",
+            "path": "Assets/StarterAssets/ThirdPersonController/Prefabs/PlayerFollowCamera.prefab",
+            "components": [
+                "Transform",
+                "CinemachineVirtualCamera"
+            ]
+        },
+        {
+            "name": "Text Popup",
+            "path": "Assets/TextMesh Pro/Examples & Extras/Prefabs/Text Popup.prefab",
+            "components": [
+                "RectTransform",
+                "CanvasRenderer",
+                "Image",
+                "VerticalLayoutGroup",
+                "ContentSizeFitter",
+                "CanvasGroup"
+            ]
+        },
+        {
+            "name": "TextMeshPro - Prefab 1",
+            "path": "Assets/TextMesh Pro/Examples & Extras/Prefabs/TextMeshPro - Prefab 1.prefab",
+            "components": [
+                "RectTransform",
+                "MeshFilter",
+                "MeshRenderer",
+                "TextMeshPro",
+                "CanvasRenderer"
+            ]
+        },
+        {
+            "name": "TextMeshPro - Prefab 2",
+            "path": "Assets/TextMesh Pro/Examples & Extras/Prefabs/TextMeshPro - Prefab 2.prefab",
+            "components": [
+                "RectTransform",
+                "MeshFilter",
+                "MeshRenderer",
+                "TextMeshPro",
+                "CanvasRenderer"
+            ]
+        },
+        {
+            "name": "Closed Sprite Shape",
+            "path": "Packages/com.unity.2d.spriteshape/Editor/ObjectMenuCreation/DefaultAssets/Sprite Shapes/Closed Sprite Shape.prefab",
+            "components": [
+                "Transform",
+                "SpriteShapeRenderer",
+                "SpriteShapeController"
+            ]
+        },
+        {
+            "name": "Open Sprite Shape",
+            "path": "Packages/com.unity.2d.spriteshape/Editor/ObjectMenuCreation/DefaultAssets/Sprite Shapes/Open Sprite Shape.prefab",
+            "components": [
+                "Transform",
+                "SpriteShapeRenderer",
+                "SpriteShapeController"
+            ]
+        },
+        {
+            "name": "DebugUICanvas",
+            "path": "Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Resources/DebugUICanvas.prefab",
+            "components": [
+                "RectTransform",
+                "Canvas",
+                "CanvasScaler",
+                "GraphicRaycaster",
+                "DebugUIHandlerCanvas"
+            ]
+        },
+        {
+            "name": "DebugUIPersistentCanvas",
+            "path": "Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Resources/DebugUIPersistentCanvas.prefab",
+            "components": [
+                "RectTransform",
+                "Canvas",
+                "CanvasScaler",
+                "GraphicRaycaster",
+                "DebugUIHandlerPersistentCanvas"
+            ]
+        },
+        {
+            "name": "DebugUIBitField",
+            "path": "Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Widgets/DebugUIBitField.prefab",
+            "components": [
+                "RectTransform",
+                "VerticalLayoutGroup",
+                "ContentSizeFitter",
+                "DebugUIHandlerContainer",
+                "DebugUIHandlerBitField"
+            ]
+        },
+        {
+            "name": "DebugUIButton",
+            "path": "Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Widgets/DebugUIButton.prefab",
+            "components": [
+                "RectTransform",
+                "CanvasRenderer",
+                "Image",
+                "Button",
+                "DebugUIHandlerButton"
+            ]
+        },
+        {
+            "name": "DebugUIColor",
+            "path": "Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Widgets/DebugUIColor.prefab",
+            "components": [
+                "RectTransform",
+                "VerticalLayoutGroup",
+                "ContentSizeFitter",
+                "DebugUIHandlerColor",
+                "DebugUIHandlerContainer"
+            ]
+        },
+        {
+            "name": "DebugUIEnumField",
+            "path": "Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Widgets/DebugUIEnumField.prefab",
+            "components": [
+                "RectTransform",
+                "DebugUIHandlerEnumField"
+            ]
+        },
+        {
+            "name": "DebugUIEnumHistory",
+            "path": "Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Widgets/DebugUIEnumHistory.prefab",
+            "components": [
+                "RectTransform",
+                "DebugUIHandlerEnumHistory"
+            ]
+        },
+        {
+            "name": "DebugUIFloatField",
+            "path": "Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Widgets/DebugUIFloatField.prefab",
+            "components": [
+                "RectTransform",
+                "DebugUIHandlerFloatField"
+            ]
+        },
+        {
+            "name": "DebugUIFoldout",
+            "path": "Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Widgets/DebugUIFoldout.prefab",
+            "components": [
+                "RectTransform",
+                "VerticalLayoutGroup",
+                "ContentSizeFitter",
+                "DebugUIHandlerContainer",
+                "DebugUIHandlerFoldout"
+            ]
+        },
+        {
+            "name": "DebugUIGroup",
+            "path": "Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Widgets/DebugUIGroup.prefab",
+            "components": [
+                "RectTransform",
+                "VerticalLayoutGroup",
+                "ContentSizeFitter",
+                "DebugUIHandlerContainer",
+                "DebugUIHandlerGroup"
+            ]
+        },
+        {
+            "name": "DebugUIHBox",
+            "path": "Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Widgets/DebugUIHBox.prefab",
+            "components": [
+                "RectTransform",
+                "HorizontalLayoutGroup",
+                "ContentSizeFitter",
+                "DebugUIHandlerContainer",
+                "DebugUIHandlerHBox"
+            ]
+        },
+        {
+            "name": "DebugUIIntField",
+            "path": "Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Widgets/DebugUIIntField.prefab",
+            "components": [
+                "RectTransform",
+                "DebugUIHandlerIntField"
+            ]
+        },
+        {
+            "name": "DebugUIMessageBox",
+            "path": "Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Widgets/DebugUIMessageBox.prefab",
+            "components": [
+                "RectTransform",
+                "VerticalLayoutGroup",
+                "ContentSizeFitter",
+                "DebugUIHandlerMessageBox",
+                "CanvasRenderer",
+                "Image"
+            ]
+        },
+        {
+            "name": "DebugUIObject",
+            "path": "Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Widgets/DebugUIObject.prefab",
+            "components": [
+                "RectTransform",
+                "DebugUIHandlerObject"
+            ]
+        },
+        {
+            "name": "DebugUIObjectList",
+            "path": "Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Widgets/DebugUIObjectList.prefab",
+            "components": [
+                "RectTransform",
+                "DebugUIHandlerObjectList"
+            ]
+        },
+        {
+            "name": "DebugUIObjectPopupField",
+            "path": "Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Widgets/DebugUIObjectPopupField.prefab",
+            "components": [
+                "RectTransform",
+                "DebugUIHandlerObjectPopupField"
+            ]
+        },
+        {
+            "name": "DebugUIPanel",
+            "path": "Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Widgets/DebugUIPanel.prefab",
+            "components": [
+                "RectTransform",
+                "CanvasRenderer",
+                "Image",
+                "VerticalLayoutGroup",
+                "ContentSizeFitter",
+                "DebugUIHandlerContainer",
+                "DebugUIHandlerPanel"
+            ]
+        },
+        {
+            "name": "DebugUIProgressBar",
+            "path": "Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Widgets/DebugUIProgressBar.prefab",
+            "components": [
+                "RectTransform",
+                "DebugUIHandlerProgressBar"
+            ]
+        },
+        {
+            "name": "DebugUIRow",
+            "path": "Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Widgets/DebugUIRow.prefab",
+            "components": [
+                "RectTransform",
+                "VerticalLayoutGroup",
+                "ContentSizeFitter",
+                "DebugUIHandlerContainer",
+                "DebugUIHandlerRow"
+            ]
+        },
+        {
+            "name": "DebugUIToggle",
+            "path": "Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Widgets/DebugUIToggle.prefab",
+            "components": [
+                "RectTransform",
+                "DebugUIHandlerToggle"
+            ]
+        },
+        {
+            "name": "DebugUIToggleHistory",
+            "path": "Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Widgets/DebugUIToggleHistory.prefab",
+            "components": [
+                "RectTransform",
+                "DebugUIHandlerToggleHistory"
+            ]
+        },
+        {
+            "name": "DebugUIUIntField",
+            "path": "Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Widgets/DebugUIUIntField.prefab",
+            "components": [
+                "RectTransform",
+                "DebugUIHandlerUIntField"
+            ]
+        },
+        {
+            "name": "DebugUIValue",
+            "path": "Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Widgets/DebugUIValue.prefab",
+            "components": [
+                "RectTransform",
+                "DebugUIHandlerValue"
+            ]
+        },
+        {
+            "name": "DebugUIValuePersistent",
+            "path": "Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Widgets/DebugUIValuePersistent.prefab",
+            "components": [
+                "RectTransform",
+                "DebugUIHandlerValue"
+            ]
+        },
+        {
+            "name": "DebugUIValueTuple",
+            "path": "Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Widgets/DebugUIValueTuple.prefab",
+            "components": [
+                "RectTransform",
+                "DebugUIHandlerValueTuple"
+            ]
+        },
+        {
+            "name": "DebugUIVBox",
+            "path": "Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Widgets/DebugUIVBox.prefab",
+            "components": [
+                "RectTransform",
+                "VerticalLayoutGroup",
+                "ContentSizeFitter",
+                "DebugUIHandlerContainer",
+                "DebugUIHandlerVBox"
+            ]
+        },
+        {
+            "name": "DebugUIVector2",
+            "path": "Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Widgets/DebugUIVector2.prefab",
+            "components": [
+                "RectTransform",
+                "VerticalLayoutGroup",
+                "ContentSizeFitter",
+                "DebugUIHandlerContainer",
+                "DebugUIHandlerVector2"
+            ]
+        },
+        {
+            "name": "DebugUIVector3",
+            "path": "Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Widgets/DebugUIVector3.prefab",
+            "components": [
+                "RectTransform",
+                "VerticalLayoutGroup",
+                "ContentSizeFitter",
+                "DebugUIHandlerContainer",
+                "DebugUIHandlerVector3"
+            ]
+        },
+        {
+            "name": "DebugUIVector4",
+            "path": "Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Widgets/DebugUIVector4.prefab",
+            "components": [
+                "RectTransform",
+                "VerticalLayoutGroup",
+                "ContentSizeFitter",
+                "DebugUIHandlerContainer",
+                "DebugUIHandlerVector4"
+            ]
+        }
+    ],
+    "assetStructure": {
+        "name": "Assets",
+        "path": "Assets",
+        "files": [
+            ".DS_Store",
+            "DefaultVolumeProfile.asset",
+            "InputSystem_Actions.inputactions",
+            "MyTryFassst.shader",
+            "SceneExport.json",
+            "UniversalRenderPipelineGlobalSettings.asset",
+            "particles 1.prefab"
+        ],
+        "subfolders": [
+            {
+                "name": "Animals",
+                "path": "Assets/Animals",
+                "files": [],
+                "subfolders": [
+                    {
+                        "name": "Animations",
+                        "path": "Assets/Animals/Animations",
+                        "files": [],
+                        "subfolders": []
+                    },
+                    {
+                        "name": "Materials",
+                        "path": "Assets/Animals/Materials",
+                        "files": [
+                            "Floor.mat",
+                            "Material.mat"
+                        ],
+                        "subfolders": []
+                    },
+                    {
+                        "name": "Meshes",
+                        "path": "Assets/Animals/Meshes",
+                        "files": [
+                            "Chicken_001.fbx",
+                            "Deer_001.fbx",
+                            "Dog_001.fbx",
+                            "Horse_001.fbx",
+                            "Kitty_001.fbx",
+                            "Pinguin_001.fbx",
+                            "Tiger_001.fbx"
+                        ],
+                        "subfolders": []
+                    },
+                    {
+                        "name": "Prefabs",
+                        "path": "Assets/Animals/Prefabs",
+                        "files": [
+                            "Chicken_001.prefab",
+                            "Chicken_brown.prefab",
+                            "Chicken_grey_bright.prefab",
+                            "Chicken_grey_dark.prefab",
+                            "Chicken_special.prefab",
+                            "Deer_001.prefab",
+                            "Dog_001.prefab",
+                            "Dog_blue_hell.prefab",
+                            "Dog_forest.prefab",
+                            "Horse_001.prefab",
+                            "Kitty_001.prefab",
+                            "Pinguin_001.prefab",
+                            "Tiger_001.prefab"
+                        ],
+                        "subfolders": []
+                    },
+                    {
+                        "name": "Render_Pipeline_Convert",
+                        "path": "Assets/Animals/Render_Pipeline_Convert",
+                        "files": [
+                            "Documentation.txt",
+                            "URP_to_BuiltIn_source.unitypackage",
+                            "URP_to_HDRP_source.unitypackage"
+                        ],
+                        "subfolders": []
+                    },
+                    {
+                        "name": "Scenes",
+                        "path": "Assets/Animals/Scenes",
+                        "files": [
+                            "Demonstration.unity"
+                        ],
+                        "subfolders": []
+                    },
+                    {
+                        "name": "Scripts",
+                        "path": "Assets/Animals/Scripts",
+                        "files": [
+                            "CreatureMover.cs",
+                            "MovePlayerInput.cs",
+                            "PlayerCamera.cs",
+                            "ThirdPersonCamera.cs"
+                        ],
+                        "subfolders": []
+                    },
+                    {
+                        "name": "Skyboxes",
+                        "path": "Assets/Animals/Skyboxes",
+                        "files": [
+                            "Skybox_5.mat"
+                        ],
+                        "subfolders": []
+                    },
+                    {
+                        "name": "Textures",
+                        "path": "Assets/Animals/Textures",
+                        "files": [
+                            "Texture.png"
+                        ],
+                        "subfolders": []
+                    }
+                ]
+            },
+            {
+                "name": "Editor",
+                "path": "Assets/Editor",
+                "files": [
+                    "SceneExporter.cs"
+                ],
+                "subfolders": []
+            },
+            {
+                "name": "LowpolyCharacterRio",
+                "path": "Assets/LowpolyCharacterRio",
+                "files": [
+                    "verzeichnisstruktur.txt"
+                ],
+                "subfolders": [
+                    {
+                        "name": "Materials",
+                        "path": "Assets/LowpolyCharacterRio/Materials",
+                        "files": [
+                            "Rio 1.mat",
+                            "Rio.mat"
+                        ],
+                        "subfolders": []
+                    },
+                    {
+                        "name": "Models",
+                        "path": "Assets/LowpolyCharacterRio/Models",
+                        "files": [
+                            "Rio.fbx"
+                        ],
+                        "subfolders": []
+                    },
+                    {
+                        "name": "Prefabs",
+                        "path": "Assets/LowpolyCharacterRio/Prefabs",
+                        "files": [
+                            "Rio.prefab"
+                        ],
+                        "subfolders": []
+                    },
+                    {
+                        "name": "Scenes",
+                        "path": "Assets/LowpolyCharacterRio/Scenes",
+                        "files": [
+                            "DemoScene.unity"
+                        ],
+                        "subfolders": []
+                    },
+                    {
+                        "name": "Textures",
+                        "path": "Assets/LowpolyCharacterRio/Textures",
+                        "files": [
+                            "Rio_AlbedoTransparency.png",
+                            "Rio_MetallicSmoothness.png",
+                            "Riol_Normal.png"
+                        ],
+                        "subfolders": []
+                    }
+                ]
+            },
+            {
+                "name": "Materials",
+                "path": "Assets/Materials",
+                "files": [
+                    "FogMaterial.mat",
+                    "New Material.mat",
+                    "Rio.mat"
+                ],
+                "subfolders": []
+            },
+            {
+                "name": "Oode studios",
+                "path": "Assets/Oode studios",
+                "files": [],
+                "subfolders": [
+                    {
+                        "name": "Lowpoly nature",
+                        "path": "Assets/Oode studios/Lowpoly nature",
+                        "files": [
+                            "Lowpoly nature - README.pdf",
+                            "SampleSceneProfile.asset"
+                        ],
+                        "subfolders": []
+                    }
+                ]
+            },
+            {
+                "name": "PolygonPilots",
+                "path": "Assets/PolygonPilots",
+                "files": [],
+                "subfolders": [
+                    {
+                        "name": "Campfire",
+                        "path": "Assets/PolygonPilots/Campfire",
+                        "files": [],
+                        "subfolders": []
+                    }
+                ]
+            },
+            {
+                "name": "Prefabs",
+                "path": "Assets/Prefabs",
+                "files": [
+                    "BaseMapManagerObject.prefab",
+                    "ChunkPrefab.prefab",
+                    "Cube.prefab",
+                    "FlowerInteractionUI.prefab",
+                    "ObjectManagerObject.prefab",
+                    "Quad.prefab",
+                    "RoadManagerObject.prefab",
+                    "TileManagerObject.prefab"
+                ],
+                "subfolders": []
+            },
+            {
+                "name": "Scenes",
+                "path": "Assets/Scenes",
+                "files": [
+                    "AdvancedMap.unity",
+                    "PMOV.unity",
+                    "SO_MAP2.unity",
+                    "SampleScene.unity"
+                ],
+                "subfolders": []
+            },
+            {
+                "name": "Scriptables",
+                "path": "Assets/Scriptables",
+                "files": [
+                    "BiomeCorrupted.asset",
+                    "BiomeDead.asset",
+                    "BiomeDirtyy 1.asset",
+                    "BiomeOneNice 1.asset",
+                    "BiomeOneNice.asset"
+                ],
+                "subfolders": []
+            },
+            {
+                "name": "Scripts",
+                "path": "Assets/Scripts",
+                "files": [
+                    "BiomeAccessController.cs",
+                    "CameraFollow.cs",
+                    "DiceController.cs",
+                    "FlowerInteraction.cs",
+                    "MinimapCameraFollow.cs",
+                    "WallCollisionDebug.cs"
+                ],
+                "subfolders": [
+                    {
+                        "name": "Map",
+                        "path": "Assets/Scripts/Map",
+                        "files": [
+                            "BaseMapManager.cs",
+                            "BaseRegion.cs",
+                            "BasicCreatureBehavior.cs",
+                            "CreatureBehavior.cs",
+                            "CreatureConfig.cs",
+                            "CreatureManager.cs",
+                            "FlowerConfig.cs",
+                            "LevelManager.cs",
+                            "MInimapTexture.renderTexture",
+                            "MapBiomeConfig.cs",
+                            "MapGenerationManager.cs",
+                            "MinimapController.cs",
+                            "ObjectManager.cs",
+                            "RoadManager.cs",
+                            "TileManager.cs"
+                        ],
+                        "subfolders": []
+                    }
+                ]
+            },
+            {
+                "name": "Settings",
+                "path": "Assets/Settings",
+                "files": [
+                    "Lit2DSceneTemplate.scenetemplate",
+                    "Renderer2D.asset",
+                    "UniversalRP.asset"
+                ],
+                "subfolders": [
+                    {
+                        "name": "Scenes",
+                        "path": "Assets/Settings/Scenes",
+                        "files": [
+                            "URP2DSceneTemplate.unity"
+                        ],
+                        "subfolders": []
+                    }
+                ]
+            },
+            {
+                "name": "Shaders",
+                "path": "Assets/Shaders",
+                "files": [
+                    "BasicWireframe.shader",
+                    "URPWireframe.shader"
+                ],
+                "subfolders": []
+            },
+            {
+                "name": "StarterAssets",
+                "path": "Assets/StarterAssets",
+                "files": [
+                    "Readme.asset",
+                    "StarterAssets_Documentation_v1.1.pdf",
+                    "license.txt",
+                    "verzeichnisstruktur.txt"
+                ],
+                "subfolders": [
+                    {
+                        "name": "Environment",
+                        "path": "Assets/StarterAssets/Environment",
+                        "files": [],
+                        "subfolders": []
+                    },
+                    {
+                        "name": "InputSystem",
+                        "path": "Assets/StarterAssets/InputSystem",
+                        "files": [
+                            "StarterAssets.inputactions",
+                            "StarterAssets.inputsettings.asset",
+                            "StarterAssetsInputs.cs"
+                        ],
+                        "subfolders": []
+                    },
+                    {
+                        "name": "Mobile",
+                        "path": "Assets/StarterAssets/Mobile",
+                        "files": [],
+                        "subfolders": []
+                    },
+                    {
+                        "name": "ThirdPersonController",
+                        "path": "Assets/StarterAssets/ThirdPersonController",
+                        "files": [],
+                        "subfolders": []
+                    },
+                    {
+                        "name": "TutorialInfo",
+                        "path": "Assets/StarterAssets/TutorialInfo",
+                        "files": [],
+                        "subfolders": []
+                    }
+                ]
+            },
+            {
+                "name": "TextMesh Pro",
+                "path": "Assets/TextMesh Pro",
+                "files": [],
+                "subfolders": [
+                    {
+                        "name": "Examples & Extras",
+                        "path": "Assets/TextMesh Pro/Examples & Extras",
+                        "files": [],
+                        "subfolders": []
+                    },
+                    {
+                        "name": "Fonts",
+                        "path": "Assets/TextMesh Pro/Fonts",
+                        "files": [
+                            "LiberationSans - OFL.txt",
+                            "LiberationSans.ttf"
+                        ],
+                        "subfolders": []
+                    },
+                    {
+                        "name": "Resources",
+                        "path": "Assets/TextMesh Pro/Resources",
+                        "files": [
+                            "LineBreaking Following Characters.txt",
+                            "LineBreaking Leading Characters.txt",
+                            "TMP Settings.asset"
+                        ],
+                        "subfolders": []
+                    },
+                    {
+                        "name": "Shaders",
+                        "path": "Assets/TextMesh Pro/Shaders",
+                        "files": [
+                            "SDFFunctions.hlsl",
+                            "TMP_Bitmap-Custom-Atlas.shader",
+                            "TMP_Bitmap-Mobile.shader",
+                            "TMP_Bitmap.shader",
+                            "TMP_SDF Overlay.shader",
+                            "TMP_SDF SSD.shader",
+                            "TMP_SDF-HDRP LIT.shadergraph",
+                            "TMP_SDF-HDRP UNLIT.shadergraph",
+                            "TMP_SDF-Mobile Masking.shader",
+                            "TMP_SDF-Mobile Overlay.shader",
+                            "TMP_SDF-Mobile SSD.shader",
+                            "TMP_SDF-Mobile-2-Pass.shader",
+                            "TMP_SDF-Mobile.shader",
+                            "TMP_SDF-Surface-Mobile.shader",
+                            "TMP_SDF-Surface.shader",
+                            "TMP_SDF-URP Lit.shadergraph",
+                            "TMP_SDF-URP Unlit.shadergraph",
+                            "TMP_SDF.shader",
+                            "TMP_Sprite.shader",
+                            "TMPro.cginc",
+                            "TMPro_Mobile.cginc",
+                            "TMPro_Properties.cginc",
+                            "TMPro_Surface.cginc"
+                        ],
+                        "subfolders": []
+                    },
+                    {
+                        "name": "Sprites",
+                        "path": "Assets/TextMesh Pro/Sprites",
+                        "files": [
+                            "EmojiOne Attribution.txt",
+                            "EmojiOne.json",
+                            "EmojiOne.png"
+                        ],
+                        "subfolders": []
+                    }
+                ]
+            },
+            {
+                "name": "mapassets",
+                "path": "Assets/mapassets",
+                "files": [
+                    ".DS_Store",
+                    "RoadTile.asset",
+                    "RoadTile.png",
+                    "grass.asset",
+                    "grass_darkened_1.asset"
+                ],
+                "subfolders": [
+                    {
+                        "name": "2DPixelFantasyTilemapFree",
+                        "path": "Assets/mapassets/2DPixelFantasyTilemapFree",
+                        "files": [],
+                        "subfolders": []
+                    },
+                    {
+                        "name": "Handpainted_Grass_and_Ground_Textures",
+                        "path": "Assets/mapassets/Handpainted_Grass_and_Ground_Textures",
+                        "files": [
+                            ".DS_Store",
+                            "NewGrassAndDirt.prefab"
+                        ],
+                        "subfolders": []
+                    },
+                    {
+                        "name": "Palettes",
+                        "path": "Assets/mapassets/Palettes",
+                        "files": [
+                            "MinimalPalette.prefab"
+                        ],
+                        "subfolders": []
+                    },
+                    {
+                        "name": "Stylize Tree &Grasses samples",
+                        "path": "Assets/mapassets/Stylize Tree &Grasses samples",
+                        "files": [],
+                        "subfolders": []
+                    },
+                    {
+                        "name": "kenney_city-kit-suburban_20",
+                        "path": "Assets/mapassets/kenney_city-kit-suburban_20",
+                        "files": [
+                            ".DS_Store",
+                            "License.txt",
+                            "Overview.html",
+                            "Preview (Variation A).png",
+                            "Preview (Variation B).png",
+                            "Preview (Variation C).png",
+                            "Preview.png",
+                            "Sample.png",
+                            "View Documentation.url",
+                            "Visit Kenney.url",
+                            "Visit Patreon.url"
+                        ],
+                        "subfolders": []
+                    },
+                    {
+                        "name": "kenney_pirate-pack",
+                        "path": "Assets/mapassets/kenney_pirate-pack",
+                        "files": [
+                            ".DS_Store",
+                            "License.txt",
+                            "Preview.png",
+                            "Preview_KenneyNL.png",
+                            "Sample.png"
+                        ],
+                        "subfolders": []
+                    },
+                    {
+                        "name": "kenney_top-down-tanks",
+                        "path": "Assets/mapassets/kenney_top-down-tanks",
+                        "files": [
+                            ".DS_Store",
+                            "license.txt",
+                            "preview.png",
+                            "sample.png"
+                        ],
+                        "subfolders": []
+                    }
+                ]
+            }
+        ]
+    }
+}
