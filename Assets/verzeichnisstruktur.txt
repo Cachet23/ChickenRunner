@@ -1,0 +1,1012 @@
+.
+├── ABKaspo Games Assets
+│   ├── AURW
+│   │   ├── Documentation.txt
+│   │   ├── Documentation.txt.meta
+│   │   ├── Mesh
+│   │   │   ├── Water100x100.prefab
+│   │   │   ├── Water100x100.prefab.meta
+│   │   │   ├── Water16x16.prefab
+│   │   │   ├── Water16x16.prefab.meta
+│   │   │   ├── WaterMeshes.fbx
+│   │   │   └── WaterMeshes.fbx.meta
+│   │   ├── Mesh.meta
+│   │   ├── Scripts
+│   │   │   ├── Editor
+│   │   │   ├── Editor.meta
+│   │   │   ├── PlanarReflections.cs
+│   │   │   └── PlanarReflections.cs.meta
+│   │   ├── Scripts.meta
+│   │   ├── Shared Data
+│   │   │   ├── SubGraphs
+│   │   │   ├── SubGraphs.meta
+│   │   │   ├── Textures
+│   │   │   └── Textures.meta
+│   │   ├── Shared Data.meta
+│   │   ├── URP
+│   │   │   ├── Free
+│   │   │   └── Free.meta
+│   │   └── URP.meta
+│   ├── AURW.meta
+│   ├── Demos
+│   │   ├── AURW URP
+│   │   │   ├── AURW URP Demo
+│   │   │   ├── AURW URP Demo.meta
+│   │   │   ├── AURW URP Demo.unity
+│   │   │   └── AURW URP Demo.unity.meta
+│   │   ├── AURW URP.meta
+│   │   ├── Dataterrain
+│   │   │   ├── Demo Scene URP.lighting
+│   │   │   ├── Demo Scene URP.lighting.meta
+│   │   │   ├── DemoScene.asset
+│   │   │   ├── DemoScene.asset.meta
+│   │   │   ├── Layers
+│   │   │   ├── Layers.meta
+│   │   │   ├── Materials
+│   │   │   └── Materials.meta
+│   │   └── Dataterrain.meta
+│   └── Demos.meta
+├── ABKaspo Games Assets.meta
+├── Animals
+│   ├── Animations
+│   │   ├── Animation_Controllers
+│   │   │   ├── Chicken.controller
+│   │   │   ├── Chicken.controller.meta
+│   │   │   ├── Deer.controller
+│   │   │   ├── Deer.controller.meta
+│   │   │   ├── Dog.controller
+│   │   │   ├── Dog.controller.meta
+│   │   │   ├── Horse.controller
+│   │   │   ├── Horse.controller.meta
+│   │   │   ├── Kitty.controller
+│   │   │   ├── Kitty.controller.meta
+│   │   │   ├── Pinguin.controller
+│   │   │   ├── Pinguin.controller.meta
+│   │   │   ├── Tiger.controller
+│   │   │   └── Tiger.controller.meta
+│   │   ├── Animation_Controllers.meta
+│   │   ├── Other_Animations
+│   │   │   ├── Chicken_001_idle.anim
+│   │   │   ├── Chicken_001_idle.anim.meta
+│   │   │   ├── Chicken_002_run.anim
+│   │   │   ├── Chicken_002_run.anim.meta
+│   │   │   ├── Chicken_003_walk.anim
+│   │   │   ├── Chicken_003_walk.anim.meta
+│   │   │   ├── Deer_001_idle.anim
+│   │   │   ├── Deer_001_idle.anim.meta
+│   │   │   ├── Deer_001_run.anim
+│   │   │   ├── Deer_001_run.anim.meta
+│   │   │   ├── Deer_001_walk.anim
+│   │   │   ├── Deer_001_walk.anim.meta
+│   │   │   ├── Dog_001_idle.anim
+│   │   │   ├── Dog_001_idle.anim.meta
+│   │   │   ├── Dog_001_run.anim
+│   │   │   ├── Dog_001_run.anim.meta
+│   │   │   ├── Dog_001_walk.anim
+│   │   │   ├── Dog_001_walk.anim.meta
+│   │   │   ├── Horse_001_eat.anim
+│   │   │   ├── Horse_001_eat.anim.meta
+│   │   │   ├── Horse_001_idle.anim
+│   │   │   ├── Horse_001_idle.anim.meta
+│   │   │   ├── Horse_001_run.anim
+│   │   │   ├── Horse_001_run.anim.meta
+│   │   │   ├── Horse_001_walk.anim
+│   │   │   ├── Horse_001_walk.anim.meta
+│   │   │   ├── Kitty_001_idle.anim
+│   │   │   ├── Kitty_001_idle.anim.meta
+│   │   │   ├── Kitty_001_run.anim
+│   │   │   ├── Kitty_001_run.anim.meta
+│   │   │   ├── Kitty_001_walk.anim
+│   │   │   ├── Kitty_001_walk.anim.meta
+│   │   │   ├── Pinguin_001_idle.anim
+│   │   │   ├── Pinguin_001_idle.anim.meta
+│   │   │   ├── Pinguin_001_run.anim
+│   │   │   ├── Pinguin_001_run.anim.meta
+│   │   │   ├── Pinguin_001_walk.anim
+│   │   │   ├── Pinguin_001_walk.anim.meta
+│   │   │   ├── Tiger_001_idle_rare.anim
+│   │   │   ├── Tiger_001_idle_rare.anim.meta
+│   │   │   ├── Tiger_001_idle.anim
+│   │   │   ├── Tiger_001_idle.anim.meta
+│   │   │   ├── Tiger_001_run.anim
+│   │   │   ├── Tiger_001_run.anim.meta
+│   │   │   ├── Tiger_001_walk.anim
+│   │   │   └── Tiger_001_walk.anim.meta
+│   │   └── Other_Animations.meta
+│   ├── Animations.meta
+│   ├── Materials
+│   │   ├── Floor.mat
+│   │   ├── Floor.mat.meta
+│   │   ├── Material.mat
+│   │   └── Material.mat.meta
+│   ├── Materials.meta
+│   ├── Meshes
+│   │   ├── Chicken_001.fbx
+│   │   ├── Chicken_001.fbx.meta
+│   │   ├── Deer_001.fbx
+│   │   ├── Deer_001.fbx.meta
+│   │   ├── Dog_001.fbx
+│   │   ├── Dog_001.fbx.meta
+│   │   ├── Horse_001.fbx
+│   │   ├── Horse_001.fbx.meta
+│   │   ├── Kitty_001.fbx
+│   │   ├── Kitty_001.fbx.meta
+│   │   ├── Pinguin_001.fbx
+│   │   ├── Pinguin_001.fbx.meta
+│   │   ├── Tiger_001.fbx
+│   │   └── Tiger_001.fbx.meta
+│   ├── Meshes.meta
+│   ├── Prefabs
+│   │   ├── Chicken_001.prefab
+│   │   ├── Chicken_001.prefab.meta
+│   │   ├── Deer_001.prefab
+│   │   ├── Deer_001.prefab.meta
+│   │   ├── Dog_001.prefab
+│   │   ├── Dog_001.prefab.meta
+│   │   ├── Horse_001.prefab
+│   │   ├── Horse_001.prefab.meta
+│   │   ├── Kitty_001.prefab
+│   │   ├── Kitty_001.prefab.meta
+│   │   ├── Pinguin_001.prefab
+│   │   └── Pinguin_001.prefab.meta
+│   ├── Prefabs.meta
+│   ├── Render_Pipeline_Convert
+│   │   ├── Documentation.txt
+│   │   ├── Documentation.txt.meta
+│   │   ├── URP_to_BuiltIn_source.unitypackage
+│   │   ├── URP_to_BuiltIn_source.unitypackage.meta
+│   │   ├── URP_to_HDRP_source.unitypackage
+│   │   └── URP_to_HDRP_source.unitypackage.meta
+│   ├── Render_Pipeline_Convert.meta
+│   ├── Scenes
+│   │   ├── Demonstration.unity
+│   │   └── Demonstration.unity.meta
+│   ├── Scenes.meta
+│   ├── Scripts
+│   │   ├── CreatureMover.cs
+│   │   ├── CreatureMover.cs.meta
+│   │   ├── MovePlayerInput.cs
+│   │   ├── MovePlayerInput.cs.meta
+│   │   ├── PlayerCamera.cs
+│   │   ├── PlayerCamera.cs.meta
+│   │   ├── ThirdPersonCamera.cs
+│   │   └── ThirdPersonCamera.cs.meta
+│   ├── Scripts.meta
+│   ├── Skyboxes
+│   │   ├── Skybox_5.mat
+│   │   ├── Skybox_5.mat.meta
+│   │   ├── Skybox_Textures
+│   │   │   ├── Skybox_5.png
+│   │   │   └── Skybox_5.png.meta
+│   │   └── Skybox_Textures.meta
+│   ├── Skyboxes.meta
+│   ├── Textures
+│   │   ├── Texture.png
+│   │   └── Texture.png.meta
+│   └── Textures.meta
+├── Animals.meta
+├── DefaultVolumeProfile.asset
+├── DefaultVolumeProfile.asset.meta
+├── DownloadedPacks
+│   ├── LowpolyCharacterRio
+│   │   ├── Materials
+│   │   │   ├── Rio 1.mat
+│   │   │   ├── Rio 1.mat.meta
+│   │   │   ├── Rio.mat
+│   │   │   └── Rio.mat.meta
+│   │   ├── Materials.meta
+│   │   ├── Models
+│   │   │   ├── Rio.fbx
+│   │   │   └── Rio.fbx.meta
+│   │   ├── Models.meta
+│   │   ├── Prefabs
+│   │   │   ├── Rio.prefab
+│   │   │   └── Rio.prefab.meta
+│   │   ├── Prefabs.meta
+│   │   ├── Scenes
+│   │   │   ├── DemoScene.unity
+│   │   │   └── DemoScene.unity.meta
+│   │   ├── Scenes.meta
+│   │   ├── Textures
+│   │   │   ├── Rio_AlbedoTransparency.png
+│   │   │   ├── Rio_AlbedoTransparency.png.meta
+│   │   │   ├── Rio_MetallicSmoothness.png
+│   │   │   ├── Rio_MetallicSmoothness.png.meta
+│   │   │   ├── Riol_Normal.png
+│   │   │   └── Riol_Normal.png.meta
+│   │   ├── Textures.meta
+│   │   ├── verzeichnisstruktur.txt
+│   │   └── verzeichnisstruktur.txt.meta
+│   ├── LowpolyCharacterRio.meta
+│   ├── mapassets
+│   │   ├── 2DPixelFantasyTilemapFree
+│   │   │   ├── Scenes
+│   │   │   ├── Scenes.meta
+│   │   │   ├── Sprites
+│   │   │   ├── Sprites.meta
+│   │   │   ├── TilePalettes
+│   │   │   └── TilePalettes.meta
+│   │   ├── 2DPixelFantasyTilemapFree.meta
+│   │   ├── grass_darkened_1.asset
+│   │   ├── grass_darkened_1.asset.meta
+│   │   ├── grass.asset
+│   │   ├── grass.asset.meta
+│   │   ├── Handpainted_Grass_and_Ground_Textures
+│   │   │   ├── NewGrassAndDirt.prefab
+│   │   │   ├── NewGrassAndDirt.prefab.meta
+│   │   │   ├── Textures
+│   │   │   └── Textures.meta
+│   │   ├── Handpainted_Grass_and_Ground_Textures.meta
+│   │   ├── kenney_city-kit-suburban_20
+│   │   │   ├── License.txt
+│   │   │   ├── License.txt.meta
+│   │   │   ├── Models
+│   │   │   ├── Models.meta
+│   │   │   ├── Overview.html
+│   │   │   ├── Overview.html.meta
+│   │   │   ├── Preview (Variation A).png
+│   │   │   ├── Preview (Variation A).png.meta
+│   │   │   ├── Preview (Variation B).png
+│   │   │   ├── Preview (Variation B).png.meta
+│   │   │   ├── Preview (Variation C).png
+│   │   │   ├── Preview (Variation C).png.meta
+│   │   │   ├── Preview.png
+│   │   │   ├── Preview.png.meta
+│   │   │   ├── Previews
+│   │   │   ├── Previews.meta
+│   │   │   ├── Sample.png
+│   │   │   ├── Sample.png.meta
+│   │   │   ├── View Documentation.url
+│   │   │   ├── View Documentation.url.meta
+│   │   │   ├── Visit Kenney.url
+│   │   │   ├── Visit Kenney.url.meta
+│   │   │   ├── Visit Patreon.url
+│   │   │   └── Visit Patreon.url.meta
+│   │   ├── kenney_city-kit-suburban_20.meta
+│   │   ├── kenney_pirate-pack
+│   │   │   ├── License.txt
+│   │   │   ├── License.txt.meta
+│   │   │   ├── PNG
+│   │   │   ├── PNG.meta
+│   │   │   ├── Preview_KenneyNL.png
+│   │   │   ├── Preview_KenneyNL.png.meta
+│   │   │   ├── Preview.png
+│   │   │   ├── Preview.png.meta
+│   │   │   ├── Sample.png
+│   │   │   ├── Sample.png.meta
+│   │   │   ├── Spritesheet
+│   │   │   ├── Spritesheet.meta
+│   │   │   ├── Tilesheet
+│   │   │   ├── Tilesheet.meta
+│   │   │   ├── Vector
+│   │   │   └── Vector.meta
+│   │   ├── kenney_pirate-pack.meta
+│   │   ├── kenney_top-down-tanks
+│   │   │   ├── license.txt
+│   │   │   ├── license.txt.meta
+│   │   │   ├── PNG
+│   │   │   ├── PNG.meta
+│   │   │   ├── preview.png
+│   │   │   ├── preview.png.meta
+│   │   │   ├── sample.png
+│   │   │   ├── sample.png.meta
+│   │   │   ├── Spritesheet
+│   │   │   ├── Spritesheet.meta
+│   │   │   ├── Vector
+│   │   │   └── Vector.meta
+│   │   ├── kenney_top-down-tanks.meta
+│   │   ├── Palettes
+│   │   │   ├── MinimalPalette.prefab
+│   │   │   └── MinimalPalette.prefab.meta
+│   │   ├── Palettes.meta
+│   │   ├── RoadTile.asset
+│   │   ├── RoadTile.asset.meta
+│   │   ├── RoadTile.png
+│   │   ├── RoadTile.png.meta
+│   │   ├── Stylize Tree &Grasses samples
+│   │   │   ├── HDRP
+│   │   │   ├── HDRP.meta
+│   │   │   ├── Material
+│   │   │   ├── Material.meta
+│   │   │   ├── Model
+│   │   │   ├── Model.meta
+│   │   │   ├── Prefab
+│   │   │   ├── Prefab.meta
+│   │   │   ├── Texture
+│   │   │   ├── Texture.meta
+│   │   │   ├── URP
+│   │   │   └── URP.meta
+│   │   └── Stylize Tree &Grasses samples.meta
+│   ├── mapassets.meta
+│   ├── Oode studios
+│   │   ├── Lowpoly nature
+│   │   │   ├── Lowpoly nature - README.pdf
+│   │   │   ├── Lowpoly nature - README.pdf.meta
+│   │   │   ├── Materials
+│   │   │   ├── Materials.meta
+│   │   │   ├── Meshes
+│   │   │   ├── Meshes.meta
+│   │   │   ├── Prefabs
+│   │   │   ├── Prefabs.meta
+│   │   │   ├── SampleSceneProfile.asset
+│   │   │   ├── SampleSceneProfile.asset.meta
+│   │   │   ├── Scenes
+│   │   │   ├── Scenes.meta
+│   │   │   ├── Textures
+│   │   │   ├── Textures.meta
+│   │   │   ├── Water shader
+│   │   │   └── Water shader.meta
+│   │   └── Lowpoly nature.meta
+│   ├── Oode studios.meta
+│   ├── PolygonPilots
+│   │   ├── Campfire
+│   │   │   ├── Art
+│   │   │   ├── Art.meta
+│   │   │   ├── DemoScene
+│   │   │   ├── DemoScene.meta
+│   │   │   ├── Documentary
+│   │   │   ├── Documentary.meta
+│   │   │   ├── Prefabs
+│   │   │   └── Prefabs.meta
+│   │   └── Campfire.meta
+│   ├── PolygonPilots.meta
+│   ├── Shaders
+│   │   ├── BasicWireframe.shader
+│   │   ├── BasicWireframe.shader.meta
+│   │   ├── URPWireframe.shader
+│   │   └── URPWireframe.shader.meta
+│   ├── Shaders.meta
+│   ├── StarterAssets
+│   │   ├── Environment
+│   │   │   ├── Art
+│   │   │   ├── Art.meta
+│   │   │   ├── Prefabs
+│   │   │   ├── Prefabs.meta
+│   │   │   ├── RenderPipelineProfiles
+│   │   │   └── RenderPipelineProfiles.meta
+│   │   ├── Environment.meta
+│   │   ├── InputSystem
+│   │   │   ├── StarterAssets.inputactions
+│   │   │   ├── StarterAssets.inputactions.meta
+│   │   │   ├── StarterAssets.inputsettings.asset
+│   │   │   ├── StarterAssets.inputsettings.asset.meta
+│   │   │   ├── StarterAssetsInputs.cs
+│   │   │   └── StarterAssetsInputs.cs.meta
+│   │   ├── InputSystem.meta
+│   │   ├── license.txt
+│   │   ├── license.txt.meta
+│   │   ├── Mobile
+│   │   │   ├── Prefabs
+│   │   │   ├── Prefabs.meta
+│   │   │   ├── Scripts
+│   │   │   ├── Scripts.meta
+│   │   │   ├── UI
+│   │   │   └── UI.meta
+│   │   ├── Mobile.meta
+│   │   ├── Readme.asset
+│   │   ├── Readme.asset.meta
+│   │   ├── StarterAssets_Documentation_v1.1.pdf
+│   │   ├── StarterAssets_Documentation_v1.1.pdf.meta
+│   │   ├── ThirdPersonController
+│   │   │   ├── Character
+│   │   │   ├── Character.meta
+│   │   │   ├── Prefabs
+│   │   │   ├── Prefabs.meta
+│   │   │   ├── Scenes
+│   │   │   ├── Scenes.meta
+│   │   │   ├── Scripts
+│   │   │   └── Scripts.meta
+│   │   ├── ThirdPersonController.meta
+│   │   ├── TutorialInfo
+│   │   │   ├── Icons
+│   │   │   └── Icons.meta
+│   │   ├── TutorialInfo.meta
+│   │   ├── verzeichnisstruktur.txt
+│   │   └── verzeichnisstruktur.txt.meta
+│   ├── StarterAssets.meta
+│   ├── TextMesh Pro
+│   │   ├── Examples & Extras
+│   │   │   ├── Fonts
+│   │   │   ├── Fonts.meta
+│   │   │   ├── Materials
+│   │   │   ├── Materials.meta
+│   │   │   ├── Prefabs
+│   │   │   ├── Prefabs.meta
+│   │   │   ├── Resources
+│   │   │   ├── Resources.meta
+│   │   │   ├── Scenes
+│   │   │   ├── Scenes.meta
+│   │   │   ├── Scripts
+│   │   │   ├── Scripts.meta
+│   │   │   ├── Sprites
+│   │   │   ├── Sprites.meta
+│   │   │   ├── Textures
+│   │   │   └── Textures.meta
+│   │   ├── Examples & Extras.meta
+│   │   ├── Fonts
+│   │   │   ├── LiberationSans - OFL.txt
+│   │   │   ├── LiberationSans - OFL.txt.meta
+│   │   │   ├── LiberationSans.ttf
+│   │   │   └── LiberationSans.ttf.meta
+│   │   ├── Fonts.meta
+│   │   ├── Resources
+│   │   │   ├── Fonts & Materials
+│   │   │   ├── Fonts & Materials.meta
+│   │   │   ├── LineBreaking Following Characters.txt
+│   │   │   ├── LineBreaking Following Characters.txt.meta
+│   │   │   ├── LineBreaking Leading Characters.txt
+│   │   │   ├── LineBreaking Leading Characters.txt.meta
+│   │   │   ├── Sprite Assets
+│   │   │   ├── Sprite Assets.meta
+│   │   │   ├── Style Sheets
+│   │   │   ├── Style Sheets.meta
+│   │   │   ├── TMP Settings.asset
+│   │   │   └── TMP Settings.asset.meta
+│   │   ├── Resources.meta
+│   │   ├── Shaders
+│   │   │   ├── SDFFunctions.hlsl
+│   │   │   ├── SDFFunctions.hlsl.meta
+│   │   │   ├── TMP_Bitmap-Custom-Atlas.shader
+│   │   │   ├── TMP_Bitmap-Custom-Atlas.shader.meta
+│   │   │   ├── TMP_Bitmap-Mobile.shader
+│   │   │   ├── TMP_Bitmap-Mobile.shader.meta
+│   │   │   ├── TMP_Bitmap.shader
+│   │   │   ├── TMP_Bitmap.shader.meta
+│   │   │   ├── TMP_SDF Overlay.shader
+│   │   │   ├── TMP_SDF Overlay.shader.meta
+│   │   │   ├── TMP_SDF SSD.shader
+│   │   │   ├── TMP_SDF SSD.shader.meta
+│   │   │   ├── TMP_SDF-HDRP LIT.shadergraph
+│   │   │   ├── TMP_SDF-HDRP LIT.shadergraph.meta
+│   │   │   ├── TMP_SDF-HDRP UNLIT.shadergraph
+│   │   │   ├── TMP_SDF-HDRP UNLIT.shadergraph.meta
+│   │   │   ├── TMP_SDF-Mobile Masking.shader
+│   │   │   ├── TMP_SDF-Mobile Masking.shader.meta
+│   │   │   ├── TMP_SDF-Mobile Overlay.shader
+│   │   │   ├── TMP_SDF-Mobile Overlay.shader.meta
+│   │   │   ├── TMP_SDF-Mobile SSD.shader
+│   │   │   ├── TMP_SDF-Mobile SSD.shader.meta
+│   │   │   ├── TMP_SDF-Mobile-2-Pass.shader
+│   │   │   ├── TMP_SDF-Mobile-2-Pass.shader.meta
+│   │   │   ├── TMP_SDF-Mobile.shader
+│   │   │   ├── TMP_SDF-Mobile.shader.meta
+│   │   │   ├── TMP_SDF-Surface-Mobile.shader
+│   │   │   ├── TMP_SDF-Surface-Mobile.shader.meta
+│   │   │   ├── TMP_SDF-Surface.shader
+│   │   │   ├── TMP_SDF-Surface.shader.meta
+│   │   │   ├── TMP_SDF-URP Lit.shadergraph
+│   │   │   ├── TMP_SDF-URP Lit.shadergraph.meta
+│   │   │   ├── TMP_SDF-URP Unlit.shadergraph
+│   │   │   ├── TMP_SDF-URP Unlit.shadergraph.meta
+│   │   │   ├── TMP_SDF.shader
+│   │   │   ├── TMP_SDF.shader.meta
+│   │   │   ├── TMP_Sprite.shader
+│   │   │   ├── TMP_Sprite.shader.meta
+│   │   │   ├── TMPro_Mobile.cginc
+│   │   │   ├── TMPro_Mobile.cginc.meta
+│   │   │   ├── TMPro_Properties.cginc
+│   │   │   ├── TMPro_Properties.cginc.meta
+│   │   │   ├── TMPro_Surface.cginc
+│   │   │   ├── TMPro_Surface.cginc.meta
+│   │   │   ├── TMPro.cginc
+│   │   │   └── TMPro.cginc.meta
+│   │   ├── Shaders.meta
+│   │   ├── Sprites
+│   │   │   ├── EmojiOne Attribution.txt
+│   │   │   ├── EmojiOne Attribution.txt.meta
+│   │   │   ├── EmojiOne.json
+│   │   │   ├── EmojiOne.json.meta
+│   │   │   ├── EmojiOne.png
+│   │   │   └── EmojiOne.png.meta
+│   │   └── Sprites.meta
+│   └── TextMesh Pro.meta
+├── DownloadedPacks.meta
+├── Editor
+│   ├── SceneExporter.cs
+│   └── SceneExporter.cs.meta
+├── Editor.meta
+├── GROUND TILESETS RULE TILES
+│   ├── Ground Tiles V3
+│   └── Ground Tiles V3.meta
+├── GROUND TILESETS RULE TILES.meta
+├── IgniteCoders
+│   ├── Simple Water Shader
+│   │   ├── Demo
+│   │   │   ├── LightingData.asset
+│   │   │   └── LightingData.asset.meta
+│   │   ├── Demo.meta
+│   │   ├── Demo.unity
+│   │   ├── Demo.unity.meta
+│   │   ├── Info
+│   │   │   ├── Icons
+│   │   │   ├── Icons.meta
+│   │   │   ├── Readme.asset
+│   │   │   ├── Readme.asset.meta
+│   │   │   ├── Scripts
+│   │   │   └── Scripts.meta
+│   │   ├── Info.meta
+│   │   ├── Prefabs
+│   │   │   ├── WaterBlock_50m.prefab
+│   │   │   ├── WaterBlock_50m.prefab.meta
+│   │   │   ├── WaterReflectionCamera.prefab
+│   │   │   └── WaterReflectionCamera.prefab.meta
+│   │   ├── Prefabs.meta
+│   │   ├── Resources
+│   │   │   ├── Water_mat_01.mat
+│   │   │   ├── Water_mat_01.mat.meta
+│   │   │   ├── Water_mat_02.mat
+│   │   │   ├── Water_mat_02.mat.meta
+│   │   │   ├── Water_mat_03.mat
+│   │   │   ├── Water_mat_03.mat.meta
+│   │   │   ├── WaterBlock_50m.mesh
+│   │   │   ├── WaterBlock_50m.mesh.meta
+│   │   │   ├── WaterReflection.cs
+│   │   │   ├── WaterReflection.cs.meta
+│   │   │   ├── WaterReflection.renderTexture
+│   │   │   ├── WaterReflection.renderTexture.meta
+│   │   │   ├── WaterShader.shadergraph
+│   │   │   ├── WaterShader.shadergraph.meta
+│   │   │   ├── WaterSurface_atlas.tif
+│   │   │   ├── WaterSurface_atlas.tif.meta
+│   │   │   ├── WaterSurface_single.tif
+│   │   │   └── WaterSurface_single.tif.meta
+│   │   └── Resources.meta
+│   └── Simple Water Shader.meta
+├── IgniteCoders.meta
+├── InputSystem_Actions.inputactions
+├── InputSystem_Actions.inputactions.meta
+├── Materials
+│   ├── FogMaterial.mat
+│   ├── FogMaterial.mat.meta
+│   ├── New Material.mat
+│   ├── New Material.mat.meta
+│   ├── Rio.mat
+│   └── Rio.mat.meta
+├── Materials.meta
+├── MyTryFassst.shader
+├── MyTryFassst.shader.meta
+├── particles 1.prefab
+├── particles 1.prefab.meta
+├── Prefabs
+│   ├── Animals
+│   │   ├── Chicken_brown.prefab
+│   │   ├── Chicken_brown.prefab.meta
+│   │   ├── Chicken_grey_bright.prefab
+│   │   ├── Chicken_grey_bright.prefab.meta
+│   │   ├── Chicken_grey_dark.prefab
+│   │   ├── Chicken_grey_dark.prefab.meta
+│   │   ├── Chicken_special.prefab
+│   │   ├── Chicken_special.prefab.meta
+│   │   ├── Dog_blue_hell.prefab
+│   │   ├── Dog_blue_hell.prefab.meta
+│   │   ├── Dog_forest.prefab
+│   │   ├── Dog_forest.prefab.meta
+│   │   ├── Tiger_001.prefab
+│   │   └── Tiger_001.prefab.meta
+│   ├── Animals.meta
+│   ├── BaseMapManagerObject.prefab
+│   ├── BaseMapManagerObject.prefab.meta
+│   ├── ChunkPrefab.prefab
+│   ├── ChunkPrefab.prefab.meta
+│   ├── Cube.prefab
+│   ├── Cube.prefab.meta
+│   ├── FlowerInteractionUI.prefab
+│   ├── FlowerInteractionUI.prefab.meta
+│   ├── ObjectManagerObject.prefab
+│   ├── ObjectManagerObject.prefab.meta
+│   ├── PreHistWater.prefab
+│   ├── PreHistWater.prefab.meta
+│   ├── Quad.prefab
+│   ├── Quad.prefab.meta
+│   ├── RoadManagerObject.prefab
+│   ├── RoadManagerObject.prefab.meta
+│   ├── TileManagerObject.prefab
+│   ├── TileManagerObject.prefab.meta
+│   ├── WaterBlock_50m.prefab
+│   └── WaterBlock_50m.prefab.meta
+├── Prefabs.meta
+├── SceneExport.json
+├── SceneExport.json.meta
+├── Scenes
+│   ├── AdvancedMap.unity
+│   ├── AdvancedMap.unity.meta
+│   ├── PMOV.unity
+│   ├── PMOV.unity.meta
+│   ├── SampleScene.unity
+│   ├── SampleScene.unity.meta
+│   ├── SO_MAP2.unity
+│   └── SO_MAP2.unity.meta
+├── Scenes.meta
+├── Scripts
+│   ├── BiomeAccessController.cs
+│   ├── BiomeAccessController.cs.meta
+│   ├── CameraFollow.cs
+│   ├── CameraFollow.cs.meta
+│   ├── CreatureHandling
+│   │   ├── BehaviorController.cs
+│   │   ├── BehaviorController.cs.meta
+│   │   ├── Behaviors
+│   │   │   ├── AggressiveCreatureBehavior.cs
+│   │   │   ├── AggressiveCreatureBehavior.cs.meta
+│   │   │   ├── BasicCreatureBehavior.cs
+│   │   │   ├── BasicCreatureBehavior.cs.meta
+│   │   │   ├── CreatureBehavior.cs
+│   │   │   └── CreatureBehavior.cs.meta
+│   │   ├── Behaviors.meta
+│   │   ├── CreatureManager.cs
+│   │   ├── CreatureManager.cs.meta
+│   │   ├── CreatureStats.cs
+│   │   ├── CreatureStats.cs.meta
+│   │   ├── CreatureStatusUI.cs
+│   │   └── CreatureStatusUI.cs.meta
+│   ├── CreatureHandling.meta
+│   ├── FlowerInteraction.cs
+│   ├── FlowerInteraction.cs.meta
+│   ├── Map
+│   │   ├── BaseMapManager.cs
+│   │   ├── BaseMapManager.cs.meta
+│   │   ├── BaseRegion.cs
+│   │   ├── BaseRegion.cs.meta
+│   │   ├── LevelManager.cs
+│   │   ├── LevelManager.cs.meta
+│   │   ├── MapBiomeConfig.cs
+│   │   ├── MapBiomeConfig.cs.meta
+│   │   ├── MapGenerationManager.cs
+│   │   ├── MapGenerationManager.cs.meta
+│   │   ├── ObjectManager.cs
+│   │   ├── ObjectManager.cs.meta
+│   │   ├── RoadManager.cs
+│   │   ├── RoadManager.cs.meta
+│   │   ├── TileManager.cs
+│   │   ├── TileManager.cs.meta
+│   │   ├── WaterManager.cs
+│   │   └── WaterManager.cs.meta
+│   ├── Map.meta
+│   ├── MiniMap
+│   │   ├── MinimapCameraFollow.cs
+│   │   ├── MinimapCameraFollow.cs.meta
+│   │   ├── MinimapController.cs
+│   │   └── MinimapController.cs.meta
+│   ├── MiniMap.meta
+│   ├── ScriptablesAndConfig
+│   │   ├── BiomeCorrupted.asset
+│   │   ├── BiomeCorrupted.asset.meta
+│   │   ├── BiomeDead.asset
+│   │   ├── BiomeDead.asset.meta
+│   │   ├── BiomeDirtyy 1.asset
+│   │   ├── BiomeDirtyy 1.asset.meta
+│   │   ├── BiomeOneNice.asset
+│   │   ├── BiomeOneNice.asset.meta
+│   │   ├── BiomeOneNiceLake.asset
+│   │   ├── BiomeOneNiceLake.asset.meta
+│   │   ├── BiomeOneNiceSwamp.asset
+│   │   ├── BiomeOneNiceSwamp.asset.meta
+│   │   ├── CreatureConfig.cs
+│   │   ├── CreatureConfig.cs.meta
+│   │   ├── FlowerConfig.cs
+│   │   └── FlowerConfig.cs.meta
+│   ├── ScriptablesAndConfig.meta
+│   ├── TestAndDebug
+│   │   ├── DiceController.cs
+│   │   ├── DiceController.cs.meta
+│   │   ├── WallCollisionDebug.cs
+│   │   └── WallCollisionDebug.cs.meta
+│   └── TestAndDebug.meta
+├── Scripts.meta
+├── Settings
+│   ├── Lit2DSceneTemplate.scenetemplate
+│   ├── Lit2DSceneTemplate.scenetemplate.meta
+│   ├── Renderer2D.asset
+│   ├── Renderer2D.asset.meta
+│   ├── Scenes
+│   │   ├── URP2DSceneTemplate.unity
+│   │   └── URP2DSceneTemplate.unity.meta
+│   ├── Scenes.meta
+│   ├── UniversalRP.asset
+│   └── UniversalRP.asset.meta
+├── Settings.meta
+├── SimpleLowPolyNature
+│   ├── Lowpoly Demo Post-processing Profile.asset
+│   ├── Lowpoly Demo Post-processing Profile.asset.meta
+│   ├── Materials
+│   │   ├── CloudMat.mat
+│   │   ├── CloudMat.mat.meta
+│   │   ├── DemoPlaneMat.mat
+│   │   ├── DemoPlaneMat.mat.meta
+│   │   ├── EmissionBlueMat.mat
+│   │   ├── EmissionBlueMat.mat.meta
+│   │   ├── EmissionYellowMat.mat
+│   │   ├── EmissionYellowMat.mat.meta
+│   │   ├── FireParticleAddMat.mat
+│   │   ├── FireParticleAddMat.mat.meta
+│   │   ├── FireParticleMat.mat
+│   │   ├── FireParticleMat.mat.meta
+│   │   ├── Flower1Mat.mat
+│   │   ├── Flower1Mat.mat.meta
+│   │   ├── Flower2Mat.mat
+│   │   ├── Flower2Mat.mat.meta
+│   │   ├── Flower3Mat.mat
+│   │   ├── Flower3Mat.mat.meta
+│   │   ├── Flower4Mat.mat
+│   │   ├── Flower4Mat.mat.meta
+│   │   ├── Mushroom1Mat.mat
+│   │   ├── Mushroom1Mat.mat.meta
+│   │   ├── Mushroom2Mat.mat
+│   │   ├── Mushroom2Mat.mat.meta
+│   │   ├── Mushroom3Mat.mat
+│   │   ├── Mushroom3Mat.mat.meta
+│   │   ├── PlantMat.mat
+│   │   ├── PlantMat.mat.meta
+│   │   ├── RockMat.mat
+│   │   ├── RockMat.mat.meta
+│   │   ├── TreeGreen1Mat.mat
+│   │   ├── TreeGreen1Mat.mat.meta
+│   │   ├── TreeGreen2Mat.mat
+│   │   ├── TreeGreen2Mat.mat.meta
+│   │   ├── TreeOrangeMat.mat
+│   │   ├── TreeOrangeMat.mat.meta
+│   │   ├── TreePinkMat.mat
+│   │   ├── TreePinkMat.mat.meta
+│   │   ├── TreeRedMat.mat
+│   │   ├── TreeRedMat.mat.meta
+│   │   ├── TreeYellowMat.mat
+│   │   ├── TreeYellowMat.mat.meta
+│   │   ├── WaterMat.mat
+│   │   ├── WaterMat.mat.meta
+│   │   ├── Wood1Mat.mat
+│   │   ├── Wood1Mat.mat.meta
+│   │   ├── Wood2Mat.mat
+│   │   └── Wood2Mat.mat.meta
+│   ├── Materials.meta
+│   ├── Models
+│   │   ├── Cloud1.fbx
+│   │   ├── Cloud1.fbx.meta
+│   │   ├── Cloud2.fbx
+│   │   ├── Cloud2.fbx.meta
+│   │   ├── FallenBranch.fbx
+│   │   ├── FallenBranch.fbx.meta
+│   │   ├── FireParticle.fbx
+│   │   ├── FireParticle.fbx.meta
+│   │   ├── FireWood.fbx
+│   │   ├── FireWood.fbx.meta
+│   │   ├── Flower1.fbx
+│   │   ├── Flower1.fbx.meta
+│   │   ├── Flower2.fbx
+│   │   ├── Flower2.fbx.meta
+│   │   ├── Flower3.fbx
+│   │   ├── Flower3.fbx.meta
+│   │   ├── Grass1.fbx
+│   │   ├── Grass1.fbx.meta
+│   │   ├── Grass2.fbx
+│   │   ├── Grass2.fbx.meta
+│   │   ├── Grass3.fbx
+│   │   ├── Grass3.fbx.meta
+│   │   ├── Grass4.fbx
+│   │   ├── Grass4.fbx.meta
+│   │   ├── Ivy1.fbx
+│   │   ├── Ivy1.fbx.meta
+│   │   ├── Ivy2.fbx
+│   │   ├── Ivy2.fbx.meta
+│   │   ├── LightingPlant1.fbx
+│   │   ├── LightingPlant1.fbx.meta
+│   │   ├── LightingPlant2.fbx
+│   │   ├── LightingPlant2.fbx.meta
+│   │   ├── Log.fbx
+│   │   ├── Log.fbx.meta
+│   │   ├── LowpolyTerrain.fbx
+│   │   ├── LowpolyTerrain.fbx.meta
+│   │   ├── Mushroom1.fbx
+│   │   ├── Mushroom1.fbx.meta
+│   │   ├── Mushroom2.fbx
+│   │   ├── Mushroom2.fbx.meta
+│   │   ├── MushroomLarge.fbx
+│   │   ├── MushroomLarge.fbx.meta
+│   │   ├── Paddle.fbx
+│   │   ├── Paddle.fbx.meta
+│   │   ├── Plant1.fbx
+│   │   ├── Plant1.fbx.meta
+│   │   ├── Plant2.fbx
+│   │   ├── Plant2.fbx.meta
+│   │   ├── Plant3.fbx
+│   │   ├── Plant3.fbx.meta
+│   │   ├── Plant4.fbx
+│   │   ├── Plant4.fbx.meta
+│   │   ├── Rock1.fbx
+│   │   ├── Rock1.fbx.meta
+│   │   ├── Rock10.fbx
+│   │   ├── Rock10.fbx.meta
+│   │   ├── Rock11.fbx
+│   │   ├── Rock11.fbx.meta
+│   │   ├── Rock12.fbx
+│   │   ├── Rock12.fbx.meta
+│   │   ├── Rock2.fbx
+│   │   ├── Rock2.fbx.meta
+│   │   ├── Rock3.fbx
+│   │   ├── Rock3.fbx.meta
+│   │   ├── Rock4.fbx
+│   │   ├── Rock4.fbx.meta
+│   │   ├── Rock5.fbx
+│   │   ├── Rock5.fbx.meta
+│   │   ├── Rock6.fbx
+│   │   ├── Rock6.fbx.meta
+│   │   ├── Rock7.fbx
+│   │   ├── Rock7.fbx.meta
+│   │   ├── Rock8.fbx
+│   │   ├── Rock8.fbx.meta
+│   │   ├── Rock9.fbx
+│   │   ├── Rock9.fbx.meta
+│   │   ├── Tent.fbx
+│   │   ├── Tent.fbx.meta
+│   │   ├── Tree1.fbx
+│   │   ├── Tree1.fbx.meta
+│   │   ├── Tree2.fbx
+│   │   ├── Tree2.fbx.meta
+│   │   ├── Tree3.fbx
+│   │   ├── Tree3.fbx.meta
+│   │   ├── TreeDead1.fbx
+│   │   ├── TreeDead1.fbx.meta
+│   │   ├── TreeDead2.fbx
+│   │   ├── TreeDead2.fbx.meta
+│   │   ├── TreeStump1.fbx
+│   │   ├── TreeStump1.fbx.meta
+│   │   ├── WoodBoat.fbx
+│   │   ├── WoodBoat.fbx.meta
+│   │   ├── WoodFence1.fbx
+│   │   ├── WoodFence1.fbx.meta
+│   │   ├── WoodFence2.fbx
+│   │   └── WoodFence2.fbx.meta
+│   ├── Models.meta
+│   ├── Prefabs
+│   │   ├── CampFire.prefab
+│   │   ├── CampFire.prefab.meta
+│   │   ├── Cloud1.prefab
+│   │   ├── Cloud1.prefab.meta
+│   │   ├── Cloud2.prefab
+│   │   ├── Cloud2.prefab.meta
+│   │   ├── Clouds1Layer.prefab
+│   │   ├── Clouds1Layer.prefab.meta
+│   │   ├── Clouds2Layer.prefab
+│   │   ├── Clouds2Layer.prefab.meta
+│   │   ├── FallenBranch.prefab
+│   │   ├── FallenBranch.prefab.meta
+│   │   ├── Flower1.prefab
+│   │   ├── Flower1.prefab.meta
+│   │   ├── Flower2.prefab
+│   │   ├── Flower2.prefab.meta
+│   │   ├── Flower3.prefab
+│   │   ├── Flower3.prefab.meta
+│   │   ├── Flower4.prefab
+│   │   ├── Flower4.prefab.meta
+│   │   ├── Grass1.prefab
+│   │   ├── Grass1.prefab.meta
+│   │   ├── Grass2.prefab
+│   │   ├── Grass2.prefab.meta
+│   │   ├── Grass3.prefab
+│   │   ├── Grass3.prefab.meta
+│   │   ├── Grass4.prefab
+│   │   ├── Grass4.prefab.meta
+│   │   ├── Ivy1.prefab
+│   │   ├── Ivy1.prefab.meta
+│   │   ├── Ivy2.prefab
+│   │   ├── Ivy2.prefab.meta
+│   │   ├── LightingPlant1.prefab
+│   │   ├── LightingPlant1.prefab.meta
+│   │   ├── LightingPlant2.prefab
+│   │   ├── LightingPlant2.prefab.meta
+│   │   ├── Log.prefab
+│   │   ├── Log.prefab.meta
+│   │   ├── Mushroom1.prefab
+│   │   ├── Mushroom1.prefab.meta
+│   │   ├── Mushroom2.prefab
+│   │   ├── Mushroom2.prefab.meta
+│   │   ├── Mushroom3.prefab
+│   │   ├── Mushroom3.prefab.meta
+│   │   ├── MushroomLarge.prefab
+│   │   ├── MushroomLarge.prefab.meta
+│   │   ├── Paddle.prefab
+│   │   ├── Paddle.prefab.meta
+│   │   ├── PlantEx1.prefab
+│   │   ├── PlantEx1.prefab.meta
+│   │   ├── PlantEx2.prefab
+│   │   ├── PlantEx2.prefab.meta
+│   │   ├── PlantEx3.prefab
+│   │   ├── PlantEx3.prefab.meta
+│   │   ├── PlantEx4.prefab
+│   │   ├── PlantEx4.prefab.meta
+│   │   ├── Rock1.prefab
+│   │   ├── Rock1.prefab.meta
+│   │   ├── Rock10.prefab
+│   │   ├── Rock10.prefab.meta
+│   │   ├── Rock11.prefab
+│   │   ├── Rock11.prefab.meta
+│   │   ├── Rock12.prefab
+│   │   ├── Rock12.prefab.meta
+│   │   ├── Rock2.prefab
+│   │   ├── Rock2.prefab.meta
+│   │   ├── Rock3.prefab
+│   │   ├── Rock3.prefab.meta
+│   │   ├── Rock4.prefab
+│   │   ├── Rock4.prefab.meta
+│   │   ├── Rock5.prefab
+│   │   ├── Rock5.prefab.meta
+│   │   ├── Rock6.prefab
+│   │   ├── Rock6.prefab.meta
+│   │   ├── Rock7.prefab
+│   │   ├── Rock7.prefab.meta
+│   │   ├── Rock8.prefab
+│   │   ├── Rock8.prefab.meta
+│   │   ├── Rock9.prefab
+│   │   ├── Rock9.prefab.meta
+│   │   ├── Tent.prefab
+│   │   ├── Tent.prefab.meta
+│   │   ├── Tree1.prefab
+│   │   ├── Tree1.prefab.meta
+│   │   ├── Tree2.prefab
+│   │   ├── Tree2.prefab.meta
+│   │   ├── Tree3.prefab
+│   │   ├── Tree3.prefab.meta
+│   │   ├── TreeDead1.prefab
+│   │   ├── TreeDead1.prefab.meta
+│   │   ├── TreeDead2.prefab
+│   │   ├── TreeDead2.prefab.meta
+│   │   ├── TreePink1.prefab
+│   │   ├── TreePink1.prefab.meta
+│   │   ├── TreePink3.prefab
+│   │   ├── TreePink3.prefab.meta
+│   │   ├── TreeStump.prefab
+│   │   ├── TreeStump.prefab.meta
+│   │   ├── TreeYellow1.prefab
+│   │   ├── TreeYellow1.prefab.meta
+│   │   ├── TreeYellow3.prefab
+│   │   ├── TreeYellow3.prefab.meta
+│   │   ├── Water.prefab
+│   │   ├── Water.prefab.meta
+│   │   ├── WoodBoat.prefab
+│   │   ├── WoodBoat.prefab.meta
+│   │   ├── WoodFence1.prefab
+│   │   ├── WoodFence1.prefab.meta
+│   │   ├── WoodFence2.prefab
+│   │   └── WoodFence2.prefab.meta
+│   ├── Prefabs.meta
+│   ├── Readme.txt
+│   ├── Readme.txt.meta
+│   ├── Scenes
+│   │   ├── DemoDay
+│   │   ├── DemoDay.meta
+│   │   ├── DemoDay.unity
+│   │   ├── DemoDay.unity.meta
+│   │   ├── DemoNight
+│   │   ├── DemoNight.meta
+│   │   ├── DemoNight.unity
+│   │   ├── DemoNight.unity.meta
+│   │   ├── PrefabsScene
+│   │   │   ├── LightingData.asset
+│   │   │   ├── LightingData.asset.meta
+│   │   │   ├── Lightmap-1_comp_dir.png
+│   │   │   ├── Lightmap-1_comp_dir.png.meta
+│   │   │   ├── Lightmap-1_comp_light.exr
+│   │   │   ├── Lightmap-1_comp_light.exr.meta
+│   │   │   ├── ReflectionProbe-0.exr
+│   │   │   └── ReflectionProbe-0.exr.meta
+│   │   ├── PrefabsScene.meta
+│   │   ├── PrefabsScene.unity
+│   │   ├── PrefabsScene.unity.meta
+│   │   ├── SceneDemoAsset
+│   │   │   ├── LowpolyTerrain.prefab
+│   │   │   └── LowpolyTerrain.prefab.meta
+│   │   └── SceneDemoAsset.meta
+│   ├── Scenes.meta
+│   ├── Shaders
+│   │   ├── SimpleWater.shader
+│   │   └── SimpleWater.shader.meta
+│   └── Shaders.meta
+├── SimpleLowPolyNature.meta
+├── Textures
+│   ├── MInimapTexture.renderTexture
+│   └── MInimapTexture.renderTexture.meta
+├── Textures.meta
+├── UniversalRenderPipelineGlobalSettings.asset
+├── UniversalRenderPipelineGlobalSettings.asset.meta
+└── verzeichnisstruktur.txt
+
+148 directories, 862 files
