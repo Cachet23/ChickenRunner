@@ -1,4 +1,4 @@
-# Pixel-Post
+# Chicken Runner
 
 A Unity-based open world exploration game where players explore different biomes, interact with creatures, and discover hidden features.
 
@@ -68,10 +68,3 @@ Assets/
 - Follow the established naming conventions
 - Document any new features or significant changes
 
-## License
-
-[Specify License]
-
-## Credits
-
-[List team members and contributors]
