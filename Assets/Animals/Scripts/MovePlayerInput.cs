@@ -36,6 +36,8 @@ namespace Controller
         private Vector2 m_MouseDelta;
         private float m_Scroll;
 
+        private CreatureStats currentTarget;
+
         private void Awake()
         {
             m_Mover = GetComponent<CreatureMover>();
@@ -82,6 +84,21 @@ namespace Controller
                             }
                         }
                     }
+
+                    // Update target and UI
+                    if (currentTarget != closest)
+                    {
+                        if (currentTarget != null)
+                        {
+                            currentTarget.SetAsTarget(false);
+                        }
+                        currentTarget = closest;
+                        if (currentTarget != null)
+                        {
+                            currentTarget.SetAsTarget(true);
+                        }
+                    }
+
                     if (closest != null)
                     {
                         closest.ModifyHealth(-attackDamage);
@@ -93,6 +110,15 @@ namespace Controller
                 {
                     Debug.Log("Not enough mana to attack.");
                 }
+            }
+        }
+
+        private void OnDestroy()
+        {
+            // Clean up target reference when destroyed
+            if (currentTarget != null)
+            {
+                currentTarget.SetAsTarget(false);
             }
         }
 

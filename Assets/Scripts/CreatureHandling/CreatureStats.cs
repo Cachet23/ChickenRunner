@@ -3,6 +3,11 @@ using System;
 
 public class CreatureStats : MonoBehaviour
 {
+    [Header("UI Settings")]
+    [SerializeField] private GameObject statsUIPrefab;
+    private GameObject activeUI;
+    private bool isTargeted = false;
+
     [Header("Mana Settings")]
     [SerializeField] private float manaRegenPerSecond = 3f; // Regenerate 3 mana per second
     public bool HasEnoughMana(float amount)
@@ -105,5 +110,98 @@ public class CreatureStats : MonoBehaviour
     public void DrainStaminaForSprint()
     {
         ModifyStamina(-staminaDrainPerSecond * Time.deltaTime);
+    }
+
+    public void SetAsTarget(bool targeted)
+    {
+        if (isTargeted != targeted)
+        {
+            isTargeted = targeted;
+            if (isTargeted)
+            {
+                ShowStatsUI();
+            }
+            else
+            {
+                HideStatsUI();
+            }
+        }
+    }
+
+    private void ShowStatsUI()
+    {
+        if (activeUI == null)
+        {
+            activeUI = Instantiate(statsUIPrefab, transform.position, Quaternion.identity);
+            activeUI.transform.SetParent(GameObject.Find("Canvas")?.transform, true);
+
+            // Get references to sliders
+            var sliders = activeUI.GetComponentsInChildren<UnityEngine.UI.Slider>();
+            foreach (var slider in sliders)
+            {
+                switch (slider.name.ToLower())
+                {
+                    case "health":
+                        OnHealthChanged += (value) => slider.value = value;
+                        slider.value = GetHealthPercent();
+                        break;
+                    case "mana":
+                        OnManaChanged += (value) => slider.value = value;
+                        slider.value = GetManaPercent();
+                        break;
+                    case "stamina":
+                        OnStaminaChanged += (value) => slider.value = value;
+                        slider.value = GetStaminaPercent();
+                        break;
+                }
+            }
+        }
+        activeUI.SetActive(true);
+        UpdateUIPosition(); // Initial position update
+    }
+
+    private void HideStatsUI()
+    {
+        if (activeUI != null)
+        {
+            // Remove all event handlers
+            OnHealthChanged = null;
+            OnManaChanged = null;
+            OnStaminaChanged = null;
+            activeUI.SetActive(false);
+        }
+    }
+
+    private void UpdateUIPosition()
+    {
+        if (activeUI != null && Camera.main != null)
+        {
+            Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position + Vector3.up * 0.5f); // Reduziert auf 0.5 Einheiten
+            if (screenPos.z > 0) // Only show UI if creature is in front of camera
+            {
+                activeUI.transform.position = screenPos;
+                activeUI.SetActive(true);
+            }
+            else
+            {
+                activeUI.SetActive(false);
+            }
+        }
+    }
+
+    private void LateUpdate()
+    {
+        if (isTargeted)
+        {
+            UpdateUIPosition();
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (activeUI != null)
+        {
+            Destroy(activeUI);
+        }
     }
 }
