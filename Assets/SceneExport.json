@@ -1,17 +1,1489 @@
 {
     "objects": [
         {
-            "name": "[Debug Updater]",
+            "name": "toe.R_end",
             "tag": "Untagged",
             "layer": "Default",
-            "parent": "None",
-            "prefabType": "Scene Object",
+            "parent": "toe.R",
+            "prefabType": "Prefab Instance",
             "isActive": true,
             "transform": {
                 "position": {
+                    "x": 10.847885131835938,
+                    "y": 0.004626836162060499,
+                    "z": 7.072882175445557
+                },
+                "localPosition": {
+                    "x": 8.658389560878277e-9,
+                    "y": 0.0745219737291336,
+                    "z": 1.862645149230957e-9
+                },
+                "rotation": {
+                    "x": 279.6203918457031,
+                    "y": 165.1340789794922,
+                    "z": 166.5591278076172
+                },
+                "localScale": {
+                    "x": 0.9999999403953552,
+                    "y": 0.9999999403953552,
+                    "z": 0.9999999403953552
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "toe.R",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "foot.R",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.812808990478516,
+                    "y": 0.01673988625407219,
+                    "z": 7.137507915496826
+                },
+                "localPosition": {
+                    "x": -2.852175384759903e-9,
+                    "y": 0.04787154123187065,
+                    "z": -6.984919309616089e-10
+                },
+                "rotation": {
+                    "x": 279.6203918457031,
+                    "y": 165.13409423828126,
+                    "z": 166.55908203125
+                },
+                "localScale": {
+                    "x": 0.9999998211860657,
+                    "y": 0.9999992847442627,
+                    "z": 1.000000238418579
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "foot.R",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "shin.R",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.779773712158204,
+                    "y": 0.02939298003911972,
+                    "z": 7.169760704040527
+                },
+                "localPosition": {
+                    "x": 2.9685907065868379e-9,
+                    "y": 0.049726348370313647,
+                    "z": -2.0954757928848268e-9
+                },
+                "rotation": {
+                    "x": 285.55267333984377,
+                    "y": 124.28269958496094,
+                    "z": 189.6708221435547
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 0.999999463558197,
+                    "z": 0.9999994039535523
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "shin.R",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "thigh.R",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.764059066772461,
+                    "y": 0.07312808930873871,
+                    "z": 7.18745231628418
+                },
+                "localPosition": {
+                    "x": 2.561137080192566e-9,
+                    "y": 0.0857931599020958,
+                    "z": -2.3283064365386964e-9
+                },
+                "rotation": {
+                    "x": 331.7230529785156,
+                    "y": 132.2159881591797,
+                    "z": 182.93165588378907
+                },
+                "localScale": {
+                    "x": 0.9999997019767761,
+                    "y": 1.0000003576278687,
+                    "z": 1.0000003576278687
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "thigh.R",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "spine.002",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.754630088806153,
+                    "y": 0.15819154679775239,
+                    "z": 7.19343376159668
+                },
+                "localPosition": {
+                    "x": -0.07045130431652069,
+                    "y": 0.08126606792211533,
+                    "z": -0.08534067869186402
+                },
+                "rotation": {
+                    "x": 352.6246643066406,
+                    "y": 131.9567413330078,
+                    "z": 178.7606964111328
+                },
+                "localScale": {
+                    "x": 1.000000238418579,
+                    "y": 1.000000238418579,
+                    "z": 0.9999998807907105
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "toe.L_end",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "toe.L",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.848847389221192,
+                    "y": 0.006643391214311123,
+                    "z": 7.312112331390381
+                },
+                "localPosition": {
+                    "x": 4.627509042620659e-9,
+                    "y": 0.0745219886302948,
+                    "z": -1.3242242857813836e-9
+                },
+                "rotation": {
+                    "x": 278.11767578125,
+                    "y": 134.09510803222657,
+                    "z": 163.63214111328126
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 0.9999998807907105,
+                    "z": 0.9999999403953552
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "toe.L",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "foot.L",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.783397674560547,
+                    "y": 0.01673991233110428,
+                    "z": 7.346285820007324
+                },
+                "localPosition": {
+                    "x": 0.0,
+                    "y": 0.04787154495716095,
+                    "z": 3.259629011154175e-9
+                },
+                "rotation": {
+                    "x": 278.1176452636719,
+                    "y": 134.0951385498047,
+                    "z": 163.6321258544922
+                },
+                "localScale": {
+                    "x": 0.9999997615814209,
+                    "y": 1.0000003576278687,
+                    "z": 1.000000238418579
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "foot.L",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "shin.L",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.776885986328125,
+                    "y": 0.06285708397626877,
+                    "z": 7.357353687286377
+                },
+                "localPosition": {
+                    "x": 0.00257303100079298,
+                    "y": 0.04845867678523064,
+                    "z": 0.010855893604457379
+                },
+                "rotation": {
+                    "x": 345.3020324707031,
+                    "y": 129.93238830566407,
+                    "z": 185.1626434326172
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 0.9999998807907105,
+                    "z": 0.9999992251396179
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "shin.L",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "thigh.L",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.803740501403809,
+                    "y": 0.10003061592578888,
+                    "z": 7.3381266593933109
+                },
+                "localPosition": {
+                    "x": 3.958120942115784e-9,
+                    "y": 0.08579341322183609,
+                    "z": -2.0954757928848268e-9
+                },
+                "rotation": {
+                    "x": 53.759151458740237,
+                    "y": 137.21170043945313,
+                    "z": 190.91175842285157
+                },
+                "localScale": {
+                    "x": 0.9999995827674866,
+                    "y": 0.9999998807907105,
+                    "z": 0.999999463558197
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "thigh.L",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "spine.002",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.817193984985352,
+                    "y": 0.18395434319972993,
+                    "z": 7.326450824737549
+                },
+                "localPosition": {
+                    "x": 0.07047509402036667,
+                    "y": 0.04160480201244354,
+                    "z": -0.05638735368847847
+                },
+                "rotation": {
+                    "x": 11.980608940124512,
+                    "y": 132.2583770751953,
+                    "z": 180.27110290527345
+                },
+                "localScale": {
+                    "x": 1.0000001192092896,
+                    "y": 1.0000003576278687,
+                    "z": 0.9999998211860657
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "scull_end",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "scull",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 11.001111030578614,
+                    "y": 0.3712497055530548,
+                    "z": 7.063608169555664
+                },
+                "localPosition": {
+                    "x": -3.725290298461914e-9,
+                    "y": 0.061519376933574679,
+                    "z": -3.434251993894577e-9
+                },
+                "rotation": {
+                    "x": 293.466552734375,
+                    "y": 131.0821990966797,
+                    "z": 176.36546325683595
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 0.9999999403953552,
+                    "z": 0.9999999403953552
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "scull",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "spine.007",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.956097602844239,
+                    "y": 0.39569827914237978,
+                    "z": 7.097677230834961
+                },
+                "localPosition": {
+                    "x": -2.7939677238464357e-9,
+                    "y": 0.04886326938867569,
+                    "z": -3.341119736433029e-8
+                },
+                "rotation": {
+                    "x": 294.2106628417969,
+                    "y": 142.71923828125,
+                    "z": 165.7150421142578
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0000003576278687,
+                    "z": 1.000000238418579
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "spine.007",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "spine.006",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.935545921325684,
+                    "y": 0.356458842754364,
+                    "z": 7.11830472946167
+                },
+                "localPosition": {
+                    "x": 0.0,
+                    "y": 0.04433497041463852,
+                    "z": 2.491287887096405e-8
+                },
+                "rotation": {
+                    "x": 323.78619384765627,
+                    "y": 305.7800598144531,
+                    "z": 5.541053771972656
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 0.9999992251396179,
+                    "z": 0.9999992251396179
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "spine.006",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "spine.005",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.921427726745606,
+                    "y": 0.3173084855079651,
+                    "z": 7.1335859298706059
+                },
+                "localPosition": {
+                    "x": -2.7939677238464357e-9,
+                    "y": 0.05673154816031456,
+                    "z": -1.5366822481155397e-8
+                },
+                "rotation": {
+                    "x": 332.3514709472656,
+                    "y": 307.60052490234377,
+                    "z": 4.518457889556885
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0000001192092896,
+                    "z": 1.000000238418579
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "spine.005",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "spine.004",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.902584075927735,
+                    "y": 0.2677600383758545,
+                    "z": 7.1537933349609379
+                },
+                "localPosition": {
+                    "x": -4.656612873077393e-10,
+                    "y": 0.07203511148691178,
+                    "z": -3.277091309428215e-8
+                },
+                "rotation": {
+                    "x": 331.1166687011719,
+                    "y": 308.5963439941406,
+                    "z": 4.081686973571777
+                },
+                "localScale": {
+                    "x": 0.9999999403953552,
+                    "y": 1.0,
+                    "z": 1.0000001192092896
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Wing.002.R_end",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "Wing.002.R",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.681771278381348,
+                    "y": 0.21466253697872163,
+                    "z": 7.232058525085449
+                },
+                "localPosition": {
+                    "x": 3.725290298461914e-9,
+                    "y": 0.07307472079992295,
+                    "z": -2.0954757928848268e-9
+                },
+                "rotation": {
+                    "x": 75.51206970214844,
+                    "y": 50.24795913696289,
+                    "z": 82.72581481933594
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0000001192092896
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Wing.002.R",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "Wing.001.R",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.721236228942871,
+                    "y": 0.21234779059886933,
+                    "z": 7.170600891113281
+                },
+                "localPosition": {
+                    "x": 9.709037840366364e-8,
+                    "y": 0.07368391752243042,
+                    "z": 2.8812792152166368e-9
+                },
+                "rotation": {
+                    "x": 75.5120620727539,
+                    "y": 50.24794006347656,
+                    "z": 82.72581481933594
+                },
+                "localScale": {
+                    "x": 0.9999999403953552,
+                    "y": 1.000000238418579,
+                    "z": 0.999999463558197
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Wing.001.R",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "Wing.R",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.775335311889649,
+                    "y": 0.21325494349002839,
+                    "z": 7.120582103729248
+                },
+                "localPosition": {
+                    "x": 2.0023435354232789e-8,
+                    "y": 0.10171861201524735,
+                    "z": 5.2619725465774539e-8
+                },
+                "rotation": {
+                    "x": 83.11459350585938,
+                    "y": 48.60812759399414,
+                    "z": 95.89432525634766
+                },
+                "localScale": {
+                    "x": 0.9999995231628418,
+                    "y": 0.9999991655349731,
+                    "z": 0.9999997615814209
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Wing.R",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "shoulder.R",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.8653564453125,
+                    "y": 0.2552574872970581,
+                    "z": 7.098703861236572
+                },
+                "localPosition": {
+                    "x": -0.02474064752459526,
+                    "y": 0.04725779592990875,
+                    "z": 0.024347463622689248
+                },
+                "rotation": {
+                    "x": 64.30894470214844,
+                    "y": 84.1264877319336,
+                    "z": 162.27049255371095
+                },
+                "localScale": {
+                    "x": 1.0000004768371583,
+                    "y": 1.0000005960464478,
+                    "z": 1.0000001192092896
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "shoulder.R",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "spine.004",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.841944694519043,
+                    "y": 0.2573584318161011,
+                    "z": 7.1524224281311039
+                },
+                "localPosition": {
+                    "x": -0.041757576167583469,
+                    "y": 0.02683684043586254,
+                    "z": -0.0008187873754650354
+                },
+                "rotation": {
+                    "x": 298.2383728027344,
+                    "y": 137.34716796875,
+                    "z": 173.4386749267578
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0000003576278687,
+                    "z": 1.000000238418579
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Wing.002.L_end",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "Wing.002.L",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.808588027954102,
+                    "y": 0.22170446813106538,
+                    "z": 7.367502689361572
+                },
+                "localPosition": {
+                    "x": -3.725290298461914e-9,
+                    "y": 0.07307468354701996,
+                    "z": -6.984919309616089e-9
+                },
+                "rotation": {
+                    "x": 84.5567626953125,
+                    "y": 178.05410766601563,
+                    "z": 244.97377014160157
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Wing.002.L",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "Wing.001.L",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.875808715820313,
+                    "y": 0.22463686764240266,
+                    "z": 7.338995456695557
+                },
+                "localPosition": {
+                    "x": 4.784669727087021e-8,
+                    "y": 0.07368393987417221,
+                    "z": 2.60770320892334e-8
+                },
+                "rotation": {
+                    "x": 84.5567626953125,
+                    "y": 178.05435180664063,
+                    "z": 244.97401428222657
+                },
+                "localScale": {
+                    "x": 0.999998927116394,
+                    "y": 1.000000238418579,
+                    "z": 0.999999463558197
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Wing.001.L",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "Wing.L",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.929006576538086,
+                    "y": 0.2271217256784439,
+                    "z": 7.288072109222412
+                },
+                "localPosition": {
+                    "x": -9.633367881178856e-8,
+                    "y": 0.10171864181756973,
+                    "z": 7.29633029550314e-8
+                },
+                "rotation": {
+                    "x": 85.95877075195313,
+                    "y": 72.27708435058594,
+                    "z": 118.58856201171875
+                },
+                "localScale": {
+                    "x": 1.0000003576278687,
+                    "y": 1.0000001192092896,
+                    "z": 1.0000007152557374
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Wing.L",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "shoulder.L",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.951160430908204,
+                    "y": 0.2620440125465393,
+                    "z": 7.195140361785889
+                },
+                "localPosition": {
+                    "x": 0.021004974842071534,
+                    "y": 0.047551412135362628,
+                    "z": 0.024274876341223718
+                },
+                "rotation": {
+                    "x": 69.82495880126953,
+                    "y": 160.77188110351563,
+                    "z": 174.5349884033203
+                },
+                "localScale": {
+                    "x": 0.9999996423721314,
+                    "y": 1.0,
+                    "z": 0.9999991059303284
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "shoulder.L",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "spine.004",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.897269248962403,
+                    "y": 0.26187369227409365,
+                    "z": 7.214820861816406
+                },
+                "localPosition": {
+                    "x": 0.041757579892873767,
+                    "y": 0.026836849749088289,
+                    "z": -0.0008187296334654093
+                },
+                "rotation": {
+                    "x": 298.2383728027344,
+                    "y": 137.3473358154297,
+                    "z": 173.43853759765626
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.000000238418579,
+                    "z": 1.0000003576278687
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "spine.004",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "spine.003",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.849821090698243,
+                    "y": 0.25606608390808108,
+                    "z": 7.201420783996582
+                },
+                "localPosition": {
+                    "x": 1.1641532182693482e-9,
+                    "y": 0.0787092074751854,
+                    "z": 1.2747477740049363e-8
+                },
+                "rotation": {
+                    "x": 279.85198974609377,
+                    "y": 293.3950500488281,
+                    "z": 18.419706344604493
+                },
+                "localScale": {
+                    "x": 0.9999999403953552,
+                    "y": 0.9999995827674866,
+                    "z": 0.999999463558197
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "spine.003",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "spine.002",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.79217529296875,
+                    "y": 0.24329671263694764,
+                    "z": 7.253469467163086
+                },
+                "localPosition": {
+                    "x": -1.1641532182693482e-9,
+                    "y": 0.07803936302661896,
+                    "z": -7.861672202125192e-9
+                },
+                "rotation": {
+                    "x": 279.53619384765627,
+                    "y": 300.23193359375,
+                    "z": 11.687992095947266
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0000003576278687,
+                    "z": 1.000000238418579
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "spine_end",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "spine",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.64859676361084,
+                    "y": 0.3590823709964752,
+                    "z": 7.3806939125061039
+                },
+                "localPosition": {
+                    "x": -1.3969838619232178e-9,
+                    "y": 0.06502928584814072,
+                    "z": -1.1772499419748783e-8
+                },
+                "rotation": {
+                    "x": 309.8785400390625,
+                    "y": 132.635009765625,
+                    "z": 359.0018615722656
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 0.9999998807907105,
+                    "z": 0.9999998807907105
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "spine",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "spine.001",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.68607234954834,
+                    "y": 0.3173944056034088,
+                    "z": 7.347731113433838
+                },
+                "localPosition": {
+                    "x": -2.0954757928848268e-9,
+                    "y": 0.0907551646232605,
+                    "z": -2.1289451979100705e-8
+                },
+                "rotation": {
+                    "x": 309.8785400390625,
+                    "y": 132.635009765625,
+                    "z": 359.0018615722656
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 0.9999997019767761,
+                    "z": 0.9999998807907105
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "spine.001",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "spine.002",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.724278450012207,
+                    "y": 0.2420264333486557,
+                    "z": 7.3146185874938969
+                },
+                "localPosition": {
+                    "x": -1.6298145055770875e-9,
+                    "y": -0.012952988967299462,
+                    "z": 0.008439142256975174
+                },
+                "rotation": {
+                    "x": 326.1531677246094,
+                    "y": 132.29818725585938,
+                    "z": 359.22943115234377
+                },
+                "localScale": {
+                    "x": 0.9999999403953552,
+                    "y": 0.9999998211860657,
+                    "z": 0.9999998807907105
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "spine.002",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "Root",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.7345552444458,
+                    "y": 0.23501062393188477,
+                    "z": 7.305444717407227
+                },
+                "localPosition": {
+                    "x": 9.873517115011055e-9,
+                    "y": 0.23501063883304597,
+                    "z": 0.14912143349647523
+                },
+                "rotation": {
+                    "x": 276.1141662597656,
+                    "y": 307.4962158203125,
+                    "z": 4.529313087463379
+                },
+                "localScale": {
+                    "x": 0.9999999403953552,
+                    "y": 0.9999996423721314,
+                    "z": 0.9999997019767761
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Root",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "Chicken_001_rig",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.84000015258789,
+                    "y": 0.0,
+                    "z": 7.199999809265137
+                },
+                "localPosition": {
                     "x": 0.0,
                     "y": 0.0,
                     "z": 0.0
+                },
+                "rotation": {
+                    "x": 0.000005008961579733295,
+                    "y": 315.0,
+                    "z": 0.000018669335986487567
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Chicken_001_rig",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "Chicken_brown",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.84000015258789,
+                    "y": 0.0,
+                    "z": 7.199999809265137
                 },
                 "localPosition": {
                     "x": 0.0,
@@ -20,7 +1492,53 @@
                 },
                 "rotation": {
                     "x": 0.0,
-                    "y": 0.0,
+                    "y": 135.0,
+                    "z": 0.0
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Chicken_001",
+            "tag": "Untagged",
+            "layer": "Default",
+            "parent": "Chicken_brown",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.84000015258789,
+                    "y": -9.668729150646982e-10,
+                    "z": 7.199999809265137
+                },
+                "localPosition": {
+                    "x": -2.1598878241491094e-9,
+                    "y": -9.668729150646982e-10,
+                    "z": 1.146775008287193e-9
+                },
+                "rotation": {
+                    "x": 0.0,
+                    "y": 135.0,
                     "z": 0.0
                 },
                 "localScale": {
@@ -44,7 +1562,7 @@
             },
             "components": [
                 "Transform",
-                "DebugUpdater"
+                "SkinnedMeshRenderer"
             ]
         },
         {
@@ -103,14 +1621,14 @@
             "isActive": true,
             "transform": {
                 "position": {
-                    "x": 24.04888916015625,
-                    "y": 20.084999084472658,
-                    "z": 29.706104278564454
+                    "x": 0.0,
+                    "y": 10.0,
+                    "z": 60.0
                 },
                 "localPosition": {
-                    "x": 24.04888916015625,
-                    "y": 20.084999084472658,
-                    "z": 29.706104278564454
+                    "x": 0.0,
+                    "y": 10.0,
+                    "z": 60.0
                 },
                 "rotation": {
                     "x": 90.0,
@@ -248,13 +1766,13 @@
             "isActive": true,
             "transform": {
                 "position": {
-                    "x": 766.0,
-                    "y": 569.0,
+                    "x": 737.0,
+                    "y": 625.0,
                     "z": 0.0
                 },
                 "localPosition": {
-                    "x": 433.0,
-                    "y": 279.5,
+                    "x": 418.5,
+                    "y": 307.5,
                     "z": 0.0
                 },
                 "rotation": {
@@ -346,13 +1864,13 @@
             "isActive": true,
             "transform": {
                 "position": {
-                    "x": 333.0,
-                    "y": 289.5,
+                    "x": 318.5,
+                    "y": 317.5,
                     "z": 0.0
                 },
                 "localPosition": {
-                    "x": 333.0,
-                    "y": 289.5,
+                    "x": 318.5,
+                    "y": 317.5,
                     "z": 0.0
                 },
                 "rotation": {
@@ -395,17 +1913,17 @@
             "isActive": true,
             "transform": {
                 "position": {
-                    "x": 24.04888916015625,
-                    "y": 2.3849997520446779,
-                    "z": 27.46610450744629
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
                 },
                 "localPosition": {
-                    "x": 24.04888916015625,
-                    "y": 2.3849997520446779,
-                    "z": 27.46610450744629
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
                 },
                 "rotation": {
-                    "x": 32.80000305175781,
+                    "x": 0.0,
                     "y": 0.0,
                     "z": 0.0
                 },
@@ -447,12 +1965,12 @@
                 "position": {
                     "x": 25.0,
                     "y": 0.0,
-                    "z": -0.009999999776482582
+                    "z": 75.0
                 },
                 "localPosition": {
                     "x": 25.0,
                     "y": 0.0,
-                    "z": -0.009999999776482582
+                    "z": 75.0
                 },
                 "rotation": {
                     "x": 0.0,
@@ -462,7 +1980,7 @@
                 "localScale": {
                     "x": 5.0,
                     "y": 1.0,
-                    "z": 1500.0
+                    "z": 15.0
                 }
             },
             "spriteRenderer": {
@@ -531,6 +2049,54 @@
                 "Transform",
                 "EventSystem",
                 "InputSystemUIInputModule"
+            ]
+        },
+        {
+            "name": "Panel",
+            "tag": "Untagged",
+            "layer": "UI",
+            "parent": "Bars#",
+            "prefabType": "Scene Object",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 318.5,
+                    "y": 317.5,
+                    "z": 0.0
+                },
+                "localPosition": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "RectTransform",
+                "CanvasRenderer",
+                "CreatureStatusUI"
             ]
         },
         {
@@ -679,6 +2245,55 @@
             ]
         },
         {
+            "name": "Bars#",
+            "tag": "Untagged",
+            "layer": "UI",
+            "parent": "None",
+            "prefabType": "Scene Object",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 318.5,
+                    "y": 317.5,
+                    "z": 0.0
+                },
+                "localPosition": {
+                    "x": 318.5,
+                    "y": 317.5,
+                    "z": 0.0
+                },
+                "rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "RectTransform",
+                "Canvas",
+                "CanvasScaler",
+                "GraphicRaycaster"
+            ]
+        },
+        {
             "name": "Grid",
             "tag": "Untagged",
             "layer": "Default",
@@ -724,6 +2339,58 @@
                 "Transform",
                 "Grid",
                 "Tilemap"
+            ]
+        },
+        {
+            "name": "Chicken_brown",
+            "tag": "Dice",
+            "layer": "Default",
+            "parent": "None",
+            "prefabType": "Prefab Instance",
+            "isActive": true,
+            "transform": {
+                "position": {
+                    "x": 10.84000015258789,
+                    "y": 0.0,
+                    "z": 7.199999809265137
+                },
+                "localPosition": {
+                    "x": 10.84000015258789,
+                    "y": 0.0,
+                    "z": 7.199999809265137
+                },
+                "rotation": {
+                    "x": 0.0,
+                    "y": 135.0,
+                    "z": 0.0
+                },
+                "localScale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                }
+            },
+            "spriteRenderer": {
+                "sortingLayerName": "",
+                "sortingOrder": 0,
+                "spritePath": "",
+                "color": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0,
+                    "a": 0.0
+                },
+                "flipX": false,
+                "flipY": false
+            },
+            "components": [
+                "Transform",
+                "CharacterController",
+                "Animator",
+                "CreatureMover",
+                "MovePlayerInput",
+                "SortingGroup",
+                "CreatureStats"
             ]
         },
         {
@@ -779,6 +2446,34 @@
     ],
     "prefabs": [
         {
+            "name": "Water16x16",
+            "path": "Assets/ABKaspo Games Assets/AURW/Mesh/Water16x16.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer"
+            ]
+        },
+        {
+            "name": "Water100x100",
+            "path": "Assets/ABKaspo Games Assets/AURW/Mesh/Water100x100.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer"
+            ]
+        },
+        {
+            "name": "Main Camera",
+            "path": "Assets/ABKaspo Games Assets/Demos/AURW URP/AURW URP Demo/Main Camera.prefab",
+            "components": [
+                "Transform",
+                "AudioListener",
+                "Camera",
+                "UniversalAdditionalCameraData"
+            ]
+        },
+        {
             "name": "Chicken_001",
             "path": "Assets/Animals/Prefabs/Chicken_001.prefab",
             "components": [
@@ -787,54 +2482,6 @@
                 "Animator",
                 "CreatureMover",
                 "MovePlayerInput"
-            ]
-        },
-        {
-            "name": "Chicken_brown",
-            "path": "Assets/Animals/Prefabs/Chicken_brown.prefab",
-            "components": [
-                "Transform",
-                "CharacterController",
-                "Animator",
-                "CreatureMover",
-                "MovePlayerInput",
-                "SortingGroup"
-            ]
-        },
-        {
-            "name": "Chicken_grey_bright",
-            "path": "Assets/Animals/Prefabs/Chicken_grey_bright.prefab",
-            "components": [
-                "Transform",
-                "CharacterController",
-                "Animator",
-                "CreatureMover",
-                "MovePlayerInput",
-                "SortingGroup"
-            ]
-        },
-        {
-            "name": "Chicken_grey_dark",
-            "path": "Assets/Animals/Prefabs/Chicken_grey_dark.prefab",
-            "components": [
-                "Transform",
-                "CharacterController",
-                "Animator",
-                "CreatureMover",
-                "MovePlayerInput",
-                "SortingGroup"
-            ]
-        },
-        {
-            "name": "Chicken_special",
-            "path": "Assets/Animals/Prefabs/Chicken_special.prefab",
-            "components": [
-                "Transform",
-                "CharacterController",
-                "Animator",
-                "CreatureMover",
-                "MovePlayerInput",
-                "SortingGroup"
             ]
         },
         {
@@ -851,30 +2498,6 @@
         {
             "name": "Dog_001",
             "path": "Assets/Animals/Prefabs/Dog_001.prefab",
-            "components": [
-                "Transform",
-                "CharacterController",
-                "Animator",
-                "CreatureMover",
-                "SortingGroup",
-                "BasicCreatureBehavior"
-            ]
-        },
-        {
-            "name": "Dog_blue_hell",
-            "path": "Assets/Animals/Prefabs/Dog_blue_hell.prefab",
-            "components": [
-                "Transform",
-                "CharacterController",
-                "Animator",
-                "CreatureMover",
-                "SortingGroup",
-                "BasicCreatureBehavior"
-            ]
-        },
-        {
-            "name": "Dog_forest",
-            "path": "Assets/Animals/Prefabs/Dog_forest.prefab",
             "components": [
                 "Transform",
                 "CharacterController",
@@ -918,26 +2541,15 @@
             ]
         },
         {
-            "name": "Tiger_001",
-            "path": "Assets/Animals/Prefabs/Tiger_001.prefab",
-            "components": [
-                "Transform",
-                "CharacterController",
-                "Animator",
-                "CreatureMover",
-                "SortingGroup"
-            ]
-        },
-        {
             "name": "Rio",
-            "path": "Assets/LowpolyCharacterRio/Prefabs/Rio.prefab",
+            "path": "Assets/DownloadedPacks/LowpolyCharacterRio/Prefabs/Rio.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "background",
-            "path": "Assets/mapassets/2DPixelFantasyTilemapFree/TilePalettes/background.prefab",
+            "path": "Assets/DownloadedPacks/mapassets/2DPixelFantasyTilemapFree/TilePalettes/background.prefab",
             "components": [
                 "Transform",
                 "Grid"
@@ -945,7 +2557,7 @@
         },
         {
             "name": "NewGrassAndDirt",
-            "path": "Assets/mapassets/Handpainted_Grass_and_Ground_Textures/NewGrassAndDirt.prefab",
+            "path": "Assets/DownloadedPacks/mapassets/Handpainted_Grass_and_Ground_Textures/NewGrassAndDirt.prefab",
             "components": [
                 "Transform",
                 "Grid"
@@ -953,7 +2565,7 @@
         },
         {
             "name": "MinimalPalette",
-            "path": "Assets/mapassets/Palettes/MinimalPalette.prefab",
+            "path": "Assets/DownloadedPacks/mapassets/Palettes/MinimalPalette.prefab",
             "components": [
                 "Transform",
                 "Grid"
@@ -961,70 +2573,70 @@
         },
         {
             "name": "low grass",
-            "path": "Assets/mapassets/Stylize Tree &Grasses samples/HDRP/prefab/low grass.prefab",
+            "path": "Assets/DownloadedPacks/mapassets/Stylize Tree &Grasses samples/HDRP/prefab/low grass.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "tall grass",
-            "path": "Assets/mapassets/Stylize Tree &Grasses samples/HDRP/prefab/tall grass.prefab",
+            "path": "Assets/DownloadedPacks/mapassets/Stylize Tree &Grasses samples/HDRP/prefab/tall grass.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "tree 1",
-            "path": "Assets/mapassets/Stylize Tree &Grasses samples/HDRP/prefab/tree 1.prefab",
+            "path": "Assets/DownloadedPacks/mapassets/Stylize Tree &Grasses samples/HDRP/prefab/tree 1.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "tree",
-            "path": "Assets/mapassets/Stylize Tree &Grasses samples/HDRP/prefab/tree.prefab",
+            "path": "Assets/DownloadedPacks/mapassets/Stylize Tree &Grasses samples/HDRP/prefab/tree.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "low grass",
-            "path": "Assets/mapassets/Stylize Tree &Grasses samples/Prefab/low grass.prefab",
+            "path": "Assets/DownloadedPacks/mapassets/Stylize Tree &Grasses samples/Prefab/low grass.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "tall grass",
-            "path": "Assets/mapassets/Stylize Tree &Grasses samples/Prefab/tall grass.prefab",
+            "path": "Assets/DownloadedPacks/mapassets/Stylize Tree &Grasses samples/Prefab/tall grass.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "tree 1",
-            "path": "Assets/mapassets/Stylize Tree &Grasses samples/Prefab/tree 1.prefab",
+            "path": "Assets/DownloadedPacks/mapassets/Stylize Tree &Grasses samples/Prefab/tree 1.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "tree",
-            "path": "Assets/mapassets/Stylize Tree &Grasses samples/Prefab/tree.prefab",
+            "path": "Assets/DownloadedPacks/mapassets/Stylize Tree &Grasses samples/Prefab/tree.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "low grass",
-            "path": "Assets/mapassets/Stylize Tree &Grasses samples/URP/prefab/low grass.prefab",
+            "path": "Assets/DownloadedPacks/mapassets/Stylize Tree &Grasses samples/URP/prefab/low grass.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "Oak 1",
-            "path": "Assets/mapassets/Stylize Tree &Grasses samples/URP/prefab/Oak 1.prefab",
+            "path": "Assets/DownloadedPacks/mapassets/Stylize Tree &Grasses samples/URP/prefab/Oak 1.prefab",
             "components": [
                 "Transform",
                 "LODGroup"
@@ -1032,7 +2644,7 @@
         },
         {
             "name": "Oak",
-            "path": "Assets/mapassets/Stylize Tree &Grasses samples/URP/prefab/Oak.prefab",
+            "path": "Assets/DownloadedPacks/mapassets/Stylize Tree &Grasses samples/URP/prefab/Oak.prefab",
             "components": [
                 "Transform",
                 "LODGroup"
@@ -1040,105 +2652,105 @@
         },
         {
             "name": "tall grass",
-            "path": "Assets/mapassets/Stylize Tree &Grasses samples/URP/prefab/tall grass.prefab",
+            "path": "Assets/DownloadedPacks/mapassets/Stylize Tree &Grasses samples/URP/prefab/tall grass.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "tree 1",
-            "path": "Assets/mapassets/Stylize Tree &Grasses samples/URP/prefab/tree 1.prefab",
+            "path": "Assets/DownloadedPacks/mapassets/Stylize Tree &Grasses samples/URP/prefab/tree 1.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "tree",
-            "path": "Assets/mapassets/Stylize Tree &Grasses samples/URP/prefab/tree.prefab",
+            "path": "Assets/DownloadedPacks/mapassets/Stylize Tree &Grasses samples/URP/prefab/tree.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "Bridge",
-            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Bridges/Bridge.prefab",
+            "path": "Assets/DownloadedPacks/Oode studios/Lowpoly nature/Prefabs/Bridges/Bridge.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "Broken bridge",
-            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Bridges/Broken bridge.prefab",
+            "path": "Assets/DownloadedPacks/Oode studios/Lowpoly nature/Prefabs/Bridges/Broken bridge.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "Camp fire",
-            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Camp fire/Camp fire.prefab",
+            "path": "Assets/DownloadedPacks/Oode studios/Lowpoly nature/Prefabs/Camp fire/Camp fire.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "Cliff 001",
-            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Cliffs/Cliff 001.prefab",
+            "path": "Assets/DownloadedPacks/Oode studios/Lowpoly nature/Prefabs/Cliffs/Cliff 001.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "Cliff 002",
-            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Cliffs/Cliff 002.prefab",
+            "path": "Assets/DownloadedPacks/Oode studios/Lowpoly nature/Prefabs/Cliffs/Cliff 002.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "Dead tree 001",
-            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Dead trees/Dead tree 001.prefab",
+            "path": "Assets/DownloadedPacks/Oode studios/Lowpoly nature/Prefabs/Dead trees/Dead tree 001.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "Dead tree 002",
-            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Dead trees/Dead tree 002.prefab",
+            "path": "Assets/DownloadedPacks/Oode studios/Lowpoly nature/Prefabs/Dead trees/Dead tree 002.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "Dead tree 003",
-            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Dead trees/Dead tree 003.prefab",
+            "path": "Assets/DownloadedPacks/Oode studios/Lowpoly nature/Prefabs/Dead trees/Dead tree 003.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "Dead tree 004",
-            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Dead trees/Dead tree 004.prefab",
+            "path": "Assets/DownloadedPacks/Oode studios/Lowpoly nature/Prefabs/Dead trees/Dead tree 004.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "Broken fence",
-            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Fences/Broken fence.prefab",
+            "path": "Assets/DownloadedPacks/Oode studios/Lowpoly nature/Prefabs/Fences/Broken fence.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "Fence",
-            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Fences/Fence.prefab",
+            "path": "Assets/DownloadedPacks/Oode studios/Lowpoly nature/Prefabs/Fences/Fence.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "Fire_PSys",
-            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Fire PS/Fire_PSys.prefab",
+            "path": "Assets/DownloadedPacks/Oode studios/Lowpoly nature/Prefabs/Fire PS/Fire_PSys.prefab",
             "components": [
                 "Transform",
                 "ParticleSystem",
@@ -1147,7 +2759,7 @@
         },
         {
             "name": "Flower 001",
-            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Flowers/Flower 001.prefab",
+            "path": "Assets/DownloadedPacks/Oode studios/Lowpoly nature/Prefabs/Flowers/Flower 001.prefab",
             "components": [
                 "Transform",
                 "SortingGroup",
@@ -1156,7 +2768,7 @@
         },
         {
             "name": "Flower 002",
-            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Flowers/Flower 002.prefab",
+            "path": "Assets/DownloadedPacks/Oode studios/Lowpoly nature/Prefabs/Flowers/Flower 002.prefab",
             "components": [
                 "Transform",
                 "SortingGroup",
@@ -1165,7 +2777,7 @@
         },
         {
             "name": "Flower 003",
-            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Flowers/Flower 003.prefab",
+            "path": "Assets/DownloadedPacks/Oode studios/Lowpoly nature/Prefabs/Flowers/Flower 003.prefab",
             "components": [
                 "Transform",
                 "SortingGroup",
@@ -1174,168 +2786,168 @@
         },
         {
             "name": "Grass 001",
-            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Grass/Grass 001.prefab",
+            "path": "Assets/DownloadedPacks/Oode studios/Lowpoly nature/Prefabs/Grass/Grass 001.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "Grass 002",
-            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Grass/Grass 002.prefab",
+            "path": "Assets/DownloadedPacks/Oode studios/Lowpoly nature/Prefabs/Grass/Grass 002.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "Grass 003",
-            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Grass/Grass 003.prefab",
+            "path": "Assets/DownloadedPacks/Oode studios/Lowpoly nature/Prefabs/Grass/Grass 003.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "Grass 004",
-            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Grass/Grass 004.prefab",
+            "path": "Assets/DownloadedPacks/Oode studios/Lowpoly nature/Prefabs/Grass/Grass 004.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "Mashroom 001",
-            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Mashrooms/Mashroom 001.prefab",
+            "path": "Assets/DownloadedPacks/Oode studios/Lowpoly nature/Prefabs/Mashrooms/Mashroom 001.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "Mashroom 002",
-            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Mashrooms/Mashroom 002.prefab",
+            "path": "Assets/DownloadedPacks/Oode studios/Lowpoly nature/Prefabs/Mashrooms/Mashroom 002.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "Mashroom 003",
-            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Mashrooms/Mashroom 003.prefab",
+            "path": "Assets/DownloadedPacks/Oode studios/Lowpoly nature/Prefabs/Mashrooms/Mashroom 003.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "Mashroom 004",
-            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Mashrooms/Mashroom 004.prefab",
+            "path": "Assets/DownloadedPacks/Oode studios/Lowpoly nature/Prefabs/Mashrooms/Mashroom 004.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "Pine tree 001",
-            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Pine trees/Pine tree 001.prefab",
+            "path": "Assets/DownloadedPacks/Oode studios/Lowpoly nature/Prefabs/Pine trees/Pine tree 001.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "Pine tree 002",
-            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Pine trees/Pine tree 002.prefab",
+            "path": "Assets/DownloadedPacks/Oode studios/Lowpoly nature/Prefabs/Pine trees/Pine tree 002.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "Pine tree 003",
-            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Pine trees/Pine tree 003.prefab",
+            "path": "Assets/DownloadedPacks/Oode studios/Lowpoly nature/Prefabs/Pine trees/Pine tree 003.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "Pine tree 004",
-            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Pine trees/Pine tree 004.prefab",
+            "path": "Assets/DownloadedPacks/Oode studios/Lowpoly nature/Prefabs/Pine trees/Pine tree 004.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "Pine tree 005",
-            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Pine trees/Pine tree 005.prefab",
+            "path": "Assets/DownloadedPacks/Oode studios/Lowpoly nature/Prefabs/Pine trees/Pine tree 005.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "Rock 001",
-            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Rocks/Rock 001.prefab",
+            "path": "Assets/DownloadedPacks/Oode studios/Lowpoly nature/Prefabs/Rocks/Rock 001.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "Rock 002",
-            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Rocks/Rock 002.prefab",
+            "path": "Assets/DownloadedPacks/Oode studios/Lowpoly nature/Prefabs/Rocks/Rock 002.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "Rock 003",
-            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Rocks/Rock 003.prefab",
+            "path": "Assets/DownloadedPacks/Oode studios/Lowpoly nature/Prefabs/Rocks/Rock 003.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "Rock 004",
-            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Rocks/Rock 004.prefab",
+            "path": "Assets/DownloadedPacks/Oode studios/Lowpoly nature/Prefabs/Rocks/Rock 004.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "Rock 005",
-            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Rocks/Rock 005.prefab",
+            "path": "Assets/DownloadedPacks/Oode studios/Lowpoly nature/Prefabs/Rocks/Rock 005.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "Rock 006",
-            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Rocks/Rock 006.prefab",
+            "path": "Assets/DownloadedPacks/Oode studios/Lowpoly nature/Prefabs/Rocks/Rock 006.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "Rock 007",
-            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Rocks/Rock 007.prefab",
+            "path": "Assets/DownloadedPacks/Oode studios/Lowpoly nature/Prefabs/Rocks/Rock 007.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "Rock 008",
-            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Rocks/Rock 008.prefab",
+            "path": "Assets/DownloadedPacks/Oode studios/Lowpoly nature/Prefabs/Rocks/Rock 008.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "Rock 009",
-            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Rocks/Rock 009.prefab",
+            "path": "Assets/DownloadedPacks/Oode studios/Lowpoly nature/Prefabs/Rocks/Rock 009.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "Rock 010",
-            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Rocks/Rock 010.prefab",
+            "path": "Assets/DownloadedPacks/Oode studios/Lowpoly nature/Prefabs/Rocks/Rock 010.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "Plane",
-            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Terrain/Plane.prefab",
+            "path": "Assets/DownloadedPacks/Oode studios/Lowpoly nature/Prefabs/Terrain/Plane.prefab",
             "components": [
                 "Transform",
                 "MeshFilter",
@@ -1345,54 +2957,347 @@
         },
         {
             "name": "terrain",
-            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Terrain/terrain.prefab",
+            "path": "Assets/DownloadedPacks/Oode studios/Lowpoly nature/Prefabs/Terrain/terrain.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "Tree 001",
-            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Trees/Tree 001.prefab",
+            "path": "Assets/DownloadedPacks/Oode studios/Lowpoly nature/Prefabs/Trees/Tree 001.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "Tree 002",
-            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Trees/Tree 002.prefab",
+            "path": "Assets/DownloadedPacks/Oode studios/Lowpoly nature/Prefabs/Trees/Tree 002.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "Tree 003",
-            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Trees/Tree 003.prefab",
+            "path": "Assets/DownloadedPacks/Oode studios/Lowpoly nature/Prefabs/Trees/Tree 003.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "Trunk 001",
-            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Trunks/Trunk 001.prefab",
+            "path": "Assets/DownloadedPacks/Oode studios/Lowpoly nature/Prefabs/Trunks/Trunk 001.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "Trunk 002",
-            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Trunks/Trunk 002.prefab",
+            "path": "Assets/DownloadedPacks/Oode studios/Lowpoly nature/Prefabs/Trunks/Trunk 002.prefab",
             "components": [
                 "Transform"
             ]
         },
         {
             "name": "Water",
-            "path": "Assets/Oode studios/Lowpoly nature/Prefabs/Water/Water.prefab",
+            "path": "Assets/DownloadedPacks/Oode studios/Lowpoly nature/Prefabs/Water/Water.prefab",
             "components": [
                 "Transform",
                 "MeshFilter",
                 "MeshRenderer",
                 "MeshCollider"
+            ]
+        },
+        {
+            "name": "CampFire",
+            "path": "Assets/DownloadedPacks/PolygonPilots/Campfire/Prefabs/CampFire.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Box_100x100x100_Prefab",
+            "path": "Assets/DownloadedPacks/StarterAssets/Environment/Prefabs/Box_100x100x100_Prefab.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer",
+                "BoxCollider"
+            ]
+        },
+        {
+            "name": "Box_350x250x200_Prefab",
+            "path": "Assets/DownloadedPacks/StarterAssets/Environment/Prefabs/Box_350x250x200_Prefab.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer",
+                "BoxCollider"
+            ]
+        },
+        {
+            "name": "Box_350x250x300_Prefab",
+            "path": "Assets/DownloadedPacks/StarterAssets/Environment/Prefabs/Box_350x250x300_Prefab.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer",
+                "BoxCollider"
+            ]
+        },
+        {
+            "name": "Environment_Prefab",
+            "path": "Assets/DownloadedPacks/StarterAssets/Environment/Prefabs/Environment_Prefab.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "Ramp_Prefab",
+            "path": "Assets/DownloadedPacks/StarterAssets/Environment/Prefabs/Ramp_Prefab.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer",
+                "MeshCollider"
+            ]
+        },
+        {
+            "name": "Stairs_200x100x200_Prefab",
+            "path": "Assets/DownloadedPacks/StarterAssets/Environment/Prefabs/Stairs_200x100x200_Prefab.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer",
+                "MeshCollider"
+            ]
+        },
+        {
+            "name": "Stairs_650_400_300_Prefab",
+            "path": "Assets/DownloadedPacks/StarterAssets/Environment/Prefabs/Stairs_650_400_300_Prefab.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer",
+                "MeshCollider"
+            ]
+        },
+        {
+            "name": "Structure_Prefab",
+            "path": "Assets/DownloadedPacks/StarterAssets/Environment/Prefabs/Structure_Prefab.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer",
+                "MeshCollider"
+            ]
+        },
+        {
+            "name": "Tunnel_Prefab",
+            "path": "Assets/DownloadedPacks/StarterAssets/Environment/Prefabs/Tunnel_Prefab.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer",
+                "BoxCollider",
+                "BoxCollider",
+                "BoxCollider"
+            ]
+        },
+        {
+            "name": "Wall_Prefab",
+            "path": "Assets/DownloadedPacks/StarterAssets/Environment/Prefabs/Wall_Prefab.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer",
+                "BoxCollider",
+                "BoxCollider"
+            ]
+        },
+        {
+            "name": "UI_Canvas_StarterAssetsInputs_Joysticks",
+            "path": "Assets/DownloadedPacks/StarterAssets/Mobile/Prefabs/CanvasInputs/UI_Canvas_StarterAssetsInputs_Joysticks.prefab",
+            "components": [
+                "RectTransform",
+                "Canvas",
+                "CanvasScaler",
+                "GraphicRaycaster",
+                "UICanvasControllerInput",
+                "MobileDisableAutoSwitchControls"
+            ]
+        },
+        {
+            "name": "UI_Canvas_StarterAssetsInputs_TouchZones",
+            "path": "Assets/DownloadedPacks/StarterAssets/Mobile/Prefabs/CanvasInputs/UI_Canvas_StarterAssetsInputs_TouchZones.prefab",
+            "components": [
+                "RectTransform",
+                "Canvas",
+                "CanvasScaler",
+                "GraphicRaycaster",
+                "UICanvasControllerInput",
+                "MobileDisableAutoSwitchControls"
+            ]
+        },
+        {
+            "name": "UI_EventSystem",
+            "path": "Assets/DownloadedPacks/StarterAssets/Mobile/Prefabs/EventSystem/UI_EventSystem.prefab",
+            "components": [
+                "Transform",
+                "EventSystem",
+                "InputSystemUIInputModule"
+            ]
+        },
+        {
+            "name": "UI_Virtual_Button",
+            "path": "Assets/DownloadedPacks/StarterAssets/Mobile/Prefabs/VirtualInputs/UI_Virtual_Button.prefab",
+            "components": [
+                "RectTransform",
+                "CanvasRenderer",
+                "Image",
+                "Button",
+                "UIVirtualButton"
+            ]
+        },
+        {
+            "name": "UI_Virtual_Joystick",
+            "path": "Assets/DownloadedPacks/StarterAssets/Mobile/Prefabs/VirtualInputs/UI_Virtual_Joystick.prefab",
+            "components": [
+                "RectTransform",
+                "CanvasRenderer",
+                "Image",
+                "UIVirtualJoystick"
+            ]
+        },
+        {
+            "name": "UI_Virtual_TouchZone",
+            "path": "Assets/DownloadedPacks/StarterAssets/Mobile/Prefabs/VirtualInputs/UI_Virtual_TouchZone.prefab",
+            "components": [
+                "RectTransform",
+                "CanvasRenderer",
+                "Image",
+                "UIVirtualTouchZone"
+            ]
+        },
+        {
+            "name": "MainCamera",
+            "path": "Assets/DownloadedPacks/StarterAssets/ThirdPersonController/Prefabs/MainCamera.prefab",
+            "components": [
+                "Transform",
+                "Camera",
+                "AudioListener",
+                "CinemachineBrain"
+            ]
+        },
+        {
+            "name": "NestedParentArmature_Unpack",
+            "path": "Assets/DownloadedPacks/StarterAssets/ThirdPersonController/Prefabs/NestedParentArmature_Unpack.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "NestedParentCapsule_Unpack",
+            "path": "Assets/DownloadedPacks/StarterAssets/ThirdPersonController/Prefabs/NestedParentCapsule_Unpack.prefab",
+            "components": [
+                "Transform"
+            ]
+        },
+        {
+            "name": "PlayerArmature",
+            "path": "Assets/DownloadedPacks/StarterAssets/ThirdPersonController/Prefabs/PlayerArmature.prefab",
+            "components": [
+                "Transform",
+                "Animator",
+                "CharacterController",
+                "ThirdPersonController",
+                "BasicRigidBodyPush",
+                "StarterAssetsInputs",
+                "PlayerInput"
+            ]
+        },
+        {
+            "name": "PlayerCapsule 1",
+            "path": "Assets/DownloadedPacks/StarterAssets/ThirdPersonController/Prefabs/PlayerCapsule 1.prefab",
+            "components": [
+                "Transform",
+                "CharacterController",
+                "ThirdPersonController",
+                "BasicRigidBodyPush",
+                "PlayerInput",
+                "StarterAssetsInputs"
+            ]
+        },
+        {
+            "name": "PlayerCapsule",
+            "path": "Assets/DownloadedPacks/StarterAssets/ThirdPersonController/Prefabs/PlayerCapsule.prefab",
+            "components": [
+                "Transform",
+                "CharacterController",
+                "ThirdPersonController",
+                "BasicRigidBodyPush",
+                "PlayerInput",
+                "StarterAssetsInputs"
+            ]
+        },
+        {
+            "name": "PlayerFollowCamera",
+            "path": "Assets/DownloadedPacks/StarterAssets/ThirdPersonController/Prefabs/PlayerFollowCamera.prefab",
+            "components": [
+                "Transform",
+                "CinemachineVirtualCamera"
+            ]
+        },
+        {
+            "name": "Text Popup",
+            "path": "Assets/DownloadedPacks/TextMesh Pro/Examples & Extras/Prefabs/Text Popup.prefab",
+            "components": [
+                "RectTransform",
+                "CanvasRenderer",
+                "Image",
+                "VerticalLayoutGroup",
+                "ContentSizeFitter",
+                "CanvasGroup"
+            ]
+        },
+        {
+            "name": "TextMeshPro - Prefab 1",
+            "path": "Assets/DownloadedPacks/TextMesh Pro/Examples & Extras/Prefabs/TextMeshPro - Prefab 1.prefab",
+            "components": [
+                "RectTransform",
+                "MeshFilter",
+                "MeshRenderer",
+                "TextMeshPro",
+                "CanvasRenderer"
+            ]
+        },
+        {
+            "name": "TextMeshPro - Prefab 2",
+            "path": "Assets/DownloadedPacks/TextMesh Pro/Examples & Extras/Prefabs/TextMeshPro - Prefab 2.prefab",
+            "components": [
+                "RectTransform",
+                "MeshFilter",
+                "MeshRenderer",
+                "TextMeshPro",
+                "CanvasRenderer"
+            ]
+        },
+        {
+            "name": "WaterBlock_50m",
+            "path": "Assets/IgniteCoders/Simple Water Shader/Prefabs/WaterBlock_50m.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer"
+            ]
+        },
+        {
+            "name": "WaterReflectionCamera",
+            "path": "Assets/IgniteCoders/Simple Water Shader/Prefabs/WaterReflectionCamera.prefab",
+            "components": [
+                "Transform",
+                "Camera",
+                "UniversalAdditionalCameraData",
+                "WaterReflection"
             ]
         },
         {
@@ -1405,10 +3310,86 @@
             ]
         },
         {
-            "name": "CampFire",
-            "path": "Assets/PolygonPilots/Campfire/Prefabs/CampFire.prefab",
+            "name": "Chicken_brown",
+            "path": "Assets/Prefabs/Animals/Chicken_brown.prefab",
             "components": [
-                "Transform"
+                "Transform",
+                "CharacterController",
+                "Animator",
+                "CreatureMover",
+                "MovePlayerInput",
+                "SortingGroup"
+            ]
+        },
+        {
+            "name": "Chicken_grey_bright",
+            "path": "Assets/Prefabs/Animals/Chicken_grey_bright.prefab",
+            "components": [
+                "Transform",
+                "CharacterController",
+                "Animator",
+                "CreatureMover",
+                "MovePlayerInput",
+                "SortingGroup"
+            ]
+        },
+        {
+            "name": "Chicken_grey_dark",
+            "path": "Assets/Prefabs/Animals/Chicken_grey_dark.prefab",
+            "components": [
+                "Transform",
+                "CharacterController",
+                "Animator",
+                "CreatureMover",
+                "MovePlayerInput",
+                "SortingGroup"
+            ]
+        },
+        {
+            "name": "Chicken_special",
+            "path": "Assets/Prefabs/Animals/Chicken_special.prefab",
+            "components": [
+                "Transform",
+                "CharacterController",
+                "Animator",
+                "CreatureMover",
+                "MovePlayerInput",
+                "SortingGroup"
+            ]
+        },
+        {
+            "name": "Dog_blue_hell",
+            "path": "Assets/Prefabs/Animals/Dog_blue_hell.prefab",
+            "components": [
+                "Transform",
+                "CharacterController",
+                "Animator",
+                "CreatureMover",
+                "SortingGroup",
+                "BehaviorController"
+            ]
+        },
+        {
+            "name": "Dog_forest",
+            "path": "Assets/Prefabs/Animals/Dog_forest.prefab",
+            "components": [
+                "Transform",
+                "CharacterController",
+                "Animator",
+                "CreatureMover",
+                "SortingGroup",
+                "BehaviorController"
+            ]
+        },
+        {
+            "name": "Tiger_001",
+            "path": "Assets/Prefabs/Animals/Tiger_001.prefab",
+            "components": [
+                "Transform",
+                "CharacterController",
+                "Animator",
+                "CreatureMover",
+                "SortingGroup"
             ]
         },
         {
@@ -1457,6 +3438,16 @@
             ]
         },
         {
+            "name": "PreHistWater",
+            "path": "Assets/Prefabs/PreHistWater.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer",
+                "SortingGroup"
+            ]
+        },
+        {
             "name": "Quad",
             "path": "Assets/Prefabs/Quad.prefab",
             "components": [
@@ -1483,45 +3474,218 @@
             ]
         },
         {
-            "name": "Box_100x100x100_Prefab",
-            "path": "Assets/StarterAssets/Environment/Prefabs/Box_100x100x100_Prefab.prefab",
+            "name": "WaterBlock_50m",
+            "path": "Assets/Prefabs/WaterBlock_50m.prefab",
             "components": [
                 "Transform",
                 "MeshFilter",
                 "MeshRenderer",
-                "BoxCollider"
+                "SortingGroup"
             ]
         },
         {
-            "name": "Box_350x250x200_Prefab",
-            "path": "Assets/StarterAssets/Environment/Prefabs/Box_350x250x200_Prefab.prefab",
+            "name": "CampFire",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/CampFire.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer"
+            ]
+        },
+        {
+            "name": "Cloud1",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/Cloud1.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer"
+            ]
+        },
+        {
+            "name": "Cloud2",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/Cloud2.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer"
+            ]
+        },
+        {
+            "name": "Clouds1Layer",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/Clouds1Layer.prefab",
+            "components": [
+                "Transform",
+                "ParticleSystem",
+                "ParticleSystemRenderer"
+            ]
+        },
+        {
+            "name": "Clouds2Layer",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/Clouds2Layer.prefab",
+            "components": [
+                "Transform",
+                "ParticleSystem",
+                "ParticleSystemRenderer"
+            ]
+        },
+        {
+            "name": "FallenBranch",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/FallenBranch.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer"
+            ]
+        },
+        {
+            "name": "Flower1",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/Flower1.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer"
+            ]
+        },
+        {
+            "name": "Flower2",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/Flower2.prefab",
             "components": [
                 "Transform",
                 "MeshFilter",
                 "MeshRenderer",
-                "BoxCollider"
+                "SortingGroup"
             ]
         },
         {
-            "name": "Box_350x250x300_Prefab",
-            "path": "Assets/StarterAssets/Environment/Prefabs/Box_350x250x300_Prefab.prefab",
+            "name": "Flower3",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/Flower3.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer"
+            ]
+        },
+        {
+            "name": "Flower4",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/Flower4.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer"
+            ]
+        },
+        {
+            "name": "Grass1",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/Grass1.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer"
+            ]
+        },
+        {
+            "name": "Grass2",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/Grass2.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer"
+            ]
+        },
+        {
+            "name": "Grass3",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/Grass3.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer"
+            ]
+        },
+        {
+            "name": "Grass4",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/Grass4.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer"
+            ]
+        },
+        {
+            "name": "Ivy1",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/Ivy1.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer"
+            ]
+        },
+        {
+            "name": "Ivy2",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/Ivy2.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer"
+            ]
+        },
+        {
+            "name": "LightingPlant1",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/LightingPlant1.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer"
+            ]
+        },
+        {
+            "name": "LightingPlant2",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/LightingPlant2.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer"
+            ]
+        },
+        {
+            "name": "Log",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/Log.prefab",
             "components": [
                 "Transform",
                 "MeshFilter",
                 "MeshRenderer",
-                "BoxCollider"
+                "CapsuleCollider"
             ]
         },
         {
-            "name": "Environment_Prefab",
-            "path": "Assets/StarterAssets/Environment/Prefabs/Environment_Prefab.prefab",
+            "name": "Mushroom1",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/Mushroom1.prefab",
             "components": [
-                "Transform"
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer"
             ]
         },
         {
-            "name": "Ramp_Prefab",
-            "path": "Assets/StarterAssets/Environment/Prefabs/Ramp_Prefab.prefab",
+            "name": "Mushroom2",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/Mushroom2.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer"
+            ]
+        },
+        {
+            "name": "Mushroom3",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/Mushroom3.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer"
+            ]
+        },
+        {
+            "name": "MushroomLarge",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/MushroomLarge.prefab",
             "components": [
                 "Transform",
                 "MeshFilter",
@@ -1530,8 +3694,53 @@
             ]
         },
         {
-            "name": "Stairs_200x100x200_Prefab",
-            "path": "Assets/StarterAssets/Environment/Prefabs/Stairs_200x100x200_Prefab.prefab",
+            "name": "Paddle",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/Paddle.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer"
+            ]
+        },
+        {
+            "name": "PlantEx1",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/PlantEx1.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer"
+            ]
+        },
+        {
+            "name": "PlantEx2",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/PlantEx2.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer"
+            ]
+        },
+        {
+            "name": "PlantEx3",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/PlantEx3.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer"
+            ]
+        },
+        {
+            "name": "PlantEx4",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/PlantEx4.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer"
+            ]
+        },
+        {
+            "name": "Rock1",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/Rock1.prefab",
             "components": [
                 "Transform",
                 "MeshFilter",
@@ -1540,8 +3749,8 @@
             ]
         },
         {
-            "name": "Stairs_650_400_300_Prefab",
-            "path": "Assets/StarterAssets/Environment/Prefabs/Stairs_650_400_300_Prefab.prefab",
+            "name": "Rock2",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/Rock2.prefab",
             "components": [
                 "Transform",
                 "MeshFilter",
@@ -1550,8 +3759,8 @@
             ]
         },
         {
-            "name": "Structure_Prefab",
-            "path": "Assets/StarterAssets/Environment/Prefabs/Structure_Prefab.prefab",
+            "name": "Rock3",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/Rock3.prefab",
             "components": [
                 "Transform",
                 "MeshFilter",
@@ -1560,193 +3769,250 @@
             ]
         },
         {
-            "name": "Tunnel_Prefab",
-            "path": "Assets/StarterAssets/Environment/Prefabs/Tunnel_Prefab.prefab",
+            "name": "Rock4",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/Rock4.prefab",
             "components": [
                 "Transform",
                 "MeshFilter",
                 "MeshRenderer",
-                "BoxCollider",
-                "BoxCollider",
+                "MeshCollider"
+            ]
+        },
+        {
+            "name": "Rock5",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/Rock5.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer",
+                "MeshCollider"
+            ]
+        },
+        {
+            "name": "Rock6",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/Rock6.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer",
+                "MeshCollider"
+            ]
+        },
+        {
+            "name": "Rock7",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/Rock7.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer",
+                "MeshCollider"
+            ]
+        },
+        {
+            "name": "Rock8",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/Rock8.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer",
+                "MeshCollider"
+            ]
+        },
+        {
+            "name": "Rock9",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/Rock9.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer",
+                "MeshCollider"
+            ]
+        },
+        {
+            "name": "Rock10",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/Rock10.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer",
+                "MeshCollider"
+            ]
+        },
+        {
+            "name": "Rock11",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/Rock11.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer",
+                "MeshCollider"
+            ]
+        },
+        {
+            "name": "Rock12",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/Rock12.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer",
+                "MeshCollider"
+            ]
+        },
+        {
+            "name": "Tent",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/Tent.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer"
+            ]
+        },
+        {
+            "name": "Tree1",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/Tree1.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer",
+                "CapsuleCollider"
+            ]
+        },
+        {
+            "name": "Tree2",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/Tree2.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer",
+                "CapsuleCollider"
+            ]
+        },
+        {
+            "name": "Tree3",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/Tree3.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer",
+                "CapsuleCollider"
+            ]
+        },
+        {
+            "name": "TreeDead1",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/TreeDead1.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer",
+                "CapsuleCollider"
+            ]
+        },
+        {
+            "name": "TreeDead2",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/TreeDead2.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer",
+                "CapsuleCollider"
+            ]
+        },
+        {
+            "name": "TreePink1",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/TreePink1.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer",
+                "CapsuleCollider"
+            ]
+        },
+        {
+            "name": "TreePink3",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/TreePink3.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer",
+                "CapsuleCollider"
+            ]
+        },
+        {
+            "name": "TreeStump",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/TreeStump.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer",
+                "MeshCollider"
+            ]
+        },
+        {
+            "name": "TreeYellow1",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/TreeYellow1.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer",
+                "CapsuleCollider"
+            ]
+        },
+        {
+            "name": "TreeYellow3",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/TreeYellow3.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer",
+                "CapsuleCollider"
+            ]
+        },
+        {
+            "name": "Water",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/Water.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer"
+            ]
+        },
+        {
+            "name": "WoodBoat",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/WoodBoat.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer"
+            ]
+        },
+        {
+            "name": "WoodFence1",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/WoodFence1.prefab",
+            "components": [
+                "Transform",
+                "MeshFilter",
+                "MeshRenderer",
                 "BoxCollider"
             ]
         },
         {
-            "name": "Wall_Prefab",
-            "path": "Assets/StarterAssets/Environment/Prefabs/Wall_Prefab.prefab",
+            "name": "WoodFence2",
+            "path": "Assets/SimpleLowPolyNature/Prefabs/WoodFence2.prefab",
             "components": [
                 "Transform",
                 "MeshFilter",
                 "MeshRenderer",
-                "BoxCollider",
                 "BoxCollider"
             ]
         },
         {
-            "name": "UI_Canvas_StarterAssetsInputs_Joysticks",
-            "path": "Assets/StarterAssets/Mobile/Prefabs/CanvasInputs/UI_Canvas_StarterAssetsInputs_Joysticks.prefab",
-            "components": [
-                "RectTransform",
-                "Canvas",
-                "CanvasScaler",
-                "GraphicRaycaster",
-                "UICanvasControllerInput",
-                "MobileDisableAutoSwitchControls"
-            ]
-        },
-        {
-            "name": "UI_Canvas_StarterAssetsInputs_TouchZones",
-            "path": "Assets/StarterAssets/Mobile/Prefabs/CanvasInputs/UI_Canvas_StarterAssetsInputs_TouchZones.prefab",
-            "components": [
-                "RectTransform",
-                "Canvas",
-                "CanvasScaler",
-                "GraphicRaycaster",
-                "UICanvasControllerInput",
-                "MobileDisableAutoSwitchControls"
-            ]
-        },
-        {
-            "name": "UI_EventSystem",
-            "path": "Assets/StarterAssets/Mobile/Prefabs/EventSystem/UI_EventSystem.prefab",
+            "name": "LowpolyTerrain",
+            "path": "Assets/SimpleLowPolyNature/Scenes/SceneDemoAsset/LowpolyTerrain.prefab",
             "components": [
                 "Transform",
-                "EventSystem",
-                "InputSystemUIInputModule"
-            ]
-        },
-        {
-            "name": "UI_Virtual_Button",
-            "path": "Assets/StarterAssets/Mobile/Prefabs/VirtualInputs/UI_Virtual_Button.prefab",
-            "components": [
-                "RectTransform",
-                "CanvasRenderer",
-                "Image",
-                "Button",
-                "UIVirtualButton"
-            ]
-        },
-        {
-            "name": "UI_Virtual_Joystick",
-            "path": "Assets/StarterAssets/Mobile/Prefabs/VirtualInputs/UI_Virtual_Joystick.prefab",
-            "components": [
-                "RectTransform",
-                "CanvasRenderer",
-                "Image",
-                "UIVirtualJoystick"
-            ]
-        },
-        {
-            "name": "UI_Virtual_TouchZone",
-            "path": "Assets/StarterAssets/Mobile/Prefabs/VirtualInputs/UI_Virtual_TouchZone.prefab",
-            "components": [
-                "RectTransform",
-                "CanvasRenderer",
-                "Image",
-                "UIVirtualTouchZone"
-            ]
-        },
-        {
-            "name": "MainCamera",
-            "path": "Assets/StarterAssets/ThirdPersonController/Prefabs/MainCamera.prefab",
-            "components": [
-                "Transform",
-                "Camera",
-                "AudioListener",
-                "CinemachineBrain"
-            ]
-        },
-        {
-            "name": "NestedParentArmature_Unpack",
-            "path": "Assets/StarterAssets/ThirdPersonController/Prefabs/NestedParentArmature_Unpack.prefab",
-            "components": [
-                "Transform"
-            ]
-        },
-        {
-            "name": "NestedParentCapsule_Unpack",
-            "path": "Assets/StarterAssets/ThirdPersonController/Prefabs/NestedParentCapsule_Unpack.prefab",
-            "components": [
-                "Transform"
-            ]
-        },
-        {
-            "name": "PlayerArmature",
-            "path": "Assets/StarterAssets/ThirdPersonController/Prefabs/PlayerArmature.prefab",
-            "components": [
-                "Transform",
-                "Animator",
-                "CharacterController",
-                "ThirdPersonController",
-                "BasicRigidBodyPush",
-                "StarterAssetsInputs",
-                "PlayerInput"
-            ]
-        },
-        {
-            "name": "PlayerCapsule 1",
-            "path": "Assets/StarterAssets/ThirdPersonController/Prefabs/PlayerCapsule 1.prefab",
-            "components": [
-                "Transform",
-                "CharacterController",
-                "ThirdPersonController",
-                "BasicRigidBodyPush",
-                "PlayerInput",
-                "StarterAssetsInputs"
-            ]
-        },
-        {
-            "name": "PlayerCapsule",
-            "path": "Assets/StarterAssets/ThirdPersonController/Prefabs/PlayerCapsule.prefab",
-            "components": [
-                "Transform",
-                "CharacterController",
-                "ThirdPersonController",
-                "BasicRigidBodyPush",
-                "PlayerInput",
-                "StarterAssetsInputs"
-            ]
-        },
-        {
-            "name": "PlayerFollowCamera",
-            "path": "Assets/StarterAssets/ThirdPersonController/Prefabs/PlayerFollowCamera.prefab",
-            "components": [
-                "Transform",
-                "CinemachineVirtualCamera"
-            ]
-        },
-        {
-            "name": "Text Popup",
-            "path": "Assets/TextMesh Pro/Examples & Extras/Prefabs/Text Popup.prefab",
-            "components": [
-                "RectTransform",
-                "CanvasRenderer",
-                "Image",
-                "VerticalLayoutGroup",
-                "ContentSizeFitter",
-                "CanvasGroup"
-            ]
-        },
-        {
-            "name": "TextMeshPro - Prefab 1",
-            "path": "Assets/TextMesh Pro/Examples & Extras/Prefabs/TextMeshPro - Prefab 1.prefab",
-            "components": [
-                "RectTransform",
                 "MeshFilter",
                 "MeshRenderer",
-                "TextMeshPro",
-                "CanvasRenderer"
-            ]
-        },
-        {
-            "name": "TextMeshPro - Prefab 2",
-            "path": "Assets/TextMesh Pro/Examples & Extras/Prefabs/TextMeshPro - Prefab 2.prefab",
-            "components": [
-                "RectTransform",
-                "MeshFilter",
-                "MeshRenderer",
-                "TextMeshPro",
-                "CanvasRenderer"
+                "MeshCollider"
             ]
         },
         {
@@ -2058,9 +4324,31 @@
             "MyTryFassst.shader",
             "SceneExport.json",
             "UniversalRenderPipelineGlobalSettings.asset",
-            "particles 1.prefab"
+            "particles 1.prefab",
+            "verzeichnisstruktur.txt"
         ],
         "subfolders": [
+            {
+                "name": "ABKaspo Games Assets",
+                "path": "Assets/ABKaspo Games Assets",
+                "files": [],
+                "subfolders": [
+                    {
+                        "name": "AURW",
+                        "path": "Assets/ABKaspo Games Assets/AURW",
+                        "files": [
+                            "Documentation.txt"
+                        ],
+                        "subfolders": []
+                    },
+                    {
+                        "name": "Demos",
+                        "path": "Assets/ABKaspo Games Assets/Demos",
+                        "files": [],
+                        "subfolders": []
+                    }
+                ]
+            },
             {
                 "name": "Animals",
                 "path": "Assets/Animals",
@@ -2100,18 +4388,11 @@
                         "path": "Assets/Animals/Prefabs",
                         "files": [
                             "Chicken_001.prefab",
-                            "Chicken_brown.prefab",
-                            "Chicken_grey_bright.prefab",
-                            "Chicken_grey_dark.prefab",
-                            "Chicken_special.prefab",
                             "Deer_001.prefab",
                             "Dog_001.prefab",
-                            "Dog_blue_hell.prefab",
-                            "Dog_forest.prefab",
                             "Horse_001.prefab",
                             "Kitty_001.prefab",
-                            "Pinguin_001.prefab",
-                            "Tiger_001.prefab"
+                            "Pinguin_001.prefab"
                         ],
                         "subfolders": []
                     },
@@ -2163,6 +4444,71 @@
                 ]
             },
             {
+                "name": "DownloadedPacks",
+                "path": "Assets/DownloadedPacks",
+                "files": [],
+                "subfolders": [
+                    {
+                        "name": "LowpolyCharacterRio",
+                        "path": "Assets/DownloadedPacks/LowpolyCharacterRio",
+                        "files": [
+                            "verzeichnisstruktur.txt"
+                        ],
+                        "subfolders": []
+                    },
+                    {
+                        "name": "Oode studios",
+                        "path": "Assets/DownloadedPacks/Oode studios",
+                        "files": [],
+                        "subfolders": []
+                    },
+                    {
+                        "name": "PolygonPilots",
+                        "path": "Assets/DownloadedPacks/PolygonPilots",
+                        "files": [],
+                        "subfolders": []
+                    },
+                    {
+                        "name": "Shaders",
+                        "path": "Assets/DownloadedPacks/Shaders",
+                        "files": [
+                            "BasicWireframe.shader",
+                            "URPWireframe.shader"
+                        ],
+                        "subfolders": []
+                    },
+                    {
+                        "name": "StarterAssets",
+                        "path": "Assets/DownloadedPacks/StarterAssets",
+                        "files": [
+                            "Readme.asset",
+                            "StarterAssets_Documentation_v1.1.pdf",
+                            "license.txt",
+                            "verzeichnisstruktur.txt"
+                        ],
+                        "subfolders": []
+                    },
+                    {
+                        "name": "TextMesh Pro",
+                        "path": "Assets/DownloadedPacks/TextMesh Pro",
+                        "files": [],
+                        "subfolders": []
+                    },
+                    {
+                        "name": "mapassets",
+                        "path": "Assets/DownloadedPacks/mapassets",
+                        "files": [
+                            ".DS_Store",
+                            "RoadTile.asset",
+                            "RoadTile.png",
+                            "grass.asset",
+                            "grass_darkened_1.asset"
+                        ],
+                        "subfolders": []
+                    }
+                ]
+            },
+            {
                 "name": "Editor",
                 "path": "Assets/Editor",
                 "files": [
@@ -2171,52 +4517,28 @@
                 "subfolders": []
             },
             {
-                "name": "LowpolyCharacterRio",
-                "path": "Assets/LowpolyCharacterRio",
-                "files": [
-                    "verzeichnisstruktur.txt"
-                ],
+                "name": "GROUND TILESETS RULE TILES",
+                "path": "Assets/GROUND TILESETS RULE TILES",
+                "files": [],
                 "subfolders": [
                     {
-                        "name": "Materials",
-                        "path": "Assets/LowpolyCharacterRio/Materials",
-                        "files": [
-                            "Rio 1.mat",
-                            "Rio.mat"
-                        ],
+                        "name": "Ground Tiles V3",
+                        "path": "Assets/GROUND TILESETS RULE TILES/Ground Tiles V3",
+                        "files": [],
                         "subfolders": []
-                    },
+                    }
+                ]
+            },
+            {
+                "name": "IgniteCoders",
+                "path": "Assets/IgniteCoders",
+                "files": [],
+                "subfolders": [
                     {
-                        "name": "Models",
-                        "path": "Assets/LowpolyCharacterRio/Models",
+                        "name": "Simple Water Shader",
+                        "path": "Assets/IgniteCoders/Simple Water Shader",
                         "files": [
-                            "Rio.fbx"
-                        ],
-                        "subfolders": []
-                    },
-                    {
-                        "name": "Prefabs",
-                        "path": "Assets/LowpolyCharacterRio/Prefabs",
-                        "files": [
-                            "Rio.prefab"
-                        ],
-                        "subfolders": []
-                    },
-                    {
-                        "name": "Scenes",
-                        "path": "Assets/LowpolyCharacterRio/Scenes",
-                        "files": [
-                            "DemoScene.unity"
-                        ],
-                        "subfolders": []
-                    },
-                    {
-                        "name": "Textures",
-                        "path": "Assets/LowpolyCharacterRio/Textures",
-                        "files": [
-                            "Rio_AlbedoTransparency.png",
-                            "Rio_MetallicSmoothness.png",
-                            "Riol_Normal.png"
+                            "Demo.unity"
                         ],
                         "subfolders": []
                     }
@@ -2233,35 +4555,6 @@
                 "subfolders": []
             },
             {
-                "name": "Oode studios",
-                "path": "Assets/Oode studios",
-                "files": [],
-                "subfolders": [
-                    {
-                        "name": "Lowpoly nature",
-                        "path": "Assets/Oode studios/Lowpoly nature",
-                        "files": [
-                            "Lowpoly nature - README.pdf",
-                            "SampleSceneProfile.asset"
-                        ],
-                        "subfolders": []
-                    }
-                ]
-            },
-            {
-                "name": "PolygonPilots",
-                "path": "Assets/PolygonPilots",
-                "files": [],
-                "subfolders": [
-                    {
-                        "name": "Campfire",
-                        "path": "Assets/PolygonPilots/Campfire",
-                        "files": [],
-                        "subfolders": []
-                    }
-                ]
-            },
-            {
                 "name": "Prefabs",
                 "path": "Assets/Prefabs",
                 "files": [
@@ -2270,11 +4563,28 @@
                     "Cube.prefab",
                     "FlowerInteractionUI.prefab",
                     "ObjectManagerObject.prefab",
+                    "PreHistWater.prefab",
                     "Quad.prefab",
                     "RoadManagerObject.prefab",
-                    "TileManagerObject.prefab"
+                    "TileManagerObject.prefab",
+                    "WaterBlock_50m.prefab"
                 ],
-                "subfolders": []
+                "subfolders": [
+                    {
+                        "name": "Animals",
+                        "path": "Assets/Prefabs/Animals",
+                        "files": [
+                            "Chicken_brown.prefab",
+                            "Chicken_grey_bright.prefab",
+                            "Chicken_grey_dark.prefab",
+                            "Chicken_special.prefab",
+                            "Dog_blue_hell.prefab",
+                            "Dog_forest.prefab",
+                            "Tiger_001.prefab"
+                        ],
+                        "subfolders": []
+                    }
+                ]
             },
             {
                 "name": "Scenes",
@@ -2288,48 +4598,71 @@
                 "subfolders": []
             },
             {
-                "name": "Scriptables",
-                "path": "Assets/Scriptables",
-                "files": [
-                    "BiomeCorrupted.asset",
-                    "BiomeDead.asset",
-                    "BiomeDirtyy 1.asset",
-                    "BiomeOneNice 1.asset",
-                    "BiomeOneNice.asset"
-                ],
-                "subfolders": []
-            },
-            {
                 "name": "Scripts",
                 "path": "Assets/Scripts",
                 "files": [
                     "BiomeAccessController.cs",
                     "CameraFollow.cs",
-                    "DiceController.cs",
                     "FlowerInteraction.cs",
-                    "MinimapCameraFollow.cs",
-                    "WallCollisionDebug.cs"
+                    "LevelManager.cs"
                 ],
                 "subfolders": [
+                    {
+                        "name": "CreatureHandling",
+                        "path": "Assets/Scripts/CreatureHandling",
+                        "files": [
+                            "BehaviorController.cs",
+                            "CreatureManager.cs",
+                            "CreatureStats.cs",
+                            "CreatureStatusUI.cs"
+                        ],
+                        "subfolders": []
+                    },
                     {
                         "name": "Map",
                         "path": "Assets/Scripts/Map",
                         "files": [
                             "BaseMapManager.cs",
                             "BaseRegion.cs",
-                            "BasicCreatureBehavior.cs",
-                            "CreatureBehavior.cs",
-                            "CreatureConfig.cs",
-                            "CreatureManager.cs",
-                            "FlowerConfig.cs",
-                            "LevelManager.cs",
-                            "MInimapTexture.renderTexture",
                             "MapBiomeConfig.cs",
                             "MapGenerationManager.cs",
-                            "MinimapController.cs",
                             "ObjectManager.cs",
                             "RoadManager.cs",
-                            "TileManager.cs"
+                            "TileManager.cs",
+                            "WaterManager.cs"
+                        ],
+                        "subfolders": []
+                    },
+                    {
+                        "name": "MiniMap",
+                        "path": "Assets/Scripts/MiniMap",
+                        "files": [
+                            "MinimapCameraFollow.cs",
+                            "MinimapController.cs"
+                        ],
+                        "subfolders": []
+                    },
+                    {
+                        "name": "ScriptablesAndConfig",
+                        "path": "Assets/Scripts/ScriptablesAndConfig",
+                        "files": [
+                            "BiomeCorrupted.asset",
+                            "BiomeDead.asset",
+                            "BiomeDirtyy 1.asset",
+                            "BiomeOneNice.asset",
+                            "BiomeOneNiceLake.asset",
+                            "BiomeOneNiceSwamp.asset",
+                            "CreatureConfig.cs",
+                            "FlowerConfig.cs"
+                        ],
+                        "subfolders": []
+                    },
+                    {
+                        "name": "TestAndDebug",
+                        "path": "Assets/Scripts/TestAndDebug",
+                        "files": [
+                            "DiceController.cs",
+                            "WallCollisionDebug.cs"
                         ],
                         "subfolders": []
                     }
@@ -2355,214 +4688,188 @@
                 ]
             },
             {
-                "name": "Shaders",
-                "path": "Assets/Shaders",
+                "name": "SimpleLowPolyNature",
+                "path": "Assets/SimpleLowPolyNature",
                 "files": [
-                    "BasicWireframe.shader",
-                    "URPWireframe.shader"
-                ],
-                "subfolders": []
-            },
-            {
-                "name": "StarterAssets",
-                "path": "Assets/StarterAssets",
-                "files": [
-                    "Readme.asset",
-                    "StarterAssets_Documentation_v1.1.pdf",
-                    "license.txt",
-                    "verzeichnisstruktur.txt"
+                    "Lowpoly Demo Post-processing Profile.asset",
+                    "Readme.txt"
                 ],
                 "subfolders": [
                     {
-                        "name": "Environment",
-                        "path": "Assets/StarterAssets/Environment",
-                        "files": [],
-                        "subfolders": []
-                    },
-                    {
-                        "name": "InputSystem",
-                        "path": "Assets/StarterAssets/InputSystem",
+                        "name": "Materials",
+                        "path": "Assets/SimpleLowPolyNature/Materials",
                         "files": [
-                            "StarterAssets.inputactions",
-                            "StarterAssets.inputsettings.asset",
-                            "StarterAssetsInputs.cs"
+                            "CloudMat.mat",
+                            "DemoPlaneMat.mat",
+                            "EmissionBlueMat.mat",
+                            "EmissionYellowMat.mat",
+                            "FireParticleAddMat.mat",
+                            "FireParticleMat.mat",
+                            "Flower1Mat.mat",
+                            "Flower2Mat.mat",
+                            "Flower3Mat.mat",
+                            "Flower4Mat.mat",
+                            "Mushroom1Mat.mat",
+                            "Mushroom2Mat.mat",
+                            "Mushroom3Mat.mat",
+                            "PlantMat.mat",
+                            "RockMat.mat",
+                            "TreeGreen1Mat.mat",
+                            "TreeGreen2Mat.mat",
+                            "TreeOrangeMat.mat",
+                            "TreePinkMat.mat",
+                            "TreeRedMat.mat",
+                            "TreeYellowMat.mat",
+                            "WaterMat.mat",
+                            "Wood1Mat.mat",
+                            "Wood2Mat.mat"
                         ],
                         "subfolders": []
                     },
                     {
-                        "name": "Mobile",
-                        "path": "Assets/StarterAssets/Mobile",
-                        "files": [],
-                        "subfolders": []
-                    },
-                    {
-                        "name": "ThirdPersonController",
-                        "path": "Assets/StarterAssets/ThirdPersonController",
-                        "files": [],
-                        "subfolders": []
-                    },
-                    {
-                        "name": "TutorialInfo",
-                        "path": "Assets/StarterAssets/TutorialInfo",
-                        "files": [],
-                        "subfolders": []
-                    }
-                ]
-            },
-            {
-                "name": "TextMesh Pro",
-                "path": "Assets/TextMesh Pro",
-                "files": [],
-                "subfolders": [
-                    {
-                        "name": "Examples & Extras",
-                        "path": "Assets/TextMesh Pro/Examples & Extras",
-                        "files": [],
-                        "subfolders": []
-                    },
-                    {
-                        "name": "Fonts",
-                        "path": "Assets/TextMesh Pro/Fonts",
+                        "name": "Models",
+                        "path": "Assets/SimpleLowPolyNature/Models",
                         "files": [
-                            "LiberationSans - OFL.txt",
-                            "LiberationSans.ttf"
+                            "Cloud1.fbx",
+                            "Cloud2.fbx",
+                            "FallenBranch.fbx",
+                            "FireParticle.fbx",
+                            "FireWood.fbx",
+                            "Flower1.fbx",
+                            "Flower2.fbx",
+                            "Flower3.fbx",
+                            "Grass1.fbx",
+                            "Grass2.fbx",
+                            "Grass3.fbx",
+                            "Grass4.fbx",
+                            "Ivy1.fbx",
+                            "Ivy2.fbx",
+                            "LightingPlant1.fbx",
+                            "LightingPlant2.fbx",
+                            "Log.fbx",
+                            "LowpolyTerrain.fbx",
+                            "Mushroom1.fbx",
+                            "Mushroom2.fbx",
+                            "MushroomLarge.fbx",
+                            "Paddle.fbx",
+                            "Plant1.fbx",
+                            "Plant2.fbx",
+                            "Plant3.fbx",
+                            "Plant4.fbx",
+                            "Rock1.fbx",
+                            "Rock10.fbx",
+                            "Rock11.fbx",
+                            "Rock12.fbx",
+                            "Rock2.fbx",
+                            "Rock3.fbx",
+                            "Rock4.fbx",
+                            "Rock5.fbx",
+                            "Rock6.fbx",
+                            "Rock7.fbx",
+                            "Rock8.fbx",
+                            "Rock9.fbx",
+                            "Tent.fbx",
+                            "Tree1.fbx",
+                            "Tree2.fbx",
+                            "Tree3.fbx",
+                            "TreeDead1.fbx",
+                            "TreeDead2.fbx",
+                            "TreeStump1.fbx",
+                            "WoodBoat.fbx",
+                            "WoodFence1.fbx",
+                            "WoodFence2.fbx"
                         ],
                         "subfolders": []
                     },
                     {
-                        "name": "Resources",
-                        "path": "Assets/TextMesh Pro/Resources",
+                        "name": "Prefabs",
+                        "path": "Assets/SimpleLowPolyNature/Prefabs",
                         "files": [
-                            "LineBreaking Following Characters.txt",
-                            "LineBreaking Leading Characters.txt",
-                            "TMP Settings.asset"
+                            "CampFire.prefab",
+                            "Cloud1.prefab",
+                            "Cloud2.prefab",
+                            "Clouds1Layer.prefab",
+                            "Clouds2Layer.prefab",
+                            "FallenBranch.prefab",
+                            "Flower1.prefab",
+                            "Flower2.prefab",
+                            "Flower3.prefab",
+                            "Flower4.prefab",
+                            "Grass1.prefab",
+                            "Grass2.prefab",
+                            "Grass3.prefab",
+                            "Grass4.prefab",
+                            "Ivy1.prefab",
+                            "Ivy2.prefab",
+                            "LightingPlant1.prefab",
+                            "LightingPlant2.prefab",
+                            "Log.prefab",
+                            "Mushroom1.prefab",
+                            "Mushroom2.prefab",
+                            "Mushroom3.prefab",
+                            "MushroomLarge.prefab",
+                            "Paddle.prefab",
+                            "PlantEx1.prefab",
+                            "PlantEx2.prefab",
+                            "PlantEx3.prefab",
+                            "PlantEx4.prefab",
+                            "Rock1.prefab",
+                            "Rock10.prefab",
+                            "Rock11.prefab",
+                            "Rock12.prefab",
+                            "Rock2.prefab",
+                            "Rock3.prefab",
+                            "Rock4.prefab",
+                            "Rock5.prefab",
+                            "Rock6.prefab",
+                            "Rock7.prefab",
+                            "Rock8.prefab",
+                            "Rock9.prefab",
+                            "Tent.prefab",
+                            "Tree1.prefab",
+                            "Tree2.prefab",
+                            "Tree3.prefab",
+                            "TreeDead1.prefab",
+                            "TreeDead2.prefab",
+                            "TreePink1.prefab",
+                            "TreePink3.prefab",
+                            "TreeStump.prefab",
+                            "TreeYellow1.prefab",
+                            "TreeYellow3.prefab",
+                            "Water.prefab",
+                            "WoodBoat.prefab",
+                            "WoodFence1.prefab",
+                            "WoodFence2.prefab"
+                        ],
+                        "subfolders": []
+                    },
+                    {
+                        "name": "Scenes",
+                        "path": "Assets/SimpleLowPolyNature/Scenes",
+                        "files": [
+                            "DemoDay.unity",
+                            "DemoNight.unity",
+                            "PrefabsScene.unity"
                         ],
                         "subfolders": []
                     },
                     {
                         "name": "Shaders",
-                        "path": "Assets/TextMesh Pro/Shaders",
+                        "path": "Assets/SimpleLowPolyNature/Shaders",
                         "files": [
-                            "SDFFunctions.hlsl",
-                            "TMP_Bitmap-Custom-Atlas.shader",
-                            "TMP_Bitmap-Mobile.shader",
-                            "TMP_Bitmap.shader",
-                            "TMP_SDF Overlay.shader",
-                            "TMP_SDF SSD.shader",
-                            "TMP_SDF-HDRP LIT.shadergraph",
-                            "TMP_SDF-HDRP UNLIT.shadergraph",
-                            "TMP_SDF-Mobile Masking.shader",
-                            "TMP_SDF-Mobile Overlay.shader",
-                            "TMP_SDF-Mobile SSD.shader",
-                            "TMP_SDF-Mobile-2-Pass.shader",
-                            "TMP_SDF-Mobile.shader",
-                            "TMP_SDF-Surface-Mobile.shader",
-                            "TMP_SDF-Surface.shader",
-                            "TMP_SDF-URP Lit.shadergraph",
-                            "TMP_SDF-URP Unlit.shadergraph",
-                            "TMP_SDF.shader",
-                            "TMP_Sprite.shader",
-                            "TMPro.cginc",
-                            "TMPro_Mobile.cginc",
-                            "TMPro_Properties.cginc",
-                            "TMPro_Surface.cginc"
-                        ],
-                        "subfolders": []
-                    },
-                    {
-                        "name": "Sprites",
-                        "path": "Assets/TextMesh Pro/Sprites",
-                        "files": [
-                            "EmojiOne Attribution.txt",
-                            "EmojiOne.json",
-                            "EmojiOne.png"
+                            "SimpleWater.shader"
                         ],
                         "subfolders": []
                     }
                 ]
             },
             {
-                "name": "mapassets",
-                "path": "Assets/mapassets",
+                "name": "Textures",
+                "path": "Assets/Textures",
                 "files": [
-                    ".DS_Store",
-                    "RoadTile.asset",
-                    "RoadTile.png",
-                    "grass.asset",
-                    "grass_darkened_1.asset"
+                    "MInimapTexture.renderTexture"
                 ],
-                "subfolders": [
-                    {
-                        "name": "2DPixelFantasyTilemapFree",
-                        "path": "Assets/mapassets/2DPixelFantasyTilemapFree",
-                        "files": [],
-                        "subfolders": []
-                    },
-                    {
-                        "name": "Handpainted_Grass_and_Ground_Textures",
-                        "path": "Assets/mapassets/Handpainted_Grass_and_Ground_Textures",
-                        "files": [
-                            ".DS_Store",
-                            "NewGrassAndDirt.prefab"
-                        ],
-                        "subfolders": []
-                    },
-                    {
-                        "name": "Palettes",
-                        "path": "Assets/mapassets/Palettes",
-                        "files": [
-                            "MinimalPalette.prefab"
-                        ],
-                        "subfolders": []
-                    },
-                    {
-                        "name": "Stylize Tree &Grasses samples",
-                        "path": "Assets/mapassets/Stylize Tree &Grasses samples",
-                        "files": [],
-                        "subfolders": []
-                    },
-                    {
-                        "name": "kenney_city-kit-suburban_20",
-                        "path": "Assets/mapassets/kenney_city-kit-suburban_20",
-                        "files": [
-                            ".DS_Store",
-                            "License.txt",
-                            "Overview.html",
-                            "Preview (Variation A).png",
-                            "Preview (Variation B).png",
-                            "Preview (Variation C).png",
-                            "Preview.png",
-                            "Sample.png",
-                            "View Documentation.url",
-                            "Visit Kenney.url",
-                            "Visit Patreon.url"
-                        ],
-                        "subfolders": []
-                    },
-                    {
-                        "name": "kenney_pirate-pack",
-                        "path": "Assets/mapassets/kenney_pirate-pack",
-                        "files": [
-                            ".DS_Store",
-                            "License.txt",
-                            "Preview.png",
-                            "Preview_KenneyNL.png",
-                            "Sample.png"
-                        ],
-                        "subfolders": []
-                    },
-                    {
-                        "name": "kenney_top-down-tanks",
-                        "path": "Assets/mapassets/kenney_top-down-tanks",
-                        "files": [
-                            ".DS_Store",
-                            "license.txt",
-                            "preview.png",
-                            "sample.png"
-                        ],
-                        "subfolders": []
-                    }
-                ]
+                "subfolders": []
             }
         ]
     }

@@ -70,7 +70,7 @@ public class SceneExporter : MonoBehaviour
     [MenuItem("Tools/Export Scene Data")]
     public static void ExportSceneData()
     {
-        SceneData sceneData = new SceneData
+        var sceneData = new SceneData
         {
             objects = CollectGameObjectData(),
             prefabs = CollectPrefabData(),
@@ -93,7 +93,7 @@ public class SceneExporter : MonoBehaviour
             if (obj.hideFlags == HideFlags.NotEditable || obj.hideFlags == HideFlags.HideAndDontSave)
                 continue;
 
-            GameObjectData data = new GameObjectData
+            var data = new GameObjectData
             {
                 name = obj.name,
                 tag = obj.tag,
@@ -227,13 +227,14 @@ public class SceneExporter : MonoBehaviour
             
             if (prefab != null)
             {
-                PrefabInfo info = new PrefabInfo
+                var info = new PrefabInfo
                 {
                     name = prefab.name,
                     path = path,
                     components = prefab.GetComponents<Component>()
-                                     .Select(c => c.GetType().Name)
-                                     .ToList()
+                                      .Where(c => c != null)
+                                      .Select(c => c.GetType().Name)
+                                      .ToList()
                 };
                 prefabList.Add(info);
             }
@@ -253,14 +254,14 @@ public class SceneExporter : MonoBehaviour
         {
             return null;
         }
-
-        AssetFolderInfo folder = new AssetFolderInfo
+        var folder = new AssetFolderInfo
         {
             name = Path.GetFileName(path),
             path = path.Replace(Application.dataPath, "Assets"),
             files = new List<string>(),
             subfolders = new List<AssetFolderInfo>()
         };
+        
 
         // Get files
         try

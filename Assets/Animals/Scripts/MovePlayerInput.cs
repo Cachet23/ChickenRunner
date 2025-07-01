@@ -61,27 +61,37 @@ namespace Controller
             {
                 float attackRange = m_Stats.AttackRange;
                 float attackDamage = m_Stats.AttackDamage;
-                Collider[] hits = Physics.OverlapSphere(transform.position, attackRange);
-                CreatureStats closest = null;
-                float minDist = float.MaxValue;
-                foreach (var hit in hits)
+                float attackManaCost = m_Stats.AttackManaCost;
+                // Check if enough mana for attack
+                if (m_Stats.HasEnoughStamina(0.1f) && m_Stats.HasEnoughMana(attackManaCost))
                 {
-                    if (hit.gameObject == this.gameObject) continue; // skip self
-                    var stats = hit.GetComponent<CreatureStats>();
-                    if (stats != null)
+                    Collider[] hits = Physics.OverlapSphere(transform.position, attackRange);
+                    CreatureStats closest = null;
+                    float minDist = float.MaxValue;
+                    foreach (var hit in hits)
                     {
-                        float dist = Vector3.Distance(transform.position, hit.transform.position);
-                        if (dist < minDist)
+                        if (hit.gameObject == this.gameObject) continue; // skip self
+                        var stats = hit.GetComponent<CreatureStats>();
+                        if (stats != null)
                         {
-                            minDist = dist;
-                            closest = stats;
+                            float dist = Vector3.Distance(transform.position, hit.transform.position);
+                            if (dist < minDist)
+                            {
+                                minDist = dist;
+                                closest = stats;
+                            }
                         }
                     }
+                    if (closest != null)
+                    {
+                        closest.ModifyHealth(-attackDamage);
+                        m_Stats.ModifyMana(-attackManaCost);
+                        Debug.Log($"Attacked {closest.gameObject.name} for {attackDamage} damage. Mana used: {attackManaCost}");
+                    }
                 }
-                if (closest != null)
+                else
                 {
-                    closest.ModifyHealth(-attackDamage);
-                    Debug.Log($"Attacked {closest.gameObject.name} for {attackDamage} damage.");
+                    Debug.Log("Not enough mana to attack.");
                 }
             }
         }

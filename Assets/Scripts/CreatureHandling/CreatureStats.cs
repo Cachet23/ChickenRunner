@@ -3,14 +3,22 @@ using System;
 
 public class CreatureStats : MonoBehaviour
 {
+    [Header("Mana Settings")]
+    [SerializeField] private float manaRegenPerSecond = 3f; // Regenerate 3 mana per second
+    public bool HasEnoughMana(float amount)
+    {
+        return currentMana >= amount;
+    }
     // Event for death notification
     public event Action<CreatureStats> OnDeath;
     [Header("Attack Settings")]
     [SerializeField] private float attackRange = 2.5f;
     [SerializeField] private float attackDamage = 20f;
+    [SerializeField] private float attackManaCost = 10f;
 
     public float AttackRange => attackRange;
     public float AttackDamage => attackDamage;
+    public float AttackManaCost => attackManaCost;
     [Header("Stats Configuration")]
     [SerializeField] private float maxHealth = 100f;
     [SerializeField] private float maxStamina = 100f;
@@ -49,6 +57,12 @@ public class CreatureStats : MonoBehaviour
         if (Time.time > lastStaminaUseTime + staminaRegenDelay)
         {
             ModifyStamina(staminaRegenPerSecond * Time.deltaTime);
+        }
+
+        // Mana Regeneration
+        if (currentMana < maxMana)
+        {
+            ModifyMana(manaRegenPerSecond * Time.deltaTime);
         }
     }
 

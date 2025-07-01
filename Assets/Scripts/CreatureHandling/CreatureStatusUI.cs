@@ -3,6 +3,26 @@ using UnityEngine.UI;
 
 public class CreatureStatusUI : MonoBehaviour
 {
+    // Allow dynamic binding to any CreatureStats
+    public void BindToStats(CreatureStats newStats)
+    {
+        if (stats != null)
+        {
+            stats.OnHealthChanged -= UpdateHealthBar;
+            stats.OnStaminaChanged -= UpdateStaminaBar;
+            stats.OnManaChanged -= UpdateManaBar;
+        }
+        stats = newStats;
+        if (stats != null)
+        {
+            stats.OnHealthChanged += UpdateHealthBar;
+            stats.OnStaminaChanged += UpdateStaminaBar;
+            stats.OnManaChanged += UpdateManaBar;
+            UpdateHealthBar(stats.GetHealthPercent());
+            UpdateStaminaBar(stats.GetStaminaPercent());
+            UpdateManaBar(stats.GetManaPercent());
+        }
+    }
     [Header("Bar Colors")]
     [SerializeField] private Color healthColor = Color.red;
     [SerializeField] private Color staminaColor = Color.green;
