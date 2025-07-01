@@ -102,6 +102,27 @@ public class CreatureManager : MonoBehaviour
         // Convert world position to tilemap position, ignoring the y component for tile checks
         var worldPos = new Vector3Int(Mathf.RoundToInt(position.x), Mathf.RoundToInt(position.z), 0);
         
+        // Check for water tiles - return false immediately if water is found
+        if (bmm.waterLayer.HasTile(worldPos))
+        {
+            Debug.Log($"Position {position} has water - spawn rejected");
+            return false;
+        }
+
+        // Check surrounding tiles for water to prevent spawning right at water edges
+        for (int x = -1; x <= 1; x++)
+        {
+            for (int y = -1; y <= 1; y++)
+            {
+                var checkPos = worldPos + new Vector3Int(x, y, 0);
+                if (bmm.waterLayer.HasTile(checkPos))
+                {
+                    Debug.Log($"Position {position} is too close to water - spawn rejected");
+                    return false;
+                }
+            }
+        }
+
         // Check if there's earth/grass at this position
         bool hasGround = bmm.baseLayer.HasTile(worldPos) ||
                         bmm.grassLayer.HasTile(worldPos);
@@ -112,34 +133,22 @@ public class CreatureManager : MonoBehaviour
             return false;
         }
 
-        // Check if there's water at this position
-        if (bmm.waterLayer.HasTile(worldPos))
-        {
-            Debug.Log($"Position {position} has water");
-            return false;
-        }
-
         // Check for obstacles using a sphere cast from above
         RaycastHit[] hits = Physics.SphereCastAll(
-            position + Vector3.up * 10f, // Start from above
-            0.5f, // Radius
-            Vector3.down, // Cast downward
-            20f // Distance
+            position + Vector3.up * 10f,
+            0.5f,
+            Vector3.down,
+            20f
         );
 
-        // Filter hits to only include obstacles (not ground/terrain)
         var obstacles = hits.Where(hit => 
-            !hit.collider.isTrigger && // Ignore triggers
-            hit.collider.gameObject.layer != LayerMask.NameToLayer("Default") // Assume ground is on default layer
+            !hit.collider.isTrigger &&
+            hit.collider.gameObject.layer != LayerMask.NameToLayer("Default")
         ).ToArray();
 
         if (obstacles.Length > 0)
         {
             Debug.Log($"Position {position} has {obstacles.Length} obstacles");
-            foreach (var hit in obstacles)
-            {
-                Debug.Log($"- Obstacle: {hit.collider.gameObject.name} (Layer: {LayerMask.LayerToName(hit.collider.gameObject.layer)})");
-            }
             return false;
         }
 
