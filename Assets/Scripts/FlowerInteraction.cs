@@ -93,6 +93,42 @@ public class FlowerInteraction : MonoBehaviour
 
     private void EatFlower()
     {
+        // Get player stats
+        var playerStats = GameObject.FindWithTag("Dice")?.GetComponent<CreatureStats>();
+        if (playerStats == null)
+        {
+            Debug.LogWarning("Player stats not found!");
+            return;
+        }
+
+        // Get flower rarity
+        var flower = GetComponent<Flower>();
+        if (flower != null)
+        {
+            switch (flower.Rarity)
+            {
+                case FlowerConfig.Rarity.Common:
+                    // Common flowers restore 50 stamina
+                    playerStats.ModifyStamina(50f);
+                    Debug.Log("Common flower eaten: +50 stamina");
+                    break;
+
+                case FlowerConfig.Rarity.Rare:
+                    // Rare flowers restore 50 health
+                    playerStats.ModifyHealth(50f);
+                    Debug.Log("Rare flower eaten: +50 health");
+                    break;
+
+                case FlowerConfig.Rarity.Epic:
+                    // Epic flowers restore all stats to max
+                    playerStats.ModifyHealth(float.MaxValue); // The Clamp in ModifyHealth will handle the max value
+                    playerStats.ModifyStamina(float.MaxValue); // The Clamp in ModifyStamina will handle the max value
+                    playerStats.ModifyMana(float.MaxValue); // The Clamp in ModifyMana will handle the max value
+                    Debug.Log("Epic flower eaten: All stats restored to max!");
+                    break;
+            }
+        }
+
         // Clean up UI
         if (activeUI != null)
         {

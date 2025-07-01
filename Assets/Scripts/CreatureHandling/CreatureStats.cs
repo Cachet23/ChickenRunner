@@ -73,27 +73,34 @@ public class CreatureStats : MonoBehaviour
 
     public void ModifyHealth(float amount)
     {
+        float oldHealth = currentHealth;
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
+        Debug.Log($"[CreatureStats] {gameObject.name} health modified: {oldHealth} -> {currentHealth} (amount: {amount})");
         OnHealthChanged?.Invoke(GetHealthPercent());
         if (currentHealth <= 0)
         {
+            Debug.Log($"[CreatureStats] {gameObject.name} died!");
             OnDeath?.Invoke(this);
         }
     }
 
     public void ModifyStamina(float amount)
     {
+        float oldStamina = currentStamina;
         if (amount < 0)
         {
             lastStaminaUseTime = Time.time;
         }
         currentStamina = Mathf.Clamp(currentStamina + amount, 0, maxStamina);
+        Debug.Log($"[CreatureStats] {gameObject.name} stamina modified: {oldStamina} -> {currentStamina} (amount: {amount})");
         OnStaminaChanged?.Invoke(GetStaminaPercent());
     }
 
     public void ModifyMana(float amount)
     {
+        float oldMana = currentMana;
         currentMana = Mathf.Clamp(currentMana + amount, 0, maxMana);
+        Debug.Log($"[CreatureStats] {gameObject.name} mana modified: {oldMana} -> {currentMana} (amount: {amount})");
         OnManaChanged?.Invoke(GetManaPercent());
     }
 
@@ -130,34 +137,55 @@ public class CreatureStats : MonoBehaviour
 
     private void ShowStatsUI()
     {
-        if (activeUI == null)
+        if (activeUI == null && statsUIPrefab != null)
         {
+            Debug.Log($"[CreatureStats] Creating UI for {gameObject.name}");
             activeUI = Instantiate(statsUIPrefab, transform.position, Quaternion.identity);
             activeUI.transform.SetParent(GameObject.Find("Canvas")?.transform, true);
 
             // Get references to sliders
             var sliders = activeUI.GetComponentsInChildren<UnityEngine.UI.Slider>();
+            Debug.Log($"[CreatureStats] Found {sliders.Length} sliders");
             foreach (var slider in sliders)
             {
+                Debug.Log($"[CreatureStats] Found slider: {slider.name}");
                 switch (slider.name.ToLower())
                 {
                     case "health":
-                        OnHealthChanged += (value) => slider.value = value;
+                        OnHealthChanged += (value) => {
+                            slider.value = value;
+                            Debug.Log($"[CreatureStats] Health updated to {value:F2}");
+                        };
                         slider.value = GetHealthPercent();
                         break;
                     case "mana":
-                        OnManaChanged += (value) => slider.value = value;
+                        OnManaChanged += (value) => {
+                            slider.value = value;
+                            Debug.Log($"[CreatureStats] Mana updated to {value:F2}");
+                        };
                         slider.value = GetManaPercent();
                         break;
                     case "stamina":
-                        OnStaminaChanged += (value) => slider.value = value;
+                        OnStaminaChanged += (value) => {
+                            slider.value = value;
+                            Debug.Log($"[CreatureStats] Stamina updated to {value:F2}");
+                        };
                         slider.value = GetStaminaPercent();
                         break;
                 }
             }
         }
-        activeUI.SetActive(true);
-        UpdateUIPosition(); // Initial position update
+        else if (statsUIPrefab == null)
+        {
+            Debug.LogError($"[CreatureStats] statsUIPrefab is not assigned on {gameObject.name}!");
+            return;
+        }
+
+        if (activeUI != null)
+        {
+            activeUI.SetActive(true);
+            UpdateUIPosition(); // Initial position update
+        }
     }
 
     private void HideStatsUI()
