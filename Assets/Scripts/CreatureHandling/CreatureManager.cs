@@ -4,6 +4,8 @@ using System.Linq;
 
 public class CreatureManager : MonoBehaviour
 {
+    // Track all spawned creatures for removal
+    private readonly List<GameObject> spawnedCreatures = new List<GameObject>();
     private MapGenerationManager mapManager;
     private List<MapBiomeConfig> biomeConfigs;
     private Transform creatureContainer;
@@ -83,6 +85,19 @@ public class CreatureManager : MonoBehaviour
                 
                 Debug.Log($"Successfully instantiated {creature.name} at {position}");
                 
+                // Ensure every creature has CreatureStats
+                var stats = creature.GetComponent<CreatureStats>();
+                if (stats == null)
+                {
+                    stats = creature.AddComponent<CreatureStats>();
+                }
+
+                // Subscribe to death event
+                stats.OnDeath += HandleCreatureDeath;
+
+                // Track creature
+                spawnedCreatures.Add(creature);
+
                 var behavior = creature.GetComponent<CreatureBehavior>();
                 if (behavior != null)
                 {
@@ -93,8 +108,18 @@ public class CreatureManager : MonoBehaviour
             }
             Debug.Log($"Position {position} is not valid");
         }
-        
         Debug.LogWarning($"Failed to find valid spawn position for {creaturePrefab.name} after 20 attempts");
+    }
+
+    // Remove creature when it dies
+    private void HandleCreatureDeath(CreatureStats stats)
+    {
+        if (stats != null)
+        {
+            GameObject go = stats.gameObject;
+            spawnedCreatures.Remove(go);
+            Destroy(go);
+        }
     }
 
     private bool IsValidSpawnPosition(Vector3 position, BaseMapManager bmm)

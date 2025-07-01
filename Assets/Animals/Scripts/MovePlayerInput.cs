@@ -55,6 +55,35 @@ namespace Controller
         {
             GatherInput();
             SetInput();
+
+            // Player attack logic (press 'J' to attack nearest creature in range)
+            if (m_Stats != null && Input.GetKeyDown(KeyCode.J))
+            {
+                float attackRange = m_Stats.AttackRange;
+                float attackDamage = m_Stats.AttackDamage;
+                Collider[] hits = Physics.OverlapSphere(transform.position, attackRange);
+                CreatureStats closest = null;
+                float minDist = float.MaxValue;
+                foreach (var hit in hits)
+                {
+                    if (hit.gameObject == this.gameObject) continue; // skip self
+                    var stats = hit.GetComponent<CreatureStats>();
+                    if (stats != null)
+                    {
+                        float dist = Vector3.Distance(transform.position, hit.transform.position);
+                        if (dist < minDist)
+                        {
+                            minDist = dist;
+                            closest = stats;
+                        }
+                    }
+                }
+                if (closest != null)
+                {
+                    closest.ModifyHealth(-attackDamage);
+                    Debug.Log($"Attacked {closest.gameObject.name} for {attackDamage} damage.");
+                }
+            }
         }
 
         public void GatherInput()

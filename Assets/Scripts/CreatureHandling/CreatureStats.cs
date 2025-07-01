@@ -3,6 +3,14 @@ using System;
 
 public class CreatureStats : MonoBehaviour
 {
+    // Event for death notification
+    public event Action<CreatureStats> OnDeath;
+    [Header("Attack Settings")]
+    [SerializeField] private float attackRange = 2.5f;
+    [SerializeField] private float attackDamage = 20f;
+
+    public float AttackRange => attackRange;
+    public float AttackDamage => attackDamage;
     [Header("Stats Configuration")]
     [SerializeField] private float maxHealth = 100f;
     [SerializeField] private float maxStamina = 100f;
@@ -48,6 +56,10 @@ public class CreatureStats : MonoBehaviour
     {
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
         OnHealthChanged?.Invoke(GetHealthPercent());
+        if (currentHealth <= 0)
+        {
+            OnDeath?.Invoke(this);
+        }
     }
 
     public void ModifyStamina(float amount)
