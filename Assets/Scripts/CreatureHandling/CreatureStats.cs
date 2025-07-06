@@ -58,6 +58,9 @@ public class CreatureStats : MonoBehaviour
 
     private void Update()
     {
+        // Nur der Player soll regenerieren
+        if (!CompareTag("Dice")) return;
+
         // Stamina Regeneration
         if (Time.time > lastStaminaUseTime + staminaRegenDelay)
         {
@@ -230,6 +233,45 @@ public class CreatureStats : MonoBehaviour
         if (activeUI != null)
         {
             Destroy(activeUI);
+        }
+    }
+
+    // Properties für Max-Werte
+    public float MaxHealth => maxHealth;
+    public float MaxStamina => maxStamina;
+    public float MaxMana => maxMana;
+
+    // Restore-Methoden
+    public void RestoreHealth(float amount)
+    {
+        float oldHealth = currentHealth;
+        currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
+        if (currentHealth != oldHealth)
+        {
+            OnHealthChanged?.Invoke(currentHealth / maxHealth);
+            Debug.Log($"[CreatureStats] Restored {currentHealth - oldHealth} health to {gameObject.name}");
+        }
+    }
+
+    public void RestoreStamina(float amount)
+    {
+        float oldStamina = currentStamina;
+        currentStamina = Mathf.Min(currentStamina + amount, maxStamina);
+        if (currentStamina != oldStamina)
+        {
+            OnStaminaChanged?.Invoke(currentStamina / maxStamina);
+            Debug.Log($"[CreatureStats] Restored {currentStamina - oldStamina} stamina to {gameObject.name}");
+        }
+    }
+
+    public void RestoreMana(float amount)
+    {
+        float oldMana = currentMana;
+        currentMana = Mathf.Min(currentMana + amount, maxMana);
+        if (currentMana != oldMana)
+        {
+            OnManaChanged?.Invoke(currentMana / maxMana);
+            Debug.Log($"[CreatureStats] Restored {currentMana - oldMana} mana to {gameObject.name}");
         }
     }
 }

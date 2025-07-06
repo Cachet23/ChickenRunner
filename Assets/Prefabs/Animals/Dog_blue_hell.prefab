@@ -456,9 +456,10 @@ GameObject:
   - component: {fileID: 4203687711656398374}
   - component: {fileID: 6603396127301369233}
   - component: {fileID: 2988679698843291867}
+  - component: {fileID: 556450151383980519}
   m_Layer: 0
   m_Name: Dog_blue_hell
-  m_TagString: Untagged
+  m_TagString: Creature
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -583,6 +584,29 @@ MonoBehaviour:
     alignmentTime: 3
     chaseSpeed: 1.5
   checkInterval: 0.5
+--- !u!114 &556450151383980519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2629182449500102118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8e69b1589ead4feaa38f8e98f2749d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statsUIPrefab: {fileID: 6442454213096952268, guid: d9c02d78a934f4b35b6917090ebd4177, type: 3}
+  manaRegenPerSecond: 3
+  attackRange: 2.5
+  attackDamage: 20
+  attackManaCost: 10
+  maxHealth: 100
+  maxStamina: 100
+  maxMana: 100
+  staminaDrainPerSecond: 10
+  staminaRegenPerSecond: 5
+  staminaRegenDelay: 1
 --- !u!1 &2735724662372591797
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,7 +12,6 @@ public class CreatureStatusUI : MonoBehaviour
     [Header("Bar Settings")]
     [SerializeField] private float smoothSpeed = 10f;
     [SerializeField] private Vector2 barSize = new Vector2(200f, 20f);
-    [SerializeField] private float barSpacing = 5f;
 
     private Slider healthSlider;
     private Slider staminaSlider;

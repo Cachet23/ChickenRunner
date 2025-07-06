@@ -72,7 +72,7 @@ public class ObjectManager : MonoBehaviour
     private Dictionary<GameObject, Vector3Int> houseDirections = new Dictionary<GameObject, Vector3Int>();
 
     [Header("Flower Settings")]
-    public FlowerConfig[] flowerPrefabs;
+    public GameObject[] flowerPrefabs;
     [Range(0f, 1f)]
     public float flowerSpawnChance = 0.3f;
 
@@ -542,98 +542,97 @@ public void RemoveBiomeWall()
         biomeWallInstance = null;
     }
 }    private void ReplaceGrassWithFlowers(GameObject grassObject)
-    {
-        // Detailed debug logging
-        Debug.Log($"[ObjectManager] Starting ReplaceGrassWithFlowers für: {grassObject.name}");
+{
+        Debug.Log($"[ObjectManager] Starting ReplaceGrassWithFlowers for: {grassObject.name}");
         
         if (flowerPrefabs == null || flowerPrefabs.Length == 0)
         {
-            Debug.LogWarning($"[ObjectManager] Keine Flower Prefabs verfügbar! flowerPrefabs null?: {flowerPrefabs == null}");
+            Debug.LogWarning($"[ObjectManager] No flower prefabs available!");
             return;
         }
-        
+
+        // Validate flower prefabs first
+        var validPrefabs = flowerPrefabs.Where(p => p != null && p.GetComponent<FlowerInteraction>() != null).ToArray();
+        if (validPrefabs.Length == 0)
+        {
+            Debug.LogWarning("[ObjectManager] No valid flower prefabs (with FlowerInteraction component) found!");
+            return;
+        }
+
+        // First check if we should spawn a flower at all
+        if (Random.value > flowerSpawnChance)
+        {
+            Debug.Log($"[ObjectManager] Skipping flower spawn. Random value > SpawnChance ({flowerSpawnChance})");
+            return;
+        }
+
+        // Select random rarity based on configured chances
         float randomValue = Random.value;
-        if (randomValue > flowerSpawnChance)
+        var chosenRarity = FlowerConfig.Rarity.Common;
+        
+        if (randomValue < FlowerConfig.EPIC_REPLACE_CHANCE)
+            chosenRarity = FlowerConfig.Rarity.Epic;
+        else if (randomValue < FlowerConfig.RARE_REPLACE_CHANCE)
+            chosenRarity = FlowerConfig.Rarity.Rare;
+
+        // Select a random flower prefab from valid ones
+        var randomPrefab = validPrefabs[Random.Range(0, validPrefabs.Length)];
+        
+        // Spawn the flower
+        var position = grassObject.transform.position;
+        var rotation = Quaternion.Euler(0f, Random.Range(0f, 360f), 0f);
+        var flowerObject = Instantiate(randomPrefab, position, rotation, objectContainer);
+
+        // Set the rarity on the FlowerInteraction component
+        var flowerInteraction = flowerObject.GetComponent<FlowerInteraction>();
+        flowerInteraction.Rarity = chosenRarity;
+        Debug.Log($"[ObjectManager] Spawned {chosenRarity} flower at {position}");
+
+        // Remove the grass
+        Destroy(grassObject);
+    }
+
+    private GameObject CreateGrass(Vector3 position, bool highGrass)
+    {
+        GameObject grassPrefab = highGrass ? highGrassPrefab : lowGrassPrefab;
+        if (grassPrefab == null)
         {
-            Debug.Log($"[ObjectManager] Blumen-Spawn übersprungen. Random value ({randomValue}) > SpawnChance ({flowerSpawnChance})");
-            return;
+            Debug.LogError($"[ObjectManager] {(highGrass ? "High" : "Low")} grass prefab is not assigned!");
+            return null;
         }
 
-        // Debug-Log für die Flower-Spawn-Logik
-        Debug.Log($"[ObjectManager] Versuche Blumen zu spawnen. {flowerPrefabs.Length} Blumen-Prefabs verfügbar. SpawnChance: {flowerSpawnChance}");
-
-        // Sort flowers by rarity (Epic is most rare)
-        var sortedFlowers = flowerPrefabs
-            .OrderByDescending(f => f.rarity)
-            .ToArray();
-
-        foreach (var flower in sortedFlowers)
+        Debug.Log($"[ObjectManager] Creating grass: {grassPrefab.name} at position {position}");
+        var grass = Instantiate(grassPrefab, position, Quaternion.Euler(0, Random.Range(0, 360), 0), objectContainer);
+        
+        // Check for SpriteRenderer or add one if missing
+        var spriteRenderer = grass.GetComponent<SpriteRenderer>();
+        if (spriteRenderer == null)
         {
-            if (Random.value <= flower.replacementChance)
+            // Try to find SpriteRenderer in children
+            spriteRenderer = grass.GetComponentInChildren<SpriteRenderer>();
+            if (spriteRenderer == null)
             {
-                // Create flower at grass position
-                Vector3 position = grassObject.transform.position;
-                var flowerInstance = Instantiate(flower.flowerPrefab, position, Quaternion.Euler(0, Random.Range(0, 360), 0), objectContainer);
-                
-                Debug.Log($"[ObjectManager] Blume gespawnt: {flower.flowerPrefab.name} an Position {position}. Rarity: {flower.rarity}");
-                
-                // Set sorting layer and order (using same as grass)
-                var spriteRenderer = flowerInstance.GetComponent<SpriteRenderer>();
-                if (spriteRenderer != null)
-                {
-                    spriteRenderer.sortingLayerName = sortingLayerName;
-                    spriteRenderer.sortingOrder = grassObject.GetComponent<SpriteRenderer>()?.sortingOrder ?? lowGrassSortingOrder;
-                }
-
-                // Set layer to IgnorePlayer like grass
-                flowerInstance.layer = LayerMask.NameToLayer("IgnorePlayer");
-                foreach (Transform child in flowerInstance.transform)
-                    child.gameObject.layer = LayerMask.NameToLayer("IgnorePlayer");
-
-                // Add FlowerInteraction component if not already present
-                if (!flowerInstance.GetComponent<FlowerInteraction>())
-                {
-                    flowerInstance.AddComponent<FlowerInteraction>();
-                }
-
-                // Random scale variation
-                float scale = Random.Range(0.8f, 1.2f);
-                flowerInstance.transform.localScale *= scale;
-
-                // Destroy the grass
-                Destroy(grassObject);
-                return; // Only replace with one flower
+                Debug.LogWarning($"[ObjectManager] No SpriteRenderer found on grass: {grass.name}. Make sure the grass prefab has a SpriteRenderer component!");
             }
         }
-    }
 
-private GameObject CreateGrass(Vector3 position, bool highGrass)
-{
-    GameObject grassPrefab = highGrass ? highGrassPrefab : lowGrassPrefab;
-    if (grassPrefab == null)
-    {
-        Debug.LogWarning($"[ObjectManager] Grass Prefab ist null! highGrass: {highGrass}");
-        return null;
-    }
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.sortingLayerName = sortingLayerName;
+            spriteRenderer.sortingOrder = highGrass ? highGrassSortingOrder : lowGrassSortingOrder;
+            Debug.Log($"[ObjectManager] Configured SpriteRenderer for {grass.name}. Layer: {sortingLayerName}, Order: {spriteRenderer.sortingOrder}");
+        }
 
-    Debug.Log($"[ObjectManager] Erstelle Gras: {grassPrefab.name} an Position {position}");
-    var grass = Instantiate(grassPrefab, position, Quaternion.Euler(0, Random.Range(0, 360), 0), objectContainer);
-    
-    var spriteRenderer = grass.GetComponent<SpriteRenderer>();
-    if (spriteRenderer != null)
-    {
-        spriteRenderer.sortingLayerName = sortingLayerName;
-        spriteRenderer.sortingOrder = highGrass ? highGrassSortingOrder : lowGrassSortingOrder;
-        Debug.Log($"[ObjectManager] Sprite Renderer konfiguriert für {grass.name}. Layer: {sortingLayerName}, Order: {spriteRenderer.sortingOrder}");
-    }
-    else
-    {
-        Debug.LogWarning($"[ObjectManager] Kein SpriteRenderer gefunden auf Gras: {grass.name}");
-    }
+        // Only try to replace with flower if we have valid flower prefabs
+        if (flowerPrefabs != null && flowerPrefabs.Length > 0 && flowerPrefabs.All(f => f != null))
+        {
+            ReplaceGrassWithFlowers(grass);
+        }
+        else
+        {
+            Debug.LogWarning("[ObjectManager] No valid flower prefabs configured, skipping flower replacement");
+        }
 
-    // Try to replace with flower, regardless of grass prefab name
-    ReplaceGrassWithFlowers(grass);
-
-    return grass;
-}
+        return grass;
+    }
 }

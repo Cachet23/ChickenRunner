@@ -1837,11 +1837,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8e69b1589ead4feaa38f8e98f2749d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  statsUIPrefab: {fileID: 6442454213096952268, guid: d9c02d78a934f4b35b6917090ebd4177, type: 3}
+  manaRegenPerSecond: 3
+  attackRange: 2.5
+  attackDamage: 20
+  attackManaCost: 10
   maxHealth: 100
-  maxStamina: 100
+  maxStamina: 300
   maxMana: 100
   staminaDrainPerSecond: 10
-  staminaRegenPerSecond: 5
+  staminaRegenPerSecond: 20
   staminaRegenDelay: 1
 --- !u!1 &2056643463
 GameObject:

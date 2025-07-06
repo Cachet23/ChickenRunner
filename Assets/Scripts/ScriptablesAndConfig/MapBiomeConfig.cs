@@ -67,9 +67,8 @@ public class MapBiomeConfig : ScriptableObject
     public List<CreatureConfig> creatures = new List<CreatureConfig>();
 
     [Header("Flower Settings")]
-    public FlowerConfig[] flowerPrefabs;
-    [Range(0f, 1f)]
-    public float flowerSpawnChance = 0.3f; // Overall chance to replace grass with any flower
+    [Tooltip("Direct references to prefabs with FlowerInteraction component")]
+    public GameObject[] flowerPrefabs;
 
     [Header("Water Settings")]
     public GameObject waterPrefab;     // Das 3D Water Object Prefab

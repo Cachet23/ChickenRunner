@@ -7,7 +7,6 @@ public class BasicCreatureBehavior : CreatureBehavior
     [SerializeField] private float turnSpeed = 2f;                // How quickly it turns towards target
     [SerializeField] private float acceleration = 0.5f;           // How quickly it speeds up/slows down
     [SerializeField] private float obstacleDetectionRadius = 2f;  // Radius for detecting obstacles
-    [SerializeField] private float roadAvoidanceDistance = 3f;    // Distance to avoid roads
     [SerializeField] private LayerMask obstacleLayer;             // Layer mask for obstacles
     
     private Vector2 currentVelocity;                              // Current movement direction and speed
@@ -130,13 +129,13 @@ public class BasicCreatureBehavior : CreatureBehavior
 
     private bool IsOnWater(Vector3Int tilePos)
     {
-        var waterLayer = GameObject.FindObjectOfType<BaseMapManager>()?.waterLayer;
+        var waterLayer = Object.FindAnyObjectByType<BaseMapManager>(FindObjectsInactive.Exclude)?.waterLayer;
         return waterLayer != null && waterLayer.HasTile(tilePos);
     }
 
     private bool IsNearRoad(Vector3Int tilePos)
     {
-        var roadLayer = GameObject.FindObjectOfType<BaseMapManager>()?.roadLayer;
+        var roadLayer = Object.FindAnyObjectByType<BaseMapManager>(FindObjectsInactive.Exclude)?.roadLayer;
         if (roadLayer == null) return false;
 
         // Check surrounding tiles for roads
