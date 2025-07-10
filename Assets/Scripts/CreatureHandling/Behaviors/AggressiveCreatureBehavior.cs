@@ -110,11 +110,16 @@ public class AggressiveCreatureBehavior : CreatureBehavior
         if (distanceToPlayer <= myStats.AttackRange)
         {
             // In attack range - try to attack
+            Debug.Log($"[AggressiveCreatureBehavior] {gameObject.name} trying to attack player. Range={distanceToPlayer}, AttackRange={myStats.AttackRange}");
             if (myStats.TryAttack(playerStats))
             {
                 // Attacke war erfolgreich - bleib stehen
                 mover.SetInput(Vector2.zero, playerTransform.position, false, false);
                 return;
+            }
+            else
+            {
+                Debug.Log($"[AggressiveCreatureBehavior] {gameObject.name} attack failed");
             }
         }
         

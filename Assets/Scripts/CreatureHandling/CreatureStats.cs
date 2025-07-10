@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Linq;
 
 public class CreatureStats : MonoBehaviour
 {
@@ -7,6 +8,8 @@ public class CreatureStats : MonoBehaviour
     [SerializeField] private GameObject statsUIPrefab;
     private GameObject activeUI;
     private bool isTargeted = false;
+    private float lastCooldownUpdate = 0f;
+    private const float COOLDOWN_UPDATE_INTERVAL = 0.05f; // Update alle 0.05 Sekunden für smoothe Animation
 
     [Header("Mana Settings")]
     [SerializeField] private float manaRegenPerSecond = 3f; // Regenerate 3 mana per second
@@ -35,6 +38,7 @@ public class CreatureStats : MonoBehaviour
     {
         bool isReady = Time.time >= nextAttackTime;
         bool hasMana = HasEnoughMana(attackManaCost);
+        Debug.Log($"[CreatureStats] {gameObject.name} CanAttack check: Ready={isReady}, HasMana={hasMana}, CurrentMana={currentMana}, Cost={attackManaCost}");
         return isReady && hasMana;
     }
 
@@ -50,6 +54,7 @@ public class CreatureStats : MonoBehaviour
     {
         if (!CanAttack() || !IsInAttackRange(target))
         {
+            Debug.Log($"[CreatureStats] {gameObject.name} can't attack: CanAttack={CanAttack()}, InRange={IsInAttackRange(target)}");
             return false;
         }
 
@@ -59,8 +64,9 @@ public class CreatureStats : MonoBehaviour
         
         // Setze Cooldown
         nextAttackTime = Time.time + attackCooldown;
+        OnCooldownProgress?.Invoke(0f); // Signal cooldown start (0 = gerade benutzt)
         
-        Debug.Log($"[CreatureStats] {gameObject.name} attacked {target.gameObject.name} for {attackDamage} damage");
+        Debug.Log($"[CreatureStats] {gameObject.name} attacked {target.gameObject.name} for {attackDamage} damage. Mana cost: {attackManaCost}, New mana: {currentMana}");
         return true;
     }
     [Header("Stats Configuration")]
@@ -82,12 +88,21 @@ public class CreatureStats : MonoBehaviour
     public event Action<float> OnHealthChanged;
     public event Action<float> OnStaminaChanged;
     public event Action<float> OnManaChanged;
+    public event Action<float> OnCooldownProgress; // 0 = ready, 1 = just started cooldown
+
+    public float GetCooldownProgress()
+    {
+        if (Time.time >= nextAttackTime) return 1f; // Voll gefüllt wenn Attacke bereit
+        float remainingTime = nextAttackTime - Time.time;
+        return 1f - (remainingTime / attackCooldown); // Von 0 (gerade benutzt) bis 1 (bereit)
+    }
 
     private void Start()
     {
         currentHealth = maxHealth;
         currentStamina = maxStamina;
         currentMana = maxMana;
+        lastCooldownUpdate = Time.time;
 
         // Initial events triggern
         OnHealthChanged?.Invoke(GetHealthPercent());
@@ -97,9 +112,7 @@ public class CreatureStats : MonoBehaviour
 
     private void Update()
     {
-        // Nur der Player soll regenerieren
-        if (!CompareTag("Dice")) return;
-
+        // Regeneration für alle Creatures
         // Stamina Regeneration
         if (Time.time > lastStaminaUseTime + staminaRegenDelay)
         {
@@ -110,6 +123,19 @@ public class CreatureStats : MonoBehaviour
         if (currentMana < maxMana)
         {
             ModifyMana(manaRegenPerSecond * Time.deltaTime);
+            if (!CompareTag("Dice"))
+            {
+                Debug.Log($"[CreatureStats] {gameObject.name} regenerating mana: {currentMana}/{maxMana}");
+            }
+        }
+
+        // Update cooldown progress if targeted
+        if (isTargeted && Time.time >= lastCooldownUpdate + COOLDOWN_UPDATE_INTERVAL)
+        {
+            lastCooldownUpdate = Time.time;
+            float progress = GetCooldownProgress();
+            OnCooldownProgress?.Invoke(progress);
+            Debug.Log($"[CreatureStats] {gameObject.name} Cooldown Update: {progress:F2}");
         }
     }
 
@@ -185,9 +211,12 @@ public class CreatureStats : MonoBehaviour
             activeUI = Instantiate(statsUIPrefab, transform.position, Quaternion.identity);
             activeUI.transform.SetParent(GameObject.Find("Canvas")?.transform, true);
 
-            // Get references to sliders
+            // Get references to sliders and cooldown image
             var sliders = activeUI.GetComponentsInChildren<UnityEngine.UI.Slider>();
-            Debug.Log($"[CreatureStats] Found {sliders.Length} sliders");
+            var allImages = activeUI.GetComponentsInChildren<UnityEngine.UI.Image>(true);
+            var cooldownImage = allImages.FirstOrDefault(img => img.gameObject.name.ToLower().Contains("cooldown"));
+
+            Debug.Log($"[CreatureStats] Found {sliders.Length} sliders and {allImages.Length} images");
             foreach (var slider in sliders)
             {
                 Debug.Log($"[CreatureStats] Found slider: {slider.name}");
@@ -215,6 +244,30 @@ public class CreatureStats : MonoBehaviour
                         slider.value = GetStaminaPercent();
                         break;
                 }
+            }
+
+            // Setup cooldown UI if found
+            if (cooldownImage != null && cooldownImage.name.ToLower().Contains("cooldown"))
+            {
+                cooldownImage.type = UnityEngine.UI.Image.Type.Filled;
+                cooldownImage.fillMethod = UnityEngine.UI.Image.FillMethod.Radial360;
+                cooldownImage.fillOrigin = (int)UnityEngine.UI.Image.Origin360.Top;
+                cooldownImage.fillClockwise = true;
+                cooldownImage.fillAmount = 1f; // Start ready
+                cooldownImage.gameObject.SetActive(true);
+
+                OnCooldownProgress += (progress) => {
+                    if (cooldownImage != null)
+                    {
+                        cooldownImage.fillAmount = progress;
+                        Debug.Log($"[CreatureStats] {gameObject.name} cooldown progress: {progress:F2}, Time: {Time.time:F2}, NextAttack: {nextAttackTime:F2}");
+                    }
+                };
+                Debug.Log($"[CreatureStats] Found and initialized cooldown UI for {gameObject.name}");
+            }
+            else
+            {
+                Debug.LogWarning($"[CreatureStats] No cooldown UI image found in {gameObject.name}!");
             }
         }
         else if (statsUIPrefab == null)
@@ -247,6 +300,7 @@ public class CreatureStats : MonoBehaviour
             OnHealthChanged = null;
             OnManaChanged = null;
             OnStaminaChanged = null;
+            OnCooldownProgress = null;
             Destroy(activeUI);
             activeUI = null;
         }
