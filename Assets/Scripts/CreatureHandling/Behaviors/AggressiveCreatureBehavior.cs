@@ -5,7 +5,8 @@ public class AggressiveCreatureBehavior : CreatureBehavior
 {
     private float alignmentTime = 3f;          // Time to align towards player
     private float chaseSpeed = 1.5f;           // Speed multiplier when chasing
-    private const float STAMINA_SPRINT_THRESHOLD = 0.5f;  // 50% Stamina für Sprint
+    private const float STAMINA_SPRINT_THRESHOLD = 0.95f;  // Warte bis 95% Stamina zum erneuten Sprint
+    private const float STAMINA_EXHAUSTED_THRESHOLD = 0.05f;  // Bei 5% Stamina ist erschöpft
 
     private Transform playerTransform;
     private bool isAligning = false;
@@ -90,15 +91,18 @@ public class AggressiveCreatureBehavior : CreatureBehavior
 
         // Stamina Management
         float currentStaminaPercent = myStats.GetStaminaPercent();
+        
+        // Wenn erschöpft, warte auf fast volle Regeneration
         if (!canSprint && currentStaminaPercent >= STAMINA_SPRINT_THRESHOLD)
         {
             canSprint = true;
-            Debug.Log($"[AggressiveCreatureBehavior] {gameObject.name} recovered enough stamina to sprint again");
+            Debug.Log($"[AggressiveCreatureBehavior] {gameObject.name} Stamina voll regeneriert ({currentStaminaPercent:P0}), beginne Sprint");
         }
-        else if (canSprint && currentStaminaPercent < 0.1f) // Wenn fast leer, Sprint stoppen
+        // Wenn Stamina fast leer, stoppe Sprint und warte auf Regeneration
+        else if (canSprint && currentStaminaPercent <= STAMINA_EXHAUSTED_THRESHOLD)
         {
             canSprint = false;
-            Debug.Log($"[AggressiveCreatureBehavior] {gameObject.name} too exhausted to sprint");
+            Debug.Log($"[AggressiveCreatureBehavior] {gameObject.name} Stamina erschöpft ({currentStaminaPercent:P0}), regeneriere...");
         }
 
         var playerStats = playerTransform.GetComponent<CreatureStats>();
@@ -110,16 +114,11 @@ public class AggressiveCreatureBehavior : CreatureBehavior
         if (distanceToPlayer <= myStats.AttackRange)
         {
             // In attack range - try to attack
-            Debug.Log($"[AggressiveCreatureBehavior] {gameObject.name} trying to attack player. Range={distanceToPlayer}, AttackRange={myStats.AttackRange}");
             if (myStats.TryAttack(playerStats))
             {
                 // Attacke war erfolgreich - bleib stehen
                 mover.SetInput(Vector2.zero, playerTransform.position, false, false);
                 return;
-            }
-            else
-            {
-                Debug.Log($"[AggressiveCreatureBehavior] {gameObject.name} attack failed");
             }
         }
         

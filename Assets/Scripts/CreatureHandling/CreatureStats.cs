@@ -38,7 +38,6 @@ public class CreatureStats : MonoBehaviour
     {
         bool isReady = Time.time >= nextAttackTime;
         bool hasMana = HasEnoughMana(attackManaCost);
-        Debug.Log($"[CreatureStats] {gameObject.name} CanAttack check: Ready={isReady}, HasMana={hasMana}, CurrentMana={currentMana}, Cost={attackManaCost}");
         return isReady && hasMana;
     }
 
@@ -54,7 +53,6 @@ public class CreatureStats : MonoBehaviour
     {
         if (!CanAttack() || !IsInAttackRange(target))
         {
-            Debug.Log($"[CreatureStats] {gameObject.name} can't attack: CanAttack={CanAttack()}, InRange={IsInAttackRange(target)}");
             return false;
         }
 
@@ -66,7 +64,7 @@ public class CreatureStats : MonoBehaviour
         nextAttackTime = Time.time + attackCooldown;
         OnCooldownProgress?.Invoke(0f); // Signal cooldown start (0 = gerade benutzt)
         
-        Debug.Log($"[CreatureStats] {gameObject.name} attacked {target.gameObject.name} for {attackDamage} damage. Mana cost: {attackManaCost}, New mana: {currentMana}");
+        Debug.Log($"[CreatureStats] {gameObject.name} attacked {target.gameObject.name} for {attackDamage} damage");
         return true;
     }
     [Header("Stats Configuration")]
@@ -112,7 +110,9 @@ public class CreatureStats : MonoBehaviour
 
     private void Update()
     {
-        // Regeneration für alle Creatures
+        // Nur der Player soll regenerieren
+        if (!CompareTag("Dice")) return;
+
         // Stamina Regeneration
         if (Time.time > lastStaminaUseTime + staminaRegenDelay)
         {
@@ -123,10 +123,6 @@ public class CreatureStats : MonoBehaviour
         if (currentMana < maxMana)
         {
             ModifyMana(manaRegenPerSecond * Time.deltaTime);
-            if (!CompareTag("Dice"))
-            {
-                Debug.Log($"[CreatureStats] {gameObject.name} regenerating mana: {currentMana}/{maxMana}");
-            }
         }
 
         // Update cooldown progress if targeted

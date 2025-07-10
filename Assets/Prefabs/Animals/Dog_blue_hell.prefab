@@ -607,7 +607,7 @@ MonoBehaviour:
   maxStamina: 30
   maxMana: 100
   staminaDrainPerSecond: 10
-  staminaRegenPerSecond: 5
+  staminaRegenPerSecond: 25
   staminaRegenDelay: 1
 --- !u!1 &2735724662372591797
 GameObject:
