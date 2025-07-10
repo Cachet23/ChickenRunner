@@ -602,7 +602,7 @@ MonoBehaviour:
   attackDamage: 20
   attackManaCost: 10
   maxHealth: 100
-  maxStamina: 100
+  maxStamina: 30
   maxMana: 100
   staminaDrainPerSecond: 10
   staminaRegenPerSecond: 5

@@ -132,10 +132,10 @@ public class FlowerInteraction : MonoBehaviour
         {
             string rarityColor = rarity switch
             {
-                FlowerConfig.Rarity.Common => "white",
-                FlowerConfig.Rarity.Rare => "cyan",
-                FlowerConfig.Rarity.Epic => "magenta",
-                _ => "white"
+                FlowerConfig.Rarity.Common => "#FFFFFF",  // White
+                FlowerConfig.Rarity.Rare => "#00FFFF",   // Cyan
+                FlowerConfig.Rarity.Epic => "#FF00FF",   // Magenta
+                _ => "#FFFFFF"
             };
 
             string effectsText = GetEffectsDescription();

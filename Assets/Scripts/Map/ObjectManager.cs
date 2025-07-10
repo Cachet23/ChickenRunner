@@ -551,20 +551,29 @@ public void RemoveBiomeWall()
             return;
         }
 
-        // Validate flower prefabs first
-        var validPrefabs = flowerPrefabs.Where(p => p != null && p.GetComponent<FlowerInteraction>() != null).ToArray();
-        if (validPrefabs.Length == 0)
-        {
-            Debug.LogWarning("[ObjectManager] No valid flower prefabs (with FlowerInteraction component) found!");
-            return;
-        }
-
         // First check if we should spawn a flower at all
         if (Random.value > flowerSpawnChance)
         {
             Debug.Log($"[ObjectManager] Skipping flower spawn. Random value > SpawnChance ({flowerSpawnChance})");
             return;
         }
+
+        // Validate flower prefabs and get their configured rarities
+        var validPrefabs = flowerPrefabs
+            .Where(p => p != null && p.GetComponent<FlowerInteraction>() != null)
+            .Select(p => (prefab: p, interaction: p.GetComponent<FlowerInteraction>()))
+            .ToArray();
+
+        if (validPrefabs.Length == 0)
+        {
+            Debug.LogWarning("[ObjectManager] No valid flower prefabs (with FlowerInteraction component) found!");
+            return;
+        }
+
+        // Group prefabs by their configured rarity
+        var prefabsByRarity = validPrefabs
+            .GroupBy(p => p.interaction.Rarity)
+            .ToDictionary(g => g.Key, g => g.ToList());
 
         // Select random rarity based on configured chances
         float randomValue = Random.value;
@@ -575,17 +584,23 @@ public void RemoveBiomeWall()
         else if (randomValue < FlowerConfig.RARE_REPLACE_CHANCE)
             chosenRarity = FlowerConfig.Rarity.Rare;
 
-        // Select a random flower prefab from valid ones
-        var randomPrefab = validPrefabs[Random.Range(0, validPrefabs.Length)];
+        // Try to get a prefab of the chosen rarity
+        if (!prefabsByRarity.TryGetValue(chosenRarity, out var matchingPrefabs))
+        {
+            Debug.LogWarning($"[ObjectManager] No flower prefabs found for rarity {chosenRarity}, using random prefab instead.");
+            var randomPair = validPrefabs[Random.Range(0, validPrefabs.Length)];
+            matchingPrefabs = new List<(GameObject prefab, FlowerInteraction interaction)> { randomPair };
+            chosenRarity = randomPair.interaction.Rarity;
+        }
+
+        // Select a random prefab from the matching ones
+        var selectedPair = matchingPrefabs[Random.Range(0, matchingPrefabs.Count)];
         
         // Spawn the flower
         var position = grassObject.transform.position;
         var rotation = Quaternion.Euler(0f, Random.Range(0f, 360f), 0f);
-        var flowerObject = Instantiate(randomPrefab, position, rotation, objectContainer);
+        var flowerObject = Instantiate(selectedPair.prefab, position, rotation, objectContainer);
 
-        // Set the rarity on the FlowerInteraction component
-        var flowerInteraction = flowerObject.GetComponent<FlowerInteraction>();
-        flowerInteraction.Rarity = chosenRarity;
         Debug.Log($"[ObjectManager] Spawned {chosenRarity} flower at {position}");
 
         // Remove the grass

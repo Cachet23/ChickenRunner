@@ -932,6 +932,8 @@ GameObject:
   - component: {fileID: 5883155896844355907}
   - component: {fileID: 5883155896844355916}
   - component: {fileID: 6566607112222167781}
+  - component: {fileID: -781055748814350653}
+  - component: {fileID: -3450783899006512701}
   m_Layer: 0
   m_Name: Tiger_001
   m_TagString: Untagged
@@ -1039,6 +1041,49 @@ SortingGroup:
   m_SortingLayer: 7
   m_SortingOrder: 0
   m_SortAtRoot: 0
+--- !u!114 &-781055748814350653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5883155896844355918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8e69b1589ead4feaa38f8e98f2749d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statsUIPrefab: {fileID: 6442454213096952268, guid: d9c02d78a934f4b35b6917090ebd4177, type: 3}
+  manaRegenPerSecond: 3
+  attackRange: 2.5
+  attackDamage: 20
+  attackManaCost: 10
+  maxHealth: 100
+  maxStamina: 100
+  maxMana: 100
+  staminaDrainPerSecond: 10
+  staminaRegenPerSecond: 5
+  staminaRegenDelay: 1
+--- !u!114 &-3450783899006512701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5883155896844355918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0526656f9aac4363a0157df67603ffe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  settings:
+    useBasicBehavior: 1
+    isBasicDefault: 1
+    useAggressiveBehavior: 1
+    aggressiveActivationDistance: 20
+    alignmentTime: 5
+    chaseSpeed: 1.5
+  checkInterval: 0.5
 --- !u!1 &6083925854692512673
 GameObject:
   m_ObjectHideFlags: 0
