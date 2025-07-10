@@ -99,18 +99,21 @@ namespace Controller
                 // Player attack logic (press 'J' to attack nearest creature in range)
                 if (Input.GetKeyDown(KeyCode.J) && currentTarget != null)
                 {
-                    float attackDamage = m_Stats.AttackDamage;
-                    float attackManaCost = m_Stats.AttackManaCost;
-                    // Check if enough mana for attack
-                    if (m_Stats.HasEnoughStamina(0.1f) && m_Stats.HasEnoughMana(attackManaCost))
+                    // Versuche Attacke auszuführen
+                    if (m_Stats.HasEnoughStamina(0.1f))  // Kleine Stamina-Kosten als "Schwung"-Requirement
                     {
-                        currentTarget.ModifyHealth(-attackDamage);
-                        m_Stats.ModifyMana(-attackManaCost);
-                        Debug.Log($"Attacked {currentTarget.gameObject.name} for {attackDamage} damage. Mana used: {attackManaCost}");
+                        if (m_Stats.TryAttack(currentTarget))
+                        {
+                            m_Stats.ModifyStamina(-0.1f);  // Ziehe Stamina ab wenn Attacke erfolgreich
+                        }
+                        else
+                        {
+                            Debug.Log("Attack failed - Target not in range or attack on cooldown");
+                        }
                     }
                     else
                     {
-                        Debug.Log("Not enough mana to attack.");
+                        Debug.Log("Not enough stamina to attack");
                     }
                 }
             }

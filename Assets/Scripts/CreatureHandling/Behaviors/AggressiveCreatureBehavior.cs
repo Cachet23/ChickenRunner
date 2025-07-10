@@ -3,8 +3,16 @@ using System.Collections;
 
 public class AggressiveCreatureBehavior : CreatureBehavior
 {
-        private float alignmentTime = 3f;          // Time to align towards player
+    private float alignmentTime = 3f;          // Time to align towards player
     private float chaseSpeed = 1.5f;           // Speed multiplier when chasing
+    private const float STAMINA_SPRINT_THRESHOLD = 0.5f;  // 50% Stamina für Sprint
+
+    private Transform playerTransform;
+    private bool isAligning = false;
+    private bool isChasing = false;
+    private float alignmentTimer = 0f;
+    private CreatureStats myStats;
+    private bool canSprint = true;
 
     public void SetSettings(float alignTime, float speed)
     {
@@ -12,15 +20,11 @@ public class AggressiveCreatureBehavior : CreatureBehavior
         chaseSpeed = speed;
     }
 
-    private Transform playerTransform;
-    private bool isAligning = false;
-    private bool isChasing = false;
-    private float alignmentTimer = 0f;
-
     protected override void Awake()
     {
         base.Awake();
         playerTransform = GameObject.FindWithTag("Dice")?.transform;
+        myStats = GetComponent<CreatureStats>();
         
         if (playerTransform == null)
         {
@@ -78,15 +82,27 @@ public class AggressiveCreatureBehavior : CreatureBehavior
         directionToPlayer.y = 0; // Keep it on the horizontal plane
         float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
         
-        // Get stats components
-        var myStats = GetComponent<CreatureStats>();
-        var playerStats = playerTransform.GetComponent<CreatureStats>();
-        
-        if (myStats == null || playerStats == null)
+        if (myStats == null)
         {
             Debug.LogWarning("[AggressiveCreatureBehavior] Missing CreatureStats component!");
             return;
         }
+
+        // Stamina Management
+        float currentStaminaPercent = myStats.GetStaminaPercent();
+        if (!canSprint && currentStaminaPercent >= STAMINA_SPRINT_THRESHOLD)
+        {
+            canSprint = true;
+            Debug.Log($"[AggressiveCreatureBehavior] {gameObject.name} recovered enough stamina to sprint again");
+        }
+        else if (canSprint && currentStaminaPercent < 0.1f) // Wenn fast leer, Sprint stoppen
+        {
+            canSprint = false;
+            Debug.Log($"[AggressiveCreatureBehavior] {gameObject.name} too exhausted to sprint");
+        }
+
+        var playerStats = playerTransform.GetComponent<CreatureStats>();
+        if (playerStats == null) return;
 
         // Attack range check (subtract 1 to maintain some distance)
         float targetDistance = myStats.AttackRange - 1f;
@@ -94,10 +110,9 @@ public class AggressiveCreatureBehavior : CreatureBehavior
         if (distanceToPlayer <= myStats.AttackRange)
         {
             // In attack range - try to attack
-            if (myStats.CanAttack)
+            if (myStats.TryAttack(playerStats))
             {
-                myStats.TryAttack(playerStats);
-                // Stop moving when attacking
+                // Attacke war erfolgreich - bleib stehen
                 mover.SetInput(Vector2.zero, playerTransform.position, false, false);
                 return;
             }
@@ -107,7 +122,8 @@ public class AggressiveCreatureBehavior : CreatureBehavior
         if (distanceToPlayer > targetDistance)
         {
             Vector2 input = new Vector2(directionToPlayer.x, directionToPlayer.z);
-            mover.SetInput(input * chaseSpeed, playerTransform.position, true, false);
+            bool shouldRun = canSprint && distanceToPlayer > myStats.AttackRange * 1.5f; // Sprint nur wenn weiter weg
+            mover.SetInput(input * (shouldRun ? chaseSpeed : 1f), playerTransform.position, shouldRun, false);
         }
         else
         {

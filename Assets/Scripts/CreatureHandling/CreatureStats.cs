@@ -17,30 +17,50 @@ public class CreatureStats : MonoBehaviour
     // Event for death notification
     public event Action<CreatureStats> OnDeath;
     [Header("Attack Settings")]
-    [SerializeField] private float sightRange = 5f;     // Range at which we can see the target UI
-    [SerializeField] private float attackRange = 2.5f;  // Range at which we can actually attack
+    [SerializeField] private float attackRange = 2.5f;
     [SerializeField] private float attackDamage = 20f;
     [SerializeField] private float attackManaCost = 10f;
-    [SerializeField] private float attackSpeed = 1.5f;  // Attacks per second
+    [SerializeField] private float attackCooldown = 0.75f; // Zeit in Sekunden zwischen Attacken
     private float nextAttackTime = 0f;
 
-    public float SightRange => sightRange;
+    // UI & Targeting nur für Player relevant
+    [SerializeField] private float sightRange = 5f;
+    public float SightRange => CompareTag("Dice") ? sightRange : 0f;
     public float AttackRange => attackRange;
     public float AttackDamage => attackDamage;
     public float AttackManaCost => attackManaCost;
-    
-    public bool CanAttack => Time.time >= nextAttackTime && HasEnoughMana(attackManaCost);
 
+    // Prüft ob die Creature attackieren kann (Cooldown & Mana)
+    public bool CanAttack()
+    {
+        bool isReady = Time.time >= nextAttackTime;
+        bool hasMana = HasEnoughMana(attackManaCost);
+        return isReady && hasMana;
+    }
+
+    // Prüft ob ein Target in Range ist
+    public bool IsInAttackRange(CreatureStats target)
+    {
+        if (target == null) return false;
+        return Vector3.Distance(transform.position, target.transform.position) <= attackRange;
+    }
+
+    // Zentrale Attack-Methode
     public bool TryAttack(CreatureStats target)
     {
-        if (!CanAttack) return false;
-        
-        // Apply damage and consume mana
+        if (!CanAttack() || !IsInAttackRange(target))
+        {
+            return false;
+        }
+
+        // Führe Attacke aus
         target.ModifyHealth(-attackDamage);
         ModifyMana(-attackManaCost);
         
-        // Reset attack timer
-        nextAttackTime = Time.time + (1f / attackSpeed);
+        // Setze Cooldown
+        nextAttackTime = Time.time + attackCooldown;
+        
+        Debug.Log($"[CreatureStats] {gameObject.name} attacked {target.gameObject.name} for {attackDamage} damage");
         return true;
     }
     [Header("Stats Configuration")]
@@ -214,11 +234,21 @@ public class CreatureStats : MonoBehaviour
     {
         if (activeUI != null)
         {
-            // Remove all event handlers
+            // Nur UI ausblenden, Event-Handler beibehalten
+            activeUI.SetActive(false);
+        }
+    }
+
+    // Event-Handler nur beim wirklichen Zerstören des UIs entfernen
+    private void CleanupStatsUI()
+    {
+        if (activeUI != null)
+        {
             OnHealthChanged = null;
             OnManaChanged = null;
             OnStaminaChanged = null;
-            activeUI.SetActive(false);
+            Destroy(activeUI);
+            activeUI = null;
         }
     }
 
@@ -275,10 +305,7 @@ public class CreatureStats : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (activeUI != null)
-        {
-            Destroy(activeUI);
-        }
+        CleanupStatsUI();
     }
 
     // Properties für Max-Werte
