@@ -1,0 +1,59 @@
+@startuml MapGenerationProcess
+skinparam linetype ortho
+skinparam packageStyle rectangle
+skinparam componentStyle uml2
+left to right direction
+
+package "Map Generation Core" {
+    [MapGenerationManager] as MGM
+    [BaseMapManager] as BMM
+    [ObjectManager] as OM
+    [TileManager] as TM
+    [RoadManager] as RM
+    [WaterManager] as WM
+}
+
+package "Region Types" {
+    interface "BaseRegion" as BR
+    class "EarthRegion" as ER
+    class "GrassRegion" as GR
+    class "LakeRegion" as LR
+    class "HouseRegion" as HR
+}
+
+package "Configuration" {
+    class "MapBiomeConfig" as MBC {
+        +biomeSize: Vector2Int
+        +earthTile: Tile
+        +grassTile: Tile
+        +waterTile: Tile
+        +roadTile: RuleTile
+    }
+}
+
+' Generation Flow
+MGM --> BMM : 1. Generate Base Terrain
+MGM --> OM : 2. Place Houses
+MGM --> BMM : 3. Detect Regions
+MGM --> TM : 4. Enhance Terrain
+MGM --> RM : 5. Build Roads
+MGM --> OM : 6. Place Vegetation
+MGM --> WM : 7. Add Water Effects
+
+' Region Inheritance
+BR <|-- ER
+BR <|-- GR
+BR <|-- LR
+BR <|-- HR
+
+' Region Usage
+BMM --> BR : creates
+BMM --> MBC : uses config
+
+' Dependencies
+OM --> BMM : uses regions
+TM --> BMM : uses regions
+RM --> BMM : uses regions
+WM --> BMM : uses regions
+
+@enduml

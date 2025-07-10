@@ -1,0 +1,196 @@
+@startuml
+' Layout und Style
+left to right direction
+skinparam packageStyle rectangle
+skinparam linetype ortho
+
+' Player- und Level-Komponenten
+package "Player & Level" {
+  class LevelManager {
+    +biomeConfigs: List<MapBiomeConfig>
+    +wallPrefab: GameObject
+    +fogPrefab: GameObject
+    +OnMapGenerationComplete()
+  }
+  class PlayerRemover {
+    -rotationSpeed: float
+    -ascensionSpeed: float
+    -startDelay: float
+    +Start()
+    +CheckHealth(healthPercent)
+    +StartDeathSequence()
+    +Update()
+  }
+  class PlayerSpawner {
+    -playerCreature: GameObject
+    -roof: GameObject
+    +OnMapGenerationComplete()
+    +FindValidSpawnPosition(): Vector3?
+  }
+  class CameraFollow {
+    +target: Transform
+    +offset: Vector3
+    +LateUpdate()
+  }
+  class DiceController {
+    +moveSpeed: float
+    +FixedUpdate()
+  }
+  LevelManager --> MapGenerationManager : erstellt
+  PlayerRemover ..> CreatureStats : subscribes to
+  PlayerRemover ..> MovePlayerInput
+  PlayerRemover ..> CreatureMover
+  PlayerRemover ..> CharacterController
+  PlayerSpawner --> MapGenerationManager : subscribes to
+}
+
+' Flower-Komponenten
+package "Flower" {
+  class FlowerInteraction {
+    -rarity: FlowerConfig.Rarity
+    -healthRestoreAmount, staminaRestoreAmount, manaRestoreAmount: float
+    -interactionRadius: float
+    +ShowInteractionUI()
+    +EatFlower()
+  }
+  class Flower {
+    -rarity: FlowerConfig.Rarity
+  }
+  class FlowerConfig {
+    +enum Rarity { Common, Rare, Epic }
+    +GetReplacementChance(rarity): float
+  }
+  FlowerInteraction ..> FlowerConfig : uses
+  FlowerInteraction ..> CreatureStats : modifies
+}
+
+' Creature Handling
+package "Creature Handling" {
+  class CreatureManager {
+    -spawnedCreatures: List<GameObject>
+    +Initialize(mapManager, configs)
+    +SpawnCreatures()
+  }
+  class CreatureStats {
+    -currentHealth, currentStamina, currentMana: float
+    +OnHealthChanged(percent)
+    +OnDeath(this)
+    +ModifyHealth(amount)
+    +TryAttack(target)
+  }
+  class CreatureStatusUI {
+    +UpdateHealthBar(percent)
+    +UpdateStaminaBar(percent)
+    +UpdateManaBar(percent)
+  }
+  class BehaviorController {
+    -settings: BehaviorSettings
+    +UpdateBehavior()
+  }
+  abstract class CreatureBehavior {
+    +Initialize(bounds)
+    +Update()
+  }
+  class WanderingCreatureBehavior
+  class AggressiveCreatureBehavior {
+    +SetSettings(alignTime, chaseSpeed)
+  }
+  CreatureManager --> CreatureStats : instantiates & tracks
+  CreatureStats --> CreatureBehavior : feeds into (for UI targeting)
+  CreatureStatusUI ..> CreatureStats : subscribes to events
+  BehaviorController --> CreatureBehavior
+  CreatureBehavior <|-- WanderingCreatureBehavior
+  CreatureBehavior <|-- AggressiveCreatureBehavior
+}
+
+' Scriptable Configs
+package "Config (ScriptableObjects)" {
+  class CreatureConfig {
+    +creaturePrefab: GameObject
+    +spawnCount: int
+  }
+  class MapBiomeConfig {
+    +biomeSize: Vector2Int
+    +earthTile, grassTile, waterTile, roadTile: Tile
+    +creatures: List<CreatureConfig>
+    +flowerPrefabs: GameObject[]
+    +... (weitere Parameter)
+  }
+}
+
+' MiniMap
+package "MiniMap" {
+  class MinimapController {
+    +minimapCamera: Camera
+    +minimapImage: RawImage
+    +LateUpdate()
+  }
+  class MinimapCameraFollow {
+    +dice: Transform
+    +LateUpdate()
+  }
+}
+
+' Map-Generierung
+package "Map Generation" {
+  class MapGenerationManager {
+    -allBMM: List<BaseMapManager>
+    -allOM: List<ObjectManager>
+    -allTM: List<TileManager>
+    -roadManager: RoadManager
+    +GenerateAll()
+    +GetAllBaseMapManagers(): List<BaseMapManager>
+  }
+  class BaseMapManager {
+    +origin, biomeSize: Vector2Int
+    +GenerateBaseMap()
+    +DetectRegions()
+    +ValidateDependencies()
+  }
+  class ObjectManager {
+    +PlaceHouses()
+    +PlaceRemainingObjects()
+  }
+  class TileManager {
+    +EnhanceTerrain()
+  }
+  class WaterManager {
+    +SpawnWaterObjects()
+  }
+  class RoadManager {
+    +SetHouseFronts()
+    +BuildRoads()
+  }
+  abstract class BaseRegion
+  class EarthRegion
+  class GrassRegion
+  class LakeRegion
+  class HouseRegion
+  BaseRegion <|-- EarthRegion
+  BaseRegion <|-- GrassRegion
+  BaseRegion <|-- LakeRegion
+  BaseRegion <|-- HouseRegion
+
+  MapGenerationManager --> BaseMapManager
+  MapGenerationManager --> ObjectManager
+  MapGenerationManager --> TileManager
+  MapGenerationManager --> WaterManager
+  MapGenerationManager --> RoadManager
+  BaseMapManager --> BaseRegion : erzeugt
+  ObjectManager --> BaseMapManager : nutzt
+  TileManager --> BaseMapManager : nutzt
+  WaterManager --> BaseMapManager : nutzt
+  RoadManager --> BaseMapManager : nutzt
+  RoadManager --> ObjectManager : nutzt HouseFronts
+}
+
+' Debug / Test
+package "Test & Debug" {
+  class WallCollisionDebug {
+    +OnCollisionEnter()
+    +OnCollisionStay()
+  }
+  DiceController --> WallCollisionDebug : collides
+}
+
+@enduml
