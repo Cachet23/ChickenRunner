@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Dice
   - Creature
+  - CinemachineTarget
+  - Cooldown
   layers:
   - Default
   - TransparentFX

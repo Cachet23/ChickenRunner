@@ -52,19 +52,21 @@ public class CreatureStats : MonoBehaviour
     public bool TryAttack(CreatureStats target)
     {
         if (!CanAttack() || !IsInAttackRange(target))
-        {
             return false;
+
+        // Set attack cooldown
+        nextAttackTime = Time.time + attackCooldown;
+        
+        // Immediately notify about cooldown start
+        if (isTargeted)
+        {
+            OnCooldownProgress?.Invoke(1f);
         }
 
-        // Führe Attacke aus
-        target.ModifyHealth(-attackDamage);
+        // Apply attack effects
         ModifyMana(-attackManaCost);
+        target.ModifyHealth(-attackDamage);
         
-        // Setze Cooldown
-        nextAttackTime = Time.time + attackCooldown;
-        OnCooldownProgress?.Invoke(0f); // Signal cooldown start (0 = gerade benutzt)
-        
-        Debug.Log($"[CreatureStats] {gameObject.name} attacked {target.gameObject.name} for {attackDamage} damage");
         return true;
     }
     [Header("Stats Configuration")]
@@ -90,9 +92,12 @@ public class CreatureStats : MonoBehaviour
 
     public float GetCooldownProgress()
     {
-        if (Time.time >= nextAttackTime) return 1f; // Voll gefüllt wenn Attacke bereit
-        float remainingTime = nextAttackTime - Time.time;
-        return 1f - (remainingTime / attackCooldown); // Von 0 (gerade benutzt) bis 1 (bereit)
+        if (Time.time >= nextAttackTime) 
+            return 0f; // Attack is ready
+            
+        float totalCooldown = attackCooldown;
+        float remainingCooldown = nextAttackTime - Time.time;
+        return remainingCooldown / totalCooldown; // Returns 1.0 when cooldown just started, 0.0 when ready
     }
 
     private void Start()
@@ -110,28 +115,27 @@ public class CreatureStats : MonoBehaviour
 
     private void Update()
     {
-        // Nur der Player soll regenerieren
-        if (!CompareTag("Dice")) return;
-
-        // Stamina Regeneration
-        if (Time.time > lastStaminaUseTime + staminaRegenDelay)
+        if (!CompareTag("Dice"))
         {
-            ModifyStamina(staminaRegenPerSecond * Time.deltaTime);
-        }
+            // Stamina regeneration
+            if (Time.time > lastStaminaUseTime + staminaRegenDelay)
+            {
+                RestoreStamina(staminaRegenPerSecond * Time.deltaTime);
+            }
 
-        // Mana Regeneration
-        if (currentMana < maxMana)
-        {
-            ModifyMana(manaRegenPerSecond * Time.deltaTime);
-        }
+            // Mana regeneration
+            if (currentMana < maxMana)
+            {
+                RestoreMana(manaRegenPerSecond * Time.deltaTime);
+            }
 
-        // Update cooldown progress if targeted
-        if (isTargeted && Time.time >= lastCooldownUpdate + COOLDOWN_UPDATE_INTERVAL)
-        {
-            lastCooldownUpdate = Time.time;
-            float progress = GetCooldownProgress();
-            OnCooldownProgress?.Invoke(progress);
-            Debug.Log($"[CreatureStats] {gameObject.name} Cooldown Update: {progress:F2}");
+            // Cooldown Updates
+            if (isTargeted)
+            {
+                float currentCooldown = GetCooldownProgress();
+                OnCooldownProgress?.Invoke(currentCooldown);
+                lastCooldownUpdate = Time.time;
+            }
         }
     }
 

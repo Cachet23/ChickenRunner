@@ -22,7 +22,7 @@ MonoBehaviour:
   seed: 0
   grassThreshold: 0.54
   waterThreshold: 0.41
-  minRegionSize: 40
+  minRegionSize: 4
   darkEarthTiles:
   - {fileID: 11400000, guid: 5e76936474c7b4da890843f7c3fa5bae, type: 2}
   - {fileID: 11400000, guid: 7e3f608f7362f4793b57aef1cd4ce301, type: 2}
@@ -82,3 +82,6 @@ MonoBehaviour:
   houseSortingOrder: 2
   highGrassSortingOrder: 1
   lowGrassSortingOrder: 0
+  creatures: []
+  flowerPrefabs: []
+  waterPrefab: {fileID: 0}
