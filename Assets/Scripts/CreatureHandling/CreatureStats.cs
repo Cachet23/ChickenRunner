@@ -115,27 +115,24 @@ public class CreatureStats : MonoBehaviour
 
     private void Update()
     {
-        if (!CompareTag("Dice"))
+        // Stamina regeneration for all creatures
+        if (Time.time > lastStaminaUseTime + staminaRegenDelay)
         {
-            // Stamina regeneration
-            if (Time.time > lastStaminaUseTime + staminaRegenDelay)
-            {
-                RestoreStamina(staminaRegenPerSecond * Time.deltaTime);
-            }
+            ModifyStamina(staminaRegenPerSecond * Time.deltaTime);
+        }
 
-            // Mana regeneration
-            if (currentMana < maxMana)
-            {
-                RestoreMana(manaRegenPerSecond * Time.deltaTime);
-            }
+        // Mana regeneration for all creatures
+        if (currentMana < maxMana)
+        {
+            ModifyMana(manaRegenPerSecond * Time.deltaTime);
+        }
 
-            // Cooldown Updates
-            if (isTargeted)
-            {
-                float currentCooldown = GetCooldownProgress();
-                OnCooldownProgress?.Invoke(currentCooldown);
-                lastCooldownUpdate = Time.time;
-            }
+        // Cooldown Updates nur für targeted creatures
+        if (isTargeted && Time.time >= lastCooldownUpdate + COOLDOWN_UPDATE_INTERVAL)
+        {
+            float currentCooldown = GetCooldownProgress();
+            OnCooldownProgress?.Invoke(currentCooldown);
+            lastCooldownUpdate = Time.time;
         }
     }
 
