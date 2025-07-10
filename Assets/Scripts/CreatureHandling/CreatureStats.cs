@@ -140,7 +140,7 @@ public class CreatureStats : MonoBehaviour
     {
         float oldHealth = currentHealth;
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
-        Debug.Log($"[CreatureStats] {gameObject.name} health modified: {oldHealth} -> {currentHealth} (amount: {amount})");
+        //Debug.Log($"[CreatureStats] {gameObject.name} health modified: {oldHealth} -> {currentHealth} (amount: {amount})");
         OnHealthChanged?.Invoke(GetHealthPercent());
         if (currentHealth <= 0)
         {
@@ -157,7 +157,7 @@ public class CreatureStats : MonoBehaviour
             lastStaminaUseTime = Time.time;
         }
         currentStamina = Mathf.Clamp(currentStamina + amount, 0, maxStamina);
-        Debug.Log($"[CreatureStats] {gameObject.name} stamina modified: {oldStamina} -> {currentStamina} (amount: {amount})");
+        //Debug.Log($"[CreatureStats] {gameObject.name} stamina modified: {oldStamina} -> {currentStamina} (amount: {amount})");
         OnStaminaChanged?.Invoke(GetStaminaPercent());
     }
 
@@ -165,7 +165,7 @@ public class CreatureStats : MonoBehaviour
     {
         float oldMana = currentMana;
         currentMana = Mathf.Clamp(currentMana + amount, 0, maxMana);
-        Debug.Log($"[CreatureStats] {gameObject.name} mana modified: {oldMana} -> {currentMana} (amount: {amount})");
+        //Debug.Log($"[CreatureStats] {gameObject.name} mana modified: {oldMana} -> {currentMana} (amount: {amount})");
         OnManaChanged?.Invoke(GetManaPercent());
     }
 
@@ -222,21 +222,21 @@ public class CreatureStats : MonoBehaviour
                     case "health":
                         OnHealthChanged += (value) => {
                             slider.value = value;
-                            Debug.Log($"[CreatureStats] Health updated to {value:F2}");
+                            //Debug.Log($"[CreatureStats] Health updated to {value:F2}");
                         };
                         slider.value = GetHealthPercent();
                         break;
                     case "mana":
                         OnManaChanged += (value) => {
                             slider.value = value;
-                            Debug.Log($"[CreatureStats] Mana updated to {value:F2}");
+                            //Debug.Log($"[CreatureStats] Mana updated to {value:F2}");
                         };
                         slider.value = GetManaPercent();
                         break;
                     case "stamina":
                         OnStaminaChanged += (value) => {
                             slider.value = value;
-                            Debug.Log($"[CreatureStats] Stamina updated to {value:F2}");
+                            //Debug.Log($"[CreatureStats] Stamina updated to {value:F2}");
                         };
                         slider.value = GetStaminaPercent();
                         break;
@@ -257,7 +257,7 @@ public class CreatureStats : MonoBehaviour
                     if (cooldownImage != null)
                     {
                         cooldownImage.fillAmount = progress;
-                        Debug.Log($"[CreatureStats] {gameObject.name} cooldown progress: {progress:F2}, Time: {Time.time:F2}, NextAttack: {nextAttackTime:F2}");
+                        //Debug.Log($"[CreatureStats] {gameObject.name} cooldown progress: {progress:F2}, Time: {Time.time:F2}, NextAttack: {nextAttackTime:F2}");
                     }
                 };
                 Debug.Log($"[CreatureStats] Found and initialized cooldown UI for {gameObject.name}");

@@ -1,0 +1,4315 @@
+
+
+=====
+./PlayerRemover.cs
+=====
+using UnityEngine;
+using Controller;
+
+public class PlayerRemover : MonoBehaviour
+{
+    [Header("Death Animation Settings")]
+    [SerializeField] private float rotationSpeed = 90f;       // Degrees per second
+    [SerializeField] private float ascensionSpeed = 2f;      // Units per second
+    [SerializeField] private float startDelay = 1f;          // Delay before starting animation
+
+    private CreatureStats playerStats;
+    private MovePlayerInput playerInput;
+    private CreatureMover creatureMover;
+    private CharacterController characterController;
+    private bool isAnimating = false;
+    private float deathTimer = 0f;
+    private bool isDead = false;
+
+    private void Start()
+    {
+        GameObject player = GameObject.FindWithTag("Dice");
+        if (player == null)
+        {
+            Debug.LogError("PlayerRemover: Could not find player with tag 'Dice'!");
+            return;
+        }
+
+        playerStats = player.GetComponent<CreatureStats>();
+        playerInput = player.GetComponent<MovePlayerInput>();
+        creatureMover = player.GetComponent<CreatureMover>();
+        characterController = player.GetComponent<CharacterController>();
+
+        if (playerStats != null)
+        {
+            // Subscribe to health changes
+            playerStats.OnHealthChanged += CheckHealth;
+        }
+        else
+        {
+            Debug.LogError("PlayerRemover: Player does not have CreatureStats component!");
+        }
+    }
+
+    private void CheckHealth(float healthPercent)
+    {
+        if (healthPercent <= 0 && !isDead)
+        {
+            StartDeathSequence();
+        }
+    }
+
+    private void StartDeathSequence()
+    {
+        if (isDead) return;
+        isDead = true;
+
+        // Disable all movement and control components
+        if (playerInput != null)
+        {
+            playerInput.enabled = false;
+        }
+        if (creatureMover != null)
+        {
+            creatureMover.enabled = false;  // Dies stoppt auch die CharacterController Bewegungen
+        }
+        if (playerStats != null)
+        {
+            playerStats.enabled = false;
+        }
+
+        // Start animation sequence
+        isAnimating = true;
+        deathTimer = 0f;
+        
+        Debug.Log("PlayerRemover: Starting death sequence...");
+    }
+
+    private void Update()
+    {
+        if (!isAnimating) return;
+
+        deathTimer += Time.deltaTime;
+
+        // Get reference to transform once per frame
+        Transform playerTransform = playerStats.transform;
+
+        // Rotate around Z axis (starts immediately)
+        float currentRotation = playerTransform.rotation.eulerAngles.z;
+        if (currentRotation < 90f)
+        {
+            float newRotation = Mathf.MoveTowards(currentRotation, 90f, rotationSpeed * Time.deltaTime);
+            playerTransform.rotation = Quaternion.Euler(0f, 0f, newRotation);
+        }
+
+        // Wait for start delay before moving upward
+        if (deathTimer >= startDelay)
+        {
+            // Move upward only after delay
+            Vector3 position = playerTransform.position;
+            position.y += ascensionSpeed * Time.deltaTime;
+            playerTransform.position = position;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (playerStats != null)
+        {
+            playerStats.OnHealthChanged -= CheckHealth;
+        }
+    }
+}
+
+
+=====
+./LevelManager.cs
+=====
+using UnityEngine;
+using System.Collections.Generic;
+
+public class LevelManager : MonoBehaviour
+{
+    [Header("Level Configuration")]
+    public List<MapBiomeConfig> biomeConfigs;
+
+    [Header("Global Prefabs")]
+    [Tooltip("Prefab for the walls between biomes")]
+    public GameObject wallPrefab;
+    [Tooltip("Prefab for the fog of war")]
+    public GameObject fogPrefab;
+
+    private MapGenerationManager mapManager;
+    private CreatureManager creatureManager;
+
+    private void Awake()
+    {
+        // Create MapGenerationManager
+        var mapManagerGO = new GameObject("MapGenerationManager");
+        mapManagerGO.transform.parent = transform;
+        mapManager = mapManagerGO.AddComponent<MapGenerationManager>();
+        mapManager.biomeConfigs = biomeConfigs;
+        mapManager.wallPrefab = wallPrefab;
+        mapManager.fogPrefab = fogPrefab;
+
+        // Create CreatureManager
+        var creatureManagerGO = new GameObject("CreatureManager");
+        creatureManagerGO.transform.parent = transform;
+        creatureManager = creatureManagerGO.AddComponent<CreatureManager>();
+
+        // Create container for creatures
+        var creatureContainer = new GameObject("CreatureContainer");
+        creatureContainer.transform.parent = creatureManagerGO.transform;
+    }
+
+    private void Start()
+    {
+        // Subscribe to map generation complete event
+        mapManager.OnMapGenerationComplete += OnMapGenerationComplete;
+    }
+
+    private void OnMapGenerationComplete()
+    {
+        // Initialize creature manager with map data and configs
+        creatureManager.Initialize(mapManager, biomeConfigs);
+    }
+}
+
+
+=====
+./MyContextCreator.py
+=====
+import os
+
+class ContextCreator:
+    """
+    A class to create a context for use in a prompt for a language model. 
+    It scans directories for files of specific types, collects the content, 
+    and writes the final context to a file.
+    """
+
+    def __init__(self):
+        """
+        Initialize the ContextCreator instance, scan directories, start the user interface, 
+        and create the context.
+        """
+        self.context = ""
+        self.chosen_dirs = []
+        self.all_dirs = []
+        self.files_to_be_included = []
+        self.include_root_files = False
+        self.file_types = [".py", ".txt", ".md", ".yml", ".cs"]  # change to your need
+        
+        try:
+            self.all_dirs = self.scan_for_right_type_directories()
+            if not self.all_dirs:
+                print("No directories found with files of the specified types.")
+                return
+            self.start_user_interface()
+            self.create_context()
+        except Exception as e:
+            print(f"Error during initialization: {e}")
+
+    def create_context(self):
+        """
+        Create the context by appending content from the chosen directories and files.
+        """
+        try:
+            print("Creating context...")
+            self.find_files()
+            if not self.files_to_be_included:
+                print("No files found to include in the context.")
+                return
+            self.append_files_to_context()
+            with open("collected_context.txt", "w", encoding="utf-8") as f:
+                f.write(self.context)
+            print(f"Context successfully written to collected_context.txt")
+        except Exception as e:
+            print(f"Error creating context: {e}")
+
+    def scan_for_right_type_directories(self):
+        """
+        Scan all directories and find those containing files of the specified types.
+
+        Returns:
+            list: A list of directories containing files with the specified types.
+        """
+        all_dirs = []
+        for root, dirs, files in os.walk('.'):
+            if root.startswith('./venv'):
+                continue
+            if self.has_right_type_file(root):
+                all_dirs.append(root)
+        return all_dirs
+
+    def has_right_type_file(self, dir_path):
+        """
+        Check if a directory contains at least one file with the right type.
+
+        Args:
+            dir_path (str): The directory path to check.
+
+        Returns:
+            bool: True if the directory contains at least one file with the right type, False otherwise.
+        """
+        try:
+            for file in os.listdir(dir_path):
+                if self.is_right_type(file):
+                    return True
+        except OSError as e:
+            print(f"Error accessing directory {dir_path}: {e}")
+        return False
+
+    def is_right_type(self, file):
+        """
+        Check if a file has one of the specified types.
+
+        Args:
+            file (str): The file name to check.
+
+        Returns:
+            bool: True if the file has the right type, False otherwise.
+        """
+        return os.path.splitext(file)[1] in self.file_types
+
+    def append_files_to_context(self):
+        """
+        Append the contents of the files to the context in a formatted way.
+        """
+        for file in self.files_to_be_included:
+            try:
+                self.context += f"\n\n{'=' * 5}\n{file}\n{'=' * 5}\n"
+                with open(file, 'r', encoding="utf-8") as f:
+                    self.context += f.read()
+            except (OSError, UnicodeDecodeError) as e:
+                print(f"Error reading file {file}: {e}")
+
+    def find_files(self):
+        """
+        Find all files in the chosen directories and the root directory (if included).
+        """
+        try:
+            for dir in self.chosen_dirs:
+                for file in os.listdir(dir):
+                    file_path = os.path.join(dir, file)
+                    if os.path.isfile(file_path) and self.is_right_type(file):
+                        self.files_to_be_included.append(file_path)
+            if self.include_root_files:
+                for file in os.listdir('.'):
+                    file_path = os.path.join('.', file)
+                    if os.path.isfile(file_path) and self.is_right_type(file):
+                        self.files_to_be_included.append(file_path)
+        except OSError as e:
+            print(f"Error accessing files: {e}")
+
+    def start_user_interface(self):
+        """
+        Start the user interface to allow the user to choose directories and include root files.
+        """
+        try:
+            print("Directories with files of the right type:")
+            for i, d in enumerate(self.all_dirs, 1):
+                print(f"{i}. {d}")
+            print("\nChoose directories by number, separated by a space:")
+            chosen_dirs = input().split()
+            
+            # Validate chosen numbers
+            for i in chosen_dirs:
+                if not i.isdigit() or int(i) < 1 or int(i) > len(self.all_dirs):
+                    raise ValueError(f"Invalid choice: {i}")
+            
+            self.chosen_dirs = [self.all_dirs[int(i) - 1] for i in chosen_dirs]
+            self.include_root_files = input("\nInclude files from root directory? (y/n): ").strip().lower() == 'y'
+            
+            print(f"\nChosen directories: {self.chosen_dirs}")
+            print(f"Include files from root directory: {self.include_root_files}")
+        except ValueError as e:
+            print(f"Input error: {e}")
+        except Exception as e:
+            print(f"Unexpected error during user input: {e}")
+
+if __name__ == "__main__":
+    ContextCreator()
+
+
+
+
+=====
+./FlowerInteraction.cs
+=====
+using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using System.Collections.Generic;
+using System.Linq;
+
+public class FlowerInteraction : MonoBehaviour
+{
+    // Static tracking of all flowers in range of player
+    private static readonly List<FlowerInteraction> flowersInRange = new List<FlowerInteraction>();
+    private static FlowerInteraction activeFlower;
+
+    [Header("Flower Properties")]
+    [SerializeField] private FlowerConfig.Rarity rarity;
+
+    [Header("Creature Stat Effects")]
+    [Tooltip("Amount of health to restore. Set to 0 for no effect.")]
+    [SerializeField] private float healthRestoreAmount = 0f;
+    
+    [Tooltip("Amount of stamina to restore. Set to 0 for no effect.")]
+    [SerializeField] private float staminaRestoreAmount = 0f;
+    
+    [Tooltip("Amount of mana to restore. Set to 0 for no effect.")]
+    [SerializeField] private float manaRestoreAmount = 0f;
+
+    [Header("Interaction Settings")]
+    [SerializeField] private float interactionRadius = 2f;
+    [SerializeField] private GameObject interactionUIPrefab;
+    
+    private GameObject activeUI;
+    private Transform player;
+    private bool isInRange;
+    private float distanceToPlayer;
+
+    public FlowerConfig.Rarity Rarity
+    {
+        get => rarity;
+        set
+        {
+            rarity = value;
+            Debug.Log($"[FlowerInteraction] Set rarity to {value} on {gameObject.name}");
+        }
+    }
+
+    private void OnEnable()
+    {
+        flowersInRange.Add(this);
+        UpdateActiveFlower();
+    }
+
+    private void OnDisable()
+    {
+        flowersInRange.Remove(this);
+        if (activeFlower == this)
+        {
+            HideInteractionUI();
+            activeFlower = null;
+        }
+        UpdateActiveFlower();
+    }
+
+    private void Start()
+    {
+        // Find the player (assuming it has the Dice tag)
+        player = GameObject.FindWithTag("Dice")?.transform;
+        if (player == null)
+        {
+            Debug.LogWarning("[FlowerInteraction] Player not found! Make sure it has the 'Dice' tag.");
+            return;
+        }
+
+        Debug.Log($"[FlowerInteraction] Initialized flower on {gameObject.name} with rarity {rarity}");
+    }
+
+    private void Update()
+    {
+        if (player == null) return;
+
+        // Check if player is in range
+        distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        bool wasInRange = isInRange;
+        isInRange = distanceToPlayer <= interactionRadius;
+
+        // Handle range changes
+        if (isInRange != wasInRange)
+        {
+            UpdateActiveFlower();
+        }
+
+        // Handle interaction input only if we're the active flower
+        if (isInRange && activeFlower == this && Input.GetKeyDown(KeyCode.E))
+        {
+            EatFlower();
+        }
+    }
+
+    private static void UpdateActiveFlower()
+    {
+        // Find the nearest flower in range
+        var nearestFlower = flowersInRange
+            .Where(f => f.isInRange)
+            .OrderBy(f => f.distanceToPlayer)
+            .FirstOrDefault();
+
+        // If the active flower has changed
+        if (activeFlower != nearestFlower)
+        {
+            // Hide UI of previous active flower
+            if (activeFlower != null)
+            {
+                activeFlower.HideInteractionUI();
+            }
+
+            // Show UI of new active flower
+            activeFlower = nearestFlower;
+            if (activeFlower != null)
+            {
+                activeFlower.ShowInteractionUI();
+            }
+        }
+    }
+
+    private void ShowInteractionUI()
+    {
+        if (activeUI != null) return;
+
+        // Create UI at flower position
+        activeUI = Instantiate(interactionUIPrefab, transform.position + Vector3.up * 2f, Quaternion.identity);
+        
+        // Update UI text based on rarity and effects
+        if (activeUI.GetComponentInChildren<TextMeshProUGUI>() is TextMeshProUGUI tmp)
+        {
+            string rarityColor = rarity switch
+            {
+                FlowerConfig.Rarity.Common => "#FFFFFF",  // White
+                FlowerConfig.Rarity.Rare => "#00FFFF",   // Cyan
+                FlowerConfig.Rarity.Epic => "#FF00FF",   // Magenta
+                _ => "#FFFFFF"
+            };
+
+            string effectsText = GetEffectsDescription();
+            tmp.text = $"Press E to collect <color={rarityColor}>{rarity}</color> flower\n{effectsText}";
+        }
+        
+        Debug.Log($"[FlowerInteraction] Showing UI for {rarity} flower");
+    }
+
+    private string GetEffectsDescription()
+    {
+        var effects = new System.Collections.Generic.List<string>();
+        
+        if (healthRestoreAmount > 0)
+            effects.Add($"+{healthRestoreAmount} Health");
+        if (staminaRestoreAmount > 0)
+            effects.Add($"+{staminaRestoreAmount} Stamina");
+        if (manaRestoreAmount > 0)
+            effects.Add($"+{manaRestoreAmount} Mana");
+
+        return string.Join(", ", effects);
+    }
+
+    private void HideInteractionUI()
+    {
+        if (activeUI != null)
+        {
+            Destroy(activeUI);
+            activeUI = null;
+        }
+    }
+
+    private void EatFlower()
+    {
+        if (player.GetComponent<CreatureStats>() is CreatureStats playerStats)
+        {
+            bool anyEffectApplied = false;
+
+            // Apply all configured effects
+            if (healthRestoreAmount > 0)
+            {
+                playerStats.RestoreHealth(healthRestoreAmount);
+                anyEffectApplied = true;
+                Debug.Log($"[FlowerInteraction] Restored {healthRestoreAmount} health");
+            }
+
+            if (staminaRestoreAmount > 0)
+            {
+                playerStats.RestoreStamina(staminaRestoreAmount);
+                anyEffectApplied = true;
+                Debug.Log($"[FlowerInteraction] Restored {staminaRestoreAmount} stamina");
+            }
+
+            if (manaRestoreAmount > 0)
+            {
+                playerStats.RestoreMana(manaRestoreAmount);
+                anyEffectApplied = true;
+                Debug.Log($"[FlowerInteraction] Restored {manaRestoreAmount} mana");
+            }
+
+            if (!anyEffectApplied)
+            {
+                Debug.LogWarning("[FlowerInteraction] Flower consumed but no effects were configured!");
+            }
+        }
+        else
+        {
+            Debug.LogError("[FlowerInteraction] Player missing CreatureStats component!");
+        }
+
+        // Clean up and destroy the flower
+        HideInteractionUI();
+        Destroy(gameObject);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, interactionRadius);
+    }
+}
+
+
+=====
+./PlayerSpawner.cs
+=====
+using UnityEngine;
+using UnityEngine.Tilemaps;
+
+public class PlayerSpawner : MonoBehaviour
+{
+    [Header("References")]
+    [SerializeField] private GameObject playerCreature;  // Reference to the player creature in scene
+    [SerializeField] private GameObject roof;           // Reference to the roof plane
+
+    [Header("Spawn Settings")]
+    [SerializeField] private float minDistanceFromTrees = 2f;
+    [SerializeField] private float minDistanceFromWater = 3f;  // Minimum distance from water tiles
+    [SerializeField] private LayerMask treeLayer;       // Layer containing trees
+
+    private MapGenerationManager mapManager;
+    private BaseMapManager firstBiome;    // We'll spawn in the first biome
+
+    private void Start()
+    {
+        // Find required components
+        mapManager = FindObjectOfType<MapGenerationManager>();
+        if (mapManager == null)
+        {
+            Debug.LogError("PlayerSpawner: Could not find MapGenerationManager!");
+            return;
+        }
+
+        // Subscribe to map generation complete event
+        mapManager.OnMapGenerationComplete += OnMapGenerationComplete;
+
+        // Validate references
+        if (playerCreature == null)
+        {
+            Debug.LogError("PlayerSpawner: Player Creature reference not set!");
+            return;
+        }
+
+        if (roof == null)
+        {
+            Debug.LogError("PlayerSpawner: Roof reference not set!");
+            return;
+        }
+    }
+
+    private void OnMapGenerationComplete()
+    {
+        // Get the first biome manager
+        var allBMMs = mapManager.GetAllBaseMapManagers();
+        if (allBMMs.Count == 0)
+        {
+            Debug.LogError("PlayerSpawner: No biome managers found!");
+            return;
+        }
+
+        firstBiome = allBMMs[0];
+        Vector3? spawnPosition = FindValidSpawnPosition();
+
+        if (spawnPosition.HasValue)
+        {
+            // Move player high above the found position first
+            Vector3 highPosition = spawnPosition.Value;
+            highPosition.y = 30f;  // Place it at y=30
+            playerCreature.transform.position = highPosition;
+            
+            // Remove the roof
+            Destroy(roof);
+            
+            Debug.Log($"PlayerSpawner: Successfully spawned player above position {highPosition}");
+        }
+        else
+        {
+            Debug.LogError("PlayerSpawner: Could not find valid spawn position!");
+        }
+
+        // Unsubscribe from the event
+        mapManager.OnMapGenerationComplete -= OnMapGenerationComplete;
+    }
+
+    private Vector3? FindValidSpawnPosition()
+    {
+        // Start from z > 0 and move towards higher z values
+        for (int z = 1; z < firstBiome.biomeSize.y; z++)
+        {
+            for (int x = 0; x < firstBiome.biomeSize.x; x++)
+            {
+                Vector3Int tilePos = new Vector3Int(x, z, 0);
+                Vector3 worldPos = firstBiome.grassLayer.CellToWorld(tilePos);
+                worldPos.y = -22f; // Set to ground level
+
+                // Check if position is valid
+                if (IsValidSpawnPosition(tilePos, worldPos))
+                {
+                    return worldPos;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    private bool IsValidSpawnPosition(Vector3Int tilePos, Vector3 worldPos)
+    {
+        // Must be on grass tile
+        if (!firstBiome.grassLayer.HasTile(tilePos))
+            return false;
+
+        // Check for water tiles in radius
+        for (int dx = -Mathf.CeilToInt(minDistanceFromWater); dx <= Mathf.CeilToInt(minDistanceFromWater); dx++)
+        {
+            for (int dy = -Mathf.CeilToInt(minDistanceFromWater); dy <= Mathf.CeilToInt(minDistanceFromWater); dy++)
+            {
+                Vector3Int checkPos = tilePos + new Vector3Int(dx, dy, 0);
+                if (firstBiome.waterLayer.HasTile(checkPos))
+                {
+                    // Calculate actual distance to this water tile
+                    Vector3 waterWorldPos = firstBiome.waterLayer.CellToWorld(checkPos);
+                    waterWorldPos.y = worldPos.y; // Use same Y for distance calculation
+                    if (Vector3.Distance(worldPos, waterWorldPos) <= minDistanceFromWater)
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        // Check for nearby trees
+        Collider[] nearbyTrees = Physics.OverlapSphere(worldPos, minDistanceFromTrees, treeLayer);
+        if (nearbyTrees.Length > 0)
+            return false;
+
+        // Check for nearby water
+        Collider[] nearbyWater = Physics.OverlapSphere(worldPos, minDistanceFromWater, treeLayer);
+        if (nearbyWater.Length > 0)
+            return false;
+
+        return true;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (Application.isPlaying && firstBiome != null)
+        {
+            Gizmos.color = Color.green;
+            // Draw search area
+            Vector3 center = firstBiome.grassLayer.CellToWorld(new Vector3Int(
+                firstBiome.biomeSize.x / 2,
+                firstBiome.biomeSize.y / 2,
+                0
+            ));
+            Gizmos.DrawWireCube(center, new Vector3(
+                firstBiome.biomeSize.x,
+                1,
+                firstBiome.biomeSize.y
+            ));
+        }
+    }
+}
+
+
+=====
+./BiomeAccessController.cs
+=====
+using System.Collections.Generic;
+using UnityEngine;
+using System.Linq;
+
+/// <summary>
+/// Erlaubt dem Spieler, zwischen Biomen zu wechseln, indem er 3 Creatures im aktuellen Biom besiegt.
+/// Entfernt die nächste vorhandene BiomeWall aus dem jeweils ersten ObjectManager, der noch eine Wand hat.
+/// </summary>
+public class BiomeAccessController : MonoBehaviour
+{
+    [Header("Würfel-Referenz (optional)")]
+    [Tooltip("Transform des Würfels (Dice). Wird automatisch nach Tag \"Dice\" gesucht, falls leer gelassen.")]
+    public Transform diceTransform;
+
+    // Dictionary to track kills per biome (biomeY -> killCount)
+    private Dictionary<int, int> killsPerBiome = new Dictionary<int, int>();
+    private const int requiredKills = 3;
+    private CreatureManager creatureManager;
+    private MapGenerationManager mapManager;
+
+    private void Start()
+    {
+        // Würfel-Transform finden, falls nicht im Inspector zugewiesen
+        if (diceTransform == null)
+        {
+            var diceGO = GameObject.FindWithTag("Dice");
+            if (diceGO != null)
+                diceTransform = diceGO.transform;
+            else
+                Debug.LogWarning("[BiomeAccessController] Kein Würfel-Objekt mit Tag \"Dice\" gefunden. Bitte im Inspector zuweisen.");
+        }
+
+        // Find required managers
+        creatureManager = FindObjectOfType<CreatureManager>();
+        mapManager = FindObjectOfType<MapGenerationManager>();
+        
+        if (creatureManager == null)
+            Debug.LogError("[BiomeAccessController] CreatureManager not found in scene!");
+        if (mapManager == null)
+            Debug.LogError("[BiomeAccessController] MapGenerationManager not found in scene!");
+
+        // Subscribe to OnDeath events of all existing CreatureStats
+        SubscribeToCreatures();
+    }
+
+    private void SubscribeToCreatures()
+    {
+        Debug.Log("[BiomeAccessController] Subscribing to all creatures...");
+        // Find all CreatureStats in the scene
+        var allCreatures = FindObjectsByType<CreatureStats>(FindObjectsSortMode.None);
+        foreach (var creature in allCreatures)
+        {
+            // Only subscribe if it's not the player
+            if (!creature.CompareTag("Dice"))
+            {
+                creature.OnDeath += HandleCreatureDeath;
+                Debug.Log($"[BiomeAccessController] Subscribed to {creature.gameObject.name}");
+            }
+        }
+    }
+
+    private void HandleCreatureDeath(CreatureStats deadCreature)
+    {
+        if (deadCreature.CompareTag("Dice")) return; // Ignore player deaths
+
+        // Get the biome Y coordinate based on creature position
+        int biomeY = Mathf.FloorToInt(deadCreature.transform.position.z); 
+        // Round to nearest biome boundary (assuming biomeSize.y is 50)
+        biomeY = Mathf.FloorToInt(biomeY / 50f) * 50;
+        
+        // Initialize or increment kill count for this biome
+        if (!killsPerBiome.ContainsKey(biomeY))
+        {
+            killsPerBiome[biomeY] = 1;
+        }
+        else
+        {
+            killsPerBiome[biomeY]++;
+        }
+
+        Debug.Log($"[BiomeAccessController] Creature {deadCreature.gameObject.name} killed in biome {biomeY}. Current kills: {killsPerBiome[biomeY]}/{requiredKills}");
+
+        // Check if we've reached the required kills for this biome
+        if (killsPerBiome[biomeY] >= requiredKills)
+        {
+            Debug.Log($"[BiomeAccessController] Required kills ({requiredKills}) reached in biome {biomeY}! Attempting to remove wall...");
+            TryRemoveNextBiomeWall();
+            // Reset kill count for this biome after wall is removed
+            killsPerBiome[biomeY] = 0;
+        }
+    }
+
+    private void OnEnable()
+    {
+        // Subscribe when enabled
+        SubscribeToCreatures();
+    }
+
+    private void OnDisable()
+    {
+        // Unsubscribe from all creatures when disabled
+        var allCreatures = FindObjectsByType<CreatureStats>(FindObjectsSortMode.None);
+        foreach (var creature in allCreatures)
+        {
+            if (!creature.CompareTag("Dice"))
+            {
+                creature.OnDeath -= HandleCreatureDeath;
+            }
+        }
+    }
+
+    private void Update()
+    {
+        // Periodically check for new creatures that might have spawned
+        if (Time.frameCount % 60 == 0) // Check every 60 frames
+        {
+            SubscribeToCreatures();
+        }
+    }
+
+    private void TryRemoveNextBiomeWall()
+    {
+        // Hole alle ObjectManager in Szenen-Reihenfolge
+        var allOM = FindObjectsByType<ObjectManager>(FindObjectsSortMode.None)
+            .OrderBy(om => om.origin.y)
+            .ToList();
+        foreach (var om in allOM)
+        {
+            var wallField = om.GetType().GetField("biomeWallInstance", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            var wall = wallField?.GetValue(om) as GameObject;
+            if (wall != null)
+            {
+                om.RemoveBiomeWall();
+                Debug.Log($"[BiomeAccessController] Wand von {om.name} entfernt.");
+                return;
+            }
+        }
+        Debug.Log("[BiomeAccessController] Keine weitere Biome-Wand mehr vorhanden.");
+    }
+}
+
+=====
+./Flower.cs
+=====
+using UnityEngine;
+
+public class Flower : MonoBehaviour
+{
+    [SerializeField] private FlowerConfig.Rarity rarity;
+    
+    public FlowerConfig.Rarity Rarity => rarity;
+
+    public void SetRarity(FlowerConfig.Rarity newRarity)
+    {
+        rarity = newRarity;
+        Debug.Log($"[Flower] Set rarity to {newRarity} on {gameObject.name}");
+    }
+
+    // Called when the component is added to ensure we have a default rarity
+    private void Awake()
+    {
+        Debug.Log($"[Flower] Initialized on {gameObject.name} with rarity {rarity}");
+    }
+}
+
+
+=====
+./CameraFollow.cs
+=====
+using UnityEngine;
+
+public class CameraFollow : MonoBehaviour
+{
+    public Transform target;
+    public Vector3 offset = new Vector3(0, -6.76f, 0);
+    public float xRotation = 36.46f;
+
+    void LateUpdate()
+    {
+        if (target != null)
+        {
+            transform.position = target.position + offset;
+            transform.rotation = Quaternion.Euler(xRotation, 0, 0);
+        }
+    }
+}
+
+
+=====
+./CreatureHandling/CreatureManager.cs
+=====
+using UnityEngine;
+using System.Collections.Generic;
+using System.Linq;
+
+public class CreatureManager : MonoBehaviour
+{
+    // Track all spawned creatures for removal
+    private readonly List<GameObject> spawnedCreatures = new List<GameObject>();
+    private MapGenerationManager mapManager;
+    private List<MapBiomeConfig> biomeConfigs;
+    private Transform creatureContainer;
+
+    private void Awake()
+    {
+        creatureContainer = transform.Find("CreatureContainer");
+        if (creatureContainer == null)
+        {
+            creatureContainer = new GameObject("CreatureContainer").transform;
+            creatureContainer.parent = transform;
+        }
+    }
+
+    public void Initialize(MapGenerationManager mapManager, List<MapBiomeConfig> configs)
+    {
+        this.mapManager = mapManager;
+        this.biomeConfigs = configs;
+        SpawnCreatures();
+    }
+
+    private void SpawnCreatures()
+    {
+        var allBMMs = mapManager.GetAllBaseMapManagers();
+        Debug.Log($"Spawning creatures for {biomeConfigs.Count} biomes...");
+        
+        // Spawn creatures for each biome
+        for (int i = 0; i < biomeConfigs.Count && i < allBMMs.Count; i++)
+        {
+            var config = biomeConfigs[i];
+            var bmm = allBMMs[i];
+            
+            Debug.Log($"Biome {i}: Found {config.creatures.Count} creature types to spawn");
+            foreach (var creatureConfig in config.creatures)
+            {
+                if (creatureConfig.creaturePrefab == null)
+                {
+                    Debug.LogError($"Creature prefab is null in biome {i}");
+                    continue;
+                }
+                
+                Debug.Log($"Spawning {creatureConfig.spawnCount}x {creatureConfig.creaturePrefab.name} in biome {i}");
+                for (int j = 0; j < creatureConfig.spawnCount; j++)
+                {
+                    SpawnCreature(creatureConfig.creaturePrefab, bmm);
+                }
+            }
+        }
+    }
+
+    private void SpawnCreature(GameObject creaturePrefab, BaseMapManager bmm)
+    {
+        Debug.Log($"Attempting to spawn {creaturePrefab.name} in bounds: x({bmm.biomeBounds.xMin}-{bmm.biomeBounds.xMax}), y({bmm.biomeBounds.yMin}-{bmm.biomeBounds.yMax})");
+        
+        // Try to find a valid spawn position
+        for (int attempts = 0; attempts < 20; attempts++) // Increased attempts to 20
+        {
+            // Get random position within biome bounds
+            int x = Random.Range(bmm.biomeBounds.xMin, bmm.biomeBounds.xMax);
+            int y = Random.Range(bmm.biomeBounds.yMin, bmm.biomeBounds.yMax);
+            // Place the creature higher above ground to ensure it doesn't intersect
+            Vector3 position = new Vector3(x, 2f, y);
+
+            Debug.Log($"Attempt {attempts + 1}: Testing position {position}");
+
+            // Check if position is valid (on earth/grass, not on objects)
+            if (IsValidSpawnPosition(position, bmm))
+            {
+                Debug.Log($"Found valid position at {position}");
+                var creature = Instantiate(creaturePrefab, position, Quaternion.identity, creatureContainer);
+                
+                if (creature == null)
+                {
+                    Debug.LogError($"Failed to instantiate creature!");
+                    continue;
+                }
+                
+                Debug.Log($"Successfully instantiated {creature.name} at {position}");
+                
+                // Ensure every creature has CreatureStats
+                var stats = creature.GetComponent<CreatureStats>();
+                if (stats == null)
+                {
+                    stats = creature.AddComponent<CreatureStats>();
+                }
+
+                // Subscribe to death event
+                stats.OnDeath += HandleCreatureDeath;
+
+                // Track creature
+                spawnedCreatures.Add(creature);
+
+                var behavior = creature.GetComponent<CreatureBehavior>();
+                if (behavior != null)
+                {
+                    behavior.Initialize(bmm.biomeBounds);
+                    Debug.Log($"Initialized behavior for {creature.name}");
+                }
+                return; // Successfully spawned
+            }
+            Debug.Log($"Position {position} is not valid");
+        }
+        Debug.LogWarning($"Failed to find valid spawn position for {creaturePrefab.name} after 20 attempts");
+    }
+
+    // Remove creature when it dies
+    private void HandleCreatureDeath(CreatureStats stats)
+    {
+        if (stats != null)
+        {
+            GameObject go = stats.gameObject;
+            spawnedCreatures.Remove(go);
+            Destroy(go);
+        }
+    }
+
+    private bool IsValidSpawnPosition(Vector3 position, BaseMapManager bmm)
+    {
+        // Convert world position to tilemap position, ignoring the y component for tile checks
+        var worldPos = new Vector3Int(Mathf.RoundToInt(position.x), Mathf.RoundToInt(position.z), 0);
+        
+        // Check for water tiles - return false immediately if water is found
+        if (bmm.waterLayer.HasTile(worldPos))
+        {
+            Debug.Log($"Position {position} has water - spawn rejected");
+            return false;
+        }
+
+        // Check surrounding tiles for water to prevent spawning right at water edges
+        for (int x = -1; x <= 1; x++)
+        {
+            for (int y = -1; y <= 1; y++)
+            {
+                var checkPos = worldPos + new Vector3Int(x, y, 0);
+                if (bmm.waterLayer.HasTile(checkPos))
+                {
+                    Debug.Log($"Position {position} is too close to water - spawn rejected");
+                    return false;
+                }
+            }
+        }
+
+        // Check if there's earth/grass at this position
+        bool hasGround = bmm.baseLayer.HasTile(worldPos) ||
+                        bmm.grassLayer.HasTile(worldPos);
+
+        if (!hasGround)
+        {
+            Debug.Log($"Position {position} has no ground");
+            return false;
+        }
+
+        // Check for obstacles using a sphere cast from above
+        RaycastHit[] hits = Physics.SphereCastAll(
+            position + Vector3.up * 10f,
+            0.5f,
+            Vector3.down,
+            20f
+        );
+
+        var obstacles = hits.Where(hit => 
+            !hit.collider.isTrigger &&
+            hit.collider.gameObject.layer != LayerMask.NameToLayer("Default")
+        ).ToArray();
+
+        if (obstacles.Length > 0)
+        {
+            Debug.Log($"Position {position} has {obstacles.Length} obstacles");
+            return false;
+        }
+
+        return true;
+    }
+}
+
+
+=====
+./CreatureHandling/CreatureStats.cs
+=====
+using UnityEngine;
+using System;
+using System.Linq;
+
+public class CreatureStats : MonoBehaviour
+{
+    [Header("UI Settings")]
+    [SerializeField] private GameObject statsUIPrefab;
+    private GameObject activeUI;
+    private bool isTargeted = false;
+    private float lastCooldownUpdate = 0f;
+    private const float COOLDOWN_UPDATE_INTERVAL = 0.05f; // Update alle 0.05 Sekunden für smoothe Animation
+
+    [Header("Mana Settings")]
+    [SerializeField] private float manaRegenPerSecond = 3f; // Regenerate 3 mana per second
+    public bool HasEnoughMana(float amount)
+    {
+        return currentMana >= amount;
+    }
+    // Event for death notification
+    public event Action<CreatureStats> OnDeath;
+    [Header("Attack Settings")]
+    [SerializeField] private float attackRange = 2.5f;
+    [SerializeField] private float attackDamage = 20f;
+    [SerializeField] private float attackManaCost = 10f;
+    [SerializeField] private float attackCooldown = 0.75f; // Zeit in Sekunden zwischen Attacken
+    private float nextAttackTime = 0f;
+
+    // UI & Targeting nur für Player relevant
+    [SerializeField] private float sightRange = 5f;
+    public float SightRange => CompareTag("Dice") ? sightRange : 0f;
+    public float AttackRange => attackRange;
+    public float AttackDamage => attackDamage;
+    public float AttackManaCost => attackManaCost;
+
+    // Prüft ob die Creature attackieren kann (Cooldown & Mana)
+    public bool CanAttack()
+    {
+        bool isReady = Time.time >= nextAttackTime;
+        bool hasMana = HasEnoughMana(attackManaCost);
+        return isReady && hasMana;
+    }
+
+    // Prüft ob ein Target in Range ist
+    public bool IsInAttackRange(CreatureStats target)
+    {
+        if (target == null) return false;
+        return Vector3.Distance(transform.position, target.transform.position) <= attackRange;
+    }
+
+    // Zentrale Attack-Methode
+    public bool TryAttack(CreatureStats target)
+    {
+        if (!CanAttack() || !IsInAttackRange(target))
+            return false;
+
+        // Set attack cooldown
+        nextAttackTime = Time.time + attackCooldown;
+        
+        // Immediately notify about cooldown start
+        if (isTargeted)
+        {
+            OnCooldownProgress?.Invoke(1f);
+        }
+
+        // Apply attack effects
+        ModifyMana(-attackManaCost);
+        target.ModifyHealth(-attackDamage);
+        
+        return true;
+    }
+    [Header("Stats Configuration")]
+    [SerializeField] private float maxHealth = 100f;
+    [SerializeField] private float maxStamina = 100f;
+    [SerializeField] private float maxMana = 100f;
+
+    [Header("Stamina Settings")]
+    [SerializeField] private float staminaDrainPerSecond = 10f;  // Drain 10 stamina per second while sprinting
+    [SerializeField] private float staminaRegenPerSecond = 5f;   // Regenerate 5 stamina per second (10 per 2 seconds)
+    [SerializeField] private float staminaRegenDelay = 1f;       // Wait 1 second after using stamina before regenerating
+
+    private float currentHealth;
+    private float currentStamina;
+    private float currentMana;
+    private float lastStaminaUseTime;
+
+    // Events für UI Updates
+    public event Action<float> OnHealthChanged;
+    public event Action<float> OnStaminaChanged;
+    public event Action<float> OnManaChanged;
+    public event Action<float> OnCooldownProgress; // 0 = ready, 1 = just started cooldown
+
+    public float GetCooldownProgress()
+    {
+        if (Time.time >= nextAttackTime) 
+            return 0f; // Attack is ready
+            
+        float totalCooldown = attackCooldown;
+        float remainingCooldown = nextAttackTime - Time.time;
+        return remainingCooldown / totalCooldown; // Returns 1.0 when cooldown just started, 0.0 when ready
+    }
+
+    private void Start()
+    {
+        currentHealth = maxHealth;
+        currentStamina = maxStamina;
+        currentMana = maxMana;
+        lastCooldownUpdate = Time.time;
+
+        // Initial events triggern
+        OnHealthChanged?.Invoke(GetHealthPercent());
+        OnStaminaChanged?.Invoke(GetStaminaPercent());
+        OnManaChanged?.Invoke(GetManaPercent());
+    }
+
+    private void Update()
+    {
+        // Stamina regeneration for all creatures
+        if (Time.time > lastStaminaUseTime + staminaRegenDelay)
+        {
+            ModifyStamina(staminaRegenPerSecond * Time.deltaTime);
+        }
+
+        // Mana regeneration for all creatures
+        if (currentMana < maxMana)
+        {
+            ModifyMana(manaRegenPerSecond * Time.deltaTime);
+        }
+
+        // Cooldown Updates nur für targeted creatures
+        if (isTargeted && Time.time >= lastCooldownUpdate + COOLDOWN_UPDATE_INTERVAL)
+        {
+            float currentCooldown = GetCooldownProgress();
+            OnCooldownProgress?.Invoke(currentCooldown);
+            lastCooldownUpdate = Time.time;
+        }
+    }
+
+    public void ModifyHealth(float amount)
+    {
+        float oldHealth = currentHealth;
+        currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
+        //Debug.Log($"[CreatureStats] {gameObject.name} health modified: {oldHealth} -> {currentHealth} (amount: {amount})");
+        OnHealthChanged?.Invoke(GetHealthPercent());
+        if (currentHealth <= 0)
+        {
+            Debug.Log($"[CreatureStats] {gameObject.name} died!");
+            OnDeath?.Invoke(this);
+        }
+    }
+
+    public void ModifyStamina(float amount)
+    {
+        float oldStamina = currentStamina;
+        if (amount < 0)
+        {
+            lastStaminaUseTime = Time.time;
+        }
+        currentStamina = Mathf.Clamp(currentStamina + amount, 0, maxStamina);
+        //Debug.Log($"[CreatureStats] {gameObject.name} stamina modified: {oldStamina} -> {currentStamina} (amount: {amount})");
+        OnStaminaChanged?.Invoke(GetStaminaPercent());
+    }
+
+    public void ModifyMana(float amount)
+    {
+        float oldMana = currentMana;
+        currentMana = Mathf.Clamp(currentMana + amount, 0, maxMana);
+        //Debug.Log($"[CreatureStats] {gameObject.name} mana modified: {oldMana} -> {currentMana} (amount: {amount})");
+        OnManaChanged?.Invoke(GetManaPercent());
+    }
+
+    public bool HasEnoughStamina(float amount)
+    {
+        return currentStamina >= amount;
+    }
+
+    public float GetHealthPercent() => currentHealth / maxHealth;
+    public float GetStaminaPercent() => currentStamina / maxStamina;
+    public float GetManaPercent() => currentMana / maxMana;
+
+    // Stamina beim Sprinten verbrauchen
+    public void DrainStaminaForSprint()
+    {
+        ModifyStamina(-staminaDrainPerSecond * Time.deltaTime);
+    }
+
+    public void SetAsTarget(bool targeted)
+    {
+        if (isTargeted != targeted)
+        {
+            isTargeted = targeted;
+            if (isTargeted)
+            {
+                ShowStatsUI();
+            }
+            else
+            {
+                HideStatsUI();
+            }
+        }
+    }
+
+    private void ShowStatsUI()
+    {
+        if (activeUI == null && statsUIPrefab != null)
+        {
+            Debug.Log($"[CreatureStats] Creating UI for {gameObject.name}");
+            activeUI = Instantiate(statsUIPrefab, transform.position, Quaternion.identity);
+            activeUI.transform.SetParent(GameObject.Find("Canvas")?.transform, true);
+
+            // Get references to sliders and cooldown image
+            var sliders = activeUI.GetComponentsInChildren<UnityEngine.UI.Slider>();
+            var allImages = activeUI.GetComponentsInChildren<UnityEngine.UI.Image>(true);
+            var cooldownImage = allImages.FirstOrDefault(img => img.gameObject.name.ToLower().Contains("cooldown"));
+
+            Debug.Log($"[CreatureStats] Found {sliders.Length} sliders and {allImages.Length} images");
+            foreach (var slider in sliders)
+            {
+                Debug.Log($"[CreatureStats] Found slider: {slider.name}");
+                switch (slider.name.ToLower())
+                {
+                    case "health":
+                        OnHealthChanged += (value) => {
+                            slider.value = value;
+                            //Debug.Log($"[CreatureStats] Health updated to {value:F2}");
+                        };
+                        slider.value = GetHealthPercent();
+                        break;
+                    case "mana":
+                        OnManaChanged += (value) => {
+                            slider.value = value;
+                            //Debug.Log($"[CreatureStats] Mana updated to {value:F2}");
+                        };
+                        slider.value = GetManaPercent();
+                        break;
+                    case "stamina":
+                        OnStaminaChanged += (value) => {
+                            slider.value = value;
+                            //Debug.Log($"[CreatureStats] Stamina updated to {value:F2}");
+                        };
+                        slider.value = GetStaminaPercent();
+                        break;
+                }
+            }
+
+            // Setup cooldown UI if found
+            if (cooldownImage != null && cooldownImage.name.ToLower().Contains("cooldown"))
+            {
+                cooldownImage.type = UnityEngine.UI.Image.Type.Filled;
+                cooldownImage.fillMethod = UnityEngine.UI.Image.FillMethod.Radial360;
+                cooldownImage.fillOrigin = (int)UnityEngine.UI.Image.Origin360.Top;
+                cooldownImage.fillClockwise = true;
+                cooldownImage.fillAmount = 1f; // Start ready
+                cooldownImage.gameObject.SetActive(true);
+
+                OnCooldownProgress += (progress) => {
+                    if (cooldownImage != null)
+                    {
+                        cooldownImage.fillAmount = progress;
+                        //Debug.Log($"[CreatureStats] {gameObject.name} cooldown progress: {progress:F2}, Time: {Time.time:F2}, NextAttack: {nextAttackTime:F2}");
+                    }
+                };
+                Debug.Log($"[CreatureStats] Found and initialized cooldown UI for {gameObject.name}");
+            }
+            else
+            {
+                Debug.LogWarning($"[CreatureStats] No cooldown UI image found in {gameObject.name}!");
+            }
+        }
+        else if (statsUIPrefab == null)
+        {
+            Debug.LogError($"[CreatureStats] statsUIPrefab is not assigned on {gameObject.name}!");
+            return;
+        }
+
+        if (activeUI != null)
+        {
+            activeUI.SetActive(true);
+            UpdateUIPosition(); // Initial position update
+        }
+    }
+
+    private void HideStatsUI()
+    {
+        if (activeUI != null)
+        {
+            // Nur UI ausblenden, Event-Handler beibehalten
+            activeUI.SetActive(false);
+        }
+    }
+
+    // Event-Handler nur beim wirklichen Zerstören des UIs entfernen
+    private void CleanupStatsUI()
+    {
+        if (activeUI != null)
+        {
+            OnHealthChanged = null;
+            OnManaChanged = null;
+            OnStaminaChanged = null;
+            OnCooldownProgress = null;
+            Destroy(activeUI);
+            activeUI = null;
+        }
+    }
+
+    private void UpdateUIPosition()
+    {
+        if (activeUI != null && Camera.main != null)
+        {
+            var screenPos = Camera.main.WorldToScreenPoint(transform.position + Vector3.up * 0.6f);
+            
+            // Check if creature is in front of camera
+            if (screenPos.z > 0)
+            {
+                activeUI.transform.position = screenPos;
+                
+                // Update UI color based on distance to player
+                var playerTransform = GameObject.FindWithTag("Dice")?.transform;
+                if (playerTransform != null)
+                {
+                    float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
+                    bool inAttackRange = distanceToPlayer <= attackRange;
+                    
+                    // Get UI text component and update color based on range
+                    var text = activeUI.GetComponentInChildren<TMPro.TextMeshProUGUI>();
+                    if (text != null)
+                    {
+                        if (inAttackRange)
+                        {
+                            text.color = Color.red;    // In attack range - red
+                            text.text = "In Attack Range!";
+                        }
+                        else
+                        {
+                            text.color = Color.yellow; // In sight but not in attack range - yellow
+                            text.text = "Target Spotted";
+                        }
+                    }
+                }
+            }
+            else
+            {
+                // Hide UI when behind camera
+                activeUI.transform.position = new Vector3(-1000, -1000, -1000);
+            }
+        }
+    }
+
+    private void LateUpdate()
+    {
+        if (isTargeted)
+        {
+            UpdateUIPosition();
+        }
+    }
+
+    private void OnDestroy()
+    {
+        CleanupStatsUI();
+    }
+
+    // Properties für Max-Werte
+    public float MaxHealth => maxHealth;
+    public float MaxStamina => maxStamina;
+    public float MaxMana => maxMana;
+
+    // Restore-Methoden
+    public void RestoreHealth(float amount)
+    {
+        float oldHealth = currentHealth;
+        currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
+        if (currentHealth != oldHealth)
+        {
+            OnHealthChanged?.Invoke(currentHealth / maxHealth);
+            Debug.Log($"[CreatureStats] Restored {currentHealth - oldHealth} health to {gameObject.name}");
+        }
+    }
+
+    public void RestoreStamina(float amount)
+    {
+        float oldStamina = currentStamina;
+        currentStamina = Mathf.Min(currentStamina + amount, maxStamina);
+        if (currentStamina != oldStamina)
+        {
+            OnStaminaChanged?.Invoke(currentStamina / maxStamina);
+            Debug.Log($"[CreatureStats] Restored {currentStamina - oldStamina} stamina to {gameObject.name}");
+        }
+    }
+
+    public void RestoreMana(float amount)
+    {
+        float oldMana = currentMana;
+        currentMana = Mathf.Min(currentMana + amount, maxMana);
+        if (currentMana != oldMana)
+        {
+            OnManaChanged?.Invoke(currentMana / maxMana);
+            Debug.Log($"[CreatureStats] Restored {currentMana - oldMana} mana to {gameObject.name}");
+        }
+    }
+}
+
+=====
+./CreatureHandling/PlayerCreatureStatusUI.cs
+=====
+using UnityEngine;
+using UnityEngine.UI;
+
+public class CreatureStatusUI : MonoBehaviour
+{
+    [Header("Bar Colors")]
+    [SerializeField] private Color healthColor = Color.red;
+    [SerializeField] private Color staminaColor = Color.green;
+    [SerializeField] private Color manaColor = Color.blue;
+    [SerializeField] private Color backgroundColor = new Color(0.2f, 0.2f, 0.2f, 1f);
+
+    [Header("Bar Settings")]
+    [SerializeField] private float smoothSpeed = 10f;
+    [SerializeField] private Vector2 barSize = new Vector2(200f, 20f);
+
+    private Slider healthSlider;
+    private Slider staminaSlider;
+    private Slider manaSlider;
+    private CreatureStats stats;
+    private float targetHealthFill;
+    private float targetStaminaFill;
+    private float targetManaFill;
+
+    private Slider CreateStatBar(string name, Color fillColor, Vector2 anchorMinMax)
+    {
+        // Create the main container
+        GameObject sliderObj = new GameObject(name);
+        sliderObj.transform.SetParent(transform, false);
+
+        // Setup RectTransform
+        RectTransform sliderRect = sliderObj.AddComponent<RectTransform>();
+        
+        // Calculate the center position and width for this third
+        float thirdWidth = (anchorMinMax.y - anchorMinMax.x); // Width of the third
+        float centerOfThird = anchorMinMax.x + (thirdWidth / 2f); // Center point of the third
+        float halfBarWidth = (barSize.x / Screen.width) / 2f; // Half of our desired bar width in normalized coordinates
+        
+        // Set anchors to the center 50% of the third
+        sliderRect.anchorMin = new Vector2(centerOfThird - halfBarWidth, 0); // Bottom of screen
+        sliderRect.anchorMax = new Vector2(centerOfThird + halfBarWidth, 0);
+        sliderRect.pivot = new Vector2(0.5f, 0); // Center horizontally, bottom vertically
+        sliderRect.sizeDelta = new Vector2(0, barSize.y); // Only set height, width is controlled by anchors
+        sliderRect.anchoredPosition = new Vector2(0, 20); // Small margin from bottom
+
+        // Add Slider component
+        Slider slider = sliderObj.AddComponent<Slider>();
+        slider.minValue = 0f;
+        slider.maxValue = 1f;
+        slider.value = 1f;
+        slider.interactable = false; // Make it non-interactive
+
+        // Create Background
+        GameObject background = new GameObject("Background");
+        background.transform.SetParent(sliderObj.transform, false);
+        Image backgroundImage = background.AddComponent<Image>();
+        backgroundImage.color = backgroundColor;
+        RectTransform bgRect = background.GetComponent<RectTransform>();
+        bgRect.anchorMin = Vector2.zero;
+        bgRect.anchorMax = Vector2.one;
+        bgRect.sizeDelta = Vector2.zero;
+
+        // Create Fill Area
+        GameObject fillArea = new GameObject("Fill Area");
+        fillArea.transform.SetParent(sliderObj.transform, false);
+        RectTransform fillAreaRect = fillArea.AddComponent<RectTransform>();
+        fillAreaRect.anchorMin = Vector2.zero;
+        fillAreaRect.anchorMax = Vector2.one;
+        fillAreaRect.sizeDelta = Vector2.zero;
+
+        // Create Fill
+        GameObject fill = new GameObject("Fill");
+        fill.transform.SetParent(fillArea.transform, false);
+        Image fillImage = fill.AddComponent<Image>();
+        fillImage.color = fillColor;
+        RectTransform fillRect = fill.GetComponent<RectTransform>();
+        fillRect.anchorMin = Vector2.zero;
+        fillRect.anchorMax = Vector2.one;
+        fillRect.sizeDelta = Vector2.zero;
+
+        // Setup slider references
+        slider.fillRect = fillRect;
+        slider.targetGraphic = fillImage;
+        slider.direction = Slider.Direction.LeftToRight;
+
+        return slider;
+    }
+
+    private void Start()
+    {
+        // Create the sliders - divide screen into thirds
+        staminaSlider = CreateStatBar("StaminaBar", staminaColor, new Vector2(0f, 0.33f));      // Left third
+        healthSlider = CreateStatBar("HealthBar", healthColor, new Vector2(0.33f, 0.66f));      // Middle third
+        manaSlider = CreateStatBar("ManaBar", manaColor, new Vector2(0.66f, 1f));              // Right third
+
+        // Find player creature by tag and get its stats
+        GameObject player = GameObject.FindWithTag("Dice");
+        if (player != null)
+        {
+            stats = player.GetComponent<CreatureStats>();
+            Debug.Log($"Found player object with CreatureStats: {stats != null}");
+        }
+        else
+        {
+            Debug.LogError("Could not find object with tag 'Dice'!");
+            enabled = false;
+            return;
+        }
+
+        if (stats == null)
+        {
+            Debug.LogError("Could not find CreatureStats on player with tag 'Dice'!", this);
+            enabled = false;
+            return;
+        }
+
+        // Subscribe to events
+        stats.OnHealthChanged += UpdateHealthBar;
+        stats.OnStaminaChanged += UpdateStaminaBar;
+        stats.OnManaChanged += UpdateManaBar;
+
+        // Initialize bars with current values
+        UpdateHealthBar(stats.GetHealthPercent());
+        UpdateStaminaBar(stats.GetStaminaPercent());
+        UpdateManaBar(stats.GetManaPercent());
+
+        Debug.Log($"UI initialized with Sliders. Initial values - Health: {healthSlider.value}, Stamina: {staminaSlider.value}, Mana: {manaSlider.value}");
+    }
+
+    private void OnDestroy()
+    {
+        if (stats != null)
+        {
+            stats.OnHealthChanged -= UpdateHealthBar;
+            stats.OnStaminaChanged -= UpdateStaminaBar;
+            stats.OnManaChanged -= UpdateManaBar;
+        }
+    }
+
+    private void Update()
+    {
+        if (healthSlider == null || staminaSlider == null || manaSlider == null || stats == null)
+            return;
+
+        // Smooth value changes
+        healthSlider.value = Mathf.Lerp(healthSlider.value, targetHealthFill, Time.deltaTime * smoothSpeed);
+        staminaSlider.value = Mathf.Lerp(staminaSlider.value, targetStaminaFill, Time.deltaTime * smoothSpeed);
+        manaSlider.value = Mathf.Lerp(manaSlider.value, targetManaFill, Time.deltaTime * smoothSpeed);
+    }
+
+    private void UpdateHealthBar(float percent)
+    {
+        targetHealthFill = percent;
+        Debug.Log($"Health updated to: {percent:F2}, current value: {healthSlider.value:F2}");
+    }
+
+    private void UpdateStaminaBar(float percent)
+    {
+        targetStaminaFill = percent;
+        // Debug.Log($"Stamina updated to: {percent:F2}, current value: {staminaSlider.value:F2}");
+    }
+
+    private void UpdateManaBar(float percent)
+    {
+        targetManaFill = percent;
+        // Debug.Log($"Mana updated to: {percent:F2}, current value: {manaSlider.value:F2}");
+    }
+}
+
+=====
+./CreatureHandling/BehaviorController.cs
+=====
+using UnityEngine;
+using System.Collections.Generic;
+
+public class BehaviorController : MonoBehaviour
+{
+    [System.Serializable]
+    public class BehaviorSettings
+    {
+        [Header("Basic Behavior")]
+        public bool useBasicBehavior = true;
+        public bool isBasicDefault = true;
+
+        [Header("Aggressive Behavior")]
+        public bool useAggressiveBehavior;
+        public float aggressiveActivationDistance = 10f;
+        public float alignmentTime = 3f;
+        public float chaseSpeed = 1.5f;
+    }
+
+    [Header("Behavior Configuration")]
+    [SerializeField] private BehaviorSettings settings = new BehaviorSettings();
+    [SerializeField] private float checkInterval = 0.5f;  // How often to check distance (for performance)
+
+    private Transform playerTransform;
+    private CreatureBehavior currentBehavior;
+    private float nextCheckTime;
+    
+    private BasicCreatureBehavior basicBehavior;
+    private AggressiveCreatureBehavior aggressiveBehavior;
+
+    private void OnValidate()
+    {
+        // Make sure at least one behavior is enabled
+        if (!settings.useBasicBehavior && !settings.useAggressiveBehavior)
+        {
+            Debug.LogWarning("At least one behavior should be enabled!");
+            settings.useBasicBehavior = true;
+            settings.isBasicDefault = true;
+        }
+
+        // If basic behavior is not used, it can't be default
+        if (!settings.useBasicBehavior)
+        {
+            settings.isBasicDefault = false;
+        }
+    }
+
+    private void Start()
+    {
+        // Find player with tag "Dice"
+        playerTransform = GameObject.FindWithTag("Dice")?.transform;
+        
+        if (playerTransform == null)
+        {
+            Debug.LogWarning("No player object with tag 'Dice' found!");
+            return;
+        }
+
+        // Create behaviors based on settings
+        if (settings.useBasicBehavior)
+        {
+            basicBehavior = gameObject.AddComponent<BasicCreatureBehavior>();
+            basicBehavior.enabled = false;
+        }
+
+        if (settings.useAggressiveBehavior)
+        {
+            aggressiveBehavior = gameObject.AddComponent<AggressiveCreatureBehavior>();
+            aggressiveBehavior.enabled = false;
+            
+            // Configure aggressive behavior settings
+            if (aggressiveBehavior != null)
+            {
+                var aggro = aggressiveBehavior as AggressiveCreatureBehavior;
+                aggro.SetSettings(settings.alignmentTime, settings.chaseSpeed);
+            }
+        }
+
+        // Activate default behavior
+        ActivateDefaultBehavior();
+    }
+
+    private void Update()
+    {
+        if (playerTransform == null || Time.time < nextCheckTime) return;
+
+        nextCheckTime = Time.time + checkInterval;
+        UpdateBehavior();
+    }
+
+    private void UpdateBehavior()
+    {
+        if (!settings.useAggressiveBehavior)
+        {
+            // If no aggressive behavior, just keep basic behavior active
+            SwitchToBehavior(basicBehavior);
+            return;
+        }
+
+        float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
+
+        // Switch to aggressive if player is in range
+        if (distanceToPlayer <= settings.aggressiveActivationDistance)
+        {
+            SwitchToBehavior(aggressiveBehavior);
+        }
+        else
+        {
+            SwitchToBehavior(basicBehavior);
+        }
+    }
+
+    private void ActivateDefaultBehavior()
+    {
+        if (settings.useBasicBehavior && settings.isBasicDefault)
+        {
+            SwitchToBehavior(basicBehavior);
+        }
+        else if (settings.useAggressiveBehavior)
+        {
+            SwitchToBehavior(aggressiveBehavior);
+        }
+    }
+
+    private void SwitchToBehavior(CreatureBehavior newBehavior)
+    {
+        if (currentBehavior == newBehavior) return;
+
+        if (currentBehavior != null)
+        {
+            currentBehavior.enabled = false;
+        }
+
+        if (newBehavior != null)
+        {
+            newBehavior.enabled = true;
+            currentBehavior = newBehavior;
+        }
+    }
+
+    // Optional: Visualize the activation distances in the editor
+    private void OnDrawGizmosSelected()
+    {
+        if (settings.useAggressiveBehavior)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, settings.aggressiveActivationDistance);
+        }
+    }
+}
+
+
+=====
+./CreatureHandling/Behaviors/CreatureBehavior.cs
+=====
+using UnityEngine;
+using Controller;
+
+[RequireComponent(typeof(CreatureMover))]
+public abstract class CreatureBehavior : MonoBehaviour
+{
+    protected CreatureMover mover;
+    protected BoundsInt biomeBounds;
+    protected Vector3 currentTarget;
+    protected float waitTime;
+    protected bool isWaiting;
+
+    [Header("Movement Settings")]
+    public float minWaitTime = 2f;
+    public float maxWaitTime = 5f;
+    public float moveRadius = 10f;
+
+    protected virtual void Awake()
+    {
+        mover = GetComponent<CreatureMover>();
+    }
+
+    public virtual void Initialize(BoundsInt bounds)
+    {
+        this.biomeBounds = bounds;
+        SetNewTarget();
+    }
+
+    protected virtual void Update()
+    {
+        if (isWaiting)
+        {
+            waitTime -= Time.deltaTime;
+            if (waitTime <= 0)
+            {
+                isWaiting = false;
+                SetNewTarget();
+            }
+            return;
+        }
+
+        // Move towards target
+        Vector3 toTarget = currentTarget - transform.position;
+        if (toTarget.magnitude < 0.5f)
+        {
+            // Reached target, wait for a bit
+            isWaiting = true;
+            waitTime = Random.Range(minWaitTime, maxWaitTime);
+            return;
+        }
+
+        // Convert world direction to input axis
+        Vector2 input = new Vector2(toTarget.x, toTarget.z).normalized;
+        mover.SetInput(input, currentTarget, false, false);
+    }
+
+    protected virtual void SetNewTarget()
+    {
+        Vector3 randomOffset = new Vector3(
+            Random.Range(-moveRadius, moveRadius),
+            0,
+            Random.Range(-moveRadius, moveRadius)
+        );
+
+        Vector3 newTarget = transform.position + randomOffset;
+        
+        // Clamp to biome bounds
+        newTarget.x = Mathf.Clamp(newTarget.x, biomeBounds.xMin, biomeBounds.xMax);
+        newTarget.z = Mathf.Clamp(newTarget.z, biomeBounds.yMin, biomeBounds.yMax);
+        
+        currentTarget = newTarget;
+    }
+}
+
+// Example concrete implementation
+public class WanderingCreatureBehavior : CreatureBehavior
+{
+    // This basic implementation just uses the base behavior
+    // More complex behaviors can override the base methods
+}
+
+
+=====
+./CreatureHandling/Behaviors/AggressiveCreatureBehavior.cs
+=====
+using UnityEngine;
+using System.Collections;
+
+public class AggressiveCreatureBehavior : CreatureBehavior
+{
+    private float alignmentTime = 3f;          // Time to align towards player
+    private float chaseSpeed = 1.5f;           // Speed multiplier when chasing
+    private const float STAMINA_SPRINT_THRESHOLD = 0.95f;  // Warte bis 95% Stamina zum erneuten Sprint
+    private const float STAMINA_EXHAUSTED_THRESHOLD = 0.05f;  // Bei 5% Stamina ist erschöpft
+
+    private Transform playerTransform;
+    private bool isAligning = false;
+    private bool isChasing = false;
+    private float alignmentTimer = 0f;
+    private CreatureStats myStats;
+    private bool canSprint = true;
+
+    public void SetSettings(float alignTime, float speed)
+    {
+        alignmentTime = alignTime;
+        chaseSpeed = speed;
+    }
+
+    protected override void Awake()
+    {
+        base.Awake();
+        playerTransform = GameObject.FindWithTag("Dice")?.transform;
+        myStats = GetComponent<CreatureStats>();
+        
+        if (playerTransform == null)
+        {
+            Debug.LogWarning("No player object with tag 'Dice' found!");
+        }
+    }
+
+    protected override void Update()
+    {
+        if (playerTransform == null) return;
+
+        // When enabled by the controller, start with alignment phase
+        if (!isAligning && !isChasing)
+        {
+            StartAlignment();
+        }
+        else if (isAligning)
+        {
+            UpdateAlignment();
+        }
+        else if (isChasing)
+        {
+            ChasePlayer();
+        }
+    }
+
+    private void StartAlignment()
+    {
+        isAligning = true;
+        alignmentTimer = alignmentTime;
+    }
+
+    private void UpdateAlignment()
+    {
+        alignmentTimer -= Time.deltaTime;
+        
+        // During alignment, just look at the player
+        Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
+        directionToPlayer.y = 0; // Keep it on the horizontal plane
+        
+        // Convert world direction to input axis for looking at player
+        Vector2 input = new Vector2(directionToPlayer.x, directionToPlayer.z);
+        mover.SetInput(Vector2.zero, playerTransform.position, false, false);
+
+        if (alignmentTimer <= 0)
+        {
+            isAligning = false;
+            isChasing = true;
+        }
+    }
+
+    private void ChasePlayer()
+    {
+        Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
+        directionToPlayer.y = 0; // Keep it on the horizontal plane
+        float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
+        
+        if (myStats == null)
+        {
+            Debug.LogWarning("[AggressiveCreatureBehavior] Missing CreatureStats component!");
+            return;
+        }
+
+        // Stamina Management
+        float currentStaminaPercent = myStats.GetStaminaPercent();
+        
+        // Wenn erschöpft, warte auf fast volle Regeneration
+        if (!canSprint && currentStaminaPercent >= STAMINA_SPRINT_THRESHOLD)
+        {
+            canSprint = true;
+            Debug.Log($"[AggressiveCreatureBehavior] {gameObject.name} Stamina voll regeneriert ({currentStaminaPercent:P0}), beginne Sprint");
+        }
+        // Wenn Stamina fast leer, stoppe Sprint und warte auf Regeneration
+        else if (canSprint && currentStaminaPercent <= STAMINA_EXHAUSTED_THRESHOLD)
+        {
+            canSprint = false;
+            Debug.Log($"[AggressiveCreatureBehavior] {gameObject.name} Stamina erschöpft ({currentStaminaPercent:P0}), regeneriere...");
+        }
+
+        var playerStats = playerTransform.GetComponent<CreatureStats>();
+        if (playerStats == null) return;
+
+        // Attack range check (subtract 1 to maintain some distance)
+        float targetDistance = myStats.AttackRange - 1f;
+        
+        if (distanceToPlayer <= myStats.AttackRange)
+        {
+            // In attack range - try to attack
+            if (myStats.TryAttack(playerStats))
+            {
+                // Attacke war erfolgreich - bleib stehen
+                mover.SetInput(Vector2.zero, playerTransform.position, false, false);
+                return;
+            }
+        }
+        
+        // Not in range or can't attack yet - keep chasing if we're too far
+        if (distanceToPlayer > targetDistance)
+        {
+            Vector2 input = new Vector2(directionToPlayer.x, directionToPlayer.z);
+            bool shouldRun = canSprint && distanceToPlayer > myStats.AttackRange * 1.5f; // Sprint nur wenn weiter weg
+            mover.SetInput(input * (shouldRun ? chaseSpeed : 1f), playerTransform.position, shouldRun, false);
+        }
+        else
+        {
+            // In ideal range - stop moving
+            mover.SetInput(Vector2.zero, playerTransform.position, false, false);
+        }
+    }
+
+    private void OnEnable()
+    {
+        // Reset state when behavior is enabled
+        isAligning = false;
+        isChasing = false;
+    }
+
+    private void OnDisable()
+    {
+        // Clean up state when behavior is disabled
+        isAligning = false;
+        isChasing = false;
+    }
+}
+
+
+=====
+./CreatureHandling/Behaviors/BasicCreatureBehavior.cs
+=====
+using UnityEngine;
+using System.Collections;
+
+public class BasicCreatureBehavior : CreatureBehavior
+{
+    [Header("Movement Settings")]
+    [SerializeField] private float turnSpeed = 2f;                // How quickly it turns towards target
+    [SerializeField] private float acceleration = 0.5f;           // How quickly it speeds up/slows down
+    [SerializeField] private float obstacleDetectionRadius = 2f;  // Radius for detecting obstacles
+    [SerializeField] private LayerMask obstacleLayer;             // Layer mask for obstacles
+    
+    private Vector2 currentVelocity;                              // Current movement direction and speed
+    private float speedMultiplier;                                // Current speed (accelerates/decelerates smoothly)
+    private bool isLooking;                                      // Whether the creature is currently looking around
+
+    protected override void Awake()
+    {
+        base.Awake();
+        speedMultiplier = 0f;
+        obstacleLayer = LayerMask.GetMask("Wall", "Default");
+    }
+
+    protected override void Update()
+    {
+        if (isWaiting)
+        {
+            HandleWaiting();
+            return;
+        }
+
+        if (isLooking)
+        {
+            return; // Let the coroutine handle looking
+        }
+
+        // Check for water
+        var tilePos = new Vector3Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.z), 0);
+        if (IsOnWater(tilePos))
+        {
+            SetNewTarget(); // Find new target if we're on water
+            return;
+        }
+
+        Vector3 toTarget = currentTarget - transform.position;
+        toTarget.y = 0f;
+
+        // Check for obstacles and adjust direction
+        if (Physics.SphereCast(transform.position, obstacleDetectionRadius, toTarget.normalized, out RaycastHit hit, 2f, obstacleLayer))
+        {
+            // Calculate avoidance direction
+            Vector3 avoidanceDirection = Vector3.Cross(Vector3.up, hit.normal);
+            currentTarget = transform.position + avoidanceDirection * moveRadius;
+            toTarget = currentTarget - transform.position;
+        }
+
+        // Update movement
+        if (toTarget.magnitude < 0.5f)
+        {
+            StartCoroutine(LookAround());
+            return;
+        }
+
+        // Apply movement using the CreatureMover
+        Vector2 targetVelocity = new Vector2(toTarget.x, toTarget.z).normalized;
+        currentVelocity = Vector2.Lerp(currentVelocity, targetVelocity, turnSpeed * Time.deltaTime);
+        mover.SetInput(currentVelocity, currentTarget, false, false);
+    }
+
+    private void HandleWaiting()
+    {
+        speedMultiplier = Mathf.Lerp(speedMultiplier, 0f, acceleration * Time.deltaTime);
+        if (speedMultiplier < 0.01f)
+        {
+            speedMultiplier = 0f;
+            waitTime -= Time.deltaTime;
+            if (waitTime <= 0)
+            {
+                isWaiting = false;
+                StartCoroutine(LookAround());
+            }
+        }
+    }
+
+    private IEnumerator LookAround()
+    {
+        isLooking = true;
+        
+        // Random rotation
+        float targetRotation = Random.Range(0f, 360f);
+        float rotationTime = Random.Range(0.5f, 1.5f);
+        float elapsed = 0f;
+        
+        Quaternion startRotation = transform.rotation;
+        Quaternion endRotation = Quaternion.Euler(0, targetRotation, 0);
+        
+        while (elapsed < rotationTime)
+        {
+            elapsed += Time.deltaTime;
+            transform.rotation = Quaternion.Lerp(startRotation, endRotation, elapsed / rotationTime);
+            yield return null;
+        }
+        
+        isLooking = false;
+        SetNewTarget();
+    }
+
+    protected override void SetNewTarget()
+    {
+        for (int i = 0; i < 10; i++) // Try 10 times to find valid target
+        {
+            Vector3 randomDirection = Random.insideUnitSphere * moveRadius;
+            randomDirection.y = 0;
+            Vector3 newTarget = transform.position + randomDirection;
+            
+            // Check if target is within bounds
+            newTarget.x = Mathf.Clamp(newTarget.x, biomeBounds.xMin, biomeBounds.xMax);
+            newTarget.z = Mathf.Clamp(newTarget.z, biomeBounds.yMin, biomeBounds.yMax);
+            
+            // Check if target is not on water or road
+            var targetTilePos = new Vector3Int(Mathf.RoundToInt(newTarget.x), Mathf.RoundToInt(newTarget.z), 0);
+            if (!IsOnWater(targetTilePos) && !IsNearRoad(targetTilePos))
+            {
+                currentTarget = newTarget;
+                speedMultiplier = 0f;
+                return;
+            }
+        }
+    }
+
+    private bool IsOnWater(Vector3Int tilePos)
+    {
+        var waterLayer = Object.FindAnyObjectByType<BaseMapManager>(FindObjectsInactive.Exclude)?.waterLayer;
+        return waterLayer != null && waterLayer.HasTile(tilePos);
+    }
+
+    private bool IsNearRoad(Vector3Int tilePos)
+    {
+        var roadLayer = Object.FindAnyObjectByType<BaseMapManager>(FindObjectsInactive.Exclude)?.roadLayer;
+        if (roadLayer == null) return false;
+
+        // Check surrounding tiles for roads
+        for (int x = -1; x <= 1; x++)
+        {
+            for (int y = -1; y <= 1; y++)
+            {
+                if (roadLayer.HasTile(tilePos + new Vector3Int(x, y, 0)))
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+}
+
+
+=====
+./ScriptablesAndConfig/CreatureConfig.cs
+=====
+using UnityEngine;
+
+[System.Serializable]
+public class CreatureConfig
+{
+    public GameObject creaturePrefab;
+    public int spawnCount = 1;
+}
+
+
+=====
+./ScriptablesAndConfig/MapBiomeConfig.cs
+=====
+using UnityEngine;
+using UnityEngine.Tilemaps;
+using System.Collections.Generic;
+
+[CreateAssetMenu(fileName = "MapBiomeConfig", menuName = "Map/MapBiomeConfig", order = 1)]
+public class MapBiomeConfig : ScriptableObject
+{
+    public Vector2Int biomeSize = new Vector2Int(100, 50);
+
+    [Header("Terrain Layers")]
+    // Removed Tilemap references as per the change request
+
+    [Header("Basic Terrain Tiles")]
+    public Tile earthTile;
+    public Tile grassTile;
+    public Tile waterTile;
+    public RuleTile roadTile;
+
+    [Header("Noise & Thresholds")]
+    public float noiseScale = 10f;
+    public bool useRandomSeed = true;
+    public int seed = 0;
+    [Range(0f, 1f)] public float grassThreshold = 0.4f;
+    [Range(0f, 1f)] public float waterThreshold = 0.3f;
+    public int minRegionSize = 4;
+
+    [Header("Tile Variants")]
+    public Tile[] darkEarthTiles;
+    public Tile[] mediumEarthTiles;
+    public Tile[] lightEarthTiles;
+    public Tile[] lightGrassTiles;
+    public Tile[] mediumGrassTiles;
+    public Tile[] darkGrassTiles;
+    public Tile[] waterTileVariants;
+
+    [Header("Object Manager Prefabs")]
+    public GameObject[] treePrefabs;
+    public GameObject highGrassPrefab;
+    public GameObject lowGrassPrefab;
+    public GameObject[] housePrefabs;
+
+    [Header("Object Manager Settings")]
+    [Range(0f, 1f)] public float treeDensity = 0.3f;
+    public float minTreeDistance = 2f;
+    public float minTreeRoadDistance = 3f;
+    public float highGrassRadius = 5f;
+    public float lowGrassRadius = 8f;
+    [Range(0f, 1f)] public float highGrassDensity = 0.4f;
+    [Range(0f, 1f)] public float lowGrassDensity = 0.3f;
+    [Range(0f, 1f)] public float lakeTreeChance = 0.2f;
+    public float lakeEffectRadius = 6f;
+    [Range(0f, 1f)] public float lakeHighGrassChance = 0.4f;
+    [Range(0f, 1f)] public float lakeLowGrassChance = 0.5f;
+    public float roadGrassRadius = 3f;
+    [Range(0f, 1f)] public float roadGrassChance = 0.3f;
+    [Range(0f, 1f)] public float roadHighGrassRatio = 0.4f;
+    public float minHouseDistance = 5f;
+
+    [Header("Sorting Layers")]
+    public string sortingLayerName = "Props";
+    public int treeSortingOrder = 3;
+    public int houseSortingOrder = 2;
+    public int highGrassSortingOrder = 1;
+    public int lowGrassSortingOrder = 0;
+
+    [Header("Creature Settings")]
+    public List<CreatureConfig> creatures = new List<CreatureConfig>();
+
+    [Header("Flower Settings")]
+    [Tooltip("Direct references to prefabs with FlowerInteraction component")]
+    public GameObject[] flowerPrefabs;
+
+    [Header("Water Settings")]
+    public GameObject waterPrefab;     // Das 3D Water Object Prefab
+}
+
+=====
+./ScriptablesAndConfig/FlowerConfig.cs
+=====
+using UnityEngine;
+
+[System.Serializable]
+public class FlowerConfig
+{
+    public GameObject flowerPrefab;
+    public enum Rarity { Common, Rare, Epic }
+
+    // Hardcoded replacement chances for each rarity
+    public const float COMMON_REPLACE_CHANCE = 0.3f;
+    public const float RARE_REPLACE_CHANCE = 0.15f;
+    public const float EPIC_REPLACE_CHANCE = 0.05f;
+
+    public static float GetReplacementChance(Rarity rarity)
+    {
+        return rarity switch
+        {
+            Rarity.Common => COMMON_REPLACE_CHANCE,
+            Rarity.Rare => RARE_REPLACE_CHANCE,
+            Rarity.Epic => EPIC_REPLACE_CHANCE,
+            _ => COMMON_REPLACE_CHANCE
+        };
+    }
+}
+
+
+=====
+./MiniMap/MinimapController.cs
+=====
+using UnityEngine;
+using UnityEngine.UI;
+
+public class MinimapController : MonoBehaviour
+{
+    public Camera minimapCamera;
+    public RawImage minimapImage;
+    public RectTransform minimapRect;
+    public Vector2Int mapSize = new Vector2Int(100, 100);
+    public float border = 10f;
+
+    [Header("Player Marker")]
+    public Transform playerTransform;
+    public float markerSize = 10f;
+    public Color markerColor = Color.red;
+    private RectTransform playerMarker;
+
+    void Start()
+    {
+        if (minimapCamera != null)
+        {
+            // Set camera size and position to fit the whole map
+            minimapCamera.orthographic = true;
+            minimapCamera.orthographicSize = mapSize.y / 2f + border;
+            minimapCamera.transform.position = new Vector3(mapSize.x / 2f, mapSize.y / 2f, -20f);
+            minimapCamera.cullingMask = LayerMask.GetMask("Default", "Props");
+        }
+
+        // Find player if not set
+        if (playerTransform == null)
+        {
+            var player = GameObject.FindWithTag("Dice");
+            if (player != null)
+            {
+                playerTransform = player.transform;
+            }
+        }
+
+        CreatePlayerMarker();
+    }
+
+    void CreatePlayerMarker()
+    {
+        // Create a simple marker
+        var markerObj = new GameObject("PlayerMarker");
+        markerObj.transform.SetParent(minimapRect, false);
+        playerMarker = markerObj.AddComponent<RectTransform>();
+        playerMarker.sizeDelta = new Vector2(markerSize, markerSize);
+        
+        // Add and configure the image component
+        var image = markerObj.AddComponent<UnityEngine.UI.Image>();
+        image.color = markerColor;
+        
+        // Make the image circular using the built-in circle sprite
+        var texture = new Texture2D(128, 128);
+        var colors = new Color[texture.width * texture.height];
+        
+        for (int x = 0; x < texture.width; x++)
+        {
+            for (int y = 0; y < texture.height; y++)
+            {
+                var dx = x - texture.width / 2f;
+                var dy = y - texture.height / 2f;
+                var dist = Mathf.Sqrt(dx * dx + dy * dy);
+                var radius = texture.width / 2f;
+                colors[y * texture.width + x] = dist <= radius ? Color.white : Color.clear;
+            }
+        }
+        
+        texture.SetPixels(colors);
+        texture.Apply();
+        
+        var sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+        image.sprite = sprite;
+    }
+
+    void LateUpdate()
+    {
+        if (playerTransform != null && playerMarker != null && minimapCamera != null)
+        {
+            // Convert world position to screen position
+            Vector3 screenPoint = minimapCamera.WorldToViewportPoint(playerTransform.position);
+            
+            // Convert viewport position to UI position
+            Vector2 uiPosition = new Vector2(
+                (screenPoint.x * minimapRect.sizeDelta.x) - (minimapRect.sizeDelta.x * 0.5f),
+                (screenPoint.y * minimapRect.sizeDelta.y) - (minimapRect.sizeDelta.y * 0.5f)
+            );
+            
+            playerMarker.anchoredPosition = uiPosition;
+        }
+    }
+}
+
+
+=====
+./MiniMap/MinimapCameraFollow.cs
+=====
+using UnityEngine;
+
+public class MinimapCameraFollow : MonoBehaviour
+{
+    public Transform dice;      // Ziehe hier das Dice-Objekt rein
+    public Vector3 offset = new Vector3(0, 20, 0); // Höhe und ggf. Verschiebung anpassen
+    private Vector3 initialPosition;
+
+    void Start()
+    {
+        // Speichere die initiale Position
+        initialPosition = transform.position;
+    }
+
+    void LateUpdate()
+    {
+        if (dice != null)
+        {
+            // Behalte x und y von der initialen Position, update nur z vom Würfel
+            Vector3 newPosition = initialPosition;
+            newPosition.z = dice.position.z + offset.z;
+            transform.position = newPosition;
+        }
+    }
+}
+
+=====
+./Map/ObjectManager.cs
+=====
+using UnityEngine;
+using UnityEngine.Tilemaps;
+using UnityEngine.Rendering;
+using System.Collections.Generic;
+using System.Linq;
+using Map;
+
+public class ObjectManager : MonoBehaviour
+{
+    [HideInInspector] public Vector2Int origin;
+    [HideInInspector] public Vector2Int biomeSize;
+
+    [Header("Required References")]
+    public BaseMapManager baseMapManager;
+    
+    [Header("Vegetation Prefabs")]
+    public GameObject[] treePrefabs;
+    public GameObject highGrassPrefab;
+    public GameObject lowGrassPrefab;
+    public GameObject[] housePrefabs;
+
+    [Header("Forest Settings")]
+    [Range(0f, 1f)]
+    public float treeDensity = 0.3f;
+    public float minTreeDistance = 2f;
+    public float minTreeRoadDistance = 3f;  // Mindestabstand zwischen Bäumen und Straßen
+    
+    [Header("Grass Settings")]
+    public float highGrassRadius = 5f;
+    public float lowGrassRadius = 8f;
+    [Range(0f, 1f)]
+    public float highGrassDensity = 0.4f;
+    [Range(0f, 1f)]
+    public float lowGrassDensity = 0.3f;
+    
+    [Header("Lake Vegetation")]
+    [Range(0f, 1f)]
+    public float lakeTreeChance = 0.2f;
+    public float lakeEffectRadius = 6f;
+    [Range(0f, 1f)]
+    public float lakeHighGrassChance = 0.4f;
+    [Range(0f, 1f)]
+    public float lakeLowGrassChance = 0.5f;
+    
+    [Header("Road Vegetation")]
+    public float roadGrassRadius = 3f;
+    [Range(0f, 1f)]
+    public float roadGrassChance = 0.3f;
+    [Range(0f, 1f)]
+    public float roadHighGrassRatio = 0.4f;
+
+    [Header("House Settings")]
+    public float minHouseDistance = 5f;
+    
+    [Header("Sorting Settings")]
+    public string sortingLayerName = "Props";
+    public int treeSortingOrder = 3;
+    public int houseSortingOrder = 2;
+    public int highGrassSortingOrder = 1;
+    public int lowGrassSortingOrder = 0;
+
+    [Header("Biome Wall")]
+    public GameObject wallPrefab;
+    private GameObject biomeWallInstance;
+
+    [Header("Fog of War")]
+    public GameObject fogPrefab;
+    private GameObject fogInstance;
+
+    private Transform objectContainer;
+    private List<Vector3> placedObjects = new List<Vector3>();
+    private Dictionary<GameObject, Vector3Int> houseDirections = new Dictionary<GameObject, Vector3Int>();
+
+    [Header("Flower Settings")]
+    public GameObject[] flowerPrefabs;
+    [Range(0f, 1f)]
+    public float flowerSpawnChance = 0.3f;
+
+    private void Awake()
+    {
+        objectContainer = new GameObject("ObjectContainer").transform;
+        objectContainer.parent = transform;
+    }
+
+    private void Start()
+    {
+        CreateFogOfWar();
+        if (origin.y == 0)
+            StartCoroutine(RemoveFirstBiomeFog());
+    }
+
+    private void CreateFogOfWar()
+    {
+        if (fogPrefab == null)
+        {
+            Debug.LogWarning($"[ObjectManager] Kein FogPrefab gesetzt für {name}!");
+            return;
+        }
+        // X bleibt gleich, alter Y-Wert wird zu Z, fester Y-Wert ist jetzt +6
+        Vector3 position = new Vector3(
+            origin.x + biomeSize.x / 2f,  // X bleibt in X
+            6f,                           // Neuer Y-Wert ist +6
+            origin.y + biomeSize.y / 2f   // Alter Y-Wert wird zu Z
+        );
+        // Rotation um +90 Grad in X-Achse
+        fogInstance = Instantiate(fogPrefab, position, Quaternion.Euler(90, 0, 0), objectContainer);
+        fogInstance.transform.localScale = new Vector3(biomeSize.x, biomeSize.y, 1);
+        fogInstance.name = $"Fog_{origin.y / biomeSize.y}";
+        fogInstance.SetActive(true);
+        // Sorting Layer setzen
+        var renderer = fogInstance.GetComponent<Renderer>();
+        if (renderer != null)
+        {
+            renderer.sortingLayerName = sortingLayerName;
+            renderer.sortingOrder = 99; // Sehr hoch, damit immer oben
+        }
+        Debug.Log($"[ObjectManager] Fog erzeugt für {name} an {position} mit Größe {biomeSize} und SortingLayer {sortingLayerName}");
+    }
+
+    private System.Collections.IEnumerator RemoveFirstBiomeFog()
+    {
+        yield return new WaitForSeconds(3f);
+        RemoveFogOfWar();
+    }
+
+    public void RemoveFogOfWar()
+    {
+        if (fogInstance != null)
+        {
+            Destroy(fogInstance);
+            fogInstance = null;
+        }
+    }
+
+    // Public methods for MapGenerationManager to call
+    public void PlaceHouses()
+    {
+        // Find all grass tiles first
+        var bounds = baseMapManager.grassLayer.cellBounds;
+        var candidates = new List<Vector3Int>();
+        
+        foreach (var pos in bounds.allPositionsWithin)
+        {
+            if (pos.x < origin.x || pos.y < origin.y) continue;
+            if (pos.x >= origin.x + biomeSize.x || pos.y >= origin.y + biomeSize.y) continue;
+            if (IsValidHousePosition(baseMapManager.grassLayer.CellToWorld(pos)))
+                candidates.Add(pos);
+        }
+        
+        // Shuffle candidates for random placement
+        candidates = candidates.OrderBy(x => Random.value).ToList();
+        
+        // Try to place houses
+        int totalHouses = Mathf.Min(5, candidates.Count / 4); // Maximum 20 houses, or fewer if not enough space
+        int housesPlaced = 0;
+        
+        foreach (var cell in candidates)
+        {
+            if (housesPlaced >= totalHouses) break;
+            
+            var worldPos = baseMapManager.grassLayer.CellToWorld(cell) + new Vector3(0.5f, 0.5f, 0f);
+            if (!placedObjects.Any(p => Vector2.Distance(p, worldPos) < minHouseDistance))
+            {
+                PlaceHouse(worldPos);
+                housesPlaced++;
+            }
+        }
+    }
+
+    public void PlaceRemainingObjects()
+    {
+        // Stelle sicher, dass alle Platzierungen nur im eigenen Biome-Bereich erfolgen
+        PlaceForestVegetation();
+        PlaceLakeVegetation();
+        PlaceRoadVegetation();
+    }
+
+    private bool IsInBiomeBounds(Vector3 worldPos)
+    {
+        // Convert 3D world position to 2D grid position
+        var cellPos = new Vector3Int(
+            Mathf.RoundToInt(worldPos.x - 0.5f),
+            Mathf.RoundToInt(worldPos.z - 0.5f),
+            0
+        );
+        
+        return cellPos.x >= origin.x && cellPos.x < origin.x + biomeSize.x &&
+               cellPos.y >= origin.y && cellPos.y < origin.y + biomeSize.y;
+    }
+
+    private bool IsValidHousePosition(Vector3 worldPos)
+    {
+        // Convert 3D position to 2D grid coordinates
+        var cellPos = new Vector3Int(
+            Mathf.RoundToInt(worldPos.x - 0.5f),
+            Mathf.RoundToInt(worldPos.z - 0.5f),
+            0
+        );
+        
+        // Position must have grass and no water
+        if (baseMapManager.grassLayer.GetTile(cellPos) == null || 
+            baseMapManager.waterLayer.GetTile(cellPos) != null)
+            return false;
+
+        // Check map bounds
+        if (!baseMapManager.baseLayer.cellBounds.Contains(cellPos))
+            return false;
+
+        return true;
+    }
+
+
+
+    private void PlaceHouse(Vector3 position)
+    {
+        var prefab = housePrefabs[Random.Range(0, housePrefabs.Length)];
+        
+        // Only rotate around Y axis for different house orientations
+        float randomY = Random.Range(0, 4) * 90; // 0, 90, 180, or 270 degrees
+        var rotation = Quaternion.Euler(0, randomY, 0);
+        
+        // Adjust Y position to 0 for ground level
+        Vector3 adjustedPos = new Vector3(position.x, 0, position.z);
+        var house = Instantiate(prefab, adjustedPos, rotation, objectContainer);
+
+        // Set layer for houses
+        house.layer = LayerMask.NameToLayer("Wall");
+        foreach (Transform child in house.transform)
+            child.gameObject.layer = LayerMask.NameToLayer("Wall");
+
+        // Collider sicherstellen (kein Trigger)
+        var collider = house.GetComponent<Collider>();
+        if (collider == null) collider = house.AddComponent<BoxCollider>();
+        collider.isTrigger = false;
+        foreach (Transform child in house.transform)
+        {
+            var childCollider = child.GetComponent<Collider>();
+            if (childCollider != null) childCollider.isTrigger = false;
+        }
+
+        var sg = house.AddComponent<SortingGroup>();
+        sg.sortingLayerName = sortingLayerName;
+        sg.sortingOrder = houseSortingOrder;
+
+        // Convert rotation to grid direction
+        Vector3Int direction;
+        if (Mathf.Approximately(rotation.eulerAngles.y, 0f)) direction = Vector3Int.back;  // facing -Z
+        else if (Mathf.Approximately(rotation.eulerAngles.y, 90f)) direction = Vector3Int.left;  // facing -X
+        else if (Mathf.Approximately(rotation.eulerAngles.y, 180f)) direction = Vector3Int.forward; // facing +Z
+        else direction = Vector3Int.right; // facing +X
+        houseDirections[house] = direction;
+        placedObjects.Add(new Vector3(position.x, 0, position.z));
+    }
+
+    public List<RoadManager.HouseFront> GetHouseFrontPositions()
+    {
+        var fronts = new List<RoadManager.HouseFront>();
+        
+        foreach (var houseEntry in houseDirections)
+        {
+            var house = houseEntry.Key;
+            var dir = houseEntry.Value;
+            var worldPos = house.transform.position;
+            
+            // Convert 3D position to tilemap position
+            var samplePos = worldPos + new Vector3(dir.x * 0.5f, 0, dir.z * 0.5f);
+            var tilePos = new Vector3Int(
+                Mathf.RoundToInt(samplePos.x - 0.5f), 
+                Mathf.RoundToInt(samplePos.z - 0.5f), 
+                0
+            );
+            
+            fronts.Add(new RoadManager.HouseFront(tilePos, dir));
+        }
+        
+        return fronts;
+    }
+
+    private void PlaceForestVegetation()
+    {
+        foreach (var region in baseMapManager.EarthRegions)
+        {
+            foreach (var tile in region.Tiles)
+            {
+                var cellPos = baseMapManager.baseLayer.CellToWorld(tile);
+                var worldPos = new Vector3(cellPos.x + 0.5f, 0f, tile.y + 0.5f);
+                
+                if (Random.value < treeDensity && 
+                    !placedObjects.Any(p => Vector3.Distance(new Vector3(p.x, 0, p.z), worldPos) < minTreeDistance) &&
+                    IsValidPosition(worldPos, true))
+                {
+                    PlaceTree(worldPos);
+                }
+            }
+
+            // Place grass around the forest
+            PlaceGrassAroundRegion(region);
+        }
+    }
+
+    private void PlaceLakeVegetation()
+    {
+        foreach (var region in baseMapManager.LakeRegions)
+        {
+            foreach (var tile in region.Tiles)
+            {
+                var cellPos = baseMapManager.waterLayer.CellToWorld(tile);
+            var worldPos = new Vector3(cellPos.x + 0.5f, 0f, tile.y + 0.5f);
+                
+                for (float angle = 0; angle < 360; angle += 45)
+                {
+                    float rad = angle * Mathf.Deg2Rad;
+                    for (float dist = 1; dist <= lakeEffectRadius; dist += 1f)
+                    {
+                        Vector3 checkPos = worldPos + new Vector3(Mathf.Cos(rad), 0, Mathf.Sin(rad)) * dist;
+                                 if (!IsValidPosition(checkPos, true)) continue;
+
+                float distFactor = 1 - (dist / lakeEffectRadius);
+                
+                if (Random.value < lakeTreeChance * distFactor)
+                    PlaceTree(checkPos);
+                        if (Random.value < lakeHighGrassChance * distFactor)
+                            PlaceGrass(checkPos, true);
+                        if (Random.value < lakeLowGrassChance * distFactor)
+                            PlaceGrass(checkPos, false);
+                    }
+                }
+            }
+        }
+    }
+
+    private void PlaceRoadVegetation()
+    {
+        var roadBounds = baseMapManager.roadLayer.cellBounds;
+        foreach (var pos in roadBounds.allPositionsWithin)
+        {
+            if (baseMapManager.roadLayer.GetTile(pos) == null) continue;
+
+            var cellPos = baseMapManager.roadLayer.CellToWorld(pos);
+            var worldPos = new Vector3(cellPos.x + 0.5f, 0f, cellPos.y + 0.5f);
+            
+            for (float angle = 0; angle < 360; angle += 30)
+            {
+                float rad = angle * Mathf.Deg2Rad;
+                for (float dist = 1; dist <= roadGrassRadius; dist += 0.5f)
+                {
+                    if (Random.value > roadGrassChance) continue;
+
+                    Vector3 checkPos = worldPos + new Vector3(Mathf.Cos(rad), Mathf.Sin(rad), 0) * dist;
+                    if (!IsValidPosition(checkPos)) continue;
+
+                    PlaceGrass(checkPos, Random.value < roadHighGrassRatio);
+                }
+            }
+        }
+    }
+
+    private void PlaceGrassAroundRegion(Map.BaseRegion region)
+    {
+        // Place high grass closer to the region
+        foreach (var tile in region.Tiles)
+        {
+            var worldPos = baseMapManager.baseLayer.CellToWorld(tile) + new Vector3(0.5f, 0.5f, 0f);
+            PlaceGrassInRadius(worldPos, highGrassRadius, highGrassDensity, true);
+        }
+
+        // Place low grass in a wider radius
+        foreach (var tile in region.Tiles)
+        {
+            var worldPos = baseMapManager.baseLayer.CellToWorld(tile) + new Vector3(0.5f, 0.5f, 0f);
+            PlaceGrassInRadius(worldPos, lowGrassRadius, lowGrassDensity, false);
+        }
+    }
+
+    private void PlaceGrassInRadius(Vector3 center, float radius, float density, bool isHighGrass)
+    {
+        if (!IsInBiomeBounds(center)) return;
+
+        for (float angle = 0; angle < 360; angle += 15)
+        {
+            float rad = angle * Mathf.Deg2Rad;
+            for (float dist = 1; dist <= radius; dist += 0.5f)
+            {
+                if (Random.value > density) continue;
+
+                Vector3 checkPos = center + new Vector3(Mathf.Cos(rad), Mathf.Sin(rad), 0) * dist;
+                if (!IsValidPosition(checkPos)) continue;
+
+                PlaceGrass(checkPos, isHighGrass);
+            }
+        }
+    }
+
+    private void PlaceTree(Vector3 worldPos)
+    {
+        if (!IsInBiomeBounds(worldPos)) return;
+        var prefab = treePrefabs[Random.Range(0, treePrefabs.Length)];
+        
+        // Only rotate around Y axis, keep X and Z at 0
+        float randomY = Random.Range(0, 360);
+        var rotation = Quaternion.Euler(0, randomY, 0);
+        
+        // Adjust Y position to 0 for ground level
+        Vector3 adjustedPos = new Vector3(worldPos.x, 0, worldPos.z);
+        var tree = Instantiate(prefab, adjustedPos, rotation, objectContainer);
+
+        // Set layer for trees
+        tree.layer = LayerMask.NameToLayer("Wall");
+        foreach (Transform child in tree.transform)
+            child.gameObject.layer = LayerMask.NameToLayer("Wall");
+
+        // Collider sicherstellen (kein Trigger)
+        var collider = tree.GetComponent<Collider>();
+        if (collider == null) collider = tree.AddComponent<BoxCollider>();
+        collider.isTrigger = false;
+        foreach (Transform child in tree.transform)
+        {
+            var childCollider = child.GetComponent<Collider>();
+            if (childCollider != null) childCollider.isTrigger = false;
+        }
+
+        var sg = tree.AddComponent<SortingGroup>();
+        sg.sortingLayerName = sortingLayerName;
+        sg.sortingOrder = treeSortingOrder;
+        float scale = Random.Range(0.9f, 1.1f);
+        tree.transform.localScale *= scale;
+        placedObjects.Add(worldPos);
+    }
+
+    private void PlaceGrass(Vector3 worldPos, bool isHighGrass)
+    {
+        if (!IsInBiomeBounds(worldPos)) return;
+        if (placedObjects.Any(p => Vector2.Distance(new Vector2(p.x, p.z), new Vector2(worldPos.x, worldPos.z)) < minTreeDistance * 0.5f))
+            return;
+            
+        var grass = CreateGrass(new Vector3(worldPos.x, 0, worldPos.z), isHighGrass);
+        if (grass == null) return;
+
+        // Setze Layer auf "IgnorePlayer" für Gras
+        grass.layer = LayerMask.NameToLayer("IgnorePlayer");
+        foreach (Transform child in grass.transform)
+            child.gameObject.layer = LayerMask.NameToLayer("IgnorePlayer");
+
+        // Entferne ALLE Collider-Komponenten rekursiv (auch MeshCollider, BoxCollider, etc.)
+        foreach (var col in grass.GetComponents<Collider>())
+            Destroy(col);
+        foreach (var col in grass.GetComponentsInChildren<Collider>())
+            Destroy(col);
+
+        // Auch 2D-Collider entfernen, falls vorhanden
+        foreach (var col in grass.GetComponents<Collider2D>())
+            Destroy(col);
+        foreach (var col in grass.GetComponentsInChildren<Collider2D>())
+            Destroy(col);
+
+        var sg = grass.AddComponent<SortingGroup>();
+        sg.sortingLayerName = sortingLayerName;
+        sg.sortingOrder = isHighGrass ? highGrassSortingOrder : lowGrassSortingOrder;
+        float scale = Random.Range(0.8f, 1.2f);
+        grass.transform.localScale *= scale;
+        placedObjects.Add(worldPos);
+    }
+private bool IsValidPosition(Vector3 worldPos, bool isTree = false)
+{
+    // Convert 3D world position to 2D grid position
+    var cellPos = new Vector3Int(
+        Mathf.RoundToInt(worldPos.x - 0.5f),
+        Mathf.RoundToInt(worldPos.z - 0.5f),
+        0
+    );
+
+    // Check if position is within map bounds
+    if (!baseMapManager.baseLayer.cellBounds.Contains(cellPos))
+        return false;
+
+    // Check if position is in any earth region (no grass objects in earth regions)
+    if (!isTree) // <--- NUR für Gras, NICHT für Bäume!
+    {
+        foreach (var earthRegion in baseMapManager.EarthRegions)
+        {
+            if (earthRegion.Tiles.Contains(cellPos))
+                return false;
+        }
+    }
+
+    // Check if position is not on water or road
+    if (baseMapManager.waterLayer.GetTile(cellPos) != null || 
+        baseMapManager.roadLayer.GetTile(cellPos) != null)
+        return false;
+
+    // For trees, check minimum distance to roads
+    if (isTree)
+    {
+        var bounds = baseMapManager.roadLayer.cellBounds;
+        for (int x = -Mathf.CeilToInt(minTreeRoadDistance); x <= Mathf.CeilToInt(minTreeRoadDistance); x++)
+        {
+            for (int y = -Mathf.CeilToInt(minTreeRoadDistance); y <= Mathf.CeilToInt(minTreeRoadDistance); y++)
+            {
+                var checkPos = cellPos + new Vector3Int(x, y, 0);
+                if (bounds.Contains(checkPos) && baseMapManager.roadLayer.GetTile(checkPos) != null)
+                {
+                    var roadWorldPos = baseMapManager.roadLayer.CellToWorld(checkPos) + new Vector3(0.5f, 0.5f, 0f);
+                    if (Vector2.Distance(worldPos, roadWorldPos) < minTreeRoadDistance)
+                        return false;
+                }
+            }
+        }
+    }
+
+    return true;
+}
+
+public void CreateBiomeWall()
+{
+    if (wallPrefab == null) { Debug.LogError($"[ObjectManager] wallPrefab nicht gesetzt für {name}"); return; }
+    // Position: Grenze des Bioms, jetzt in X-Z Ebene bei Y=0
+    float centerX = origin.x + (biomeSize.x / 2f) - 0.5f;
+    float centerZ = origin.y + biomeSize.y + 0.5f;  // Alter Y-Wert wird zu Z-Koordinate
+    Vector3 wallPosition = new Vector3(centerX, 0f, centerZ);  // Y ist jetzt 0
+    biomeWallInstance = Instantiate(wallPrefab, wallPosition, Quaternion.Euler(0, 90, 0), objectContainer);
+    biomeWallInstance.name = $"BiomeWall_{origin.y / biomeSize.y}";
+    var box = biomeWallInstance.GetComponent<BoxCollider>();
+    if (box == null) box = biomeWallInstance.AddComponent<BoxCollider>();
+    box.isTrigger = false;
+    // Angepasste Dimensionen für die neue Orientierung
+    float width = 1f;           // X-Ausdehnung (Dicke der Wand)
+    float height = 3f;          // Y-Ausdehnung (Höhe der Wand)
+    float depth = biomeSize.x;  // Z-Ausdehnung (Breite der Wand, entspricht der Biome-Breite)
+    biomeWallInstance.transform.localScale = new Vector3(width, height, depth);
+}
+
+public void RemoveBiomeWall()
+{
+    if (biomeWallInstance != null)
+    {
+        // Fog vom nächsten Biom entfernen
+        var nextBiomeOM = FindObjectsByType<ObjectManager>(FindObjectsSortMode.None)
+            .FirstOrDefault(om => om.origin.y == origin.y + biomeSize.y);
+        if (nextBiomeOM != null)
+            nextBiomeOM.RemoveFogOfWar();
+        Destroy(biomeWallInstance);
+        biomeWallInstance = null;
+    }
+}    private void ReplaceGrassWithFlowers(GameObject grassObject)
+{
+        Debug.Log($"[ObjectManager] Starting ReplaceGrassWithFlowers for: {grassObject.name}");
+        
+        if (flowerPrefabs == null || flowerPrefabs.Length == 0)
+        {
+            Debug.LogWarning($"[ObjectManager] No flower prefabs available!");
+            return;
+        }
+
+        // First check if we should spawn a flower at all
+        if (Random.value > flowerSpawnChance)
+        {
+            Debug.Log($"[ObjectManager] Skipping flower spawn. Random value > SpawnChance ({flowerSpawnChance})");
+            return;
+        }
+
+        // Validate flower prefabs and get their configured rarities
+        var validPrefabs = flowerPrefabs
+            .Where(p => p != null && p.GetComponent<FlowerInteraction>() != null)
+            .Select(p => (prefab: p, interaction: p.GetComponent<FlowerInteraction>()))
+            .ToArray();
+
+        if (validPrefabs.Length == 0)
+        {
+            Debug.LogWarning("[ObjectManager] No valid flower prefabs (with FlowerInteraction component) found!");
+            return;
+        }
+
+        // Group prefabs by their configured rarity
+        var prefabsByRarity = validPrefabs
+            .GroupBy(p => p.interaction.Rarity)
+            .ToDictionary(g => g.Key, g => g.ToList());
+
+        // Select random rarity based on configured chances
+        float randomValue = Random.value;
+        var chosenRarity = FlowerConfig.Rarity.Common;
+        
+        if (randomValue < FlowerConfig.EPIC_REPLACE_CHANCE)
+            chosenRarity = FlowerConfig.Rarity.Epic;
+        else if (randomValue < FlowerConfig.RARE_REPLACE_CHANCE)
+            chosenRarity = FlowerConfig.Rarity.Rare;
+
+        // Try to get a prefab of the chosen rarity
+        if (!prefabsByRarity.TryGetValue(chosenRarity, out var matchingPrefabs))
+        {
+            Debug.LogWarning($"[ObjectManager] No flower prefabs found for rarity {chosenRarity}, using random prefab instead.");
+            var randomPair = validPrefabs[Random.Range(0, validPrefabs.Length)];
+            matchingPrefabs = new List<(GameObject prefab, FlowerInteraction interaction)> { randomPair };
+            chosenRarity = randomPair.interaction.Rarity;
+        }
+
+        // Select a random prefab from the matching ones
+        var selectedPair = matchingPrefabs[Random.Range(0, matchingPrefabs.Count)];
+        
+        // Spawn the flower
+        var position = grassObject.transform.position;
+        var rotation = Quaternion.Euler(0f, Random.Range(0f, 360f), 0f);
+        var flowerObject = Instantiate(selectedPair.prefab, position, rotation, objectContainer);
+
+        Debug.Log($"[ObjectManager] Spawned {chosenRarity} flower at {position}");
+
+        // Remove the grass
+        Destroy(grassObject);
+    }
+
+    private GameObject CreateGrass(Vector3 position, bool highGrass)
+    {
+        GameObject grassPrefab = highGrass ? highGrassPrefab : lowGrassPrefab;
+        if (grassPrefab == null)
+        {
+            Debug.LogError($"[ObjectManager] {(highGrass ? "High" : "Low")} grass prefab is not assigned!");
+            return null;
+        }
+
+        Debug.Log($"[ObjectManager] Creating grass: {grassPrefab.name} at position {position}");
+        var grass = Instantiate(grassPrefab, position, Quaternion.Euler(0, Random.Range(0, 360), 0), objectContainer);
+        
+        // Check for SpriteRenderer or add one if missing
+        var spriteRenderer = grass.GetComponent<SpriteRenderer>();
+        if (spriteRenderer == null)
+        {
+            // Try to find SpriteRenderer in children
+            spriteRenderer = grass.GetComponentInChildren<SpriteRenderer>();
+            if (spriteRenderer == null)
+            {
+                Debug.LogWarning($"[ObjectManager] No SpriteRenderer found on grass: {grass.name}. Make sure the grass prefab has a SpriteRenderer component!");
+            }
+        }
+
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.sortingLayerName = sortingLayerName;
+            spriteRenderer.sortingOrder = highGrass ? highGrassSortingOrder : lowGrassSortingOrder;
+            Debug.Log($"[ObjectManager] Configured SpriteRenderer for {grass.name}. Layer: {sortingLayerName}, Order: {spriteRenderer.sortingOrder}");
+        }
+
+        // Only try to replace with flower if we have valid flower prefabs
+        if (flowerPrefabs != null && flowerPrefabs.Length > 0 && flowerPrefabs.All(f => f != null))
+        {
+            ReplaceGrassWithFlowers(grass);
+        }
+        else
+        {
+            Debug.LogWarning("[ObjectManager] No valid flower prefabs configured, skipping flower replacement");
+        }
+
+        return grass;
+    }
+}
+
+
+=====
+./Map/WaterManager.cs
+=====
+using UnityEngine;
+using UnityEngine.Tilemaps;
+using System.Collections.Generic;
+using Map;
+
+public class WaterManager : MonoBehaviour
+{
+    [Header("Required References")]
+    public BaseMapManager baseMapManager;
+    public GameObject waterPrefab;
+
+    [HideInInspector] public Vector2Int origin;
+    [HideInInspector] public Vector2Int biomeSize;
+
+    private Transform waterContainer;
+
+    private void Awake()
+    {
+        // Create water container as child of this object
+        waterContainer = new GameObject("WaterContainer").transform;
+        waterContainer.parent = transform;
+    }
+
+    public void SpawnWaterObjects()
+    {
+        if (waterPrefab == null)
+        {
+            Debug.LogError("WaterManager: Water prefab not assigned!");
+            return;
+        }
+
+        foreach (var lakeRegion in baseMapManager.LakeRegions)
+        {
+            foreach (var pos in lakeRegion.Tiles)
+            {
+                // Convert tile position to world position
+                Vector3 worldPos = baseMapManager.waterLayer.CellToWorld(pos);
+                worldPos.z = 0; // Ensure Z is 0 for 2D
+                
+                // Instantiate water object
+                GameObject waterObj = Instantiate(waterPrefab, worldPos, Quaternion.identity, waterContainer);
+                waterObj.name = $"Water_{pos.x}_{pos.y}";
+            }
+        }
+    }
+}
+
+=====
+./Map/BaseMapManager.cs
+=====
+using UnityEngine;
+using UnityEngine.Tilemaps;
+using UnityEngine.Assertions;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using Map;
+
+public class BaseMapManager : MonoBehaviour
+{
+    [HideInInspector] public Vector2Int origin;
+    [HideInInspector] public Vector2Int biomeSize;
+    public BoundsInt biomeBounds; // Begrenzung für dieses Biom
+
+    [Header("Required References")]
+    public ObjectManager objectManager;   // Reference to ObjectManager
+
+    [Header("Noise Settings")]
+    public float noiseScale = 10f;
+    private float xOffset;
+    private float yOffset;
+    public bool useRandomSeed = true;
+    public int seed = 0;
+
+    [Header("Terrain Layers")]
+    public Tilemap baseLayer;    // Base earth layer
+    public Tilemap grassLayer;   // Grass overlay
+    public Tilemap waterLayer;   // Water overlay
+    public Tilemap roadLayer;    // Road overlay
+
+    [Header("Basic Terrain Tiles")]
+    public Tile earthTile;       // Base terrain
+    public Tile grassTile;       // Grass overlay
+    public Tile waterTile;       // Water overlay
+    public RuleTile roadTile;    // Road tile with automatic connections
+
+    [Header("Generation Thresholds")]
+    [Range(0f, 1f)]
+    public float grassThreshold = 0.4f;     // Above this value will be grass
+    [Range(0f, 1f)]
+    public float waterThreshold = 0.3f;     // Below this value will be water
+
+    [Header("Region Detection")]
+    public int minRegionSize = 4;           // Minimum size for a valid region
+
+    // Public access to detected regions
+    public List<Map.EarthRegion> EarthRegions { get; private set; } = new List<Map.EarthRegion>();
+    public List<Map.GrassRegion> GrassRegions { get; private set; } = new List<Map.GrassRegion>();
+    public List<Map.LakeRegion> LakeRegions { get; private set; } = new List<Map.LakeRegion>();
+    public List<Map.HouseRegion> HouseRegions { get; private set; } = new List<Map.HouseRegion>();
+
+    // Methods are now public so they can be called by MapGenerationManager
+    public void ValidateDependencies()
+    {
+        Assert.IsNotNull(baseLayer, "Base layer is required!");
+        Assert.IsNotNull(grassLayer, "Grass layer is required!");
+        Assert.IsNotNull(waterLayer, "Water layer is required!");
+        Assert.IsNotNull(roadLayer, "Road layer is required!");
+        
+        Assert.IsNotNull(earthTile, "Earth tile is required!");
+        Assert.IsNotNull(grassTile, "Grass tile is required!");
+        Assert.IsNotNull(waterTile, "Water tile is required!");
+        Assert.IsNotNull(roadTile, "Road tile is required!");
+    }
+
+    public void InitializeRandomization()
+    {
+        if (useRandomSeed)
+        {
+            seed = Random.Range(0, 99999);
+            Random.InitState(seed);
+            xOffset = Random.Range(0f, 99999f);
+            yOffset = Random.Range(0f, 99999f);
+        }
+        else
+        {
+            // Seed und Offsets deterministisch aus seed berechnen
+            Random.InitState(seed);
+            xOffset = seed * 0.12345f % 99999f;
+            yOffset = seed * 0.54321f % 99999f;
+        }
+    }
+
+    public void GenerateBaseMap()
+    {
+        // 1. Fill entire base layer with earth
+        FillBaseLayer();
+        
+        // 2. Generate and overlay grass
+        GenerateGrassLayer();
+        
+        // 3. Generate and overlay water
+        GenerateWaterLayer();
+    }
+
+    private void FillBaseLayer()
+    {
+        for (int x = 0; x < biomeSize.x; x++)
+        for (int y = 0; y < biomeSize.y; y++)
+        {
+            var cell = new Vector3Int(origin.x + x, origin.y + y, 0);
+            baseLayer.SetTile(cell, earthTile);
+        }
+    }
+
+    private void GenerateGrassLayer()
+    {
+        for (int x = 0; x < biomeSize.x; x++)
+        for (int y = 0; y < biomeSize.y; y++)
+        {
+            float nx = ((x + origin.x) / (float)biomeSize.x) * noiseScale + xOffset;
+            float ny = ((y + origin.y) / (float)biomeSize.y) * noiseScale + yOffset;
+            if (Mathf.PerlinNoise(nx, ny) > grassThreshold)
+                grassLayer.SetTile(new Vector3Int(origin.x + x, origin.y + y, 0), grassTile);
+        }
+    }
+
+    private void GenerateWaterLayer()
+    {
+        for (int x = 0; x < biomeSize.x; x++)
+        for (int y = 0; y < biomeSize.y; y++)
+        {
+            float nx = ((x + origin.x + 1000f) / biomeSize.x) * noiseScale + xOffset;
+            float ny = ((y + origin.y + 1000f) / biomeSize.y) * noiseScale + yOffset;
+            if (Mathf.PerlinNoise(nx, ny) < waterThreshold)
+                waterLayer.SetTile(new Vector3Int(origin.x + x, origin.y + y, 0), waterTile);
+        }
+    }
+
+    public void DetectRegions()
+    {
+        Debug.Log($"BaseMapManager: Starting region detection in bounds {biomeBounds}...");
+        var bounds = biomeBounds;
+        var visited = new HashSet<Vector3Int>();
+
+        // Find Earth Regions (tiles with earth but no grass)
+        FindRegions<Map.EarthRegion>(
+            bounds, visited,
+            pos => baseLayer.GetTile(pos) != null && grassLayer.GetTile(pos) == null && waterLayer.GetTile(pos) == null,
+            (name, tiles) => new Map.EarthRegion(name, tiles, baseLayer),
+            EarthRegions
+        );
+        Debug.Log($"BaseMapManager: Found {EarthRegions.Count} earth regions");
+        for (int i = 0; i < EarthRegions.Count; i++)
+        {
+            var region = EarthRegions[i];
+            Debug.Log($"EarthRegion {i}: Name={region.Name}, Size={region.Size}, Center={region.Center}, Bounds={region.Bounds}");
+        }
+
+        // Find Grass Regions
+        visited.Clear();
+        FindRegions<Map.GrassRegion>(
+            bounds, visited,
+            pos => grassLayer.GetTile(pos) != null && waterLayer.GetTile(pos) == null,
+            (name, tiles) => new Map.GrassRegion(name, tiles, baseLayer),
+            GrassRegions
+        );
+        Debug.Log($"BaseMapManager: Found {GrassRegions.Count} grass regions");
+
+        // Find Lake Regions
+        visited.Clear();
+        FindRegions<Map.LakeRegion>(
+            bounds, visited,
+            pos => waterLayer.GetTile(pos) != null,
+            (name, tiles) => new Map.LakeRegion(name, tiles, baseLayer),
+            LakeRegions
+        );
+        Debug.Log($"BaseMapManager: Found {LakeRegions.Count} lake regions");
+
+        // Detect House Regions
+        DetectHouseRegions();
+    }
+
+    private void DetectHouseRegions()
+    {
+        Debug.Log("BaseMapManager: Starting house region detection...");
+        // Start the coroutine to detect house regions after placement
+        StartCoroutine(DetectHouseRegionsAfterPlacement());
+    }
+
+    private IEnumerator DetectHouseRegionsAfterPlacement()
+    {
+        Debug.Log("BaseMapManager: Waiting for house placement...");
+        yield return new WaitForSeconds(0.5f);
+
+        Debug.Log($"BaseMapManager: ObjectManager reference {(objectManager != null ? "found" : "not found")}");
+        
+        if (objectManager != null)
+        {
+            var houseFronts = objectManager.GetHouseFrontPositions();
+            Debug.Log($"BaseMapManager: Found {houseFronts?.Count ?? 0} house positions");
+
+            HouseRegions.Clear();
+
+            // Create house regions centered on the house front
+            if (houseFronts != null)
+            {
+                foreach (var front in houseFronts)
+                {
+                    Debug.Log($"BaseMapManager: Processing house at position {front.position}");
+                    var regionTiles = new List<Vector3Int>();
+                    var radius = 3; // Radius for house region influence
+                    
+                    // Add tiles in a circular area around the house front
+                    for (int x = -radius; x <= radius; x++)
+                    {
+                        for (int y = -radius; y <= radius; y++)
+                        {
+                            var checkPos = front.position + new Vector3Int(x, y, 0);
+                            if (Vector2.Distance(new Vector2(x, y), Vector2.zero) <= radius &&
+                                grassLayer.GetTile(checkPos) != null)
+                            {
+                                regionTiles.Add(checkPos);
+                            }
+                        }
+                    }
+
+                    if (regionTiles.Count > 0)
+                    {
+                        var region = new Map.HouseRegion($"House_{HouseRegions.Count}", regionTiles, baseLayer);
+                        HouseRegions.Add(region);
+                    }
+                }
+            }
+        }
+    }
+
+    private void FindRegions<T>(
+        BoundsInt bounds,
+        HashSet<Vector3Int> visited,
+        System.Func<Vector3Int, bool> isValidTile,
+        System.Func<string, List<Vector3Int>, T> createRegion,
+        List<T> regionList) where T : Map.BaseRegion
+    {
+        int regionCount = 0;
+
+        foreach (var pos in bounds.allPositionsWithin)
+        {
+            if (visited.Contains(pos)) continue;
+            visited.Add(pos);
+            
+            if (!isValidTile(pos)) continue;
+
+            var tiles = new List<Vector3Int>();
+            var queue = new Queue<Vector3Int>();
+            queue.Enqueue(pos);
+
+            while (queue.Count > 0)
+            {
+                var current = queue.Dequeue();
+                tiles.Add(current);
+
+                foreach (var dir in new[] { Vector3Int.up, Vector3Int.down, Vector3Int.left, Vector3Int.right })
+                {
+                    var next = current + dir;
+                    if (!bounds.Contains(next) || visited.Contains(next)) continue;
+                    visited.Add(next);
+                    if (isValidTile(next))
+                        queue.Enqueue(next);
+                }
+            }
+
+            if (tiles.Count >= minRegionSize)
+            {
+                var region = createRegion($"{typeof(T).Name}_{regionCount++}", tiles);
+                regionList.Add(region);
+            }
+        }
+    }
+}
+
+
+=====
+./Map/MapGenerationManager.cs
+=====
+using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.Tilemaps;
+using System;
+
+public class MapGenerationManager : MonoBehaviour
+{
+    public event Action OnMapGenerationComplete;
+
+    [Header("Biome ScriptableObjects")]
+    public List<MapBiomeConfig> biomeConfigs;
+
+    [Header("Globale Biomeinstellungen")]
+    public Vector2Int biomeSize = new Vector2Int(50, 50); // Feste Größe für alle Biome
+
+    [Header("Biome Wall Prefab")]
+    public GameObject wallPrefab;
+
+    [Header("Fog of War Prefab")]
+    public GameObject fogPrefab;
+
+    private List<BaseMapManager> allBMM = new List<BaseMapManager>();
+    private List<ObjectManager> allOM  = new List<ObjectManager>();
+    private List<TileManager> allTM    = new List<TileManager>();
+    private RoadManager roadManager;
+
+    private Tilemap FindTilemap(string name)
+    {
+        var go = GameObject.Find(name);
+        if (go == null) Debug.LogError($"Tilemap GameObject '{name}' not found!");
+        return go ? go.GetComponent<Tilemap>() : null;
+    }
+
+    private void Start()
+    {
+        // Tilemaps aus der Szene suchen (einmalig, da für alle Biome gleich)
+        var baseLayer = FindTilemap("BaseLayer");
+        var grassLayer = FindTilemap("EarthLayer"); // oder "GrassLayer" falls vorhanden
+        var waterLayer = FindTilemap("WaterLayer");
+        var roadLayer = FindTilemap("RoadLayer");
+
+        for (int i = 0; i < biomeConfigs.Count; i++)
+        {
+            var cfg = biomeConfigs[i];
+            cfg.biomeSize = biomeSize;
+            Vector2Int origin = new Vector2Int(0, i * biomeSize.y);
+            var bounds = new BoundsInt(new Vector3Int(origin.x, origin.y, 0), new Vector3Int(biomeSize.x, biomeSize.y, 1));
+
+            // BaseMapManager erzeugen
+            var goB = new GameObject($"BMM_{i}"); goB.transform.parent = transform;
+            var b = goB.AddComponent<BaseMapManager>();
+            b.origin = origin; b.biomeSize = biomeSize;
+            b.biomeBounds = bounds;
+            b.baseLayer = baseLayer;
+            b.grassLayer = grassLayer;
+            b.waterLayer = waterLayer;
+            b.roadLayer = roadLayer;
+            b.earthTile = cfg.earthTile;
+            b.grassTile = cfg.grassTile;
+            b.waterTile = cfg.waterTile;
+            b.roadTile = cfg.roadTile;
+            b.noiseScale = cfg.noiseScale;
+            b.useRandomSeed = cfg.useRandomSeed;
+            b.seed = cfg.seed;
+            b.grassThreshold = cfg.grassThreshold;
+            b.waterThreshold = cfg.waterThreshold;
+            b.minRegionSize = cfg.minRegionSize;
+            allBMM.Add(b);
+
+            // ObjectManager erzeugen
+            var goO = new GameObject($"OM_{i}"); goO.transform.parent = transform;
+            var o = goO.AddComponent<ObjectManager>();
+            o.origin = origin; o.biomeSize = biomeSize; o.baseMapManager = b;
+            o.treePrefabs = cfg.treePrefabs;
+            o.highGrassPrefab = cfg.highGrassPrefab;
+            o.lowGrassPrefab = cfg.lowGrassPrefab;
+            o.housePrefabs = cfg.housePrefabs;
+            o.flowerPrefabs = cfg.flowerPrefabs;  // Updated property name
+            o.wallPrefab = wallPrefab;
+            o.fogPrefab = fogPrefab;
+            o.minHouseDistance = cfg.minHouseDistance;
+            o.highGrassRadius = cfg.highGrassRadius;
+            o.lowGrassRadius = cfg.lowGrassRadius;
+            o.treeDensity = cfg.treeDensity;
+            o.lakeTreeChance = cfg.lakeTreeChance;
+            o.lakeHighGrassChance = cfg.lakeHighGrassChance;
+            o.lakeLowGrassChance = cfg.lakeLowGrassChance;
+            o.roadGrassChance = cfg.roadGrassChance;
+            o.roadHighGrassRatio = cfg.roadHighGrassRatio;
+            o.sortingLayerName = cfg.sortingLayerName;
+            o.treeSortingOrder = cfg.treeSortingOrder;
+            o.houseSortingOrder = cfg.houseSortingOrder;
+            o.highGrassSortingOrder = cfg.highGrassSortingOrder;
+            o.lowGrassSortingOrder = cfg.lowGrassSortingOrder;
+            allOM.Add(o);
+            o.CreateBiomeWall(); // Wand für dieses Biom erzeugen
+
+            // TileManager erzeugen
+            var goT = new GameObject($"TM_{i}"); goT.transform.parent = transform;
+            var t = goT.AddComponent<TileManager>();
+            t.origin = origin; t.biomeSize = biomeSize; t.baseMapManager = b;
+            t.biomeBounds = bounds;
+            t.darkEarthTiles = cfg.darkEarthTiles;
+            t.mediumEarthTiles = cfg.mediumEarthTiles;
+            t.lightEarthTiles = cfg.lightEarthTiles;
+            t.lightGrassTiles = cfg.lightGrassTiles;
+            t.mediumGrassTiles = cfg.mediumGrassTiles;
+            t.darkGrassTiles = cfg.darkGrassTiles;
+            t.waterTileVariants = cfg.waterTileVariants;
+            t.roadTile = cfg.roadTile;
+            allTM.Add(t);
+
+            t.waterPrefab = cfg.waterPrefab;
+        }
+        StartCoroutine(GenerateAll());
+    }
+
+    private IEnumerator GenerateAll()
+    {
+        foreach(var b in allBMM){ b.ValidateDependencies(); b.InitializeRandomization(); b.GenerateBaseMap(); }
+        yield return null;
+        foreach(var o in allOM) o.PlaceHouses(); yield return new WaitForSeconds(0.5f);
+        foreach(var b in allBMM) b.DetectRegions(); yield return new WaitForSeconds(0.5f);
+        // --- Region Count Check ---
+        if (allBMM.Count > 1) {
+            var first = allBMM[0];
+            bool allEqual = true;
+            foreach (var b in allBMM) {
+                if (b.EarthRegions.Count != first.EarthRegions.Count ||
+                    b.GrassRegions.Count != first.GrassRegions.Count ||
+                    b.LakeRegions.Count != first.LakeRegions.Count) {
+                    allEqual = false;
+                    break;
+                }
+            }
+            if (allEqual) {
+                Debug.LogWarning("[RegionCheck] All BaseMapManager instances found the same number of regions! This likely means bounds are not set correctly.");
+            } else {
+                Debug.Log("[RegionCheck] Region counts differ between BaseMapManagers as expected.");
+            }
+        }
+        foreach(var t in allTM) t.EnhanceTerrain(); yield return new WaitForSeconds(0.3f);
+
+        // RoadManager erzeugen und alle HouseFronts übergeben
+        int totalHouses = 0;
+        var goR = new GameObject("RoadManager"); goR.transform.parent = transform;
+        roadManager = goR.AddComponent<RoadManager>();
+        roadManager.baseMapManager = allBMM[0];
+        roadManager.globalOrigin = new Vector2Int(0, 0);
+        roadManager.globalSize = new Vector2Int(biomeSize.x, biomeSize.y * biomeConfigs.Count);
+        var allHouseFronts = new List<RoadManager.HouseFront>();
+        for (int i = 0; i < allOM.Count; i++)
+        {
+            var houseFronts = allOM[i].GetHouseFrontPositions();
+            Debug.Log($"Biome #{i}: Houses found: {houseFronts.Count}");
+            foreach (var hf in houseFronts)
+                Debug.Log($"Biome #{i} House at {hf.position} dir {hf.direction}");
+            totalHouses += houseFronts.Count;
+            allHouseFronts.AddRange(houseFronts);
+        }
+        Debug.Log($"Total houses for road connection: {allHouseFronts.Count}");
+        foreach (var hf in allHouseFronts)
+            Debug.Log($"RoadManager House at {hf.position} dir {hf.direction}");
+        roadManager.SetHouseFronts(allHouseFronts);
+        roadManager.enabled = true;
+        yield return new WaitForSeconds(0.5f); // Warten bis Straßen platziert
+
+        // Jetzt erst die restlichen Objekte platzieren
+        foreach (var x in allOM) x.PlaceRemainingObjects(); yield return new WaitForSeconds(0.3f);
+
+        Debug.Log("All biomes generated.");
+
+        // Fire the event when generation is complete
+        OnMapGenerationComplete?.Invoke();
+    }
+
+    // --- Am Ende der Klasse hinzufügen ---
+    public List<BaseMapManager> GetAllBaseMapManagers()
+    {
+        return allBMM;
+    }
+}
+
+
+=====
+./Map/BaseRegion.cs
+=====
+using UnityEngine;
+using UnityEngine.Tilemaps;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Map
+{
+    public abstract class BaseRegion
+    {
+        public string Name { get; protected set; }
+        public int Size { get; protected set; }
+        public List<Vector3Int> Tiles { get; protected set; }
+        public Vector3 Center { get; protected set; }
+        public BoundsInt Bounds { get; protected set; }
+
+        protected BaseRegion(string name, List<Vector3Int> tiles, Tilemap baseLayer)
+        {
+            Name = name;
+            Tiles = tiles;
+            Size = tiles.Count;
+            
+            // Calculate center in world space
+            var sum = Vector3.zero;
+            foreach (var tile in tiles)
+            {
+                sum += baseLayer.CellToWorld(tile) + new Vector3(0.5f, 0.5f, 0f);
+            }
+            Center = sum / Size;
+
+            // Calculate region bounds
+            var minX = tiles.Min(t => t.x);
+            var maxX = tiles.Max(t => t.x);
+            var minY = tiles.Min(t => t.y);
+            var maxY = tiles.Max(t => t.y);
+            
+            Bounds = new BoundsInt(
+                new Vector3Int(minX, minY, 0),
+                new Vector3Int(maxX - minX + 1, maxY - minY + 1, 1)
+            );
+        }
+    }
+
+    public class EarthRegion : BaseRegion
+    {
+        public EarthRegion(string name, List<Vector3Int> tiles, Tilemap baseLayer)
+            : base(name, tiles, baseLayer) { }
+    }
+
+    public class GrassRegion : BaseRegion
+    {
+        public GrassRegion(string name, List<Vector3Int> tiles, Tilemap baseLayer)
+            : base(name, tiles, baseLayer) { }
+    }
+
+    public class LakeRegion : BaseRegion
+    {
+        public LakeRegion(string name, List<Vector3Int> tiles, Tilemap baseLayer)
+            : base(name, tiles, baseLayer) { }
+    }
+
+    public class HouseRegion : BaseRegion
+    {
+        public int MaxHouses { get; private set; }
+
+        public HouseRegion(string name, List<Vector3Int> tiles, Tilemap baseLayer)
+            : base(name, tiles, baseLayer)
+        {
+            // Calculate max houses based on region size
+            MaxHouses = Mathf.Max(1, Mathf.FloorToInt(Mathf.Sqrt(Size) / 2));
+        }
+    }
+}
+
+
+=====
+./Map/RoadManager.cs
+=====
+using UnityEngine;
+using UnityEngine.Tilemaps;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using Map;
+
+public class RoadManager : MonoBehaviour
+{
+    [Header("Required References")]
+    public BaseMapManager baseMapManager;
+
+    [Header("Road Settings")]
+    public int maxEarthSteps = 25;        // Maximum consecutive steps on earth tiles
+    public int earthPenalty = 5;          // Pathfinding penalty for earth tiles
+
+    private Tilemap roadLayer;
+    private RuleTile roadTile;
+
+    private List<HouseFront> allHouseFronts;
+
+    public Vector2Int globalOrigin;
+    public Vector2Int globalSize;
+
+    private void Awake()
+    {
+        enabled = false; // Start disabled, MapGenerationManager will enable when ready
+    }
+
+    public void SetHouseFronts(List<HouseFront> houseFronts)
+    {
+        allHouseFronts = houseFronts;
+    }
+
+    private void OnEnable()
+    {
+        if (allHouseFronts == null || allHouseFronts.Count < 2)
+        {
+            Debug.LogWarning("RoadManager: Not enough houses to build roads (minimum 2 required).");
+            return;
+        }
+        StartCoroutine(BuildRoads());
+    }
+
+    private IEnumerator BuildRoads()
+    {
+        // Wait for object manager to place houses
+        yield return new WaitForSeconds(0.5f);
+
+        roadLayer = baseMapManager.roadLayer;
+        roadTile = baseMapManager.roadTile;
+        var houseFronts = allHouseFronts;
+        var edges = BuildMST(houseFronts);
+        foreach (var (start, end) in edges)
+        {
+            ConnectPoints(start.position, start.direction, end.position, end.direction);
+        }
+    }
+
+    private void ConnectPoints(Vector3Int start, Vector3Int startDir, Vector3Int end, Vector3Int endDir)
+    {
+        var path = FindPath(start, end);
+        if (path == null || path.Count == 0)
+        {
+            Debug.LogWarning($"Could not find path between {start} and {end}");
+            return;
+        }
+
+        foreach (var pos in path)
+        {
+            roadLayer.SetTile(pos, roadTile);
+        }
+    }
+
+    private List<Vector3Int> FindPath(Vector3Int start, Vector3Int end)
+    {
+        var openSet = new PriorityQueue<Vector3Int>();
+        var closedSet = new HashSet<Vector3Int>();
+        var cameFrom = new Dictionary<Vector3Int, Vector3Int>();
+        var gScore = new Dictionary<Vector3Int, int>();
+        var earthSteps = new Dictionary<Vector3Int, int>();
+
+        openSet.Enqueue(start, 0);
+        gScore[start] = 0;
+        earthSteps[start] = IsEarthTile(start) ? 1 : 0;
+
+        while (openSet.Count > 0)
+        {
+            var current = openSet.Dequeue();
+            if (current == end)
+                return ReconstructPath(cameFrom, current);
+
+            closedSet.Add(current);
+
+            foreach (var dir in new[] { Vector3Int.up, Vector3Int.right, Vector3Int.down, Vector3Int.left })
+            {
+                var neighbor = current + dir;
+
+                if (closedSet.Contains(neighbor) || !IsValidPosition(neighbor))
+                    continue;
+
+                var isEarth = IsEarthTile(neighbor);
+                var newEarthSteps = isEarth ? earthSteps[current] + 1 : 0;
+
+                if (isEarth && newEarthSteps > maxEarthSteps)
+                    continue;
+
+                var tentativeGScore = gScore[current] + GetMovementCost(neighbor);
+
+                if (!gScore.ContainsKey(neighbor) || tentativeGScore < gScore[neighbor])
+                {
+                    cameFrom[neighbor] = current;
+                    gScore[neighbor] = tentativeGScore;
+                    earthSteps[neighbor] = newEarthSteps;
+
+                    var priority = tentativeGScore + ManhattanDistance(neighbor, end);
+                    openSet.Enqueue(neighbor, priority);
+                }
+            }
+        }
+
+        return null;
+    }
+
+    private bool IsValidPosition(Vector3Int pos)
+    {
+        // Prüfe auf globalen Bereich statt nur Biome
+        return pos.x >= globalOrigin.x && pos.x < globalOrigin.x + globalSize.x &&
+               pos.y >= globalOrigin.y && pos.y < globalOrigin.y + globalSize.y &&
+               baseMapManager.waterLayer.GetTile(pos) == null;
+    }
+
+    private bool IsEarthTile(Vector3Int pos)
+    {
+        return baseMapManager.baseLayer.GetTile(pos) != null && 
+               baseMapManager.grassLayer.GetTile(pos) == null;
+    }
+
+    private int GetMovementCost(Vector3Int pos)
+    {
+        return IsEarthTile(pos) ? earthPenalty : 1;
+    }
+
+    private int ManhattanDistance(Vector3Int a, Vector3Int b)
+    {
+        return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
+    }
+
+    private List<Vector3Int> ReconstructPath(Dictionary<Vector3Int, Vector3Int> cameFrom, Vector3Int current)
+    {
+        var path = new List<Vector3Int> { current };
+        while (cameFrom.ContainsKey(current))
+        {
+            current = cameFrom[current];
+            path.Add(current);
+        }
+        path.Reverse();
+        return path;
+    }
+
+    private List<(HouseFront a, HouseFront b)> BuildMST(List<HouseFront> nodes)
+    {
+        var result = new List<(HouseFront, HouseFront)>();
+        var visited = new HashSet<Vector3Int> { nodes[0].position };
+        var edges = new List<(HouseFront, HouseFront, int)>();
+
+        // Initialize edges from first node to all others
+        foreach (var n in nodes.Skip(1))
+            edges.Add((nodes[0], n, Cost(nodes[0].position, n.position)));
+
+        while (visited.Count < nodes.Count)
+        {
+            // Find the cheapest edge that connects to an unvisited node
+            var best = edges
+                .Where(e => visited.Contains(e.Item1.position) ^ visited.Contains(e.Item2.position))
+                .OrderBy(e => e.Item3)
+                .First();
+
+            var newNode = visited.Contains(best.Item1.position) ? best.Item2 : best.Item1;
+            result.Add((best.Item1, best.Item2));
+            visited.Add(newNode.position);
+
+            // Add new edges from the newly visited node
+            foreach (var other in nodes.Where(n => !visited.Contains(n.position)))
+                edges.Add((newNode, other, Cost(newNode.position, other.position)));
+        }
+
+        return result;
+    }
+
+    private int Cost(Vector3Int a, Vector3Int b)
+    {
+        return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
+    }
+
+    public struct HouseFront
+    {
+        public Vector3Int position;
+        public Vector3Int direction;
+
+        public HouseFront(Vector3Int pos, Vector3Int dir)
+        {
+            position = pos;
+            direction = dir;
+        }
+    }
+
+    private class PriorityQueue<T>
+    {
+        private List<(T item, int priority)> elements = new List<(T, int)>();
+
+        public int Count => elements.Count;
+
+        public void Enqueue(T item, int priority)
+        {
+            elements.Add((item, priority));
+            var currentIndex = elements.Count - 1;
+            while (currentIndex > 0)
+            {
+                var parentIndex = (currentIndex - 1) / 2;
+                if (elements[parentIndex].priority <= elements[currentIndex].priority)
+                    break;
+
+                var temp = elements[currentIndex];
+                elements[currentIndex] = elements[parentIndex];
+                elements[parentIndex] = temp;
+                currentIndex = parentIndex;
+            }
+        }
+
+        public T Dequeue()
+        {
+            var result = elements[0].item;
+            elements[0] = elements[elements.Count - 1];
+            elements.RemoveAt(elements.Count - 1);
+
+            var currentIndex = 0;
+            while (true)
+            {
+                var smallestIndex = currentIndex;
+                var leftChild = 2 * currentIndex + 1;
+                var rightChild = 2 * currentIndex + 2;
+
+                if (leftChild < elements.Count && elements[leftChild].priority < elements[smallestIndex].priority)
+                    smallestIndex = leftChild;
+
+                if (rightChild < elements.Count && elements[rightChild].priority < elements[smallestIndex].priority)
+                    smallestIndex = rightChild;
+
+                if (smallestIndex == currentIndex)
+                    break;
+
+                var temp = elements[currentIndex];
+                elements[currentIndex] = elements[smallestIndex];
+                elements[smallestIndex] = temp;
+                currentIndex = smallestIndex;
+            }
+
+            return result;
+        }
+    }
+}
+
+
+=====
+./Map/TileManager.cs
+=====
+using UnityEngine;
+using UnityEngine.Tilemaps;
+using System.Collections.Generic;
+using Map;
+using System.Linq;
+
+public class TileManager : MonoBehaviour
+{
+    [HideInInspector] public Vector2Int origin;
+    [HideInInspector] public Vector2Int biomeSize;
+    public BoundsInt biomeBounds; // Begrenzung für dieses Biom (optional, falls für spätere Features benötigt)
+
+    [Header("Required References")]
+    public BaseMapManager baseMapManager;
+    public GameObject waterPrefab;     // Das 3D Water Object Prefab
+    private Transform waterContainer;   // Container für die Water Objects
+
+    [Header("Earth Tiles")]
+    public Tile[] darkEarthTiles;      // Darker earth/dirt variants for region centers
+    public Tile[] mediumEarthTiles;    // Medium earth/dirt variants
+    public Tile[] lightEarthTiles;     // Lighter earth/dirt variants for edges
+    
+    [Header("Grass Tiles")]
+    public Tile[] lightGrassTiles;     // Lighter grass variants
+    public Tile[] mediumGrassTiles;    // Medium grass variants
+    public Tile[] darkGrassTiles;      // Darker grass variants
+    
+    [Header("Water Tiles")]
+    public Tile[] waterTileVariants;   // Different water tile variants
+
+    [Header("Road Settings")]
+    public RuleTile roadTile;          // Road tile with automatic connections
+
+    private void Awake()
+    {
+        // Create water container as child of this object
+        waterContainer = new GameObject("WaterContainer").transform;
+        waterContainer.parent = transform;
+    }
+
+    // All initialization is now controlled by MapGenerationManager
+    public void EnhanceTerrain()
+    {
+        Debug.Log("TileManager: Starting terrain enhancement...");
+        
+        // Replace basic earth tiles with variants
+        foreach (var region in baseMapManager.EarthRegions)
+        {
+            EnhanceEarthRegion(region);
+        }
+
+        // Replace basic grass tiles with variants
+        foreach (var region in baseMapManager.GrassRegions)
+        {
+            EnhanceGrassRegion(region);
+        }
+
+        // Replace basic water tiles with variants
+        foreach (var region in baseMapManager.LakeRegions)
+        {
+            EnhanceWaterRegion(region);
+        }
+
+        // Enhance house regions last to ensure they override other grass
+        foreach (var region in baseMapManager.HouseRegions)
+        {
+            EnhanceHouseRegion(region);
+        }
+
+        Debug.Log("TileManager: Terrain enhancement completed");
+    }
+
+    private void EnhanceEarthRegion(Map.EarthRegion region)
+    {
+        // Check if we have any earth tile variants
+        if ((darkEarthTiles == null || darkEarthTiles.Length == 0) &&
+            (mediumEarthTiles == null || mediumEarthTiles.Length == 0) &&
+            (lightEarthTiles == null || lightEarthTiles.Length == 0)) 
+        {
+            Debug.LogWarning($"TileManager: No earth tile variants available for region {region.Name}");
+            return;
+        }
+
+        // Get maximum distance from center for normalization
+        float maxDistance = 0f;
+        foreach (var pos in region.Tiles)
+        {
+            var worldPos = baseMapManager.baseLayer.CellToWorld(pos) + new Vector3(0.5f, 0.5f, 0f);
+            float distance = Vector3.Distance(worldPos, region.Center);
+            maxDistance = Mathf.Max(maxDistance, distance);
+        }
+
+        int darkTiles = 0, mediumTiles = 0, lightTiles = 0;
+        foreach (var pos in region.Tiles)
+        {
+            var worldPos = baseMapManager.baseLayer.CellToWorld(pos) + new Vector3(0.5f, 0.5f, 0f);
+            float distance = Vector3.Distance(worldPos, region.Center);
+            float normalizedDistance = distance / maxDistance;
+
+            // Add some noise to make the transitions less circular
+            float noise = Mathf.PerlinNoise(pos.x * 0.2f, pos.y * 0.2f) * 0.3f;
+            normalizedDistance = Mathf.Clamp01(normalizedDistance + noise);
+
+            Tile[] selectedSet;
+            if (normalizedDistance < 0.33f && darkEarthTiles != null && darkEarthTiles.Length > 0)
+            {
+                selectedSet = darkEarthTiles;
+                darkTiles++;
+            }
+            else if (normalizedDistance < 0.66f && mediumEarthTiles != null && mediumEarthTiles.Length > 0)
+            {
+                selectedSet = mediumEarthTiles;
+                mediumTiles++;
+            }
+            else if (lightEarthTiles != null && lightEarthTiles.Length > 0)
+            {
+                selectedSet = lightEarthTiles;
+                lightTiles++;
+            }
+            else
+            {
+                selectedSet = (darkEarthTiles?.Length > 0 ? darkEarthTiles : 
+                             mediumEarthTiles?.Length > 0 ? mediumEarthTiles : 
+                             lightEarthTiles)!;
+            }
+
+            var tileIndex = Mathf.Abs((pos.x * 48271 + pos.y * 16807) % selectedSet.Length);
+            baseMapManager.baseLayer.SetTile(pos, selectedSet[tileIndex]);
+        }
+
+        Debug.Log($"TileManager: Enhanced earth region {region.Name} with {darkTiles} dark, {mediumTiles} medium, {lightTiles} light tiles");
+    }
+
+    private void EnhanceGrassRegion(Map.GrassRegion region)
+    {
+        if (lightGrassTiles == null && mediumGrassTiles == null && darkGrassTiles == null)
+        {
+            Debug.LogWarning($"TileManager: No grass tile variants available for region {region.Name}");
+            return;
+        }
+
+        int tileCount = 0;
+        foreach (var pos in region.Tiles)
+        {
+            // Use Perlin noise for organic variation
+            float baseNoise = Mathf.PerlinNoise(pos.x * 0.1f, pos.y * 0.1f);
+            float detailNoise = Mathf.PerlinNoise(pos.x * 0.3f, pos.y * 0.3f) * 0.3f;
+            float noiseVal = baseNoise + detailNoise;
+
+            Tile[] selectedSet;
+            if (noiseVal < 0.33f && lightGrassTiles != null && lightGrassTiles.Length > 0)
+                selectedSet = lightGrassTiles;
+            else if (noiseVal < 0.66f && mediumGrassTiles != null && mediumGrassTiles.Length > 0)
+                selectedSet = mediumGrassTiles;
+            else if (darkGrassTiles != null && darkGrassTiles.Length > 0)
+                selectedSet = darkGrassTiles;
+            else
+            {
+                selectedSet = (darkGrassTiles?.Length > 0 ? darkGrassTiles : 
+                             mediumGrassTiles?.Length > 0 ? mediumGrassTiles : 
+                             lightGrassTiles)!;
+            }
+
+            var tileIndex = Mathf.Abs((pos.x * 48271 + pos.y * 16807) % selectedSet.Length);
+            baseMapManager.grassLayer.SetTile(pos, selectedSet[tileIndex]);
+            tileCount++;
+        }
+
+        Debug.Log($"TileManager: Enhanced grass region {region.Name} with {tileCount} variant tiles");
+    }
+
+    private void EnhanceWaterRegion(Map.LakeRegion region)
+    {
+        if (waterTileVariants == null || waterTileVariants.Length == 0)
+        {
+            Debug.LogWarning($"TileManager: No water tile variants available for region {region.Name}");
+            return;
+        }
+
+        int tileCount = 0;
+        foreach (var pos in region.Tiles)
+        {
+            // Setze Tile Variante
+            var tileIndex = Mathf.Abs((pos.x * 48271 + pos.y * 16807) % waterTileVariants.Length);
+            baseMapManager.waterLayer.SetTile(pos, waterTileVariants[tileIndex]);
+            tileCount++;
+
+            // 3D Water Object erstellen wenn vorhanden
+            if (waterPrefab != null)
+            {
+                // Convert tile position to world position and add centering offset
+                Vector3 worldPos = baseMapManager.waterLayer.CellToWorld(pos);
+                worldPos += new Vector3(0.5f, -0.04f, 0.5f); // center in x, -0.2 in y, +0.7 in z
+                
+                // Instantiate water object at exact position
+                GameObject waterObj = Instantiate(waterPrefab, worldPos, Quaternion.identity, waterContainer);
+                waterObj.name = $"Water_{pos.x}_{pos.y}";
+            }
+        }
+
+        Debug.Log($"TileManager: Enhanced water region {region.Name} with {tileCount} variant tiles and 3D objects");
+    }
+
+    private void EnhanceHouseRegion(Map.HouseRegion region)
+    {
+        Debug.Log($"TileManager: Starting to enhance house region {region.Name}");
+        
+        if (darkGrassTiles == null || darkGrassTiles.Length == 0)
+        {
+            Debug.LogWarning($"TileManager: No dark grass tiles available for house region {region.Name}");
+            return;
+        }
+
+        float radius = 5f;
+        var center = region.Center;
+        Debug.Log($"TileManager: Processing house region at {center} with radius {radius}");
+
+        var centerCell = baseMapManager.grassLayer.WorldToCell(center);
+        int radiusCells = Mathf.CeilToInt(radius);
+        int tilesChanged = 0;
+        int tilesChecked = 0;
+
+        for (int x = -radiusCells; x <= radiusCells; x++)
+        {
+            for (int y = -radiusCells; y <= radiusCells; y++)
+            {
+                var checkPos = centerCell + new Vector3Int(x, y, 0);
+                tilesChecked++;
+                
+                if (baseMapManager.grassLayer.GetTile(checkPos) == null)
+                {
+                    Debug.Log($"TileManager: No grass tile at position {checkPos}");
+                    continue;
+                }
+
+                float dist = Vector2.Distance(
+                    new Vector2(checkPos.x, checkPos.y),
+                    new Vector2(centerCell.x, centerCell.y)
+                );
+
+                if (dist <= radius)
+                {
+                    var tileIndex = Mathf.Abs((checkPos.x * 48271 + checkPos.y * 16807) % darkGrassTiles.Length);
+                    baseMapManager.grassLayer.SetTile(checkPos, darkGrassTiles[tileIndex]);
+                    tilesChanged++;
+                }
+            }
+        }
+
+        Debug.Log($"TileManager: House region {region.Name} enhancement complete. Checked {tilesChecked} tiles, changed {tilesChanged} to dark grass");
+    }
+}
+
+
+=====
+./TestAndDebug/DiceController.cs
+=====
+using UnityEngine;
+
+[RequireComponent(typeof(BoxCollider))]
+public class DiceController : MonoBehaviour
+{
+    public float moveSpeed = 5f;
+    private Rigidbody rb;
+
+    void Awake()
+    {
+        // Rigidbody holen oder neu hinzufügen
+        rb = GetComponent<Rigidbody>();
+        if (rb == null)
+            rb = gameObject.AddComponent<Rigidbody>();
+
+        // BoxCollider holen oder neu hinzufügen
+        var box = GetComponent<BoxCollider>();
+        if (box == null)
+            box = gameObject.AddComponent<BoxCollider>();
+        box.isTrigger = false;
+
+        // Rotation und Z-Position einfrieren
+        rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
+
+        // Schwerkraft deaktivieren, damit er nicht herunterfällt
+        rb.useGravity = false;
+
+        // Kinematisch = false belassen, damit Kollisionen mit statischen Collidern (Wand) wirken
+        rb.isKinematic = false;
+    }
+
+    void FixedUpdate()
+    {
+        // Input abfragen
+        float moveX = Input.GetAxisRaw("Horizontal");
+        float moveY = Input.GetAxisRaw("Vertical");
+        Vector3 move = new Vector3(moveX, moveY, 0f).normalized;
+
+        if (move.sqrMagnitude > 0.01f)
+        {
+            rb.linearVelocity = move * moveSpeed;
+        }
+        else
+        {
+            rb.linearVelocity = Vector3.zero;
+        }
+    }
+}
+
+=====
+./TestAndDebug/WallCollisionDebug.cs
+=====
+using UnityEngine;
+
+public class WallCollisionDebug : MonoBehaviour
+{
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log($"[Wall] Kollision mit {collision.gameObject.name} um {Time.time}");
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        Debug.Log($"[Wall] Bleibe in Kontakt mit {collision.gameObject.name} um {Time.time}");
+    }
+}
