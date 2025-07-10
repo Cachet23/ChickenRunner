@@ -60,10 +60,11 @@ namespace Controller
 
             if (m_Stats != null)  // Wir sind der Player
             {
+                float sightRange = m_Stats.SightRange;
                 float attackRange = m_Stats.AttackRange;
                 
-                // Ständig nach dem nächsten Ziel suchen
-                Collider[] hits = Physics.OverlapSphere(transform.position, attackRange);
+                // Ständig nach dem nächsten Ziel in Sichtweite suchen
+                Collider[] hits = Physics.OverlapSphere(transform.position, sightRange);
                 CreatureStats closest = null;
                 float minDist = float.MaxValue;
                 foreach (var hit in hits)

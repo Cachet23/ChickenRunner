@@ -76,12 +76,44 @@ public class AggressiveCreatureBehavior : CreatureBehavior
     {
         Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
         directionToPlayer.y = 0; // Keep it on the horizontal plane
+        float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
         
-        // Convert world direction to input axis
-        Vector2 input = new Vector2(directionToPlayer.x, directionToPlayer.z);
+        // Get stats components
+        var myStats = GetComponent<CreatureStats>();
+        var playerStats = playerTransform.GetComponent<CreatureStats>();
         
-        // Move towards player with increased speed
-        mover.SetInput(input * chaseSpeed, playerTransform.position, true, false);
+        if (myStats == null || playerStats == null)
+        {
+            Debug.LogWarning("[AggressiveCreatureBehavior] Missing CreatureStats component!");
+            return;
+        }
+
+        // Attack range check (subtract 1 to maintain some distance)
+        float targetDistance = myStats.AttackRange - 1f;
+        
+        if (distanceToPlayer <= myStats.AttackRange)
+        {
+            // In attack range - try to attack
+            if (myStats.CanAttack)
+            {
+                myStats.TryAttack(playerStats);
+                // Stop moving when attacking
+                mover.SetInput(Vector2.zero, playerTransform.position, false, false);
+                return;
+            }
+        }
+        
+        // Not in range or can't attack yet - keep chasing if we're too far
+        if (distanceToPlayer > targetDistance)
+        {
+            Vector2 input = new Vector2(directionToPlayer.x, directionToPlayer.z);
+            mover.SetInput(input * chaseSpeed, playerTransform.position, true, false);
+        }
+        else
+        {
+            // In ideal range - stop moving
+            mover.SetInput(Vector2.zero, playerTransform.position, false, false);
+        }
     }
 
     private void OnEnable()

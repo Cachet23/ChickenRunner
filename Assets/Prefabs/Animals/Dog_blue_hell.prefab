@@ -600,7 +600,8 @@ MonoBehaviour:
   manaRegenPerSecond: 3
   attackRange: 2.5
   attackDamage: 20
-  attackManaCost: 10
+  attackManaCost: 50
+  attackSpeed: 2
   maxHealth: 100
   maxStamina: 30
   maxMana: 100

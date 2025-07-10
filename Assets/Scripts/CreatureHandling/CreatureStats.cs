@@ -17,13 +17,32 @@ public class CreatureStats : MonoBehaviour
     // Event for death notification
     public event Action<CreatureStats> OnDeath;
     [Header("Attack Settings")]
-    [SerializeField] private float attackRange = 2.5f;
+    [SerializeField] private float sightRange = 5f;     // Range at which we can see the target UI
+    [SerializeField] private float attackRange = 2.5f;  // Range at which we can actually attack
     [SerializeField] private float attackDamage = 20f;
     [SerializeField] private float attackManaCost = 10f;
+    [SerializeField] private float attackSpeed = 1.5f;  // Attacks per second
+    private float nextAttackTime = 0f;
 
+    public float SightRange => sightRange;
     public float AttackRange => attackRange;
     public float AttackDamage => attackDamage;
     public float AttackManaCost => attackManaCost;
+    
+    public bool CanAttack => Time.time >= nextAttackTime && HasEnoughMana(attackManaCost);
+
+    public bool TryAttack(CreatureStats target)
+    {
+        if (!CanAttack) return false;
+        
+        // Apply damage and consume mana
+        target.ModifyHealth(-attackDamage);
+        ModifyMana(-attackManaCost);
+        
+        // Reset attack timer
+        nextAttackTime = Time.time + (1f / attackSpeed);
+        return true;
+    }
     [Header("Stats Configuration")]
     [SerializeField] private float maxHealth = 100f;
     [SerializeField] private float maxStamina = 100f;
@@ -207,15 +226,41 @@ public class CreatureStats : MonoBehaviour
     {
         if (activeUI != null && Camera.main != null)
         {
-            Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position + Vector3.up * 0.5f); // Reduziert auf 0.5 Einheiten
-            if (screenPos.z > 0) // Only show UI if creature is in front of camera
+            var screenPos = Camera.main.WorldToScreenPoint(transform.position + Vector3.up * 0.6f);
+            
+            // Check if creature is in front of camera
+            if (screenPos.z > 0)
             {
                 activeUI.transform.position = screenPos;
-                activeUI.SetActive(true);
+                
+                // Update UI color based on distance to player
+                var playerTransform = GameObject.FindWithTag("Dice")?.transform;
+                if (playerTransform != null)
+                {
+                    float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
+                    bool inAttackRange = distanceToPlayer <= attackRange;
+                    
+                    // Get UI text component and update color based on range
+                    var text = activeUI.GetComponentInChildren<TMPro.TextMeshProUGUI>();
+                    if (text != null)
+                    {
+                        if (inAttackRange)
+                        {
+                            text.color = Color.red;    // In attack range - red
+                            text.text = "In Attack Range!";
+                        }
+                        else
+                        {
+                            text.color = Color.yellow; // In sight but not in attack range - yellow
+                            text.text = "Target Spotted";
+                        }
+                    }
+                }
             }
             else
             {
-                activeUI.SetActive(false);
+                // Hide UI when behind camera
+                activeUI.transform.position = new Vector3(-1000, -1000, -1000);
             }
         }
     }
