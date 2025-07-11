@@ -85,9 +85,9 @@ MonoBehaviour:
   lowGrassSortingOrder: 0
   creatures:
   - creaturePrefab: {fileID: 2629182449500102118, guid: cf22d88c8f6094cb880c58995910c70a, type: 3}
-    spawnCount: 6
-  - creaturePrefab: {fileID: 2629182449500102118, guid: 5fa79f7c6280c426091ad7f8526133df, type: 3}
     spawnCount: 5
+  - creaturePrefab: {fileID: 2629182449500102118, guid: 5fa79f7c6280c426091ad7f8526133df, type: 3}
+    spawnCount: 0
   flowerPrefabs:
   - {fileID: 2405172879166089963, guid: b62683e69cbf30848b1fc1ed05c2f2ab, type: 3}
   - {fileID: 7833339051835576946, guid: 058372e3e721de24c9d6fea4cd9bfcd8, type: 3}
