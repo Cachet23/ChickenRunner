@@ -1056,8 +1056,10 @@ MonoBehaviour:
   statsUIPrefab: {fileID: 6442454213096952268, guid: d9c02d78a934f4b35b6917090ebd4177, type: 3}
   manaRegenPerSecond: 3
   attackRange: 2.5
-  attackDamage: 20
+  attackDamage: 130
   attackManaCost: 10
+  attackCooldown: 7.5
+  sightRange: 5
   maxHealth: 100
   maxStamina: 100
   maxMana: 100
@@ -1082,8 +1084,8 @@ MonoBehaviour:
     useAggressiveBehavior: 1
     aggressiveActivationDistance: 20
     alignmentTime: 5
-    chaseSpeed: 1.5
-  checkInterval: 0.5
+    chaseSpeed: 1.98
+  checkInterval: 0.2
 --- !u!1 &6083925854692512673
 GameObject:
   m_ObjectHideFlags: 0
